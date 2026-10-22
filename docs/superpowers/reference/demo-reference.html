@@ -1,0 +1,652 @@
+<h2>First screen: does this feel right?</h2>
+<p class="subtitle">Rough CSS sketch using your real felt, wood and metal spiral textures. Nothing here is the final package code.</p>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+    <feImage id="refract-map" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<style>
+  .fam {
+    --tint: #1f7a3d;
+    --aqua-top: #406eda;
+    --aqua-mid: #3866d1;
+    --aqua-bottom: #2f5fc8;
+    --cream: #f6ecd2;
+    font-family: "Lucida Grande", -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    color: var(--cream);
+  }
+  .fam * { box-sizing: border-box; }
+
+  /* Tintable texture: grayscale photo multiplied onto --tint */
+  .tinted { position: relative; isolation: isolate; background-color: var(--tint); }
+  .tinted::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: var(--tex) 0 0 / 256px repeat;
+    filter: grayscale(1) contrast(1.5) brightness(1.5);
+    mix-blend-mode: multiply;
+  }
+
+  .screen {
+    --tex: url(demo-assets/felt-tile.jpg);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 18px 40px -12px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.6);
+    min-height: 560px;
+  }
+
+  /* Wooden navigation bar */
+  .navbar {
+    display: flex; align-items: center; gap: 10px; padding: 0 14px; height: 54px;
+    background: linear-gradient(rgba(255,238,205,.22), rgba(255,238,205,.22)), url(demo-assets/wood-light-tile.jpg) 0 0 / 380px repeat;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 6px rgba(80,40,10,.45), 0 4px 10px rgba(0,0,0,.5);
+    position: relative; z-index: 2;
+  }
+  /* Light wood with dark recessed (engraved) text: a dark glyph with a light lip along the lower edge */
+  .navbar .brand { font-weight: 700; letter-spacing: .5px; margin-right: 14px; color: #1c0d03; text-shadow: 0 1px 0 rgba(255,238,205,.6), 0 -1px 0 rgba(60,30,5,.3); }
+  .navitem {
+    padding: 7px 18px; border-radius: 999px; color: #1c0d03; font-weight: 600; letter-spacing: .3px; cursor: default;
+    text-shadow: 0 1px 0 rgba(255,238,205,.6), 0 -1px 0 rgba(60,30,5,.3);
+  }
+  /* Only the active item is recessed: a pocket cut into the wood, with a shadow along the top edge and a light lip along the bottom */
+  .navitem.selected {
+    background: linear-gradient(rgba(60,30,5,.16), rgba(60,30,5,.06));
+    box-shadow: inset 0 2px 4px rgba(50,25,5,.5), inset 0 0 0 1px rgba(50,25,5,.35), 0 1px 0 rgba(255,238,205,.6);
+  }
+
+  .body { padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 34px; }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: #fff; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+
+  /* Frosted glass, after ~/shiny */
+  .glass { --r: 999px; --bleed: 2rem; --glow-depth: 18px; position: relative; isolation: isolate; border-radius: var(--r); box-shadow: 0 8px 20px -8px rgba(0,0,0,.55); }
+  .glass::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    backdrop-filter: blur(14px) saturate(125%) brightness(110%);
+    background:
+      linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.42)),
+      linear-gradient(to bottom, rgba(255,255,255,.3) 0%, rgba(255,255,255,.07) 46%, rgba(255,255,255,0) 54%),
+      linear-gradient(rgba(255,255,255,.14), rgba(255,255,255,.32));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 -8px 12px -6px rgba(0,0,0,.35);
+  }
+  /* Ambient glow. The transparent border is the bleed: the backdrop is sampled across the whole extended
+     box, while the mask (four soft edge gradients clipped to the rounded padding box) keeps only a glow
+     that is strongest at the lens edge and fades inward over --glow-depth. */
+  .glass::after {
+    content: ''; position: absolute; inset: calc(-1 * var(--bleed)); pointer-events: none;
+    border: var(--bleed) solid transparent;
+    border-radius: calc(var(--r) + var(--bleed));
+    backdrop-filter: blur(25px) saturate(190%) brightness(135%);
+    background: linear-gradient(135deg, rgba(255,255,255,.35), rgba(255,255,255,.04) 35%, rgba(255,255,255,.04) 65%, rgba(255,255,255,.3)) padding-box;
+    mask:
+      linear-gradient(to bottom, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box,
+      linear-gradient(to top, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box,
+      linear-gradient(to right, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box,
+      linear-gradient(to left, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box;
+  }
+  .glass input, .glass .selectlike {
+    width: 100%; padding: 10px 18px; border: 0; outline: 0; background: transparent; color: #fff;
+    font: inherit; text-shadow: 0 1px 2px rgba(0,0,0,.6); position: relative; z-index: 1;
+  }
+  .glass input::placeholder { color: rgba(255,255,255,.62); }
+  .selectlike { display: flex; justify-content: space-between; align-items: center; }
+  .caret { width: 8px; height: 8px; margin: -4px 4px 0 0; border-right: 2px solid rgba(255,255,255,.85); border-bottom: 2px solid rgba(255,255,255,.85); transform: rotate(45deg); filter: drop-shadow(0 1px 1px rgba(0,0,0,.5)); }
+
+  .menu { margin-top: 10px; border-radius: 10px; overflow: hidden; background: rgba(250,250,250,.94); color: #222; box-shadow: 0 10px 24px -6px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.35); }
+  .menu div { padding: 7px 14px; }
+  .menu .picked {
+    color: #fff; text-shadow: 0 -1px 0 rgba(0,30,110,.8);
+    background: linear-gradient(to bottom, #406eda, #2f5fc8); box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
+  }
+
+  /* Metal switch: brushed metal track, spiral metal thumb */
+  .switchrow { display: flex; gap: 22px; align-items: center; }
+  .switch {
+    width: 78px; height: 32px; border-radius: 999px; position: relative;
+    background: url(demo-assets/metal-brushed.jpg) 50% 50% / 240px auto;
+    box-shadow: inset 0 3px 7px rgba(0,0,0,.75), inset 0 -1px 1px rgba(255,255,255,.35), 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(0,0,0,.7);
+    overflow: hidden;
+  }
+  .switch::before {
+    content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity .2s;
+    background:
+      linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,0) 50%),
+      linear-gradient(to bottom, rgba(64,110,218,.95), rgba(122,157,245,.92));
+  }
+  .switch.on { box-shadow: inset 0 3px 7px rgba(0,30,110,.5), inset 0 0 14px rgba(160,185,252,.85), 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(20,40,120,.85), 0 0 12px 2px rgba(100,140,245,.7); }
+  .switch.on::before { opacity: 1; }
+  .switch.on .knob { left: calc(100% - 34px); box-shadow: 0 0 9px 1px rgba(150,175,252,.85), 0 2px 4px rgba(0,0,0,.55), inset 0 -2px 3px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.9), 0 0 0 1px rgba(0,40,130,.6); }
+  .knob {
+    position: absolute; top: 2px; left: 2px; width: 28px; height: 28px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 55%),
+      url(demo-assets/metal-spiral.jpg) 50% 50% / auto 84px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.65), inset 0 -2px 3px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.9), 0 0 0 1px rgba(0,0,0,.45);
+  }
+  .switchlabel { font-size: 12px; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+
+  /* Progress tubes */
+  .tube {
+    height: 18px; border-radius: 999px; position: relative; overflow: hidden; margin-bottom: 14px;
+    background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.25));
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.7), 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(0,0,0,.5);
+  }
+  /* Aqua gloss lives in the gradient: dark thin top edge, pale highlight band, saturated middle, light glow at the bottom */
+  .fill {
+    position: absolute; inset: 1px; right: auto; border-radius: 999px;
+    --sheen: linear-gradient(to bottom, rgba(20,45,150,.55) 0%, rgba(20,45,150,0) 16%, rgba(255,255,255,.38) 30%, rgba(255,255,255,.12) 52%, rgba(255,255,255,0) 60%, rgba(140,180,255,.3) 100%);
+  }
+  /* Soft-edged diagonal stripes (32px period) under the sheen; 45.25px = 32px / sin45 so the loop is seamless */
+  .candy {
+    background:
+      var(--sheen),
+      repeating-linear-gradient(-45deg, #3d6fe0 0, #3d6fe0 6px, #f4f8ff 10px, #f4f8ff 22px, #3d6fe0 26px, #3d6fe0 32px);
+    background-size: 100% 100%, 45.25px 45.25px;
+    background-repeat: no-repeat, repeat;
+    animation: stripe 1s linear infinite;
+    box-shadow: inset 0 0 0 1px rgba(20,40,140,.35);
+  }
+  @keyframes stripe { from { background-position: 0 0, 0 0; } to { background-position: 0 0, 45.25px 0; } }
+  .aqua { background: linear-gradient(to bottom, #2b4fb5 0%, #93aef0 14%, #a3bbf2 38%, #4a78e4 58%, #5f8bec 80%, #86abf6 100%); box-shadow: inset 0 0 0 1px rgba(20,40,140,.35); }
+  .greengloss { background: linear-gradient(to bottom, #1f7a32 0%, #9fd9a4 14%, #b0e2b3 38%, #35b24a 58%, #4cc562 80%, #7ae08c 100%); box-shadow: inset 0 0 0 1px rgba(10,80,30,.35); }
+
+  /* Tint row */
+  .swatches { display: flex; gap: 14px; margin-top: 4px; }
+  .swatch { --tex: url(demo-assets/felt-tile.jpg); width: 86px; height: 56px; border-radius: 10px; box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 6px 12px -4px rgba(0,0,0,.5); overflow: hidden; }
+  .swatch-cap { font-size: 11px; text-align: center; margin-top: 4px; color: #c9c9d0; }
+
+  /* Refraction comparison */
+  /* Varied backdrop: four materials side by side, lenses straddle the seams */
+  .strip {
+    position: relative; height: 120px; border-radius: 14px; margin-bottom: 14px; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.6);
+    background:
+      radial-gradient(circle at 88% 30%, #fff 0 6px, transparent 7px),
+      radial-gradient(circle at 70% 75%, #ffd400 0 16px, transparent 17px),
+      radial-gradient(circle at 60% 25%, #ff2d55 0 22px, transparent 23px),
+      linear-gradient(115deg, #ff3b30, #ffcc00 30%, #34c759 55%, #0a84ff 80%, #bf5af2) 50% 0 / 25% 100% no-repeat,
+      url(demo-assets/metal-spiral.jpg) 25% 0 / 25% 100% no-repeat,
+      url(demo-assets/leather.jpg) 0 0 / 25% 100% no-repeat,
+      url(demo-assets/wood-light.jpg) 100% 0 / 25% 100% no-repeat;
+    background-color: #222;
+  }
+  .strip-label { font-size: 12px; color: #c9c9d0; margin: 10px 0 6px; }
+  .lens { width: 210px; height: 54px; display: grid; place-items: center; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+  .strip .glass { position: absolute; top: 33px; --r: 27px; }
+  .strip .glass:nth-child(1) { left: calc(25% - 105px); }
+  .strip .glass:nth-child(2) { left: calc(50% - 105px); }
+  .strip .glass:nth-child(3) { left: calc(75% - 105px); }
+  .glass.refract::before {
+    backdrop-filter: url(#refract) blur(1px) saturate(110%) brightness(105%);
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.24) 0%, rgba(255,255,255,.05) 46%, rgba(255,255,255,0) 54%),
+      linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.18));
+  }
+  .refract-note { font-size: 12px; color: #c9c9d0; margin-top: 8px; }
+
+  /* Glass cursor playground */
+  .playground {
+    position: relative; height: 340px; border-radius: 14px; overflow: hidden; cursor: none; touch-action: none;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.6);
+    background:
+      radial-gradient(circle at 88% 30%, #fff 0 8px, transparent 9px),
+      radial-gradient(circle at 68% 78%, #ffd400 0 28px, transparent 29px),
+      radial-gradient(circle at 58% 22%, #ff2d55 0 34px, transparent 35px),
+      linear-gradient(115deg, #ff3b30, #ffcc00 30%, #34c759 55%, #0a84ff 80%, #bf5af2) 50% 0 / 25% 100% no-repeat,
+      url(demo-assets/metal-spiral.jpg) 25% 0 / 25% 100% no-repeat,
+      url(demo-assets/leather.jpg) 0 0 / 25% 100% no-repeat,
+      url(demo-assets/wood-light.jpg) 100% 0 / 25% 100% no-repeat;
+    background-color: #222;
+  }
+  .playground .words { position: absolute; font-weight: 800; font-size: 34px; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.6); pointer-events: none; }
+  .playground .rule { position: absolute; left: 0; right: 0; height: 4px; background: #fff; pointer-events: none; }
+  .playground .rule.vertical { top: 0; bottom: 0; left: auto; right: auto; width: 4px; height: auto; }
+  .cursor-lens { position: absolute; top: 0; left: 0; width: 130px; height: 130px; --r: 65px; pointer-events: none; opacity: 0; transition: opacity .15s; will-change: transform; }
+  .cursor-lens.visible { opacity: 1; }
+  .modes { display: flex; gap: 8px; margin-bottom: 10px; }
+  .modes button { padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(0,0,0,.45); background: linear-gradient(#fdfdfd, #d8d8d8); font: inherit; font-size: 12px; cursor: pointer; }
+  .modes button[aria-pressed="true"] { background: linear-gradient(#406eda, #2f5fc8); color: #fff; border-color: #0d3f9e; }
+
+  /* Engraved text. Glyph colors are opaque and chosen to meet WCAG 3:1 (large text) against the texture pixels behind them.
+     All three: dark glyph with a light lip below. The leather panel gets a tan wash so a dark glyph can reach 3:1 on it. */
+  .engraved-metal { color: rgb(18,20,26); font-weight: 700; letter-spacing: 1px; text-shadow: 0 1px 0 rgba(255,255,255,.9), 0 -1px 0 rgba(0,0,0,.2); }
+  .engraved-leather { color: rgb(55,28,10); font-weight: 700; letter-spacing: 1px; text-shadow: 0 1px 0 rgba(255,225,185,.55), 0 -1px 1px rgba(0,0,0,.25); }
+  .engraved-wood { color: rgb(66,38,14); font-weight: 700; letter-spacing: 1px; text-shadow: 0 1px 0 rgba(255,238,205,.55), 0 -1px 1px rgba(0,0,0,.25); }
+  .panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .panel { height: 96px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 6px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.55); }
+  .panel.metal { background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,0) 45%, rgba(0,0,0,.1)), url(demo-assets/metal-tile.jpg) 0 0 / 300px repeat; }
+  .panel.leather { background: linear-gradient(rgba(240,190,130,.5), rgba(240,190,130,.5)), url(demo-assets/leather-tile.jpg) 0 0 / 360px repeat; }
+  .panel.wood { background: url(demo-assets/wood-light.jpg) center / cover; }
+</style>
+
+<div class="fam">
+  <div class="screen tinted" id="screen">
+    <nav class="navbar" aria-label="Sample navigation">
+      <span class="brand">fam-ui</span>
+      <span class="navitem selected">Controls</span>
+      <span class="navitem">Progress</span>
+      <span class="navitem">Textures</span>
+      <span class="navitem">Effects</span>
+    </nav>
+
+    <div class="body">
+      <div>
+        <div class="label">Rounded glassy input</div>
+        <div class="glass"><input placeholder="Search" aria-label="Search"></div>
+
+        <div class="label" style="margin-top:22px">Dropdown</div>
+        <div class="glass"><div class="selectlike"><span>Walnut</span><span class="caret" aria-hidden="true"></span></div></div>
+        <div class="menu" role="listbox" aria-label="Sample options">
+          <div>Oak</div>
+          <div class="picked" role="option" aria-selected="true">Walnut</div>
+          <div>Cherry</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Metal switches</div>
+        <div class="switchrow">
+          <div><div class="switch on"><div class="knob"></div></div></div>
+          <div><div class="switch"><div class="knob"></div></div></div>
+          <span class="switchlabel">on / off</span>
+        </div>
+
+        <div class="label" style="margin-top:26px">Candy cane progress</div>
+        <div class="tube"><div class="fill candy" style="width:68%"></div></div>
+
+        <div class="label">Glossy progress</div>
+        <div class="tube"><div class="fill aqua" style="width:52%"></div></div>
+        <div class="tube"><div class="fill greengloss" style="width:84%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px">One felt, any color</h3>
+  <p class="subtitle">The photo is made grayscale and multiplied onto a single <code>--tint</code> color, so changing one variable recolors the whole texture. Your felt photo is actually orange, so this is how it became green.</p>
+  <div class="swatches">
+    <div><div class="swatch tinted" style="--tint:#1f7a3d"></div><div class="swatch-cap">green</div></div>
+    <div><div class="swatch tinted" style="--tint:#1d4fa8"></div><div class="swatch-cap">blue</div></div>
+    <div><div class="swatch tinted" style="--tint:#8a1f2b"></div><div class="swatch-cap">burgundy</div></div>
+    <div><div class="swatch tinted" style="--tint:#6b3fa0"></div><div class="swatch-cap">purple</div></div>
+    <div><div class="swatch tinted" style="--tint:#c7a23a"></div><div class="swatch-cap">gold</div></div>
+  </div>
+
+  <h3 style="margin-top:34px">Glass: frosted vs. refracting</h3>
+  <p class="subtitle">Each strip is leather, metal spiral, a bright rainbow with colored dots, and wood. Each lens sits on a seam so it picks up two materials at once. The top row is the frosted recipe from ~/shiny. The bottom row is clear glass with edge refraction from an SVG displacement filter.</p>
+  <div class="strip-label">Frosted (~/shiny recipe)</div>
+  <div class="strip">
+    <div class="glass" style="--r:27px"><div class="lens"></div></div>
+    <div class="glass" style="--r:27px"><div class="lens"></div></div>
+    <div class="glass" style="--r:27px"><div class="lens"></div></div>
+  </div>
+  <div class="strip-label">Refracting (SVG filter)</div>
+  <div class="strip">
+    <div class="glass refract"><div class="lens"></div></div>
+    <div class="glass refract"><div class="lens"></div></div>
+    <div class="glass refract"><div class="lens"></div></div>
+  </div>
+  <p class="refract-note">The refraction row relies on SVG filters inside <code>backdrop-filter</code>, which Chromium supports. Other browsers would show a clear pane without the bending.</p>
+
+  <h3 style="margin-top:34px">Glass cursor</h3>
+  <p class="subtitle">Move your mouse (or finger) over the area below. The lens follows the pointer so you can sweep it across seams, text and bright dots.</p>
+  <div class="modes" role="group" aria-label="Glass type">
+    <button type="button" id="mode-refract" aria-pressed="true">Refracting</button>
+    <button type="button" id="mode-frosted" aria-pressed="false">Frosted</button>
+  </div>
+  <div class="playground" id="playground">
+    <div class="rule" style="top:70px"></div>
+    <div class="rule" style="top:200px"></div>
+    <div class="rule vertical" style="left:25%"></div>
+    <div class="rule vertical" style="left:50%"></div>
+    <div class="rule vertical" style="left:75%"></div>
+    <span class="words" style="left:24px;top:94px">Walnut Leather</span>
+    <span class="words" style="left:34%;top:226px">Brushed Metal 123</span>
+    <span class="words" style="left:60%;top:94px">GLASS</span>
+    <div class="glass refract cursor-lens" id="cursor-lens"></div>
+  </div>
+
+  <h3 style="margin-top:34px">Engraved text</h3>
+  <p class="subtitle">One idea, three materials: <code>.engraved-metal</code>, <code>.engraved-leather</code> and <code>.engraved-wood</code>. A dark glyph with a thin light lip on the lower edge makes it look cut into the surface.</p>
+  <div class="panels">
+    <div class="panel metal"><span class="engraved-metal">SETTINGS</span></div>
+    <div class="panel leather"><span class="engraved-leather">Notebook</span></div>
+    <div class="panel wood"><span class="engraved-wood">LIBRARY</span></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var edge = function (channel) {
+      return "<linearGradient id='" + channel + "' x1='" + (channel === 'x' ? 0 : 0) + "' x2='" + (channel === 'x' ? 1 : 0) + "' y1='0' y2='" + (channel === 'x' ? 0 : 1) + "'>" +
+        "<stop offset='0' stop-color='" + (channel === 'x' ? 'rgb(255,0,0)' : 'rgb(0,255,0)') + "'/>" +
+        "<stop offset='.04' stop-color='" + (channel === 'x' ? 'rgb(215,0,0)' : 'rgb(0,215,0)') + "'/>" +
+        "<stop offset='.1' stop-color='" + (channel === 'x' ? 'rgb(160,0,0)' : 'rgb(0,160,0)') + "'/>" +
+        "<stop offset='.2' stop-color='" + (channel === 'x' ? 'rgb(128,0,0)' : 'rgb(0,128,0)') + "'/>" +
+        "<stop offset='.8' stop-color='" + (channel === 'x' ? 'rgb(128,0,0)' : 'rgb(0,128,0)') + "'/>" +
+        "<stop offset='.9' stop-color='" + (channel === 'x' ? 'rgb(96,0,0)' : 'rgb(0,96,0)') + "'/>" +
+        "<stop offset='.96' stop-color='" + (channel === 'x' ? 'rgb(40,0,0)' : 'rgb(0,40,0)') + "'/>" +
+        "<stop offset='1' stop-color='rgb(0,0,0)'/></linearGradient>";
+    };
+    var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'><defs>" + edge('x') + edge('y') + "</defs>" +
+      "<rect width='100' height='100' fill='black'/>" +
+      "<rect width='100' height='100' fill='url(#x)'/>" +
+      "<rect width='100' height='100' fill='url(#y)' style='mix-blend-mode:screen'/></svg>";
+    document.getElementById('refract-map').setAttribute('href', 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg));
+  })();
+</script>
+<script>
+  (function () {
+    var playground = document.getElementById('playground');
+    var lens = document.getElementById('cursor-lens');
+    var refractButton = document.getElementById('mode-refract');
+    var frostedButton = document.getElementById('mode-frosted');
+    var halfLens = lens.offsetWidth / 2;
+    var pendingFrame = null;
+    var latestX = 0;
+    var latestY = 0;
+
+    function placeLens() {
+      lens.style.transform = 'translate(' + (latestX - halfLens) + 'px, ' + (latestY - halfLens) + 'px)';
+      pendingFrame = null;
+    }
+
+    playground.addEventListener('pointermove', function (event) {
+      var bounds = playground.getBoundingClientRect();
+      latestX = event.clientX - bounds.left;
+      latestY = event.clientY - bounds.top;
+      lens.classList.add('visible');
+      if (pendingFrame !== null) return;
+      pendingFrame = requestAnimationFrame(placeLens);
+    });
+    playground.addEventListener('pointerleave', function () { lens.classList.remove('visible'); });
+
+    function setMode(isRefracting) {
+      lens.classList.toggle('refract', isRefracting);
+      refractButton.setAttribute('aria-pressed', String(isRefracting));
+      frostedButton.setAttribute('aria-pressed', String(!isRefracting));
+    }
+    refractButton.addEventListener('click', function () { setMode(true); });
+    frostedButton.addEventListener('click', function () { setMode(false); });
+  })();
+</script>
+<style>
+  .kit {
+    --tint: #c98a46;
+    font-family: "Lucida Grande", -apple-system, "Helvetica Neue", sans-serif; font-size: 14px; color: #e9e9ec;
+  }
+  .kit * { box-sizing: border-box; }
+  .kit h3 { margin: 38px 0 4px; }
+  .kit .cap { font-size: 12px; color: #b8b8c0; margin: 6px 0 10px; }
+
+  /* ---------- Glass (smoked variant for use on light materials) ---------- */
+  .kit .glass { --r: 999px; --bleed: 2rem; --glow-depth: 18px; position: relative; isolation: isolate; border-radius: var(--r); box-shadow: 0 6px 14px -6px rgba(0,0,0,.6); }
+  .kit .glass::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    backdrop-filter: blur(10px) saturate(125%) brightness(.8);
+    background: linear-gradient(to bottom, rgba(255,255,255,.22) 0%, rgba(255,255,255,.05) 46%, rgba(255,255,255,0) 54%), linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.42));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), inset 0 2px 5px rgba(0,0,0,.5);
+  }
+  .kit .glass::after {
+    content: ''; position: absolute; inset: calc(-1 * var(--bleed)); pointer-events: none;
+    border: var(--bleed) solid transparent; border-radius: calc(var(--r) + var(--bleed));
+    backdrop-filter: blur(25px) saturate(190%) brightness(135%);
+    background: linear-gradient(135deg, rgba(255,255,255,.3), rgba(255,255,255,.03) 35%, rgba(255,255,255,.03) 65%, rgba(255,255,255,.25)) padding-box;
+    mask:
+      linear-gradient(to bottom, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box,
+      linear-gradient(to top, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box,
+      linear-gradient(to right, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box,
+      linear-gradient(to left, #000, rgba(0,0,0,.35) calc(var(--glow-depth) * .3), transparent var(--glow-depth)) padding-box;
+  }
+  .kit .glass input { width: 100%; padding: 8px 16px; border: 0; outline: 0; background: transparent; color: #fff; font: inherit; text-shadow: 0 1px 2px rgba(0,0,0,.7); position: relative; z-index: 1; }
+  .kit .glass input::placeholder { color: rgba(255,255,255,.74); }
+
+  /* ---------- Engraved text ---------- */
+  .kit .engraved-metal { color: rgb(18,20,26); font-weight: 700; letter-spacing: 1px; text-shadow: 0 1px 0 rgba(255,255,255,.9), 0 -1px 0 rgba(0,0,0,.2); }
+  .kit .engraved-leather { color: rgb(48,22,6); font-weight: 700; letter-spacing: 1px; text-shadow: 0 1px 0 rgba(255,225,185,.5), 0 -1px 1px rgba(0,0,0,.25); }
+
+  /* ---------- Plastic ---------- */
+  .plastic {
+    --c: #d93a2f; position: relative; overflow: hidden; display: inline-grid; place-items: center; min-width: 44px; height: 34px; padding: 0 18px; border-radius: 999px;
+    color: #fff; font: 600 13px/1 inherit; font-family: inherit; text-shadow: 0 -1px 0 rgba(0,0,0,.45); cursor: pointer;
+    border: 1px solid color-mix(in srgb, var(--c) 40%, black);
+    background:
+      url(demo-assets/grain-fine.jpg) 0 0 / 128px 128px,
+      linear-gradient(to bottom, color-mix(in srgb, var(--c) 95%, white) 0%, var(--c) 55%, color-mix(in srgb, var(--c) 86%, black) 100%);
+    background-blend-mode: overlay, normal;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -2px 3px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.4);
+  }
+  /* Satin plastic: a broad soft sheen, not a hard specular band */
+  .plastic::before { content: ''; position: absolute; inset: 0; background: radial-gradient(110% 80% at 50% 0%, rgba(255,255,255,.06), rgba(255,255,255,0) 70%); pointer-events: none; }
+  .plastic:active { transform: translateY(1px); box-shadow: inset 0 2px 4px rgba(0,0,0,.4), 0 1px 1px rgba(0,0,0,.4); }
+  .plastic.round { width: 34px; padding: 0; min-width: 0; font-size: 20px; }
+  /* Metal knob: face built from the spiral-metal photo's ring profile (no axis seams), soft sheen, smooth bevel, orange indicator */
+  .metal-knob {
+    position: relative; width: 72px; height: 72px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 14%, rgba(255,255,255,.4), rgba(255,255,255,0) 55%),
+      conic-gradient(from 30deg, rgba(255,255,255,.2), rgba(255,255,255,0) 22%, rgba(0,0,0,.16) 45%, rgba(255,255,255,.2) 55%, rgba(255,255,255,0) 78%, rgba(0,0,0,.14) 95%, rgba(255,255,255,.2)),
+      url(demo-assets/knob-face.jpg) 0 0 / 100% 100%;
+    box-shadow: inset 0 -3px 6px rgba(0,0,0,.4), inset 0 1px 1px rgba(255,255,255,.8), 0 5px 9px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.6);
+  }
+  .metal-knob::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    box-shadow: inset 0 0 0 3px rgba(215,219,227,.5), inset 0 0 0 4px rgba(0,0,0,.3);
+  }
+  .metal-knob::after { content: ''; position: absolute; left: 50%; top: 11px; width: 4px; height: 14px; margin-left: -2px; border-radius: 2px; background: #e8561c; box-shadow: 0 0 5px rgba(255,120,40,.8), 0 1px 0 rgba(255,255,255,.4); transform-origin: 50% 25px; transform: rotate(35deg); }
+  .plate { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; padding: 22px; border-radius: 16px; background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,0) 45%, rgba(0,0,0,.1)), url(demo-assets/metal-tile.jpg) 0 0 / 300px repeat; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -3px 8px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.55), 0 10px 22px -8px rgba(0,0,0,.55); }
+
+  /* ---------- Notes app template ---------- */
+
+  /* ---------- Stitched border and recessed fields ---------- */
+  /* Thread = the surface's leather color lifted toward white by --stitch-lift (about 35% in the Find My Friends reference), so it stays consistent on any tint. Set --leather-color to the leather's average color. */
+  .stitched { --stitch-lift: 35%; --stitch-color: color-mix(in srgb, white var(--stitch-lift), var(--leather-color, #8a5a30)); --stitch-shadow: color-mix(in srgb, black 55%, var(--leather-color, #8a5a30)); }
+  .stitched { position: relative; }
+  /* Real-looking running stitches: a 9-slice SVG mask of short rounded thread segments, each tilted slightly along the path, filled with the thread color.
+     Corner stitches follow the arc and the period keeps spacing even across corners (corner radius fixed at 16.4px). Generated by make_stitch_svg.py. */
+  .stitched::after {
+    content: ''; position: absolute; inset: var(--stitch-inset, 8px); pointer-events: none;
+    border: 18px solid transparent; background: var(--stitch-color);
+    -webkit-mask-box-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='87.52' height='87.52'%3E%3Cg stroke='black' stroke-width='2.6' stroke-linecap='round'%3E%3Cline x1='0.44' y1='15.23' x2='5.26' y2='8.22'/%3E%3Cline x1='7.55' y1='3.62' x2='15.90' y2='2.07'/%3E%3Cline x1='72.30' y1='0.44' x2='79.30' y2='5.26'/%3E%3Cline x1='83.90' y1='7.55' x2='85.45' y2='15.90'/%3E%3Cline x1='87.08' y1='72.30' x2='82.27' y2='79.30'/%3E%3Cline x1='79.98' y1='83.90' x2='71.62' y2='85.45'/%3E%3Cline x1='15.23' y1='87.08' x2='8.22' y2='82.27'/%3E%3Cline x1='3.62' y1='79.98' x2='2.07' y2='71.62'/%3E%3Cline x1='20.28' y1='0.72' x2='28.60' y2='2.48'/%3E%3Cline x1='86.81' y1='20.28' x2='85.04' y2='28.60'/%3E%3Cline x1='67.24' y1='86.81' x2='58.92' y2='85.04'/%3E%3Cline x1='0.72' y1='67.24' x2='2.48' y2='58.92'/%3E%3Cline x1='33.16' y1='0.72' x2='41.48' y2='2.48'/%3E%3Cline x1='86.81' y1='33.16' x2='85.04' y2='41.48'/%3E%3Cline x1='54.36' y1='86.81' x2='46.04' y2='85.04'/%3E%3Cline x1='0.72' y1='54.36' x2='2.48' y2='46.04'/%3E%3Cline x1='46.04' y1='0.72' x2='54.36' y2='2.48'/%3E%3Cline x1='86.81' y1='46.04' x2='85.04' y2='54.36'/%3E%3Cline x1='41.48' y1='86.81' x2='33.16' y2='85.04'/%3E%3Cline x1='0.72' y1='41.48' x2='2.48' y2='33.16'/%3E%3Cline x1='58.92' y1='0.72' x2='67.24' y2='2.48'/%3E%3Cline x1='86.81' y1='58.92' x2='85.04' y2='67.24'/%3E%3Cline x1='28.60' y1='86.81' x2='20.28' y2='85.04'/%3E%3Cline x1='0.72' y1='28.60' x2='2.48' y2='20.28'/%3E%3C/g%3E%3C/svg%3E");
+    -webkit-mask-box-image-slice: 18; -webkit-mask-box-image-width: 18px; -webkit-mask-box-image-repeat: round;
+    filter: drop-shadow(0 1px 0 var(--stitch-shadow));
+  }
+  .leather-card {
+    width: 100%; max-width: 500px; padding: 16px 14px 18px; color: #3a2008;
+    border: 34px solid transparent; border-radius: 34px;
+    border-image: url(demo-assets/leather-frame-tan-soft.png) 68 / 34px / 0 round;
+    background: url(demo-assets/leather-fill-tan-tile.jpg) 0 0 / 168px 51.5px repeat;
+    box-shadow: 0 22px 36px -14px rgba(0,0,0,.65);
+  }
+  .leather-card h4 { margin: 0 0 18px; text-align: center; font: 700 24px/1.1 Georgia, "Times New Roman", serif; color: #1f0e02; text-shadow: 0 1px 0 rgba(255,235,195,.6), 0 -1px 0 rgba(60,30,5,.25); }
+  .recessed { border-radius: 12px; overflow: hidden; background: linear-gradient(#f9f1dc, #efe4c6); box-shadow: inset 0 2px 5px rgba(60,35,10,.45), inset 0 0 0 1px rgba(80,50,15,.5), 0 1px 0 rgba(255,235,190,.6); }
+  .recessed .row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
+  .recessed .row + .row { border-top: 1px solid rgba(110,80,30,.25); }
+  .recessed label { flex: 0 0 82px; font-weight: 700; font-size: 13px; color: #3a2008; }
+  .recessed input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; color: #3a2008; }
+  .recessed input::placeholder { color: rgb(116,98,66); }
+  .recessed:focus-within { box-shadow: inset 0 2px 5px rgba(60,35,10,.45), inset 0 0 0 1px rgba(80,50,15,.5), 0 0 0 3px rgba(255,214,140,.75); }
+  .leather-button {
+    display: block; width: 100%; margin-top: 16px; padding: 12px 16px; border-radius: 10px; cursor: pointer;
+    font: 700 15px/1 inherit; font-family: inherit; color: #3a1f08; text-shadow: 0 1px 0 rgba(255,225,170,.6);
+    border: 1px solid #6e431b;
+    background: linear-gradient(#dcaa6c, #be8647);
+    box-shadow: inset 0 1px 0 rgba(255,235,190,.75), inset 0 -2px 3px rgba(80,40,5,.25), 0 1px 0 rgba(255,255,255,.3), 0 3px 5px rgba(0,0,0,.35);
+  }
+  .leather-button:active { box-shadow: inset 0 2px 4px rgba(80,40,5,.45), 0 1px 0 rgba(255,255,255,.3); }
+  /* Notes app, after the iOS 4 Notes reference: black stitched leather frame, light list panel with recessed search,
+     brown leather title bar over a yellow legal pad, Selected rows stay Aqua blue. */
+  /* Frame = the real stitched seam from the leather-stitched photo (pebbled edge, rolled edge, smooth band with thread stitches), bent around the corners.
+     Built by make_stitched_frame.py: 9-slice at 2x (slice 68 = 34px border), corner arc = 2 stitch periods so spacing stays even. Inside is a smooth leather tile from the same photo. */
+  .notes-app {
+    border: 34px solid transparent; border-radius: 34px;
+    border-image: url(demo-assets/leather-frame-black-soft.png) 68 / 34px / 0 round;
+    padding: 8px;
+    background: url(demo-assets/leather-fill-black-tile.jpg) 0 0 / 168px 51.5px repeat;
+    box-shadow: 0 26px 44px -16px rgba(0,0,0,.7);
+  }
+  .notes-split { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
+  .note-panel {
+    position: relative; flex: 0 0 300px; min-height: 560px; border-radius: 6px; overflow: hidden; color: #2a241a;
+    background: #f7f6f2 url(demo-assets/paper.jpg) center / cover;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 6px 14px -4px rgba(0,0,0,.6);
+  }
+  .note-panel h4 { margin: 0; padding: 14px 0 10px; text-align: center; font-size: 17px; }
+  .note-search {
+    display: flex; align-items: center; gap: 8px; margin: 0 14px 12px; padding: 7px 12px; border-radius: 999px;
+    background: linear-gradient(#e9e9ec, #f6f6f8);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.3), inset 0 0 0 1px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.9);
+  }
+  .note-search svg { flex: none; color: #5d5d64; }
+  .note-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 13px; color: #25252a; }
+  .note-search input::placeholder { color: rgb(100,100,108); }
+  .note-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 11px 16px; border-top: 1px solid rgba(0,0,0,.13); font-family: "Marker Felt", "Bradley Hand", "Segoe Print", cursive; }
+  .note-row b { font-size: 15px; font-weight: 700; }
+  .note-row span { flex: none; font: 12px/1 "Lucida Grande", -apple-system, sans-serif; color: #66666d; }
+  .note-row.picked { color: #fff; text-shadow: 0 -1px 0 rgba(0,30,110,.8); background: linear-gradient(to bottom, #406eda, #2f5fc8); box-shadow: inset 0 1px 0 rgba(255,255,255,.3); border-top-color: #1148b0; }
+  .note-row.picked span { color: rgba(255,255,255,.92); }
+  .pad-panel { position: relative; flex: 1 1 420px; min-width: 0; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 6px 14px -4px rgba(0,0,0,.6); }
+  .pad-bar {
+    position: relative; z-index: 1; flex: none; height: 46px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 12px;
+    background: url(demo-assets/cardstock-tile.jpg) 0 0 / 256px repeat, #562a0e;
+    background-blend-mode: multiply;
+    box-shadow: inset 0 1px 0 rgba(255,220,170,.35), 0 3px 6px rgba(0,0,0,.5);
+  }
+  .pad-title { grid-column: 2; margin: 0; color: #fff; font-size: 17px; text-shadow: 0 -1px 0 rgba(0,0,0,.7); }
+  .pad-add {
+    grid-column: 3; justify-self: end; width: 34px; height: 26px; border-radius: 6px; display: grid; place-items: center; color: #fff; cursor: pointer;
+    font: 700 18px/1 inherit; font-family: inherit; border: 1px solid #2d1707; background: linear-gradient(#9a6a40, #664020);
+    box-shadow: inset 0 1px 0 rgba(255,225,185,.5), 0 1px 0 rgba(255,225,170,.25); text-shadow: 0 -1px 0 rgba(0,0,0,.6);
+  }
+  /* The legal-pad tile repeats at 585px wide so its 27.2px rule pitch scales to exactly 24px (the line height) */
+  .sheet {
+    position: relative; flex: 1; min-height: 500px; padding: 0 18px 64px 52px; color: #2b2216; font: 19px/24px "Marker Felt", "Bradley Hand", "Segoe Print", cursive;
+    background:
+      linear-gradient(90deg, transparent 38px, #cc2a2e 38px, #cc2a2e 39px, transparent 39px, transparent 42px, #cc2a2e 42px, #cc2a2e 43px, transparent 43px),
+      #fbee9c url(demo-assets/legal-tile.jpg) 0 0 / 585px auto repeat;
+  }
+  .sheet .meta { display: flex; justify-content: space-between; font: 600 12px/24px "Lucida Grande", -apple-system, sans-serif; color: #82301c; }
+  .sheet p { margin: 0; white-space: pre-line; }
+  .pad-tools { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 0 14px; display: flex; justify-content: center; gap: 44px; color: #82301c; background: linear-gradient(rgba(251,238,156,0), #fbee9c 38%); }
+  .pad-tools button { background: none; border: 0; padding: 4px; color: inherit; cursor: pointer; }
+  .pad-tools button[disabled] { opacity: .4; cursor: default; }
+
+  /* ---------- Rounding ---------- */
+  .round-demo { display: flex; gap: 26px; flex-wrap: wrap; }
+  .round-card { --outer: 34px; --pad: 16px; padding: var(--pad); border-radius: var(--outer); background: linear-gradient(#5a7fb8, #3d5f94); box-shadow: 0 6px 12px -4px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.4); width: 240px; }
+  .round-card .inner { height: 84px; display: grid; place-items: center; font-size: 12px; color: #1b2a40; background: linear-gradient(#f8fafd, #d7e1f0); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
+  .round-card.naive .inner { border-radius: var(--outer); }
+  .round-card.concentric .inner { border-radius: calc(var(--outer) - var(--pad)); }
+  .radius-scale { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin-top: 16px; }
+  .radius-chip { width: 92px; height: 62px; display: grid; place-items: center; font-size: 11px; color: #1b2a40; background: linear-gradient(#f8fafd, #cdd8ea); box-shadow: 0 2px 4px rgba(0,0,0,.4), inset 0 1px 0 #fff; }
+
+  /* ---------- Shadows and gloss ---------- */
+  .stage { display: flex; gap: 26px; flex-wrap: wrap; padding: 34px 28px; border-radius: 16px; background: linear-gradient(#dfe3e9, #c4cad3); box-shadow: inset 0 0 0 1px rgba(0,0,0,.35); }
+  .elev { width: 130px; height: 84px; display: grid; place-items: center; border-radius: 12px; background: #f7f8fa; color: #2a2f38; font-size: 12px; }
+  .elev.sm { box-shadow: 0 1px 1px rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.2); }
+  .elev.md { box-shadow: 0 1px 1px rgba(0,0,0,.14), 0 3px 6px rgba(0,0,0,.2), 0 8px 14px -4px rgba(0,0,0,.22); }
+  .elev.lg { box-shadow: 0 1px 1px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.16), 0 12px 20px -4px rgba(0,0,0,.24), 0 24px 40px -12px rgba(0,0,0,.3); }
+  .elev.inset { background: #e3e7ee; box-shadow: inset 0 2px 5px rgba(0,0,0,.35), inset 0 -1px 0 rgba(255,255,255,.8), 0 1px 0 rgba(255,255,255,.8); }
+  /* Aqua pill: dark rim, body that gets lighter toward the bottom, and a soft sheen in the upper half */
+  .gloss-item { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 12px; color: #2a2f38; }
+  .gloss-demo {
+    position: relative; overflow: hidden; width: 150px; height: 46px; border-radius: 999px; border: 1px solid #243fa0;
+    background: linear-gradient(to bottom, #3556c4 0%, #5a85ea 52%, #8db0f7 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 3px 6px rgba(0,0,0,.35);
+  }
+  .gloss-demo::after { content: ''; position: absolute; left: 4%; right: 4%; top: 2px; height: 50%; border-radius: 999px; background: linear-gradient(rgba(255,255,255,var(--g)), rgba(255,255,255,0)); pointer-events: none; }
+  .gloss-demo.none { background: linear-gradient(#4574e2, #3a66d4); }
+  .gloss-demo.none::after { display: none; }
+</style>
+
+<div class="kit">
+  <h3>Template: notes app</h3>
+  <p class="cap">After the iOS 4 Notes reference: a black stitched leather frame, a light notes list with a recessed search, a brown leather title bar over a yellow legal pad, Selected rows stay Aqua blue.</p>
+  <div class="notes-app">
+    <div class="notes-split">
+      <aside class="note-panel" aria-label="Notes list">
+        <h4>6 Notes</h4>
+        <label class="note-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+          <input placeholder="Search" aria-label="Search notes">
+        </label>
+        <div role="listbox" aria-label="Notes">
+          <div class="note-row"><b>Grocery run</b><span>Today</span></div>
+          <div class="note-row picked" role="option" aria-selected="true"><b>Picnic plans</b><span>Yesterday</span></div>
+          <div class="note-row"><b>Book ideas</b><span>Monday</span></div>
+          <div class="note-row"><b>Phone numbers</b><span>Last week</span></div>
+          <div class="note-row"><b>Reading list</b><span>Sep 29</span></div>
+          <div class="note-row"><b>Gift ideas</b><span>Sep 12</span></div>
+        </div>
+      </aside>
+      <section class="pad-panel" aria-label="Note">
+        <div class="pad-bar">
+          <h4 class="pad-title">Picnic plans</h4>
+          <button class="pad-add" type="button" aria-label="New note">+</button>
+        </div>
+        <div class="sheet">
+          <div class="meta"><span>Yesterday</span><span>Oct 21, 5:36 PM</span></div>
+          <p>Picnic plans
+- Bring the blue blanket
+- Sandwiches and lemonade
+- Check the weather Friday
+- Call Dana about the park</p>
+          <div class="pad-tools">
+            <button type="button" aria-label="Previous note" disabled><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="13" r="10"/><path d="M17 13H9m3-3.5L8.5 13l3.5 3.5"/></svg></button>
+            <button type="button" aria-label="Share by mail"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="20" height="14" rx="2"/><path d="M3.5 7.5L13 14.5l9.5-7"/></svg></button>
+            <button type="button" aria-label="Delete note"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8l1 14h10l1-14M5 8h16M10 8V5h6v3M11 12v6M15 12v6"/></svg></button>
+            <button type="button" aria-label="Next note"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="13" r="10"/><path d="M9 13h8m-3-3.5l3.5 3.5-3.5 3.5"/></svg></button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+  <h3>Stitched leather and recessed fields</h3>
+  <p class="cap">The sign-in card uses the same photo-based stitched frame as the notepad, with a smooth leather inside. Recessed fields use an inner shadow with a light lip, and the placeholder is muted but still 4.5:1 or better against the cream.</p>
+  <div class="leather-card">
+    <h4>Sign In</h4>
+    <div class="recessed">
+      <div class="row"><label for="demo-id">Apple ID</label><input id="demo-id" placeholder="example@me.com"></div>
+      <div class="row"><label for="demo-pw">Password</label><input id="demo-pw" type="password" placeholder="Required"></div>
+    </div>
+    <button class="leather-button" type="button">Sign In</button>
+  </div>
+
+  <h3>Plastic controls</h3>
+  <p class="cap">Plastic is satin with grain and takes one <code>--c</code> color. The knob uses the metal spiral.</p>
+  <div class="plate">
+    <button class="plastic" style="--c:#a82219">Record</button>
+    <button class="plastic" style="--c:#176528">Play</button>
+    <button class="plastic" style="--c:#f2a62b; color:#2a1600; text-shadow:0 1px 0 rgba(255,255,255,.35)">Pause</button>
+    <button class="plastic" style="--c:#264eae">Share</button>
+    <button class="plastic round" style="--c:#53349e" aria-label="Info">i</button>
+    <div class="metal-knob" role="img" aria-label="Metal knob"></div>
+  </div>
+
+  <h3>Natural rounding</h3>
+  <p class="cap">Left reuses the outer radius on the inner box, so the gap pinches at the corners. Right uses outer radius minus padding, so the gap stays even. The package would do this with a variable.</p>
+  <div class="round-demo">
+    <div><div class="round-card naive"><div class="inner">same radius (looks off)</div></div></div>
+    <div><div class="round-card concentric"><div class="inner">outer &minus; padding</div></div></div>
+  </div>
+  <div class="radius-scale">
+    <div class="radius-chip" style="border-radius:6px">sm 6px</div>
+    <div class="radius-chip" style="border-radius:12px">md 12px</div>
+    <div class="radius-chip" style="border-radius:20px">lg 20px</div>
+    <div class="radius-chip" style="border-radius:999px">pill</div>
+  </div>
+
+  <h3>Shadow and gloss utilities</h3>
+  <p class="cap">Shadows are layered (a tight contact shadow plus softer ambient ones). Gloss is a separate highlight you can dial from none to strong.</p>
+  <div class="stage">
+    <div class="elev sm">shadow sm</div>
+    <div class="elev md">shadow md</div>
+    <div class="elev lg">shadow lg</div>
+    <div class="elev inset">inset</div>
+    <div class="gloss-item"><div class="gloss-demo none"></div>no gloss</div>
+    <div class="gloss-item"><div class="gloss-demo" style="--g:.28"></div>gloss soft</div>
+    <div class="gloss-item"><div class="gloss-demo" style="--g:.55"></div>gloss strong</div>
+  </div>
+</div>
