@@ -14,7 +14,7 @@ const packageFiles = () =>
 
 test('tarball contains only what ships', async () => {
   const files = packageFiles();
-  const required = ['dist/fam-ui.css', 'snippets/refraction-filter.html', 'README.md', 'CREDITS.md', 'package.json'];
+  const required = ['dist/fam-ui.css', 'snippets/refraction-filter.html', 'snippets/refraction-round.js', 'README.md', 'CREDITS.md', 'package.json'];
   for (const name of [...required, ...(await readdir(join(packageRoot, 'css'))).map((file) => `css/${file}`), ...(await readdir(join(packageRoot, 'assets'))).map((file) => `assets/${file}`)]) {
     assert.ok(files.includes(name), `${name} is missing from the tarball`);
   }
