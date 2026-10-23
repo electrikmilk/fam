@@ -39,7 +39,7 @@
   .knobwrap .fam-knob { width: 64px; height: 64px; }
 
   .utils h4 { margin: 18px 0 8px; font: 600 12px ui-monospace, Menlo, monospace; letter-spacing: 1px; text-transform: uppercase; color: #fff; }
-  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
   .sq { text-align: center; font: 11px ui-monospace, Menlo, monospace; color: #b8bcc6; }
   .sq i { display: block; aspect-ratio: 1; border-radius: 10px; box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 6px 12px -4px rgba(0,0,0,.6); margin-bottom: 6px; }
   .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; }
@@ -102,6 +102,19 @@
     </div>
 
     <div class="section">
+      <div class="window" style="background:#1d1f24;padding:26px;display:grid;gap:26px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:start">
+          <figure class="fam-print-frame fam-paper" style="margin:0"><img src="../../../examples/tree.jpg" alt="" style="display:block;width:100%"></figure>
+          <figure class="fam-print-frame fam-cardstock" style="margin:0"><img src="../../../examples/tree.jpg" alt="" style="display:block;width:100%"></figure>
+          <figure class="fam-wood-frame" style="margin:0"><img src="../../../examples/tree.jpg" alt="" style="display:block;width:100%"></figure>
+          <figure class="fam-wood-frame fam-wood-frame--glossy" style="margin:0"><img src="../../../examples/tree.jpg" alt="" style="display:block;width:100%"></figure>
+        </div>
+        <div class="fam-wood-frame"><div class="fam-cork" style="height:150px"></div></div>
+      </div>
+      <div class="cap"><b>photo frames + cork</b> &nbsp; fam-print-frame on fam-paper or fam-cardstock, fam-wood-frame (optionally --glossy), fam-cork in a wood frame</div>
+    </div>
+
+    <div class="section">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
         <div class="window fam-metal" style="display:grid;place-items:center;height:110px"><span class="fam-engraved-metal">SETTINGS</span></div>
         <div class="window fam-leather" style="display:grid;place-items:center;height:110px"><span class="fam-engraved-leather">Notebook</span></div>
@@ -119,7 +132,9 @@
           <div class="sq"><i class="fam-metal"></i>fam-metal</div>
           <div class="sq"><i class="fam-leather"></i>fam-leather</div>
           <div class="sq"><i class="fam-paper"></i>fam-paper</div>
+          <div class="sq"><i class="fam-cork"></i>fam-cork</div>
           <div class="sq"><i class="fam-cardstock"></i>fam-cardstock</div>
+          <div class="sq"><i class="fam-cardstock" style="--fam-cardstock-tint:#562a0e"></i>--fam-cardstock-tint</div>
           <div class="sq"><i class="fam-legal-pad"></i>fam-legal-pad</div>
           <div class="sq"><i class="fam-leather-frame fam-leather-frame--black" style="border-radius:10px"></i>fam-leather-frame</div>
         </div>
@@ -162,6 +177,8 @@
     <ul>
       <li>Opening screen is tan stitched leather with the title engraved into it, instead of the photo.</li>
       <li>The opening screen text is serif (Georgia, then Times New Roman), the same face as the sign-in card title.</li>
+      <li>New photo frames section after the metal controls: print frames with a paper margin and a cardstock margin, a wood frame and a glossy wood frame, and a corkboard in a wood frame.</li>
+      <li>Build your own gains cork and tinted cardstock (natural by default, brown with --fam-cardstock-tint).</li>
       <li>Engraved text: one panel each for metal, leather and wood.</li>
       <li>New "build your own" section before the glass: a square for every texture, felt in five tints, then gloss, rounding and shadow utilities (shadows are my guess).</li>
       <li>The ribbon photo now belongs to the glass section only, which runs edge to edge on a dark background.</li>

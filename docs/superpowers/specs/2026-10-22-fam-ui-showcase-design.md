@@ -3,13 +3,13 @@
 Date: 2026-10-22
 Status: draft for approval, then planning
 
-A single-page site that shows off fam-ui, the plain-CSS kit for skeuomorphic interfaces (metal, glass, leather, wood, felt, paper, cardstock and plastic). The kit's design is in `docs/superpowers/specs/2026-10-22-fam-ui-design.md`, and version 1 is built and merged. This document is only about the showcase page, which the kit's design listed as a later goal.
+A single-page site that shows off fam-ui, the plain-CSS kit for skeuomorphic interfaces (metal, glass, leather, wood, felt, paper, cardstock, cork and plastic). The kit's design is in `docs/superpowers/specs/2026-10-22-fam-ui-design.md`, and version 1 is built and merged. This document is only about the showcase page, which the kit's design listed as a later goal.
 
 ## Reference material
 
 - `docs/superpowers/reference/showcase-mockup.html` - the final mockup of the whole page, built from the real kit classes. Open it in a browser after `npm run build` (it links `dist/fam-ui.css`). It is a layout and look reference, not code to ship. Its engraved text, glass lens and knobs are static.
 - `docs/superpowers/reference/showcase-assets/ribbon.jpg` - the glass photo, resized for the mockup.
-- The kit itself: `dist/fam-ui.css`, `assets/`, `examples/` (the three templates and the components page) and the README, which has the markup for every component.
+- The kit itself: `dist/fam-ui.css`, `assets/`, `examples/` (the three templates, the components page and `examples/frames.html`, which shows the photo frames and the cork board) and the README, which has the markup for every component. The owner added `fam-cork`, `fam-wood-frame`, `fam-print-frame` and the tintable cardstock (`--fam-cardstock-tint`) after the first version of this document, and the showcase covers them.
 - `references/boliviainteligente-fQkSoZD0A3o-unsplash.jpg` - the owner's original glass photo (3840 by 2400): a purple, blue and cream ribbon on a dark navy background.
 
 ## Intent and why
@@ -43,7 +43,7 @@ Each item is what the owner decided unless it is marked as my call.
 ### Structure
 
 - **One scrolling page, with the structure the owner called "A":** a dark page, each scene in a framed window with its class names underneath. The owner rejected full-bleed material bands for the page, but wanted the glass section to run edge to edge on a dark background.
-- Order, top to bottom: opening screen, four paired scenes, engraved text, build your own, glass.
+- Order, top to bottom: opening screen, four paired scenes, photo frames and cork, engraved text, build your own, glass.
 
 ### Opening screen
 
@@ -60,6 +60,15 @@ Each scene is a framed window on the dark page with its classes beneath. The own
 - Leather and paper: the tan stitched frame around a paper list with a selected row.
 - Metal on metal, with controls: plastic buttons, a knob and a switch on a brushed-metal plate.
 
+### Photo frames and cork
+
+Added at the owner's request after the first draft, to show the new texture (cork) and the photo framing in wood, paper and cardstock. One framed window with a row of four frames around the same photo, and a cork board below:
+
+- `fam-print-frame` with a `fam-paper` margin, and with a `fam-cardstock` margin (natural by default; brown with `--fam-cardstock-tint`).
+- `fam-wood-frame`, and `fam-wood-frame--glossy` with its glass sheen over the photo.
+- A `fam-cork` board inside a `fam-wood-frame`.
+- The photo is the kit's own `examples/tree.jpg` (resized from the Unsplash photo by mehrab-sium, credited in `CREDITS.md`). Whether the showcase reuses it or uses its own is left to the builder, but any photo needs its credit on the page.
+
 ### Engraved text
 
 A section with three panels, one per engraved class on its own material: `fam-engraved-metal` ("SETTINGS"), `fam-engraved-leather` ("Notebook"), `fam-engraved-wood` ("LIBRARY").
@@ -68,7 +77,7 @@ A section with three panels, one per engraved class on its own material: `fam-en
 
 A utility-classes section for building your own, shown in one framed panel:
 
-- A square for every texture, labeled with its class: felt, wood, metal, leather, paper, cardstock, legal pad and the stitched leather frame.
+- A square for every texture, labeled with its class: felt, wood, metal, leather, paper, cork, cardstock (natural, and tinted brown with `--fam-cardstock-tint`), legal pad and the stitched leather frame.
 - A row of felt in five tints (green, blue, burgundy, purple, gold) to show that one variable recolors it.
 - Gloss (`fam-gloss-none`, `soft`, `strong` on the Aqua pill) and rounding (`fam-round-sm`, `md`, `lg`, `pill`).
 - Shadows (`fam-shadow-sm`, `md`, `lg`, `inset`). The owner asked for gloss and rounding; shadows are my call because they belong with them.
