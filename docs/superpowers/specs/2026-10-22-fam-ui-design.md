@@ -11,7 +11,7 @@ Everything below was worked out against a working prototype. Treat it as the spe
 
 - `docs/superpowers/reference/demo-reference.html` - the final prototype page. Open it in Chrome. It contains the felt controls screen, the glass and refraction tests, a "glass cursor" test area, engraved text, the notes app template, the sign-in card template, plastic controls, the rounding comparison, and the shadow and gloss utilities.
 - `docs/superpowers/reference/demo-assets/` - the processed texture files the prototype uses.
-- `docs/superpowers/reference/texture-pipeline/` - the scripts that produced those textures, plus the contrast audit.
+- `tools/texture-pipeline/` - the scripts that produced those textures, plus the contrast audit.
 - `references/` - the user's reference screenshots (Snow Leopard GUI, Soft Aqua UI kit, iOS 4 Notes, Find My Friends leather, plastic controls, iBooks wood shelf, an AI-generated "Tasks" leather UI).
 - `textures/` - the user's source photos. These are large, so they are inputs to a build step and never shipped.
 
@@ -131,7 +131,7 @@ Three pre-built templates exist in the prototype. All use only kit parts.
 
 ### Texture pipeline (maintainers only)
 
-Scripts in `docs/superpowers/reference/texture-pipeline/`. They need Python with Pillow and ImageMagick.
+Scripts in `tools/texture-pipeline/`. They need Python with Pillow and ImageMagick.
 
 | Output | Script and key parameters |
 |---|---|

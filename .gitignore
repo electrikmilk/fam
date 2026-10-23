@@ -1,3 +1,6 @@
 .DS_Store
 .idea/
 .superpowers/
+node_modules/
+dist/
+*.tgz
