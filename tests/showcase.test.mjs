@@ -93,7 +93,7 @@ for (const pageName of PAGE_NAMES) {
   });
 }
 
-const SCENES = ['scene-wood-felt', 'scene-legal-leather', 'scene-leather-paper'];
+const SCENES = ['scene-wood-felt', 'scene-metal-metal', 'scene-legal-leather', 'scene-cardstock-legal', 'scene-leather-paper'];
 
 // The page may only claim what the package does: every class a caption names must be defined in the real stylesheet
 test('every class in a caption exists in the kit', async () => {

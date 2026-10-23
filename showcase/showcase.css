@@ -104,6 +104,8 @@ body {
   padding: 28px;
 }
 
+.cardstock-card { padding: 28px; }
+
 .frames-window {
   display: grid;
   gap: 26px;

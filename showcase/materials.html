@@ -33,7 +33,9 @@
       <a href="#scene-frames">Photo frames and cork</a>
       <a href="#scene-engraved">Engraved text</a>
       <a href="#scene-wood-felt">Wood and felt</a>
+      <a href="#scene-metal-metal">Metal on metal</a>
       <a href="#scene-legal-leather">Legal pad and leather</a>
+      <a href="#scene-cardstock-legal">Cardstock and legal pad</a>
       <a href="#scene-leather-paper">Leather and paper</a>
     </nav>
     </header>
@@ -164,7 +166,7 @@
 
     <section class="scene" id="scene-wood-felt">
       <h2 class="scene-title">Wood and felt</h2>
-      <p class="scene-lead">A wooden navigation bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
+      <p class="scene-lead">The look of a game table: a wooden bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
       <div class="window fam-felt">
         <nav class="fam-nav fam-wood" aria-label="Sample navigation">
           <span class="fam-nav-brand">fam</span>
@@ -196,9 +198,29 @@
       </div>
     </section>
 
+    <section class="scene" id="scene-metal-metal">
+      <h2 class="scene-title">Metal on metal</h2>
+      <p class="scene-lead">A hardware panel: metal buttons on a brushed metal plate, with its label engraved into the plate.</p>
+      <div class="window fam-metal metal-controls">
+        <span class="fam-engraved-metal">Deck</span>
+        <button class="fam-metal-button" type="button">Play</button>
+        <button class="fam-metal-button" type="button">Stop</button>
+        <button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Eject">E</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The metal on metal markup" data-label="the metal on metal markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;span class="fam-engraved-metal"&gt;Deck&lt;/span&gt;
+  &lt;button class="fam-metal-button" type="button"&gt;Play&lt;/button&gt;
+  &lt;button class="fam-metal-button" type="button"&gt;Stop&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
     <section class="scene" id="scene-legal-leather">
       <h2 class="scene-title">Legal pad and leather</h2>
-      <p class="scene-lead">A ruled yellow pad inside a black stitched leather frame.</p>
+      <p class="scene-lead">A leather-bound notepad: a ruled yellow legal pad inside a black stitched leather frame.</p>
       <div class="window fam-leather-frame fam-leather-frame--black">
         <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
       </div>
@@ -212,9 +234,25 @@
       </div>
     </section>
 
+    <section class="scene" id="scene-cardstock-legal">
+      <h2 class="scene-title">Cardstock and legal pad</h2>
+      <p class="scene-lead">A note on a card: a legal pad sheet resting on cardstock, lifted by a soft shadow.</p>
+      <div class="window fam-cardstock cardstock-card">
+        <div class="fam-legal-pad fam-round-sm fam-shadow-md pad-text">Shopping list<br>- Eggs<br>- Flour<br>- Butter</div>
+      </div>
+      <div class="code-block" role="group" aria-label="The cardstock and legal pad markup" data-label="the cardstock and legal pad markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-cardstock" style="padding: 28px"&gt;
+  &lt;div class="fam-legal-pad fam-round-sm fam-shadow-md" style="padding: 0 20px 24px 54px; font: 20px/24px var(--fam-font-hand); color: #2b2216"&gt;
+    Shopping list&lt;br&gt;- Eggs&lt;br&gt;- Flour&lt;br&gt;- Butter
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
     <section class="scene" id="scene-leather-paper">
       <h2 class="scene-title">Leather and paper</h2>
-      <p class="scene-lead">A list on white paper inside a tan stitched leather frame.</p>
+      <p class="scene-lead">A document list: white paper inside a tan stitched leather frame, like papers in a portfolio.</p>
       <div class="window fam-leather-frame">
         <div class="fam-paper paper-list">
           <ul class="fam-list" aria-label="Notes">
