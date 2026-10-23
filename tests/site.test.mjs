@@ -63,7 +63,8 @@ test('every page carries the same site bar with its own page marked current', as
 test('every link between pages in the assembled site reaches a file', async () => {
   const directory = await assembledSite();
   for (const name of SHOWCASE_PAGES) {
-    const html = await readFile(join(directory, 'showcase', `${name}.html`), 'utf8');
+    // Code samples quote links to files that belong to the reader's page, not this one
+    const html = (await readFile(join(directory, 'showcase', `${name}.html`), 'utf8')).replace(/<pre>[\s\S]*?<\/pre>/g, '');
     const targets = [...html.matchAll(/(?:href|src)="([^"#:]+)(?:#[^"]*)?"/g)].map((match) => match[1]);
     for (const target of targets) {
       await access(join(directory, 'showcase', target)).catch(() => assert.fail(`${name}.html links to ${target}, which the assembled site does not contain`));

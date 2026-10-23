@@ -1,4 +1,4 @@
-// Adds a "Copy" button after every code.copyable. Without the clipboard API nothing is added, so there are no dead buttons.
+// Adds a "Copy" button to every code block and after every code.copyable. Without the clipboard API nothing is added, so there are no dead buttons.
 (function () {
   if (!navigator.clipboard || !navigator.clipboard.writeText) return;
 
@@ -11,9 +11,10 @@
   document.body.appendChild(status);
 
   function labelOf(code) {
+    var block = code.closest('.code-block');
     var caption = code.closest('.cap');
     var heading = caption && caption.querySelector('b');
-    return code.dataset.label || (heading && heading.textContent) || 'text';
+    return (block && block.dataset.label) || code.dataset.label || (heading && heading.textContent) || 'text';
   }
 
   function showResult(button, text, announcement) {
@@ -25,7 +26,7 @@
     }, RESET_MILLISECONDS);
   }
 
-  document.querySelectorAll('code.copyable').forEach(function (code) {
+  function createButton(code) {
     var label = labelOf(code);
     var button = document.createElement('button');
     button.type = 'button';
@@ -38,6 +39,14 @@
         function () { showResult(button, 'Copy failed', 'Copy failed for ' + label); }
       );
     });
-    code.after(button);
+    return button;
+  }
+
+  document.querySelectorAll('.code-block').forEach(function (block) {
+    block.querySelector('.code-head').appendChild(createButton(block.querySelector('code')));
+  });
+
+  document.querySelectorAll('code.copyable').forEach(function (code) {
+    code.after(createButton(code));
   });
 })();

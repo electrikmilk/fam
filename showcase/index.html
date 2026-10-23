@@ -99,7 +99,7 @@
 
     <section class="section" id="pairings" aria-labelledby="pairings-heading">
       <h2 id="pairings-heading">Pick a pairing</h2>
-      <p class="lead">Materials are classes you combine. Choose a pairing to see it, and the classes it uses.</p>
+      <p class="lead">Materials are classes you combine. Choose a pairing to see it, and the markup that builds it.</p>
       <div data-pairings>
       <div class="pairing-panel" id="pairing-wood-felt" data-title="Wood and felt">
         <h3 class="pairing-title">Wood and felt</h3>
@@ -116,7 +116,23 @@
             <div class="fam-progress bar" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
           </div>
         </div>
-        <p class="cap"><b>wood and felt</b> <code class="copyable">fam-felt fam-nav fam-wood fam-glass fam-glass-input fam-switch fam-progress fam-progress-fill--candy</code></p>
+        <div class="code-block" role="group" aria-label="The wood and felt markup" data-label="the wood and felt markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt"&gt;
+  &lt;nav class="fam-nav fam-wood" aria-label="Sample navigation"&gt;
+    &lt;span class="fam-nav-brand"&gt;fam&lt;/span&gt;
+    &lt;span class="fam-nav-item" aria-current="page"&gt;Controls&lt;/span&gt;
+    &lt;span class="fam-nav-item"&gt;Progress&lt;/span&gt;
+  &lt;/nav&gt;
+  &lt;div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: center; padding: 24px 26px"&gt;
+    &lt;div class="fam-glass" style="width: 220px"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;
+    &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Wi-Fi" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;div class="fam-progress" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="flex: 1 1 160px; --fam-value: 68%"&gt;
+      &lt;div class="fam-progress-fill fam-progress-fill--candy"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       </div>
 
       <div class="pairing-panel" id="pairing-leather-paper" data-title="Leather and paper">
@@ -131,7 +147,18 @@
             </ul>
           </div>
         </div>
-        <p class="cap"><b>leather and paper</b> <code class="copyable">fam-leather-frame fam-paper fam-list fam-list-row</code></p>
+        <div class="code-block" role="group" aria-label="The leather and paper markup" data-label="the leather and paper markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-leather-frame"&gt;
+  &lt;div class="fam-paper" style="padding: 14px"&gt;
+    &lt;ul class="fam-list" aria-label="Notes"&gt;
+      &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Grocery run&lt;/b&gt;&lt;span&gt;Today&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class="fam-list-row" href="#" aria-current="true"&gt;&lt;b&gt;Picnic plans&lt;/b&gt;&lt;span&gt;Yesterday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Book ideas&lt;/b&gt;&lt;span&gt;Monday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       </div>
 
       <div class="pairing-panel" id="pairing-metal-plastic" data-title="Metal and plastic">
@@ -144,7 +171,16 @@
           <span class="fam-knob" role="img" aria-label="Metal knob"></span>
           <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Loop" checked><span class="fam-switch-knob"></span></label>
         </div>
-        <p class="cap"><b>metal and plastic</b> <code class="copyable">fam-metal fam-plastic fam-knob fam-switch</code></p>
+        <div class="code-block" role="group" aria-label="The metal and plastic markup" data-label="the metal and plastic markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-plastic fam-plastic--red" type="button"&gt;Record&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--green" type="button"&gt;Play&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--amber" type="button"&gt;Pause&lt;/button&gt;
+  &lt;span class="fam-knob" role="img" aria-label="Metal knob"&gt;&lt;/span&gt;
+  &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Loop" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       </div>
 
       <div class="pairing-panel" id="pairing-legal-leather" data-title="Legal pad and leather">
@@ -153,7 +189,14 @@
         <div class="window fam-leather-frame fam-leather-frame--black">
           <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
         </div>
-        <p class="cap"><b>legal pad and leather</b> <code class="copyable">fam-legal-pad fam-leather-frame fam-leather-frame--black</code></p>
+        <div class="code-block" role="group" aria-label="The legal pad and leather markup" data-label="the legal pad and leather markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-leather-frame fam-leather-frame--black"&gt;
+  &lt;div class="fam-legal-pad" style="padding: 0 20px 24px 54px; font: 20px/24px var(--fam-font-hand); color: #2b2216"&gt;
+    Picnic plans&lt;br&gt;- Bring the blue blanket&lt;br&gt;- Sandwiches and lemonade
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       </div>
 
       <div class="pairing-panel" id="pairing-frames-cork" data-title="Photo frames and cork">
@@ -163,7 +206,11 @@
           <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
           <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
         </div>
-        <p class="cap"><b>photo frames and cork</b> <code class="copyable">fam-wood-frame fam-wood-frame--glossy fam-cork</code></p>
+        <div class="code-block" role="group" aria-label="The photo frame and cork markup" data-label="the photo frame and cork markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;figure class="fam-wood-frame fam-wood-frame--glossy"&gt;&lt;img src="photo.jpg" alt="A lone tree on a hill"&gt;&lt;/figure&gt;
+&lt;div class="fam-wood-frame"&gt;&lt;div class="fam-cork" style="height: 150px"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+      </div>
       </div>
 
       <div class="pairing-panel" id="pairing-glass" data-title="Glass">

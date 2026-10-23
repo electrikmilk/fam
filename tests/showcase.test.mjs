@@ -113,7 +113,7 @@ test('every class in a caption exists in the kit', async () => {
   for (const pageName of PAGE_NAMES) {
     const page = await openUrl(showcasePageUrl(pageName));
     try {
-      const found = await page.page.$$eval('.cap code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []));
+      const found = await page.page.$$eval('.cap code, .code-block code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []));
       for (const name of found) names.add(name);
     } finally {
       await page.close();
@@ -125,19 +125,31 @@ test('every class in a caption exists in the kit', async () => {
 
 const SCENE_PAGE_NAMES = ['pairings', 'materials', 'glass'];
 
+// Runs in the page. A snippet or caption may only name kit classes its demo uses. A scene with a code block must also name every
+// kit class its demo uses, so what a visitor copies is the whole demo.
+const MISMATCHES_SOURCE = `(containerSelector) => {
+  const kitClasses = (text) => text.match(/(?<![-\\w])fam-[a-z0-9-]+/g) ?? [];
+  return [...document.querySelectorAll(containerSelector)].flatMap((container) => {
+    const written = new Set(kitClasses([...container.querySelectorAll('.cap code, .code-block code')].map((code) => code.textContent).join(' ')));
+    const used = new Set(
+      [...container.querySelectorAll('.window, .window [class]')]
+        .filter((element) => !element.closest('.code-block'))
+        .flatMap((element) => [...element.classList])
+        .filter((name) => name.startsWith('fam-')),
+    );
+    const notInDemo = [...written].filter((name) => !used.has(name)).map((name) => container.id + ': snippet names ' + name + ' but the demo does not use it');
+    const hasCodeBlock = container.querySelector('.code-block') !== null;
+    const notInSnippet = hasCodeBlock ? [...used].filter((name) => !written.has(name)).map((name) => container.id + ': demo uses ' + name + ' but the snippet does not show it') : [];
+    return [...notInDemo, ...notInSnippet];
+  });
+}`;
+
 for (const pageName of SCENE_PAGE_NAMES) {
-  test(`captions match the markup of their scene on ${pageName}`, async () => {
+  test(`captions and snippets match the markup of their scene on ${pageName}`, async () => {
     const page = await openUrl(showcasePageUrl(pageName));
     try {
       assert.ok((await page.page.$$('section.scene')).length >= 1, 'the scenes are missing');
-      const missing = await page.page.evaluate(() =>
-        [...document.querySelectorAll('section.scene')].flatMap((scene) =>
-          (scene.querySelector('.cap code')?.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? [])
-            .filter((name) => !scene.querySelector(`:not(.cap) .${name}, .window.${name}`))
-            .map((name) => `${scene.id}: ${name}`),
-        ),
-      );
-      assert.deepEqual(missing, []);
+      assert.deepEqual(await page.page.evaluate(`(${MISMATCHES_SOURCE})('section.scene')`), []);
     } finally {
       await page.close();
     }
@@ -150,7 +162,7 @@ for (const pageName of SCENE_PAGE_NAMES) {
         sections.map((section) => ({
           id: section.id,
           height: section.getBoundingClientRect().height,
-          captionVisible: section.querySelector('.cap code').getBoundingClientRect().height > 0,
+          captionVisible: section.querySelector('.cap code, .code-block code').getBoundingClientRect().height > 0,
           windows: [...section.querySelectorAll('.window')].map((window) => getComputedStyle(window).boxShadow !== 'none'),
         })),
       );
@@ -238,17 +250,24 @@ const RECORDING_CLIPBOARD = `window.__copied = []; Object.defineProperty(navigat
 const REJECTING_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { value: { writeText: async () => { throw new Error('denied'); } } });`;
 const NO_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { value: undefined });`;
 
-test('every caption gets a copy button that copies its classes', async () => {
+test('every code block gets a copy button in its header that copies its markup', async () => {
   const page = await openUrl(pairingsUrl, { initScript: RECORDING_CLIPBOARD });
   try {
-    const counts = await page.page.evaluate(() => ({ codes: document.querySelectorAll('code.copyable').length, buttons: document.querySelectorAll('code.copyable + button.copy').length }));
-    assert.ok(counts.codes >= 7, 'the captions are missing');
-    assert.equal(counts.buttons, counts.codes);
+    const counts = await page.page.evaluate(() => ({
+      blocks: document.querySelectorAll('.code-block').length,
+      headerButtons: document.querySelectorAll('.code-block .code-head > button.copy').length,
+      captions: document.querySelectorAll('code.copyable').length,
+      captionButtons: document.querySelectorAll('code.copyable + button.copy').length,
+    }));
+    assert.ok(counts.blocks >= 7, 'the code blocks are missing');
+    assert.equal(counts.headerButtons, counts.blocks);
+    assert.equal(counts.captionButtons, counts.captions);
 
     const first = page.page.locator('#scene-wood-felt .copy');
-    assert.ok((await first.getAttribute('aria-label')).includes('wood + felt'), 'the button does not say what it copies');
+    assert.ok((await first.getAttribute('aria-label')).includes('wood and felt'), 'the button does not say what it copies');
     await first.click();
-    const expected = await page.page.textContent('#scene-wood-felt code');
+    const expected = await page.page.textContent('#scene-wood-felt .code-block code');
+    assert.ok(expected.startsWith('<div class="fam-felt">'), 'the block does not hold the demo markup');
     assert.deepEqual(await page.page.evaluate(() => window.__copied), [expected]);
     assert.equal(await first.textContent(), 'Copied');
     assert.ok((await page.page.textContent('[role="status"]')).includes('Copied'));
@@ -353,6 +372,16 @@ test('the site text is set in Lato', async () => {
     }));
     assert.ok(result.heading.includes('Lato'), result.heading);
     assert.ok(result.loaded, 'Lato did not load from Google Fonts');
+  } finally {
+    await page.close();
+  }
+});
+
+test('the home page pairings show the markup that builds them', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    assert.deepEqual(await page.page.evaluate(`(${MISMATCHES_SOURCE})('.pairing-panel')`), []);
+    assert.equal(await page.page.locator('.pairing-panel .code-block').count(), 5);
   } finally {
     await page.close();
   }

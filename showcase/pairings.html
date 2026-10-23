@@ -26,7 +26,7 @@
     <header class="page-head">
       <p class="eyebrow">Pairings</p>
       <h1>Materials that sit well together</h1>
-      <p class="lead">Each scene combines two or more materials. The classes under every scene are the ones it uses, and the button copies them.</p>
+      <p class="lead">Each scene combines two or more materials. Under every scene is its markup, with a button that copies it.</p>
     <nav class="jump" aria-label="On this page">
       <a href="#scene-wood-felt">Wood and felt</a>
       <a href="#scene-navs">Navigation bars</a>
@@ -53,7 +53,23 @@
           <div class="fam-progress bar" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
         </div>
       </div>
-      <p class="cap"><b>wood + felt</b> <code class="copyable">fam-felt fam-nav fam-wood fam-glass fam-glass-input fam-switch fam-progress fam-progress-fill--candy</code></p>
+      <div class="code-block" role="group" aria-label="The wood and felt markup" data-label="the wood and felt markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt"&gt;
+  &lt;nav class="fam-nav fam-wood" aria-label="Sample navigation"&gt;
+    &lt;span class="fam-nav-brand"&gt;fam&lt;/span&gt;
+    &lt;span class="fam-nav-item" aria-current="page"&gt;Controls&lt;/span&gt;
+    &lt;span class="fam-nav-item"&gt;Progress&lt;/span&gt;
+  &lt;/nav&gt;
+  &lt;div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: center; padding: 24px 26px"&gt;
+    &lt;div class="fam-glass" style="width: 220px"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;
+    &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Wi-Fi" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;div class="fam-progress" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="flex: 1 1 160px; --fam-value: 68%"&gt;
+      &lt;div class="fam-progress-fill fam-progress-fill--candy"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-navs">
@@ -85,7 +101,16 @@
           <span class="fam-nav-item">About</span>
         </nav>
       </div>
-      <p class="cap"><b>navigation bars</b> <code class="copyable">fam-nav fam-wood fam-metal fam-leather-bar fam-leather-bar--black</code></p>
+      <div class="code-block" role="group" aria-label="The navigation bar markup" data-label="the navigation bar markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;nav class="fam-nav fam-wood" aria-label="Wood navigation"&gt;
+  &lt;span class="fam-nav-brand"&gt;fam&lt;/span&gt;
+  &lt;span class="fam-nav-item" aria-current="page"&gt;Home&lt;/span&gt;
+  &lt;span class="fam-nav-item"&gt;Library&lt;/span&gt;
+  &lt;span class="fam-nav-item"&gt;About&lt;/span&gt;
+&lt;/nav&gt;
+&lt;!-- Swap fam-wood for fam-metal, fam-leather-bar or fam-leather-bar fam-leather-bar--black --&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-legal-leather">
@@ -94,7 +119,14 @@
       <div class="window fam-leather-frame fam-leather-frame--black">
         <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
       </div>
-      <p class="cap"><b>legal pad + leather</b> <code class="copyable">fam-legal-pad fam-leather-frame fam-leather-frame--black</code></p>
+      <div class="code-block" role="group" aria-label="The legal pad and leather markup" data-label="the legal pad and leather markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-leather-frame fam-leather-frame--black"&gt;
+  &lt;div class="fam-legal-pad" style="padding: 0 20px 24px 54px; font: 20px/24px var(--fam-font-hand); color: #2b2216"&gt;
+    Picnic plans&lt;br&gt;- Bring the blue blanket&lt;br&gt;- Sandwiches and lemonade
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-leather-paper">
@@ -109,7 +141,18 @@
           </ul>
         </div>
       </div>
-      <p class="cap"><b>leather + paper</b> <code class="copyable">fam-leather-frame fam-paper fam-list fam-list-row</code></p>
+      <div class="code-block" role="group" aria-label="The leather and paper markup" data-label="the leather and paper markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-leather-frame"&gt;
+  &lt;div class="fam-paper" style="padding: 14px"&gt;
+    &lt;ul class="fam-list" aria-label="Notes"&gt;
+      &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Grocery run&lt;/b&gt;&lt;span&gt;Today&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class="fam-list-row" href="#" aria-current="true"&gt;&lt;b&gt;Picnic plans&lt;/b&gt;&lt;span&gt;Yesterday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Book ideas&lt;/b&gt;&lt;span&gt;Monday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-metal">
@@ -122,7 +165,16 @@
         <span class="fam-knob" role="img" aria-label="Metal knob"></span>
         <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Loop" checked><span class="fam-switch-knob"></span></label>
       </div>
-      <p class="cap"><b>metal + controls</b> <code class="copyable">fam-metal fam-plastic fam-knob fam-switch</code></p>
+      <div class="code-block" role="group" aria-label="The metal and plastic markup" data-label="the metal and plastic markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-plastic fam-plastic--red" type="button"&gt;Record&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--green" type="button"&gt;Play&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--amber" type="button"&gt;Pause&lt;/button&gt;
+  &lt;span class="fam-knob" role="img" aria-label="Metal knob"&gt;&lt;/span&gt;
+  &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Loop" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-frames">
@@ -137,7 +189,14 @@
         </div>
         <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
       </div>
-      <p class="cap"><b>photo frames + cork</b> <code class="copyable">fam-print-frame fam-paper fam-cardstock fam-wood-frame fam-wood-frame--glossy fam-cork</code></p>
+      <div class="code-block" role="group" aria-label="The photo frame and cork markup" data-label="the photo frame and cork markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;figure class="fam-print-frame fam-paper"&gt;&lt;img src="photo.jpg" alt="A lone tree on a hill"&gt;&lt;/figure&gt;
+&lt;figure class="fam-print-frame fam-cardstock"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
+&lt;figure class="fam-wood-frame"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
+&lt;figure class="fam-wood-frame fam-wood-frame--glossy"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
+&lt;div class="fam-wood-frame"&gt;&lt;div class="fam-cork" style="height: 150px"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-engraved">
@@ -148,7 +207,12 @@
         <div class="window fam-leather panel"><span class="fam-engraved-leather">Notebook</span></div>
         <div class="window fam-wood panel"><span class="fam-engraved-wood">LIBRARY</span></div>
       </div>
-      <p class="cap"><b>engraved text</b> <code class="copyable">fam-engraved-metal fam-engraved-leather fam-engraved-wood fam-metal fam-leather fam-wood</code></p>
+      <div class="code-block" role="group" aria-label="The engraved text markup" data-label="the engraved text markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;SETTINGS&lt;/span&gt;&lt;/div&gt;
+&lt;div class="fam-leather" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather"&gt;Notebook&lt;/span&gt;&lt;/div&gt;
+&lt;div class="fam-wood" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood"&gt;LIBRARY&lt;/span&gt;&lt;/div&gt;</code></pre>
+      </div>
     </section>
   </main>
 

@@ -376,3 +376,51 @@ html { scroll-behavior: smooth; }
 @media (max-width: 700px) {
   .pillars { grid-template-columns: 1fr; }
 }
+
+/* A real markup snippet with a Copy button in a header that is always visible, so it is not mistaken for a caption */
+.code-block {
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+  background: #14161a;
+  text-align: left;
+}
+
+.code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 8px 8px 16px;
+  background: #1c1f25;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.code-lang {
+  font: 700 12px/1 var(--site-font);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #b8bcc6;
+}
+
+.code-head .copy {
+  margin: 0;
+  padding: 7px 16px;
+  border-color: rgba(255, 255, 255, .4);
+  font: 700 14px/1 var(--site-font);
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 14px 16px 16px;
+  font: 13px/1.6 ui-monospace, Menlo, monospace;
+  color: #dfe2ea;
+  /* Wrapping keeps a long attribute list inside the page on a phone, where a scrolling block would be easy to miss */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.code-block code { font: inherit; }
+
+.glass-lab .code-block { margin: 16px 0 0; }
