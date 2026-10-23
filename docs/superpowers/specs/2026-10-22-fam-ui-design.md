@@ -140,6 +140,7 @@ Scripts in `tools/texture-pipeline/`. They need Python with Pillow and ImageMagi
 | Knob face | `make_radial_face.py SRC OUT 2762 1509 450 288 1.0 0.6`. Averages the ring profile at angles away from the photo's seams, then multiplies in the photo's wedge reflections (full contrast, 60% of their colour cast). |
 | Stitched frame | `make_stitched_frame.py SRC OUT 900 2500 119.8 1942 152 34`. Find the stitch period first with `stitch_period.py` and `local_periods.py`. |
 | Soft inner edge, tone-matched fill, black variant | `soft_interior.py` |
+| Stitched bottom edge for the leather bar | `make_bar_edge.py FRAME_PNG OUT 68 50`. Crops the finished frame's bottom strip just below the crease under the stitches, dropping the heavy rolled edge. |
 | Tan variant | `tan_leather.py`. Gradient map stops `(0,(126,94,58))`, `(.35,(166,126,76))`, `(.65,(208,168,106))`, `(1,(243,222,178))` with luminance raised to the 0.42 power. |
 | Stitch SVG for the CSS alternative | `make_stitch_svg.py 18 1.6 8.5 2.6 12` |
 

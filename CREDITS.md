@@ -22,6 +22,8 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `leather-fill-black-tile.jpg` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `soft_interior.py` |
 | `leather-frame-tan-soft.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_stitched_frame.py`, `soft_interior.py`, then `tan_leather.py` |
 | `leather-frame-black-soft.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_stitched_frame.py`, then `soft_interior.py` |
+| `leather-bar-edge-tan.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-tan-soft.png OUT 68 50` |
+| `leather-bar-edge-black.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-black-soft.png OUT 68 50` |
 | `wood-frame.jpg` | `wood-frame_se-tsuchiya--EkbLo1LdEM-unsplash.png` | se-tsuchiya | `make_wood_frame.py ... 556 28` |
 
 The scripts are in `tools/texture-pipeline/` and the source photos are in `textures/`.
