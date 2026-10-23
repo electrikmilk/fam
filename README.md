@@ -2,9 +2,23 @@
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
-Materials tile to make textured interfaces responsive.
+Fam stands for Fam Adds Materials.
 
-Textures are compact tiles to load fast.
+Skeuomorphism exists to make an interface feel familiar. A recessed field invites typing, a raised button invites a press and a switch looks like a switch. Fam builds those cues from real photographs of materials, processed into seamless tiles and credited in [CREDITS.md](CREDITS.md), not from gradients that imitate them.
+
+Materials tile to make textured interfaces responsive. A tile repeats at its natural size and is never stretched, so any box in any shape gets the material. There are no images per breakpoint, and a phone loads the same files as a desktop.
+
+Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a material you do not use is never downloaded.
+
+## Why use it
+
+Beyond the look:
+
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 41 KB of CSS (10.6 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
+- **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
+- **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
+- **Quick to recolor.** One variable tints felt (`--fam-tint`) and cardstock (`--fam-cardstock-tint`).
 
 ## Showcase
 
