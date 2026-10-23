@@ -1,8 +1,9 @@
 import { execFileSync } from 'node:child_process';
+import { realpathSync } from 'node:fs';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { exampleUrl, openUrl } from '../tests/helpers/browser.mjs';
 
 const EXAMPLE_PAGES = ['controls', 'notes', 'sign-in'];
@@ -28,7 +29,7 @@ export async function runAudit(pageName, { width = 1440 } = {}) {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   let failed = false;
   for (const pageName of EXAMPLE_PAGES) {
     const { measured, failures } = await runAudit(pageName);

@@ -11,6 +11,8 @@ Link the bundle and wrap your UI in `.fam` (it only sets the font and base color
 <div class="fam">...</div>
 ```
 
+With a bundler you can also write `@import "fam-ui";` in CSS or `import "fam-ui";` in JavaScript; both resolve to the bundle.
+
 The textures are separate files in `assets/` and are only fetched when a class that uses them is on the page. If you copy the stylesheet somewhere else, copy `assets/` too and keep it next to the folder that holds the stylesheet, because the CSS refers to `../assets/`.
 
 The same CSS is also split into layers in `css/`: `tokens`, `materials`, `effects`, `components`, `templates`. Load them in that order.

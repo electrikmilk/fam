@@ -14,6 +14,10 @@
     "CREDITS.md"
   ],
   "exports": {
+    ".": {
+      "style": "./dist/fam-ui.css",
+      "default": "./dist/fam-ui.css"
+    },
     "./dist/*": "./dist/*",
     "./css/*": "./css/*",
     "./assets/*": "./assets/*",

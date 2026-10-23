@@ -51,11 +51,12 @@ async function installIntoConsumer() {
 <div id="frame" class="fam-leather-frame" style="width:200px;height:140px"></div>
 </body>`,
   );
-  return pathToFileURL(join(project, 'site/pages/index.html')).href;
+  return { pageUrl: pathToFileURL(join(project, 'site/pages/index.html')).href, project };
 }
 
 test('works when installed in a project with the page in another directory', async () => {
-  const page = await openUrl(await installIntoConsumer());
+  const { pageUrl } = await installIntoConsumer();
+  const page = await openUrl(pageUrl);
   try {
     assert.deepEqual(page.issues, []);
     const sources = await page.page.evaluate(() => ({
@@ -72,7 +73,8 @@ test('works when installed in a project with the page in another directory', asy
 });
 
 test('an inline --fam-tint still recolors the felt', async () => {
-  const page = await openUrl(await installIntoConsumer());
+  const { pageUrl } = await installIntoConsumer();
+  const page = await openUrl(pageUrl);
   try {
     const green = statistics(await page.page.locator('#felt').screenshot());
     const burgundy = statistics(await page.page.locator('#felt-burgundy').screenshot());
@@ -81,4 +83,10 @@ test('an inline --fam-tint still recolors the felt', async () => {
   } finally {
     await page.close();
   }
+});
+
+test('a bare import of the package resolves to the bundle', async () => {
+  const { project } = await installIntoConsumer();
+  const resolved = execFileSync('node', ['--input-type=module', '-e', "console.log(import.meta.resolve('fam-ui'))"], { cwd: project, encoding: 'utf8' }).trim();
+  assert.ok(resolved.endsWith('/node_modules/fam-ui/dist/fam-ui.css'), resolved);
 });

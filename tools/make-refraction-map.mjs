@@ -1,5 +1,6 @@
+import { realpathSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 // Red and green edge ramps that are neutral (128) across the middle 60% of the lens, so only the rim bends the backdrop
 const RAMP_STOPS = [
@@ -41,7 +42,7 @@ export function buildSnippet() {
 `;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   const snippetPath = fileURLToPath(new URL('../snippets/refraction-filter.html', import.meta.url));
   await mkdir(fileURLToPath(new URL('../snippets/', import.meta.url)), { recursive: true });
   await writeFile(snippetPath, buildSnippet());

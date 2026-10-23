@@ -1,5 +1,6 @@
+import { realpathSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const LAYERS = ['tokens', 'materials', 'effects', 'components', 'templates'];
 
@@ -15,6 +16,6 @@ export async function buildBundle() {
   return bundlePath;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   console.log(await buildBundle());
 }
