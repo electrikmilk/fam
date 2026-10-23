@@ -431,8 +431,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-nav.fam-metal .fam-nav-item:focus-visible { outline-color: rgb(18, 20, 26); }
 
-/* Leather bar: tan keeps the frame's own tone, so its text is black and the active pocket is only shadow, not a darker fill.
-   Black leather flips to light text with a dark lip, and a darker pocket for the active item. */
+/* Leather bar: tan keeps the frame's own tone, so its text is black.
+   Black leather flips to light text with a dark lip. Both bars cut the active item as a dark pocket with light text. */
 .fam-nav.fam-leather-bar {
   padding-bottom: 8px;
   box-shadow: inset 0 1px 0 rgba(255, 244, 220, .75), 0 3px 7px rgba(50, 25, 5, .5);
@@ -441,10 +441,12 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-leather-bar .fam-nav-brand,
 .fam-leather-bar .fam-nav-item { color: #000; }
 
-/* A lighter pocket than the wood bar's: its shadow darkens the tan under the glyphs, and the stock one left the label under 4.5:1 at some pixel alignments */
+/* Dark enough that the label flips to light text, as on the black bar; black text on a darkened tan fell under 4.5:1 */
 .fam-leather-bar .fam-nav-item[aria-current="page"] {
-  background: none;
-  box-shadow: inset 0 2px 3px rgba(50, 25, 5, .38), inset 0 0 0 1px rgba(50, 25, 5, .3), 0 1px 0 rgba(255, 238, 205, .6);
+  background: linear-gradient(rgba(30, 14, 3, .85), rgba(30, 14, 3, .65));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .7), 0 1px 0 rgba(255, 238, 205, .6);
+  color: #ece3cf;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
 }
 
 .fam-nav.fam-leather-bar--black {
