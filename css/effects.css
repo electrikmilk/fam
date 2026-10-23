@@ -69,10 +69,11 @@
 .fam-shadow-lg { box-shadow: var(--fam-shadow-lg); }
 .fam-shadow-inset { box-shadow: var(--fam-shadow-inset); }
 
-.fam-round-sm { border-radius: var(--fam-radius-sm); }
-.fam-round-md { border-radius: var(--fam-radius-md); }
-.fam-round-lg { border-radius: var(--fam-radius-lg); }
-.fam-round-pill { border-radius: var(--fam-radius-pill); }
+/* They also set --fam-r so the clip of a fam-glass glow layer follows the same radius. This relies on coming after .fam-glass. */
+.fam-round-sm { --fam-r: var(--fam-radius-sm); border-radius: var(--fam-radius-sm); }
+.fam-round-md { --fam-r: var(--fam-radius-md); border-radius: var(--fam-radius-md); }
+.fam-round-lg { --fam-r: var(--fam-radius-lg); border-radius: var(--fam-radius-lg); }
+.fam-round-pill { --fam-r: var(--fam-radius-pill); border-radius: var(--fam-radius-pill); }
 
 /* An inner box inside padding looks even when its radius is the outer radius minus the padding */
 .fam-concentric { border-radius: calc(var(--fam-outer-radius) - var(--fam-pad)); }

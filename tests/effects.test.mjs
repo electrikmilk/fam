@@ -27,6 +27,17 @@ test('glass filter layer is rounded with a real border-radius', async () => {
   }
 });
 
+test('glass glow clip follows a fam-round radius class', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.equal(await style(kit.page, '#glass-rounded', null, 'borderRadius'), '12px');
+    assert.equal(await style(kit.page, '#glass-rounded', '::before', 'borderRadius'), '12px');
+    assert.equal(await style(kit.page, '#glass-rounded', '::after', 'borderRadius'), '44px');
+  } finally {
+    await kit.close();
+  }
+});
+
 test('glass recipe values', async () => {
   const kit = await openKit();
   try {
