@@ -266,6 +266,39 @@ test('every code block gets a copy button in its header that copies its markup',
   }
 });
 
+test('long code blocks start collapsed, expand on request and still copy in full', async () => {
+  const page = await openUrl(showcasePageUrl('controls'), { initScript: RECORDING_CLIPBOARD });
+  try {
+    const firstCollapsedId = await page.page.locator('.code-block.is-collapsed pre').first().getAttribute('id');
+    const block = page.page.locator('.code-block', { has: page.page.locator(`#${firstCollapsedId}`) });
+    const pre = block.locator('pre');
+    const toggle = block.locator('.toggle');
+    const collapsedHeight = await pre.evaluate((element) => element.clientHeight);
+    assert.ok(collapsedHeight < (await pre.evaluate((element) => element.scrollHeight)), 'the block is not clipped');
+    assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
+
+    await block.locator('.copy').click();
+    const fullMarkup = await block.locator('code').textContent();
+    assert.deepEqual(await page.page.evaluate(() => window.__copied), [fullMarkup]);
+
+    await toggle.click();
+    assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
+    assert.ok((await pre.evaluate((element) => element.clientHeight)) > collapsedHeight, 'the block did not open');
+    assert.equal(await toggle.textContent(), 'Show less');
+  } finally {
+    await page.close();
+  }
+});
+
+test('code blocks show in full with JavaScript off', async () => {
+  const page = await openUrl(showcasePageUrl('controls'), { javaScriptEnabled: false });
+  try {
+    assert.equal(await page.page.locator('.code-block.is-collapsed, .code-head .toggle').count(), 0);
+  } finally {
+    await page.close();
+  }
+});
+
 test('a refused copy says so', async () => {
   const page = await openUrl(materialsUrl, { initScript: REJECTING_CLIPBOARD });
   try {

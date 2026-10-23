@@ -1,8 +1,36 @@
-// Adds a "Copy" button to every code block and after every code.copyable. Without the clipboard API nothing is added, so there are no dead buttons.
+// Collapses long code blocks, and adds a "Copy" button to every code block and after every code.copyable. Without the clipboard API no
+// copy button is added, so there are no dead buttons. Without JavaScript every block shows in full.
 (function () {
-  if (!navigator.clipboard || !navigator.clipboard.writeText) return;
-
+  var COLLAPSE_AFTER_LINES = 8;
   var RESET_MILLISECONDS = 1500;
+
+  // A collapsed block shows its first lines, set by .code-block.is-collapsed pre in site.css
+  function collapseLongBlocks() {
+    document.querySelectorAll('.code-block').forEach(function (block, index) {
+      var lineCount = block.querySelector('code').textContent.split('\n').length;
+      if (lineCount <= COLLAPSE_AFTER_LINES) return;
+
+      var pre = block.querySelector('pre');
+      pre.id = 'code-block-' + index;
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'toggle';
+      toggle.setAttribute('aria-controls', pre.id);
+
+      function render(isCollapsed) {
+        block.classList.toggle('is-collapsed', isCollapsed);
+        toggle.setAttribute('aria-expanded', String(!isCollapsed));
+        toggle.textContent = isCollapsed ? 'Show all ' + lineCount + ' lines' : 'Show less';
+      }
+
+      toggle.addEventListener('click', function () { render(!block.classList.contains('is-collapsed')); });
+      render(true);
+      block.querySelector('.code-head').appendChild(toggle);
+    });
+  }
+
+  collapseLongBlocks();
+  if (!navigator.clipboard || !navigator.clipboard.writeText) return;
 
   // The button's own text changes, so announcements go through one polite status region instead of the button's label
   var status = document.createElement('div');
