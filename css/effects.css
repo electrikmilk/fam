@@ -111,6 +111,15 @@
   background-clip: border-box;
 }
 
+/* snippets/refraction-round.js gives each refracting glass a filter shaped to its own radius and names it in --fam-refract-filter.
+   It sits behind @supports because var() always parses: an engine that cannot use url() in a backdrop filter would otherwise drop
+   the blur instead of keeping the plain declaration above. */
+@supports (backdrop-filter: url(#fam-refract)) {
+  .fam-glass--refract::before {
+    backdrop-filter: var(--fam-refract-filter, url(#fam-refract)) blur(var(--fam-refract-blur)) saturate(var(--fam-refract-saturate)) brightness(105%);
+  }
+}
+
 .fam-shadow-sm { box-shadow: var(--fam-shadow-sm); }
 .fam-shadow-md { box-shadow: var(--fam-shadow-md); }
 .fam-shadow-lg { box-shadow: var(--fam-shadow-lg); }
