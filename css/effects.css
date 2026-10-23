@@ -12,10 +12,11 @@
   --fam-glass-blur: 14px;
   --fam-refract-blur: 1px;
   --fam-glass-saturate: 125%;
-  --fam-glow-saturate: 190%;
+  --fam-glow-saturate: 300%;
+  --fam-glow-brightness: 175%;
   --fam-refract-saturate: 110%;
   --fam-glass-shade: rgba(0, 0, 0, .42);
-  --fam-glass-rim: rgba(255, 255, 255, .55);
+  --fam-glass-rim: rgba(255, 255, 255, .28);
   --fam-glass-underlight: rgba(0, 0, 0, .35);
   --fam-glass-ink: #fff;
   --fam-glass-ink-soft: rgba(255, 255, 255, .72);
@@ -50,10 +51,10 @@
 }
 
 /* Tints change the shade and the ink together, so the text keeps its contrast. Light glass needs dark ink; blue glass keeps white ink.
-   Both come after .fam-glass so they win on equal specificity. Refracting glass has no shade and ignores them. */
+   Both come after .fam-glass so they win on equal specificity. Refracting glass has no shade, so they only change its ink and rim. */
 .fam-glass--light {
   --fam-glass-shade: rgba(255, 255, 255, .5);
-  --fam-glass-rim: rgba(255, 255, 255, .85);
+  --fam-glass-rim: rgba(255, 255, 255, .5);
   --fam-glass-underlight: rgba(0, 0, 0, .18);
   --fam-glass-ink: #14161c;
   --fam-glass-ink-soft: rgba(20, 22, 28, .86);
@@ -62,7 +63,7 @@
 
 .fam-glass--blue {
   --fam-glass-shade: var(--fam-glass-blue-shade);
-  --fam-glass-rim: rgba(190, 215, 255, .7);
+  --fam-glass-rim: rgba(190, 215, 255, .4);
   --fam-glass-underlight: rgba(0, 10, 60, .45);
   --fam-glass-ink-shadow: 0 1px 2px rgba(0, 10, 60, .7);
 }
@@ -80,7 +81,7 @@
   pointer-events: none;
   border: var(--fam-bleed) solid transparent;
   border-radius: calc(var(--fam-r, 999px) + var(--fam-bleed));
-  backdrop-filter: blur(25px) saturate(var(--fam-glow-saturate)) brightness(135%);
+  backdrop-filter: blur(25px) saturate(var(--fam-glow-saturate)) brightness(var(--fam-glow-brightness));
   background: linear-gradient(135deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, .04) 35%, rgba(255, 255, 255, .04) 65%, rgba(255, 255, 255, .3)) padding-box;
   mask:
     linear-gradient(to bottom, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) center top / calc(100% - 2 * var(--fam-glow-tile)) 100% no-repeat padding-box,
