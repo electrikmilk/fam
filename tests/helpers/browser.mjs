@@ -1,4 +1,3 @@
-import { after } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { chromium, firefox, webkit } from 'playwright-core';
 
@@ -19,11 +18,18 @@ function launchEngine() {
 // Each test still gets its own context, so viewport, motion and color settings stay isolated.
 let sharedBrowser;
 const sharedBrowserForThisFile = () => (sharedBrowser ??= launchEngine());
-after(async () => {
+export async function closeSharedBrowser() {
   if (sharedBrowser) await (await sharedBrowser).close();
-});
+  sharedBrowser = undefined;
+}
+// Scripts that use openUrl outside the test runner must call closeSharedBrowser themselves, or the open browser keeps the process alive.
+// The hook is registered only under the runner, because importing node:test elsewhere makes it print an empty test summary.
+if (process.env.NODE_TEST_CONTEXT) {
+  const { after } = await import('node:test');
+  after(closeSharedBrowser);
+}
 
-export const fixtureUrl =(name) => pathToFileURL(fileURLToPath(new URL(`fixtures/${name}.html`, testsRoot))).href;
+export const fixtureUrl = (name) => pathToFileURL(fileURLToPath(new URL(`fixtures/${name}.html`, testsRoot))).href;
 export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../examples/${name}.html`, testsRoot))).href;
 
 export async function openUrl(

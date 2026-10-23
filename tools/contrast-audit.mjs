@@ -4,7 +4,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { exampleUrl, openUrl } from '../tests/helpers/browser.mjs';
+import { closeSharedBrowser, exampleUrl, openUrl } from '../tests/helpers/browser.mjs';
 
 const EXAMPLE_PAGES = ['controls', 'notes', 'sign-in'];
 const collectScript = fileURLToPath(new URL('contrast-audit/collect.js', import.meta.url));
@@ -31,13 +31,17 @@ export async function runAudit(pageName, { width = 1440 } = {}) {
 
 if (import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   let failed = false;
-  for (const pageName of EXAMPLE_PAGES) {
-    const { measured, failures } = await runAudit(pageName);
-    console.log(`${pageName}: ${measured} items measured, ${failures.length} below threshold`);
-    for (const failure of failures) {
-      console.log(`  ${failure.kind} "${failure.text}" in ${failure.sel}: worst ${failure.worst.toFixed(2)}, needs ${failure.needed}`);
+  try {
+    for (const pageName of EXAMPLE_PAGES) {
+      const { measured, failures } = await runAudit(pageName);
+      console.log(`${pageName}: ${measured} items measured, ${failures.length} below threshold`);
+      for (const failure of failures) {
+        console.log(`  ${failure.kind} "${failure.text}" in ${failure.sel}: worst ${failure.worst.toFixed(2)}, needs ${failure.needed}`);
+      }
+      failed ||= failures.length > 0;
     }
-    failed ||= failures.length > 0;
+  } finally {
+    await closeSharedBrowser();
   }
   process.exitCode = failed ? 1 : 0;
 }
