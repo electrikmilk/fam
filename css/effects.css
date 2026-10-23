@@ -107,8 +107,9 @@
 .fam-gloss-strong { --fam-gloss: .55; }
 
 /* Engraved text: an opaque dark glyph with a light lip along the lower edge, so it looks cut into the surface.
-   The glyph colors were fitted to the real texture pixels to pass WCAG contrast. */
+   The glyph colors were fitted to the real texture pixels to pass WCAG contrast as large text (20px bold, 3:1), so the size is part of the class. */
 .fam-engraved-metal {
+  font-size: 20px;
   color: rgb(18, 20, 26);
   font-weight: 700;
   letter-spacing: 1px;
@@ -116,6 +117,7 @@
 }
 
 .fam-engraved-leather {
+  font-size: 20px;
   color: rgb(55, 28, 10);
   font-weight: 700;
   letter-spacing: 1px;
@@ -123,6 +125,7 @@
 }
 
 .fam-engraved-wood {
+  font-size: 20px;
   color: rgb(66, 38, 14);
   font-weight: 700;
   letter-spacing: 1px;

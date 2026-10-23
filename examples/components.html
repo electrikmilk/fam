@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fam-ui text on materials</title>
+  <link rel="stylesheet" href="../dist/fam-ui.css">
+  <style>
+    body { margin: 0; padding: 28px 16px; background: #1b1b1f; }
+    .fam { max-width: 900px; margin: 0 auto; }
+    .fam .page-heading { margin: 34px 0 6px; font-size: 15px; font-weight: 600; color: #e9e9ec; }
+    .fam .page-heading:first-child { margin-top: 0; }
+    .panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .panel { display: grid; place-items: center; height: 96px; border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), inset 0 -2px 6px rgba(0, 0, 0, .4), 0 0 0 1px rgba(0, 0, 0, .55); }
+    .plate { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; padding: 22px; border-radius: 16px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -3px 8px rgba(0, 0, 0, .35), 0 0 0 1px rgba(0, 0, 0, .55); }
+    .shelf { max-width: 340px; }
+  </style>
+</head>
+<body>
+<div class="fam">
+  <main>
+    <h1 class="page-heading">Engraved text on its material</h1>
+    <div class="panels">
+      <div class="panel fam-metal"><span class="fam-engraved-metal">SETTINGS</span></div>
+      <div class="panel fam-leather"><span class="fam-engraved-leather">Notebook</span></div>
+      <div class="panel fam-wood"><span class="fam-engraved-wood">LIBRARY</span></div>
+    </div>
+
+    <h2 class="page-heading">Plastic buttons and switches on a metal plate</h2>
+    <div class="plate fam-metal">
+      <button class="fam-plastic fam-plastic--red" type="button">Record</button>
+      <button class="fam-plastic fam-plastic--green" type="button">Play</button>
+      <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
+      <button class="fam-plastic fam-plastic--blue" type="button">Share</button>
+      <button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button>
+      <span class="fam-knob" role="img" aria-label="Volume"></span>
+      <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label>
+    </div>
+
+    <h2 class="page-heading">Plastic buttons on felt</h2>
+    <div class="plate fam-felt">
+      <button class="fam-plastic fam-plastic--red" type="button">Record</button>
+      <button class="fam-plastic fam-plastic--green" type="button">Play</button>
+      <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
+      <button class="fam-plastic fam-plastic--blue" type="button">Share</button>
+      <button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button>
+    </div>
+
+    <h2 class="page-heading">Rows, search and fields on paper and leather</h2>
+    <div class="shelf fam-paper" style="padding:14px">
+      <label class="fam-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+        <input placeholder="Search" aria-label="Search notes">
+      </label>
+      <ul class="fam-list" style="margin-top:12px">
+        <li><a class="fam-list-row" href="#a"><b>Grocery run</b><span>Today</span></a></li>
+        <li><a class="fam-list-row" href="#b" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
+        <li><a class="fam-list-row" href="#c"><b>Book ideas</b><span>Monday</span></a></li>
+      </ul>
+    </div>
+    <div class="shelf fam-leather" style="padding:18px; margin-top:14px">
+      <div class="fam-recessed">
+        <div class="fam-recessed-row"><label for="components-name">Name</label><input id="components-name" placeholder="Required"></div>
+      </div>
+      <button class="fam-leather-button" type="button">Save</button>
+    </div>
+  </main>
+</div>
+</body>
+</html>

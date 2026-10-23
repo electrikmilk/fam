@@ -4,7 +4,8 @@ import test from 'node:test';
 import { exampleUrl, openUrl } from './helpers/browser.mjs';
 import { OFFENDERS_SOURCE } from './helpers/layout.mjs';
 
-const PAGES = ['controls', 'notes', 'sign-in'];
+const PAGES = ['controls', 'notes', 'sign-in', 'components'];
+const TEMPLATE_PAGES = ['controls', 'notes', 'sign-in'];
 const LOAD_BUDGET_BYTES = 1.5 * 1024 * 1024;
 
 for (const name of PAGES) {
@@ -34,7 +35,7 @@ for (const name of PAGES) {
     }
   });
 
-  test(`${name} carries the current refraction snippet`, async () => {
+  if (TEMPLATE_PAGES.includes(name)) test(`${name} carries the current refraction snippet`, async () => {
     const [page, snippet] = await Promise.all([
       readFile(new URL(`../examples/${name}.html`, import.meta.url), 'utf8'),
       readFile(new URL('../snippets/refraction-filter.html', import.meta.url), 'utf8'),
@@ -79,6 +80,22 @@ test('list rows are real links, not a listbox that has no keyboard model', async
     assert.ok(rowTags.length > 0);
     assert.deepEqual([...new Set(rowTags)], ['A']);
     assert.equal(fakeOptions, 0, 'options with their own tab stops promise arrow-key behavior nothing implements');
+  } finally {
+    await example.close();
+  }
+});
+
+test('controls navigation labels are not truncated at phone width', async () => {
+  const example = await openUrl(exampleUrl('controls'), { viewport: { width: 375, height: 800 } });
+  try {
+    const items = await example.page.$$eval('.fam-nav-item', (links) =>
+      links.map((link) => ({ text: link.textContent, hidden: link.scrollWidth - link.clientWidth })),
+    );
+    for (const item of items) assert.ok(item.hidden <= 0, `"${item.text}" is cut off by ${item.hidden}px`);
+    const brand = await example.page.$eval('.fam-nav-brand', (node) => node.getBoundingClientRect().height);
+    assert.ok(brand < 30, `the brand wraps onto several lines (${brand}px tall)`);
+    const navScroll = await example.page.$eval('.fam-nav', (node) => node.scrollWidth - node.clientWidth);
+    assert.ok(navScroll <= 0, `the nav needs to scroll by ${navScroll}px for four short labels`);
   } finally {
     await example.close();
   }

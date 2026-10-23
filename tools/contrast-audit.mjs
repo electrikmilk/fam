@@ -9,12 +9,10 @@ const EXAMPLE_PAGES = ['controls', 'notes', 'sign-in'];
 const collectScript = fileURLToPath(new URL('contrast-audit/collect.js', import.meta.url));
 const measureScript = fileURLToPath(new URL('contrast-audit/measure.py', import.meta.url));
 
-// measure.py maps page coordinates to screenshot pixels with a fixed 1440px width and a device pixel ratio of 2
-const VIEWPORT = { width: 1440, height: 900 };
-
-export async function runAudit(pageName) {
+// measure.py maps page coordinates to screenshot pixels with a device pixel ratio of 2
+export async function runAudit(pageName, { width = 1440 } = {}) {
   const collectSource = await readFile(collectScript, 'utf8');
-  const example = await openUrl(exampleUrl(pageName), { viewport: VIEWPORT, deviceScaleFactor: 2 });
+  const example = await openUrl(exampleUrl(pageName), { viewport: { width, height: 900 }, deviceScaleFactor: 2 });
   try {
     const collected = await example.page.evaluate(`(${collectSource})()`);
     const directory = await mkdtemp(join(tmpdir(), 'fam-audit-'));

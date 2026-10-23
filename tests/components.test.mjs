@@ -114,7 +114,8 @@ test('long text stays inside its container', async () => {
       const nav = document.getElementById('nav');
       nav.style.width = '260px';
       document.getElementById('nav-link').textContent = long;
-      measure('nav', nav);
+      // A nav with more than fits may scroll inside itself, but it must not push its container wider
+      measure('nav', nav.parentElement);
 
       const list = document.getElementById('row-plain').closest('ul');
       list.style.width = '260px';
