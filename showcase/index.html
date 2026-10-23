@@ -30,6 +30,73 @@
       </div>
     </section>
 
+    <section class="section" id="why" aria-labelledby="why-heading">
+      <h2 id="why-heading">Familiar on purpose</h2>
+      <p class="lead">Skeuomorphism exists to make an interface feel familiar. A recessed field invites typing, a raised button invites a press and a switch looks like a switch. Fam builds those cues from photographs of real materials.</p>
+
+      <div class="pillars">
+        <article class="pillar">
+          <h3>Real photographs</h3>
+          <p>Every texture is processed from an Unsplash photograph, made seamless and credited. The grain is real, not a gradient imitation of it.</p>
+        </article>
+        <article class="pillar">
+          <h3>Light on the wire</h3>
+          <p>Each material is a tile between <b data-claim="tile-min">13 KB</b> and <b data-claim="tile-max">85 KB</b>. The notes example loads <b data-claim="notes-images">250 KB</b> of images and <b data-claim="css">41 KB</b> of CSS (<b data-claim="css-gzip">10.6 KB</b> gzipped), with no JavaScript.</p>
+        </article>
+        <article class="pillar">
+          <h3>Responsive by tiling</h3>
+          <p>A tile repeats at its natural size and is never stretched, so any box in any shape gets the material. There are no images per breakpoint, and a phone loads the same files as a desktop.</p>
+        </article>
+        <article class="pillar">
+          <h3>Built to ship</h3>
+          <p>Contrast is measured on the rendered pixels against WCAG AA. Every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. It is one stylesheet with <code>fam-</code> classes.</p>
+        </article>
+      </div>
+
+      <div class="tile-lab">
+        <h3>One tile fills any box</h3>
+        <p class="tile-lab-lead">These three boxes are all <code>fam-felt</code>. They share one tile, which is downloaded once.</p>
+        <div class="tile-sizes">
+          <div class="fam-felt tile-box tile-box--small"><span>96 x 96</span></div>
+          <div class="fam-felt tile-box tile-box--wide"><span>280 x 96</span></div>
+          <div class="fam-felt tile-box tile-box--tall"><span>120 x 200</span></div>
+        </div>
+
+        <h3>The files you ship</h3>
+        <p class="tile-lab-lead">Each tile is a 512px photograph, drawn at 256 to 380px. A material you do not use is never downloaded.</p>
+        <div class="tile-strip">
+          <figure class="tile-card">
+            <img src="../assets/wood-light-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-wood</code><span data-claim="tile:wood-light-tile.jpg">53 KB</span></figcaption>
+          </figure>
+          <figure class="tile-card">
+            <img src="../assets/felt-gray-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-felt</code><span data-claim="tile:felt-gray-tile.jpg">85 KB</span></figcaption>
+          </figure>
+          <figure class="tile-card">
+            <img src="../assets/metal-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-metal</code><span data-claim="tile:metal-tile.jpg">35 KB</span></figcaption>
+          </figure>
+          <figure class="tile-card">
+            <img src="../assets/leather-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-leather</code><span data-claim="tile:leather-tile.jpg">71 KB</span></figcaption>
+          </figure>
+          <figure class="tile-card">
+            <img src="../assets/paper-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-paper</code><span data-claim="tile:paper-tile.jpg">27 KB</span></figcaption>
+          </figure>
+          <figure class="tile-card">
+            <img src="../assets/cork-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-cork</code><span data-claim="tile:cork-tile.jpg">56 KB</span></figcaption>
+          </figure>
+          <figure class="tile-card">
+            <img src="../assets/cardstock-tile.jpg" width="96" height="96" alt="" loading="lazy">
+            <figcaption><code>fam-cardstock</code><span data-claim="tile:cardstock-tile.jpg">51 KB</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="pairings" aria-labelledby="pairings-heading">
       <h2 id="pairings-heading">Pick a pairing</h2>
       <p class="lead">Materials are classes you combine. Choose a pairing to see it, and the classes it uses.</p>
@@ -154,6 +221,7 @@
 
   <footer id="credits">
     <p>Photos on Unsplash: the ribbon by boliviainteligente and the tree by mehrab-sium. The textures are processed from Unsplash photographs and credited one by one in <a href="https://github.com/electrikmilk/fam/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+    <p>Fam stands for Fam Adds Materials.</p>
     <p><a href="https://github.com/electrikmilk/fam">fam-ui on GitHub</a></p>
   </footer>
 </div>

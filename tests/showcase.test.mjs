@@ -286,7 +286,7 @@ for (const [width, height] of [[1440, 900], [768, 1024], [375, 700]]) {
     try {
       const { heroBottom, headingTop, cues } = await page.page.evaluate(() => ({
         heroBottom: document.querySelector('#hero').getBoundingClientRect().bottom,
-        headingTop: document.querySelector('#pairings h2').getBoundingClientRect().top,
+        headingTop: document.querySelector('#why h2').getBoundingClientRect().top,
         cues: document.querySelectorAll('.scroll-cue').length,
       }));
       assert.ok(heroBottom < height - 60, `the opening screen ends at ${heroBottom}px of a ${height}px viewport`);
