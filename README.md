@@ -108,10 +108,13 @@ Recessed fields, search pill, leather button, list rows:
 </div>
 <label class="fam-search"><svg aria-hidden="true">...</svg><input placeholder="Search" aria-label="Search"></label>
 <button class="fam-leather-button" type="button">Sign In</button>
-<div role="listbox" aria-label="Notes">
-  <div class="fam-list-row" role="option" tabindex="0" aria-selected="true"><b>Title</b><span>Today</span></div>
-</div>
+<ul class="fam-list" aria-label="Notes">
+  <li><a class="fam-list-row" href="#a" aria-current="true"><b>Title</b><span>Today</span></a></li>
+  <li><a class="fam-list-row" href="#b"><b>Another</b><span>Monday</span></a></li>
+</ul>
 ```
+
+Rows are real links (or buttons) in a plain list, so they work with the keyboard as they are. Mark the current row with `aria-current="true"`. `fam-menu` is only the look of an open menu: if you build a real custom menu, give it listbox semantics and the arrow-key behavior that goes with them.
 
 Selected rows and menu items use the blue family `--fam-blue-top` to `--fam-blue-bottom`.
 

@@ -29,14 +29,14 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
           <input placeholder="Search" aria-label="Search notes">
         </label>
-        <div role="listbox" aria-label="Notes">
-          <div class="fam-list-row" role="option" tabindex="0"><b>Grocery run</b><span>Today</span></div>
-          <div class="fam-list-row" role="option" tabindex="0" aria-selected="true"><b>Picnic plans</b><span>Yesterday</span></div>
-          <div class="fam-list-row" role="option" tabindex="0"><b>Book ideas</b><span>Monday</span></div>
-          <div class="fam-list-row" role="option" tabindex="0"><b>Phone numbers</b><span>Last week</span></div>
-          <div class="fam-list-row" role="option" tabindex="0"><b>Reading list</b><span>Sep 29</span></div>
-          <div class="fam-list-row" role="option" tabindex="0"><b>Gift ideas</b><span>Sep 12</span></div>
-        </div>
+        <ul class="fam-list" aria-label="Notes">
+          <li><a class="fam-list-row" href="#grocery"><b>Grocery run</b><span>Today</span></a></li>
+          <li><a class="fam-list-row" href="#picnic" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
+          <li><a class="fam-list-row" href="#books"><b>Book ideas</b><span>Monday</span></a></li>
+          <li><a class="fam-list-row" href="#phone"><b>Phone numbers</b><span>Last week</span></a></li>
+          <li><a class="fam-list-row" href="#reading"><b>Reading list</b><span>Sep 29</span></a></li>
+          <li><a class="fam-list-row" href="#gifts"><b>Gift ideas</b><span>Sep 12</span></a></li>
+        </ul>
       </aside>
       <section class="fam-pad" aria-label="Note">
         <div class="fam-pad-bar fam-cardstock">

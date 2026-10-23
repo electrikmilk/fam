@@ -27,6 +27,7 @@ test('README only names classes and variables that exist', async () => {
   const classNames = new Set([...readme.matchAll(/(?<![-\w])(fam-(?!ui\b)[a-z0-9]+(?:-[a-z0-9]+)*)/g)].map((match) => match[1]));
   assert.ok(classNames.size > 20, 'the README documents too few classes');
   for (const name of classNames) assert.ok(css.includes(`.${name}`), `README names .${name} but the CSS does not define it`);
+  assert.ok(!readme.includes('role="option" tabindex'), 'the README must not teach a listbox with per-option tab stops');
   const variables = new Set([...readme.matchAll(/--fam-[a-z0-9-]+/g)].map((match) => match[0]));
   for (const name of variables) assert.ok(css.includes(name), `README names ${name} but the CSS does not use it`);
 });

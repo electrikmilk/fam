@@ -116,7 +116,7 @@ test('long text stays inside its container', async () => {
       document.getElementById('nav-link').textContent = long;
       measure('nav', nav);
 
-      const list = document.getElementById('row-plain').parentElement;
+      const list = document.getElementById('row-plain').closest('ul');
       list.style.width = '260px';
       document.querySelector('#row-plain b').textContent = long;
       measure('list', list);

@@ -68,3 +68,18 @@ test('notes keeps the list beside the pad with the 24px rule pitch', async () =>
     await example.close();
   }
 });
+
+test('list rows are real links, not a listbox that has no keyboard model', async () => {
+  const example = await openUrl(exampleUrl('notes'));
+  try {
+    const { rowTags, fakeOptions } = await example.page.evaluate(() => ({
+      rowTags: [...document.querySelectorAll('.fam-list-row')].map((row) => row.tagName),
+      fakeOptions: document.querySelectorAll('[role="option"][tabindex]').length,
+    }));
+    assert.ok(rowTags.length > 0);
+    assert.deepEqual([...new Set(rowTags)], ['A']);
+    assert.equal(fakeOptions, 0, 'options with their own tab stops promise arrow-key behavior nothing implements');
+  } finally {
+    await example.close();
+  }
+});

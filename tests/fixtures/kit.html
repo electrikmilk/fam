@@ -77,10 +77,10 @@
 
     <section id="paper-components" class="fam-paper" style="padding:20px; margin-top:24px; width:320px">
       <label class="fam-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg><input id="search-input" placeholder="Search" aria-label="Search notes"></label>
-      <div role="listbox" aria-label="Notes" style="margin-top:12px">
-        <div id="row-plain" class="fam-list-row" role="option" tabindex="0"><b>Grocery run</b><span>Today</span></div>
-        <div id="row-selected" class="fam-list-row" role="option" tabindex="0" aria-selected="true"><b>Picnic plans</b><span>Yesterday</span></div>
-      </div>
+      <ul class="fam-list" style="margin-top:12px">
+        <li><a id="row-plain" class="fam-list-row" href="#grocery"><b>Grocery run</b><span>Today</span></a></li>
+        <li><a id="row-selected" class="fam-list-row" href="#picnic" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
+      </ul>
     </section>
 
     <section id="tan-components" class="fam-leather" style="padding:20px; margin-top:24px; width:360px">
