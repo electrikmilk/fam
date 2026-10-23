@@ -1,0 +1,69 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { access, readFile, stat } from 'node:fs/promises';
+import test from 'node:test';
+import { fileURLToPath } from 'node:url';
+
+const ASSET_NAMES = [
+  'felt-gray-tile.jpg',
+  'wood-light-tile.jpg',
+  'metal-tile.jpg',
+  'metal-brushed.jpg',
+  'metal-spiral.jpg',
+  'knob-face.jpg',
+  'grain-fine.jpg',
+  'cardstock-tile.jpg',
+  'legal-tile.jpg',
+  'paper-tile.jpg',
+  'leather-tile.jpg',
+  'leather-fill-tan-tile.jpg',
+  'leather-fill-black-tile.jpg',
+  'leather-frame-tan-soft.png',
+  'leather-frame-black-soft.png',
+];
+
+const TILED_NAMES = [
+  'felt-gray-tile.jpg',
+  'wood-light-tile.jpg',
+  'metal-tile.jpg',
+  'cardstock-tile.jpg',
+  'legal-tile.jpg',
+  'paper-tile.jpg',
+  'leather-tile.jpg',
+  'leather-fill-tan-tile.jpg',
+  'leather-fill-black-tile.jpg',
+  'grain-fine.jpg',
+];
+
+// File name to byte ceiling, for files that stay over the budget after lossless optimization.
+// The tan frame is a 457px alpha image of stitched leather; ImageMagick and Pillow both re-encode it larger than this.
+const EXCEPTIONS = { 'leather-frame-tan-soft.png': 217652 };
+const BUDGET_BYTES = 150 * 1024;
+
+const assetPath = (name) => fileURLToPath(new URL(`../assets/${name}`, import.meta.url));
+
+test('every shipped asset exists', async () => {
+  for (const name of ASSET_NAMES) {
+    await access(assetPath(name));
+  }
+});
+
+test('tiles stay within the size budget', async () => {
+  for (const name of ASSET_NAMES) {
+    const { size } = await stat(assetPath(name));
+    const ceiling = EXCEPTIONS[name] ?? BUDGET_BYTES;
+    assert.ok(size <= ceiling, `${name} is ${size} bytes, over its ${ceiling} byte ceiling`);
+  }
+});
+
+test('tiled assets are seamless', () => {
+  const script = fileURLToPath(new URL('../tools/texture-pipeline/check_seams.py', import.meta.url));
+  execFileSync('python3', ['-I', script, ...TILED_NAMES.map(assetPath)], { stdio: 'pipe' });
+});
+
+test('credits cover every asset', async () => {
+  const credits = await readFile(new URL('../CREDITS.md', import.meta.url), 'utf8');
+  for (const name of ASSET_NAMES) {
+    assert.ok(credits.includes(name), `CREDITS.md does not mention ${name}`);
+  }
+});
