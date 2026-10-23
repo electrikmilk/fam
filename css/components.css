@@ -575,6 +575,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-button-group > * {
   --fam-cell-radius: var(--fam-radius-pill);
+  position: relative;
   flex: none;
   margin: 0;
   border-radius: 0;
@@ -590,6 +591,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 }
 
 .fam-button-group > * + * { margin-left: -1px; }
+
+/* Neighbours overlap by a border, so the focused cell has to paint above them or the next cell cuts its ring */
+.fam-button-group > :focus-visible { z-index: 1; }
 
 .fam-button-group > :first-child {
   border-top-left-radius: var(--fam-cell-radius);
@@ -1089,6 +1093,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 /* ---------- Disabled controls: dimmed, no pointer cursor, no pressed look (disabled text is exempt from WCAG contrast) ---------- */
 
 .fam-leather-button:disabled,
+.fam-nav-item:disabled,
 .fam-radio:has(input:disabled),
 .fam-glossy-button:disabled,
 .fam-glass-button:disabled,
@@ -1132,7 +1137,12 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   .fam-button-group > [aria-selected="true"] {
     outline: 2px solid Highlight;
     outline-offset: -4px;
+    text-decoration: underline;
   }
+
+  /* One outline cannot be both marker and ring, so a focused selected cell moves its outline out to the usual ring and keeps the underline as the marker */
+  .fam-button-group > [aria-pressed="true"]:focus-visible,
+  .fam-button-group > [aria-selected="true"]:focus-visible { outline-offset: 2px; }
 
   .fam-radio-dot { border: 1px solid CanvasText; }
   .fam-radio input:checked + .fam-radio-dot::after { background: Highlight; }

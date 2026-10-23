@@ -500,3 +500,42 @@ test('a checked LED radio glows like the active switch: an outer glow, an inner 
     await kit.close();
   }
 });
+
+test('a focused selected tab keeps a focus ring in forced colors', { skip: !isChromium && 'forced-colors emulation is only reliable in Chromium' }, async () => {
+  const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
+  try {
+    const { page } = kit;
+    for (const selector of ['#tab-silver-selected', '#tab-plastic-selected', '#tab-metal-selected', '#tab-leather-selected', '#tab-wood-selected']) {
+      const resting = await read(page, selector, 'outlineOffset');
+      await page.locator(selector).focus();
+      assert.notEqual(await read(page, selector, 'outlineOffset'), resting, `${selector} looks the same focused as at rest`);
+      assert.ok((await read(page, selector, 'textDecorationLine')).includes('underline'), `${selector} loses its selected marker when focused`);
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a disabled wood tab is dimmed and shows no interactive cursor', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.equal(await read(kit.page, '#tab-wood-disabled', 'opacity'), '0.5');
+    assert.equal(await read(kit.page, '#tab-wood-disabled', 'cursor'), 'default');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a focused group cell rises above its neighbours so its ring is not cut off', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const selector of ['#tab-metal-plain', '#tab-leather-plain', '#tab-wood-plain']) {
+      assert.equal(await read(page, selector, 'zIndex'), 'auto');
+      await page.locator(selector).focus();
+      assert.equal(await read(page, selector, 'zIndex'), '1', `${selector} stays under its neighbour`);
+    }
+  } finally {
+    await kit.close();
+  }
+});
