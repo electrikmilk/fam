@@ -5,6 +5,8 @@
 // The demo page scrolls inside a container, so the script first expands the scroll containers above `.fam` so a full-page screenshot works.
 // Adjust the root selector ('.fam') for another page. Device pixel ratio is assumed to be 2 in measure.py.
 async () => {
+  // Two frames: the first applies the style and layout changes below, the second confirms they were painted
+  const settle = () => document.fonts.ready.then(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
   for (let n = document.querySelector('.fam'); n; n = n.parentElement) {
     const cs = getComputedStyle(n);
     if (n === document.body || n === document.documentElement) continue;
@@ -14,7 +16,7 @@ async () => {
   }
   document.documentElement.style.height = 'auto'; document.documentElement.style.overflow = 'visible';
   document.body.style.height = 'auto'; document.body.style.overflow = 'visible';
-  await new Promise(r => setTimeout(r, 500));
+  await settle();
 
   const parse = value => { const m = value.match(/[\d.]+/g).map(Number); return [m[0], m[1], m[2], m[3] === undefined ? 1 : m[3]]; };
   const opacityChain = el => { let o = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) o *= parseFloat(getComputedStyle(n).opacity); return o; };
@@ -51,6 +53,6 @@ async () => {
   const style = document.createElement('style');
   style.textContent = '* { color: transparent !important; text-shadow: none !important; -webkit-text-fill-color: transparent !important; } input::placeholder { color: transparent !important; } svg { color: transparent !important; }';
   document.head.appendChild(style);
-  await new Promise(r => setTimeout(r, 300));
+  await settle();
   return { pageHeight: document.documentElement.scrollHeight, count: items.length, items };
 }

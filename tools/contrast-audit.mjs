@@ -1,12 +1,14 @@
-import { execFileSync } from 'node:child_process';
+import { execFile } from 'node:child_process';
 import { realpathSync } from 'node:fs';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { promisify } from 'node:util';
 import { closeSharedBrowser, exampleUrl, openUrl } from '../tests/helpers/browser.mjs';
 
-const EXAMPLE_PAGES = ['controls', 'notes', 'sign-in'];
+const execFileAsync = promisify(execFile);
+const EXAMPLE_PAGES =['controls', 'notes', 'sign-in'];
 const collectScript = fileURLToPath(new URL('contrast-audit/collect.js', import.meta.url));
 const measureScript = fileURLToPath(new URL('contrast-audit/measure.py', import.meta.url));
 
@@ -22,7 +24,7 @@ export async function runAudit(pageName, { width = 1440 } = {}) {
     const resultsPath = join(directory, 'results.json');
     await writeFile(itemsPath, JSON.stringify(collected));
     await example.page.screenshot({ path: screenshotPath, fullPage: true });
-    execFileSync('python3', ['-I', measureScript, itemsPath, screenshotPath, resultsPath], { stdio: 'pipe' });
+    await execFileAsync('python3', ['-I', measureScript, itemsPath, screenshotPath, resultsPath]);
     return JSON.parse(await readFile(resultsPath, 'utf8'));
   } finally {
     await example.close();
