@@ -32,6 +32,7 @@
       <a href="#scene-buttons">Plastic and metal buttons</a>
       <a href="#scene-glossy-glass">Glossy and glass buttons</a>
       <a href="#scene-radios">Radio buttons</a>
+      <a href="#scene-tabs">Tabs</a>
       <a href="#scene-switch-knob">Switch and knob</a>
       <a href="#scene-progress">Progress tubes</a>
       <a href="#scene-glass-fields">Glass field and dropdown</a>
@@ -237,6 +238,159 @@
       </div>
     </section>
 
+    <section class="scene" id="scene-tabs">
+      <h2 class="scene-title">Tabs</h2>
+      <p class="scene-lead">A tab strip is a button group with role="tablist", and each tab is a button with role="tab" and aria-selected. Silver glossy tabs follow the Snow Leopard strip, and plastic, metal, wood and leather tabs suit their materials. The wood and leather strips are the navigation bar's wood and leather. Arrow keys need a few lines of script, and tabs.js in the showcase folder is the one used here.</p>
+      <div class="window fam-paper controls-stage">
+        <div class="tab-demo">
+        <div class="fam-button-group" role="tablist" aria-label="Silver tabs" data-tabs>
+          <button class="fam-glossy-button fam-glossy-button--silver" type="button" role="tab" id="silver-tab-0" aria-selected="true" aria-controls="silver-panel-0">Tab</button>
+          <button class="fam-glossy-button fam-glossy-button--silver" type="button" role="tab" id="silver-tab-1" aria-selected="false" aria-controls="silver-panel-1">View</button>
+          <button class="fam-glossy-button fam-glossy-button--silver" type="button" role="tab" id="silver-tab-2" aria-selected="false" aria-controls="silver-panel-2" disabled>Locked</button>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="silver-panel-0" aria-labelledby="silver-tab-0">Tab panel</div>
+        <div class="tab-panel" role="tabpanel" id="silver-panel-1" aria-labelledby="silver-tab-1">View panel</div>
+        <div class="tab-panel" role="tabpanel" id="silver-panel-2" aria-labelledby="silver-tab-2">Locked panel</div>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The silver tab strip markup" data-label="the silver tab strip markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-paper" style="padding: 28px"&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-button-group" role="tablist" aria-label="Silver tabs" data-tabs&gt;
+    &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button" role="tab" id="silver-tab-0" aria-selected="true" aria-controls="silver-panel-0"&gt;Tab&lt;/button&gt;
+    &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button" role="tab" id="silver-tab-1" aria-selected="false" aria-controls="silver-panel-1"&gt;View&lt;/button&gt;
+    &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button" role="tab" id="silver-tab-2" aria-selected="false" aria-controls="silver-panel-2" disabled&gt;Locked&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="silver-panel-0" aria-labelledby="silver-tab-0"&gt;Tab panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="silver-panel-1" aria-labelledby="silver-tab-1"&gt;View panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="silver-panel-2" aria-labelledby="silver-tab-2"&gt;Locked panel&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-metal controls-stage">
+        <div class="tab-demo">
+        <div class="fam-button-group fam-button-group--case" role="tablist" aria-label="Plastic tabs" data-tabs>
+          <button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-0" aria-selected="false" aria-controls="plastic-panel-0">General</button>
+          <button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-1" aria-selected="true" aria-controls="plastic-panel-1">Sound</button>
+          <button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-2" aria-selected="false" aria-controls="plastic-panel-2">Display</button>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="plastic-panel-0" aria-labelledby="plastic-tab-0">General panel</div>
+        <div class="tab-panel" role="tabpanel" id="plastic-panel-1" aria-labelledby="plastic-tab-1">Sound panel</div>
+        <div class="tab-panel" role="tabpanel" id="plastic-panel-2" aria-labelledby="plastic-tab-2">Display panel</div>
+        </div>
+        <div class="tab-demo">
+        <div class="fam-button-group" role="tablist" aria-label="Metal tabs" data-tabs>
+          <button class="fam-metal-button" type="button" role="tab" id="metal-tab-0" aria-selected="true" aria-controls="metal-panel-0">One</button>
+          <button class="fam-metal-button" type="button" role="tab" id="metal-tab-1" aria-selected="false" aria-controls="metal-panel-1">Two</button>
+          <button class="fam-metal-button" type="button" role="tab" id="metal-tab-2" aria-selected="false" aria-controls="metal-panel-2">Three</button>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="metal-panel-0" aria-labelledby="metal-tab-0">One panel</div>
+        <div class="tab-panel" role="tabpanel" id="metal-panel-1" aria-labelledby="metal-tab-1">Two panel</div>
+        <div class="tab-panel" role="tabpanel" id="metal-panel-2" aria-labelledby="metal-tab-2">Three panel</div>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The plastic and metal tab strips markup" data-label="the plastic and metal tab strips markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="padding: 28px"&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-button-group fam-button-group--case" role="tablist" aria-label="Plastic tabs" data-tabs&gt;
+    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-0" aria-selected="false" aria-controls="plastic-panel-0"&gt;General&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-1" aria-selected="true" aria-controls="plastic-panel-1"&gt;Sound&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-2" aria-selected="false" aria-controls="plastic-panel-2"&gt;Display&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-0" aria-labelledby="plastic-tab-0"&gt;General panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-1" aria-labelledby="plastic-tab-1"&gt;Sound panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-2" aria-labelledby="plastic-tab-2"&gt;Display panel&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-button-group" role="tablist" aria-label="Metal tabs" data-tabs&gt;
+    &lt;button class="fam-metal-button" type="button" role="tab" id="metal-tab-0" aria-selected="true" aria-controls="metal-panel-0"&gt;One&lt;/button&gt;
+    &lt;button class="fam-metal-button" type="button" role="tab" id="metal-tab-1" aria-selected="false" aria-controls="metal-panel-1"&gt;Two&lt;/button&gt;
+    &lt;button class="fam-metal-button" type="button" role="tab" id="metal-tab-2" aria-selected="false" aria-controls="metal-panel-2"&gt;Three&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="metal-panel-0" aria-labelledby="metal-tab-0"&gt;One panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="metal-panel-1" aria-labelledby="metal-tab-1"&gt;Two panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="metal-panel-2" aria-labelledby="metal-tab-2"&gt;Three panel&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-felt controls-stage">
+        <div class="tab-demo">
+        <div class="fam-wood fam-button-group fam-button-group--wood" role="tablist" aria-label="Wood tabs" data-tabs>
+          <button class="fam-nav-item" type="button" role="tab" id="wood-tab-0" aria-selected="true" aria-controls="wood-panel-0">Library</button>
+          <button class="fam-nav-item" type="button" role="tab" id="wood-tab-1" aria-selected="false" aria-controls="wood-panel-1">Shelf</button>
+          <button class="fam-nav-item" type="button" role="tab" id="wood-tab-2" aria-selected="false" aria-controls="wood-panel-2">Archive</button>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="wood-panel-0" aria-labelledby="wood-tab-0">Library panel</div>
+        <div class="tab-panel" role="tabpanel" id="wood-panel-1" aria-labelledby="wood-tab-1">Shelf panel</div>
+        <div class="tab-panel" role="tabpanel" id="wood-panel-2" aria-labelledby="wood-tab-2">Archive panel</div>
+        </div>
+        <div class="tab-demo">
+        <div class="fam-button-group fam-button-group--leather" role="tablist" aria-label="Leather tabs" data-tabs>
+          <button class="fam-leather-button" type="button" role="tab" id="leather-tab-0" aria-selected="false" aria-controls="leather-panel-0">Name</button>
+          <button class="fam-leather-button" type="button" role="tab" id="leather-tab-1" aria-selected="true" aria-controls="leather-panel-1">Date</button>
+          <button class="fam-leather-button" type="button" role="tab" id="leather-tab-2" aria-selected="false" aria-controls="leather-panel-2">Size</button>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="leather-panel-0" aria-labelledby="leather-tab-0">Name panel</div>
+        <div class="tab-panel" role="tabpanel" id="leather-panel-1" aria-labelledby="leather-tab-1">Date panel</div>
+        <div class="tab-panel" role="tabpanel" id="leather-panel-2" aria-labelledby="leather-tab-2">Size panel</div>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The wood and leather tab strips markup" data-label="the wood and leather tab strips markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt" style="padding: 28px"&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-wood fam-button-group fam-button-group--wood" role="tablist" aria-label="Wood tabs" data-tabs&gt;
+    &lt;button class="fam-nav-item" type="button" role="tab" id="wood-tab-0" aria-selected="true" aria-controls="wood-panel-0"&gt;Library&lt;/button&gt;
+    &lt;button class="fam-nav-item" type="button" role="tab" id="wood-tab-1" aria-selected="false" aria-controls="wood-panel-1"&gt;Shelf&lt;/button&gt;
+    &lt;button class="fam-nav-item" type="button" role="tab" id="wood-tab-2" aria-selected="false" aria-controls="wood-panel-2"&gt;Archive&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="wood-panel-0" aria-labelledby="wood-tab-0"&gt;Library panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="wood-panel-1" aria-labelledby="wood-tab-1"&gt;Shelf panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="wood-panel-2" aria-labelledby="wood-tab-2"&gt;Archive panel&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-button-group fam-button-group--leather" role="tablist" aria-label="Leather tabs" data-tabs&gt;
+    &lt;button class="fam-leather-button" type="button" role="tab" id="leather-tab-0" aria-selected="false" aria-controls="leather-panel-0"&gt;Name&lt;/button&gt;
+    &lt;button class="fam-leather-button" type="button" role="tab" id="leather-tab-1" aria-selected="true" aria-controls="leather-panel-1"&gt;Date&lt;/button&gt;
+    &lt;button class="fam-leather-button" type="button" role="tab" id="leather-tab-2" aria-selected="false" aria-controls="leather-panel-2"&gt;Size&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="leather-panel-0" aria-labelledby="leather-tab-0"&gt;Name panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="leather-panel-1" aria-labelledby="leather-tab-1"&gt;Date panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="leather-panel-2" aria-labelledby="leather-tab-2"&gt;Size panel&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-leather controls-stage">
+        <div class="tab-demo">
+        <div class="fam-button-group fam-button-group--leather" role="tablist" aria-label="Leather tabs on leather" data-tabs>
+          <button class="fam-leather-button" type="button" role="tab" id="lol-tab-0" aria-selected="true" aria-controls="lol-panel-0">Notes</button>
+          <button class="fam-leather-button" type="button" role="tab" id="lol-tab-1" aria-selected="false" aria-controls="lol-panel-1">Todo</button>
+          <button class="fam-leather-button" type="button" role="tab" id="lol-tab-2" aria-selected="false" aria-controls="lol-panel-2">Done</button>
+        </div>
+        <div class="tab-panel" role="tabpanel" id="lol-panel-0" aria-labelledby="lol-tab-0">Notes panel</div>
+        <div class="tab-panel" role="tabpanel" id="lol-panel-1" aria-labelledby="lol-tab-1">Todo panel</div>
+        <div class="tab-panel" role="tabpanel" id="lol-panel-2" aria-labelledby="lol-tab-2">Done panel</div>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The leather tabs on leather markup" data-label="the leather tabs on leather markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-leather" style="padding: 28px"&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-button-group fam-button-group--leather" role="tablist" aria-label="Leather tabs on leather" data-tabs&gt;
+    &lt;button class="fam-leather-button" type="button" role="tab" id="lol-tab-0" aria-selected="true" aria-controls="lol-panel-0"&gt;Notes&lt;/button&gt;
+    &lt;button class="fam-leather-button" type="button" role="tab" id="lol-tab-1" aria-selected="false" aria-controls="lol-panel-1"&gt;Todo&lt;/button&gt;
+    &lt;button class="fam-leather-button" type="button" role="tab" id="lol-tab-2" aria-selected="false" aria-controls="lol-panel-2"&gt;Done&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="lol-panel-0" aria-labelledby="lol-tab-0"&gt;Notes panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="lol-panel-1" aria-labelledby="lol-tab-1"&gt;Todo panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="lol-panel-2" aria-labelledby="lol-tab-2"&gt;Done panel&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
     <section class="scene" id="scene-switch-knob">
       <h2 class="scene-title">Switch and knob</h2>
       <p class="scene-lead">The switch is a checkbox, so it toggles with no JavaScript. The knob is a picture, and --fam-knob-angle turns its tick.</p>
@@ -392,6 +546,7 @@
     <p><a href="https://github.com/electrikmilk/fam">fam-ui on GitHub</a></p>
   </footer>
 </div>
+<script src="tabs.js"></script>
 <script src="copy.js"></script>
 </body>
 </html>

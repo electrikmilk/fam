@@ -188,7 +188,16 @@ Button groups put plastic, metal, glossy or leather buttons in one case. Mark th
 </div>
 ```
 
-Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
+Colors are `--red`, `--green`, `--blue`, `--purple`, `--amber` and `--cream` (the pale plastic of the case in the reference, with a dark label). For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
+
+Tabs are button groups. Give the group `role="tablist"` and each button `role="tab"` with `aria-selected`; the lit tab is styled the same way a pressed button is. Use silver glossy buttons for the Snow Leopard strip, `fam-button-group--case` with `fam-plastic--cream` buttons for a padded plastic case, metal buttons, `fam-button-group--leather` with `fam-leather-button` for the leather navigation's leather, and `fam-wood fam-button-group fam-button-group--wood` with `fam-nav-item` buttons for its wood. The kit does not switch panels or move between tabs with the arrow keys; `showcase/tabs.js` is a small script that does.
+
+```html
+<div class="fam-wood fam-button-group fam-button-group--wood" role="tablist" aria-label="Sections">
+  <button class="fam-nav-item" type="button" role="tab" aria-selected="true" aria-controls="library">Library</button>
+  <button class="fam-nav-item" type="button" role="tab" aria-selected="false" aria-controls="shelf">Shelf</button>
+</div>
+```
 
 Radio buttons are real radio inputs in a label, so arrow keys and forms work without JavaScript. Use `fam-radio--plastic`, `--metal`, `--glossy` or `--glass`; the checked plastic and metal ones glow like an LED (`--fam-led`).
 

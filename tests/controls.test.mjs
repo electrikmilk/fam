@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { fixtureUrl, openUrl } from './helpers/browser.mjs';
+import { fixtureUrl, isChromium, openUrl } from './helpers/browser.mjs';
 import { statistics } from './helpers/pixels.mjs';
 
 const read = (page, selector, property, pseudo = null) =>
@@ -293,5 +293,94 @@ test('the radio glow does not animate under reduced motion', async () => {
     assert.equal(await read(still.page, radioDot('radio-plastic-on'), 'transitionDuration'), '0s');
   } finally {
     await still.close();
+  }
+});
+
+const TAB_STRIPS = [
+  ['silver', '#tab-silver-selected', '#tab-silver-plain'],
+  ['plastic', '#tab-plastic-selected', '#tab-plastic-plain'],
+  ['metal', '#tab-metal-selected', '#tab-metal-plain'],
+  ['wood', '#tab-wood-selected', '#tab-wood-plain'],
+  ['leather', '#tab-leather-selected', '#tab-leather-plain'],
+  ['leather on leather', '#tab-lol-selected', '#tab-lol-plain'],
+];
+
+const lookOf = (page, selector) =>
+  page.evaluate((target) => {
+    const style = getComputedStyle(document.querySelector(target));
+    const dot = getComputedStyle(document.querySelector(target), '::after');
+    return [style.backgroundImage, style.boxShadow, style.color, dot.content, dot.backgroundColor].join(' | ');
+  }, selector);
+
+for (const [name, selected, plain] of TAB_STRIPS) {
+  test(`a selected ${name} tab differs from a plain one`, async () => {
+    const kit = await openUrl(fixtureUrl('kit'));
+    try {
+      assert.notEqual(await lookOf(kit.page, selected), await lookOf(kit.page, plain));
+    } finally {
+      await kit.close();
+    }
+  });
+}
+
+test('a disabled tab is skipped by Tab', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    await page.locator('#tab-silver-plain').focus();
+    await page.keyboard.press('Tab');
+    assert.equal(await page.evaluate(() => document.activeElement.id), 'tab-silver-selected');
+    await page.keyboard.press('Tab');
+    assert.equal(await page.evaluate(() => document.activeElement.id), 'tab-silver-last');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a wood group is a pill of wood with the nav bar pocket for the selected tab', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.ok((await read(page, '#tabs-wood', 'backgroundImage')).includes('wood-light-tile'));
+    assert.equal(await read(page, '#tab-wood-plain', 'boxShadow'), 'none');
+    assert.ok((await read(page, '#tab-wood-selected', 'boxShadow')).includes('inset'));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a case group pads its cells inside a plastic case like the strip in plastic.png', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.equal(await read(page, '#tabs-plastic', 'paddingTop'), '5px');
+    assert.ok((await read(page, '#tabs-plastic', 'backgroundImage')).includes('linear-gradient'));
+    for (const cell of ['#tab-plastic-plain', '#tab-plastic-selected']) {
+      assert.equal(await read(page, cell, 'borderTopLeftRadius'), '8px');
+      assert.equal(await read(page, cell, 'borderTopRightRadius'), '8px');
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a leather group has its own dark rim so it stands out on leather', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.ok((await read(kit.page, '#tabs-leather-on-leather', 'boxShadow')).includes('rgba(60, 30, 8, 0.55)'));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a selected tab is marked in forced colors', { skip: !isChromium && 'forced-colors emulation is only reliable in Chromium' }, async () => {
+  const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
+  try {
+    for (const [, selected, plain] of TAB_STRIPS) {
+      assert.notEqual(await read(kit.page, selected, 'outlineStyle'), 'none', `${selected} is not marked`);
+      assert.equal(await read(kit.page, plain, 'outlineStyle'), 'none');
+    }
+  } finally {
+    await kit.close();
   }
 });

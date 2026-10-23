@@ -402,6 +402,7 @@ test('the controls page shows each control alone with its variants', async () =>
         glassButtons: count('.window .fam-glass-button'),
         buttonGroups: count('.window .fam-button-group'),
         radios: count('.window .fam-radio'),
+        tabStrips: count('.window [role="tablist"]'),
         switches: count('.window .fam-switch'),
         disabledSwitches: count('.window .fam-switch input:disabled'),
         knobs: count('.window .fam-knob'),
@@ -415,9 +416,9 @@ test('the controls page shows each control alone with its variants', async () =>
         disabledControls: count('.window :disabled'),
       };
     });
-    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-switch-knob', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-recessed']);
+    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-tabs', 'scene-switch-knob', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-recessed']);
     assert.ok(found.plasticColors.every((total) => total >= 1), 'a plastic color is missing');
-    assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.glossyButtons >= 3 && found.glassButtons >= 2 && found.buttonGroups >= 5 && found.radios >= 12 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
+    assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.glossyButtons >= 3 && found.glassButtons >= 2 && found.buttonGroups >= 5 && found.radios >= 12 && found.tabStrips >= 6 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
     assert.deepEqual(found.fills, [1, 1, 1]);
     assert.ok(found.selects >= 1 && found.menus >= 1 && found.searches >= 1 && found.selectedRows === 1);
     assert.ok(found.recessedRows >= 2 && found.leatherButtons >= 2);
@@ -432,6 +433,33 @@ test('the progress tubes sit on metal on the controls page', async () => {
   try {
     const classes = await page.page.$eval('#scene-progress .window', (window) => [...window.classList]);
     assert.ok(classes.includes('fam-metal') && !classes.includes('fam-felt'), classes.join(' '));
+  } finally {
+    await page.close();
+  }
+});
+
+test('the tab demos switch panels with the arrow keys and show one panel each', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    await page.page.locator('#silver-tab-0').focus();
+    await page.page.keyboard.press('ArrowRight');
+    assert.equal(await page.page.getAttribute('#silver-tab-1', 'aria-selected'), 'true');
+    assert.equal(await page.page.getAttribute('#silver-tab-0', 'aria-selected'), 'false');
+    assert.equal(await page.page.evaluate(() => document.activeElement.id), 'silver-tab-1');
+    await page.page.keyboard.press('ArrowRight');
+    assert.equal(await page.page.evaluate(() => document.activeElement.id), 'silver-tab-0', 'the arrow keys land on the disabled tab');
+    const visible = await page.page.evaluate(() => [...document.querySelectorAll('[role="tablist"][data-tabs]')].map((strip) => [...strip.parentElement.querySelectorAll('[role="tabpanel"]')].filter((panel) => !panel.hidden).length));
+    assert.ok(visible.length >= 6 && visible.every((count) => count === 1), visible.join(','));
+  } finally {
+    await page.close();
+  }
+});
+
+test('tab strips fit a phone screen', async () => {
+  const page = await openUrl(showcasePageUrl('controls'), { viewport: { width: 375, height: 800 } });
+  try {
+    const rights = await page.page.evaluate(() => [...document.querySelectorAll('.window [role="tablist"]')].map((strip) => strip.getBoundingClientRect().right));
+    assert.ok(rights.every((right) => right <= 375), rights.join(','));
   } finally {
     await page.close();
   }

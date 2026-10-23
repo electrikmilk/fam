@@ -438,6 +438,20 @@ html { scroll-behavior: smooth; }
 .code-block + .window { margin-top: 20px; }
 .code-block + .scene-lead { margin-top: 28px; }
 
+/* Each tab demo is a strip with its panel under it. The light plate keeps the panel text readable on every surface. */
+#scene-tabs .controls-stage { display: grid; gap: 22px; }
+.tab-demo { display: grid; justify-items: start; gap: 12px; }
+.tab-panel {
+  box-sizing: border-box;
+  width: min(100%, 360px);
+  padding: 14px 16px;
+  border-radius: var(--fam-radius-md);
+  background: rgba(255, 255, 255, .8);
+  color: #1b1b20;
+  font: 600 14px/1.3 var(--fam-font-ui);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3);
+}
+
 #scene-switch-knob .controls-stage { gap: 28px; }
 
 #scene-progress .controls-stage,
