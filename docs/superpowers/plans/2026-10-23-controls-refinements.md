@@ -28,6 +28,7 @@
 - A grouped cell that is both `disabled` and `aria-pressed="true"` still looks inset and keeps its LED dim (Task 4).
 - Radios in one `name` group: arrow keys move the selection and exactly one radio is checked (Task 6).
 - A disabled tab is skipped by Tab and an `aria-selected` tab is distinguishable in forced colors (Task 7).
+- The group's lit state works from `aria-selected` as well as `aria-pressed` (Task 4).
 - Groups and tab strips do not overflow a 375px wide screen (Tasks 4, 7).
 - LED glow and any transition stop under `prefers-reduced-motion: reduce` (Tasks 4, 6).
 
@@ -123,8 +124,8 @@
 - Test: `tests/controls.test.mjs`
 
 **Interfaces:**
-- Consumes: `.fam-plastic`, `.fam-metal-button`, `.fam-glossy-button` and their square dish.
-- Produces: `.fam-button-group` (a `role="group"` wrapper with an `aria-label`). Direct children share one case: only the outer corners are rounded, dividers sit between cells, margins are zero. A child with `aria-pressed="true"` is lit: for plastic and metal cells the dish shows an LED dot using `--fam-led`; for labeled plastic or metal cells a small LED dot above the label; for glossy cells a darker pressed-in look with no LED. Fixture ids `group-plastic`, `group-metal`, `group-glossy`, `group-pressed` (a pressed plastic square cell), `group-unpressed`, `group-disabled-pressed` (disabled and pressed).
+- Consumes: `.fam-plastic`, `.fam-metal-button`, `.fam-glossy-button`, `.fam-leather-button` and the square dish.
+- Produces: `.fam-button-group` (a `role="group"` wrapper with an `aria-label`). Direct children share one case: only the outer corners are rounded, dividers sit between cells, margins are zero. A child is lit when it has `aria-pressed="true"` or `aria-selected="true"` (so the same group is also a tab strip, see Task 7). A lit cell: for plastic and metal cells the dish shows an LED dot using `--fam-led`; for labeled plastic or metal cells a small LED dot above the label; for glossy blue cells a darker pressed-in look with no LED; for `.fam-glossy-button--silver` cells the aqua blue of the selected segment in `references/snow-leopard-gui-2079776605.png`; for leather cells a pressed-in look like the existing `.fam-leather-button:active`. `.fam-leather-button` children are supported by the group. Fixture ids `group-plastic`, `group-metal`, `group-glossy`, `group-pressed` (a pressed plastic square cell), `group-unpressed`, `group-disabled-pressed` (disabled and pressed).
 
 - [ ] **Step 1: Write the failing tests.**
   - `group cells share one case`: in `#group-plastic`, the first child has `borderTopRightRadius` `'0px'` and `borderTopLeftRadius` not `'0px'`; the last child the reverse; the middle child `'0px'` on all four.
@@ -139,7 +140,7 @@
 
 - [ ] **Step 4: Run** the same command. Expected: PASS.
 
-- [ ] **Step 5: Scene and docs.** Add groups to `scene-buttons`: a four-cell plastic strip with one cell pressed (as in `plastic.png`), a metal group, and a three-button glossy silver group on a `fam-metal` bar like iTunes in `references/0522_macosx-1962914377.jpg` (place that one in `scene-glossy-glass`). Each has a markup block. Add the README snippet and the `aria-pressed` note ("set it in your own script"). Update `tests/showcase.test.mjs` for `.window .fam-button-group >= 3`.
+- [ ] **Step 5: Scene and docs.** Add groups to `scene-buttons`: a leather group on a `fam-leather` stage (put it in `scene-buttons` too), a four-cell plastic strip with one cell pressed (as in `plastic.png`), a metal group, and a three-button glossy silver group on a `fam-metal` bar like iTunes in `references/0522_macosx-1962914377.jpg` (place that one in `scene-glossy-glass`). Each has a markup block. Add the README snippet and the `aria-pressed` note ("set it in your own script"). Update `tests/showcase.test.mjs` for `.window .fam-button-group >= 4`. Add a test that a lit leather cell differs from an unlit one (`#group-leather-lit` and `#group-leather-plain`) and that `aria-selected="true"` lights a cell the same way `aria-pressed="true"` does (`#group-selected`).
 
 - [ ] **Step 6: Commit** (`Add button groups`).
 
@@ -188,33 +189,37 @@
 
 ---
 
-### Task 7: Tabs
+### Task 7: Tabs as button groups
+
+The owner decided tabs are button groups, so tabs add no new component CSS: a tab strip is a `.fam-button-group` whose cells are `role="tab"` buttons of any material.
 
 **Files:**
 - Create: `showcase/tabs.js`
-- Modify: `css/components.css`, `tests/fixtures/kit.html`, `showcase/controls.html`, `showcase/site.css`, `README.md`, `tests/showcase.test.mjs`, `tests/focus-contrast.test.mjs`, `tests/contrast.test.mjs`
+- Modify: `tests/fixtures/kit.html`, `showcase/controls.html`, `showcase/site.css`, `README.md`, `tests/showcase.test.mjs`, `tests/focus-contrast.test.mjs`, `tests/contrast.test.mjs`
+- Modify `css/components.css` only if a tab strip needs something a button group does not give it (for example the Snow Leopard strip's flat bottom)
 - Test: `tests/controls.test.mjs`
 
 **Interfaces:**
-- Produces: `<div class="fam-tabs fam-tabs--aqua" role="tablist" aria-label="..."><button class="fam-tab" role="tab" aria-selected="true">...</button></div>`. Variants `fam-tabs--aqua` (the Snow Leopard strip in `references/snow-leopard-gui-2079776605.png`: light rounded segments, blue selected), `--leather`, `--metal`, `--plastic`. Selected state comes only from `aria-selected="true"`. `showcase/tabs.js` exposes `window.FamShowcase.createTabs(tablist)` that wires click, ArrowLeft, ArrowRight, Home and End on tabs and toggles each tab's panel (`aria-controls` id, `hidden`). Fixture ids `tabs-aqua`, `tab-aqua-selected`, `tab-aqua-plain`, `tab-aqua-disabled`, `tab-leather-selected`, `tab-metal-selected`, `tab-plastic-selected`.
+- Consumes: Task 4's `.fam-button-group` with `aria-selected="true"` as the lit state.
+- Produces: markup `<div class="fam-button-group" role="tablist" aria-label="..."><button class="fam-glossy-button fam-glossy-button--silver" role="tab" aria-selected="true" aria-controls="panel-id">...</button></div>` for glossy silver (the Snow Leopard strip), plastic, metal and leather cells. `showcase/tabs.js` exposes `window.FamShowcase.createTabs(tablist)` which wires click, ArrowLeft, ArrowRight, Home and End on the tabs and toggles each tab's panel (`aria-controls` id, `hidden`). Fixture ids `tabs-silver`, `tab-silver-selected`, `tab-silver-plain`, `tab-silver-disabled`, `tabs-plastic`, `tabs-metal`, `tabs-leather`.
 
 - [ ] **Step 1: Write the failing tests.**
-  - `a selected tab differs from the rest in every style`: for each style, `backgroundImage` or `backgroundColor` of the selected tab differs from the plain one.
-  - `a disabled tab is skipped by Tab`: focus the first tab, press Tab twice inside `#tabs-aqua`; `#tab-aqua-disabled` is never `document.activeElement`.
-  - `the demo wires arrow keys`: on `showcase/controls.html`, focus the first tab of the aqua demo, press `ArrowRight`; the second tab has `aria-selected="true"`, the first `"false"`, and exactly one tabpanel is not `hidden`.
-  - `tab strips fit a phone`: at 375px wide each `.fam-tabs` has `scrollWidth <= clientWidth` or scrolls inside itself, and the page has no horizontal scroll.
-  - `a selected tab is marked in forced colors` (Chromium only): selected tab `backgroundColor` or `textDecorationLine` differs from a plain tab.
+  - `a selected tab differs from the rest in every material`: for the silver, plastic, metal and leather strips, the `aria-selected="true"` cell's `backgroundImage` or `boxShadow` differs from a plain cell's.
+  - `a disabled tab is skipped by Tab`: focus the first tab of `#tabs-silver`, press Tab twice; `#tab-silver-disabled` is never `document.activeElement`.
+  - `the demo wires arrow keys`: on `showcase/controls.html`, focus the first tab of the silver demo, press `ArrowRight`; the second tab has `aria-selected="true"`, the first `"false"`, and exactly one tabpanel is not `hidden`.
+  - `tab strips fit a phone`: at 375px wide each `[role="tablist"]` has `scrollWidth <= clientWidth` or scrolls inside itself, and the page has no horizontal scroll.
+  - `a selected tab is marked in forced colors` (Chromium only): the selected tab has an outline or `backgroundColor` that a plain tab does not.
   - Add focus-ring rows for a plastic tab on metal and a leather tab on leather.
 
 - [ ] **Step 2: Run** `npm run build && node --test tests/controls.test.mjs tests/showcase.test.mjs tests/focus-contrast.test.mjs`. Expected: FAIL.
 
-- [ ] **Step 3: Implement** the CSS (the leather tab sits on `fam-leather-bar`-style leather, the metal tab is brushed metal, the plastic tab shares the plastic gradient) and `tabs.js` as a small standalone script in the IIFE style of `showcase/main.js`. It does not use roving tabindex: every enabled tab stays in the Tab order, as the spec decides. Add the forced-colors rule.
+- [ ] **Step 3: Implement** `tabs.js` as a small standalone script in the IIFE style of `showcase/main.js`. It does not use roving tabindex: every enabled tab stays in the Tab order, as the spec decides. Fix anything the group CSS misses for tabs (selected silver cell is aqua blue, as the Snow Leopard strip).
 
 - [ ] **Step 4: Run** the same command. Expected: PASS.
 
-- [ ] **Step 5: Scene and docs.** Add `scene-tabs` with the aqua strip on a `fam-paper` window, leather tabs on `fam-leather`, metal tabs on `fam-metal` and plastic tabs on a plastic panel stage (use `fam-metal` until Task 8 lands, and switch it to `fam-plastic-panel` there). Each shows a panel under the strip. The markup block notes that arrow keys need a script and links to `tabs.js` as the example. Add the README snippet. Raise `MINIMUM_MEASURED['showcase-controls']` in `tests/contrast.test.mjs` to the number the audit now reports minus 2. Load `tabs.js` in `controls.html`.
+- [ ] **Step 5: Scene and docs.** Add `scene-tabs`: the silver strip on a `fam-paper` window, leather tabs on `fam-leather`, metal tabs on `fam-metal`, and plastic tabs on a plastic panel stage (use `fam-metal` until Task 8 lands, and switch it to `fam-plastic-panel` there). Each shows a panel under the strip. The markup block notes that arrow keys need a script and points at `tabs.js`. Add the README snippet ("a tab strip is a button group with `role="tablist"`"). Raise `MINIMUM_MEASURED['showcase-controls']` in `tests/contrast.test.mjs` to the number the audit now reports minus 2. Load `tabs.js` in `controls.html`.
 
-- [ ] **Step 6: Commit** (`Add tabs in a Snow Leopard strip and material styles`).
+- [ ] **Step 6: Commit** (`Add tabs as button groups`).
 
 ---
 
