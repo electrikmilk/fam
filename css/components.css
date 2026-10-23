@@ -447,7 +447,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-list-row span {
   flex: none;
   font: 12px/1 var(--fam-font-ui);
-  color: #66666d;
+  color: #5a5a61;
 }
 
 .fam-list-row[aria-selected="true"] {
