@@ -34,7 +34,7 @@ test('the site root redirects to the showcase', async () => {
 });
 
 test('the site holds only what the page needs', async () => {
-  assert.deepEqual((await readdir(await assembledSite())).sort(), ['assets', 'dist', 'examples', 'index.html', 'showcase']);
+  assert.deepEqual((await readdir(await assembledSite())).sort(), ['assets', 'dist', 'examples', 'index.html', 'showcase', 'snippets']);
 });
 
 // The site is served under /fam/, so a URL that starts with a slash would point at the wrong place

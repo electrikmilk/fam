@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 // Assembles the folder GitHub Pages publishes. It keeps the repository's own layout (showcase/, examples/, dist/, assets/) so the pages'
 // relative links to ../dist/fam-ui.css and ../assets/ work unchanged, and adds a root page that sends visitors to the showcase.
 const packageRoot = new URL('../', import.meta.url);
-const COPIED_FOLDERS = ['showcase', 'examples', 'dist', 'assets'];
+const COPIED_FOLDERS = ['showcase', 'examples', 'dist', 'assets', 'snippets'];
 
 const REDIRECT_PAGE = `<!doctype html>
 <html lang="en">
