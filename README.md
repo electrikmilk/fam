@@ -72,7 +72,7 @@ For any other color, use `fam-stitched`: a CSS stitched border whose thread is t
 
 ### Wood frame
 
-`fam-wood-frame` is a moulded wood frame with a drop shadow outside and an inset shadow where the content meets the frame. Put a photo, a page or a corkboard inside it. The border is 40px; change it with `--fam-frame-width`.
+`fam-wood-frame` is a moulded wood frame with a drop shadow outside and an inset shadow where the content meets the frame. Put a photo, a page or a corkboard inside it. The border is 26px; change it with `--fam-frame-width`.
 
 ```html
 <figure class="fam-wood-frame"><img src="photo.jpg" alt="..."></figure>

@@ -64,13 +64,13 @@
   box-shadow: 0 26px 44px -16px rgba(0, 0, 0, .7);
 }
 
-/* 9-slice wood frame: 556px image, slices 79 79 82 81 device px, drawn at half size so a 40px border stays sharp on 2x screens.
+/* 9-slice wood frame: 500px image, slices 51 51 54 53 device px, drawn at half size so a 26px border stays sharp on 2x screens.
    The ::after overlay sits over the content, so it can put the inset shadow where the content meets the frame and, for --glossy, a sheen over the image. */
 .fam-wood-frame {
-  --fam-frame-width: 40px;
+  --fam-frame-width: 26px;
   position: relative;
   border: var(--fam-frame-width) solid transparent;
-  border-image: var(--fam-tex-wood-frame) 79 79 82 81 / var(--fam-frame-width) / 0 stretch;
+  border-image: var(--fam-tex-wood-frame) 51 51 54 53 / var(--fam-frame-width) / 0 stretch;
   background: #2b1a10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 22px 36px -12px rgba(0, 0, 0, .65);
 }

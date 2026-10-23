@@ -1,17 +1,21 @@
 """Cut a 9-slice picture frame from a photo of a frame with a see-through opening.
 
-usage: make_wood_frame.py SOURCE OUTPUT OUTPUT_WIDTH
+usage: make_wood_frame.py SOURCE OUTPUT OUTPUT_WIDTH OUTER_CROP
 
 The opening is filled with the frame's average color, because border-image discards the middle slice.
 That lets the output be a JPEG instead of an alpha PNG.
+OUTER_CROP is how many pixels, at the output size, to trim off the frame's outer edge to make the border thinner.
 Prints the border-image-slice values (top right bottom left) for the output size.
 """
 import sys
 from PIL import Image, ImageStat
 
-source_path, output_path, output_width = sys.argv[1], sys.argv[2], int(sys.argv[3])
+source_path, output_path, output_width, outer_crop = sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4])
 
 image = Image.open(source_path).convert("RGBA")
+source_crop = round(outer_crop * image.width / output_width)
+image = image.crop((source_crop, source_crop, image.width - source_crop, image.height - source_crop))
+output_width -= 2 * outer_crop
 alpha = image.getchannel("A")
 opening = alpha.point(lambda value: 255 if value == 0 else 0).getbbox()
 if opening is None:

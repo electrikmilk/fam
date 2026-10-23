@@ -18,7 +18,7 @@ test('wood frame draws the photo border with an inset shadow and a drop shadow',
       };
     });
     assert.ok(styles.borderImageSource.includes('wood-frame.jpg'), styles.borderImageSource);
-    assert.equal(styles.borderLeftWidth, '40px');
+    assert.equal(styles.borderLeftWidth, '26px');
     assert.ok(!styles.dropShadow.includes('inset') && styles.dropShadow !== 'none', styles.dropShadow);
     assert.ok(styles.overlayShadow.includes('inset'), styles.overlayShadow);
     assert.equal(styles.overlayBackground, 'none');
