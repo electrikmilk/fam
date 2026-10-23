@@ -11,8 +11,8 @@ const outputPath = fileURLToPath(new URL('../docs/header.png', import.meta.url))
 export async function makeHeader() {
   const page = await openUrl(showcaseUrl, { viewport: { width: WIDTH, height: HEIGHT }, deviceScaleFactor: 2 });
   try {
-    // Without the scroll cue the title and tagline center in the banner, and a transparent page keeps the stitched corners clean on any background
-    await page.page.addStyleTag({ content: '.scroll-cue { display: none; } html, body { background: transparent; }' });
+    // The hero is 78% of the viewport on the page; the banner is a fixed height. A transparent page keeps the stitched corners clean on any background.
+    await page.page.addStyleTag({ content: `#hero { min-height: ${HEIGHT}px; } html, body { background: transparent; }` });
     await mkdir(fileURLToPath(new URL('../docs/', import.meta.url)), { recursive: true });
     await page.page.locator('#hero').screenshot({ path: outputPath, omitBackground: true });
     return outputPath;

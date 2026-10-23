@@ -253,3 +253,22 @@ test('no copy buttons appear without the clipboard API', async () => {
     await page.close();
   }
 });
+
+// The opening screen stops short of the bottom, so the top of the first scene shows and scrolling is obvious without a "Scroll" cue
+for (const [width, height] of [[1440, 900], [768, 1024], [375, 700]]) {
+  test(`the next section peeks into the first screen at ${width} by ${height}`, async () => {
+    const page = await openUrl(showcaseUrl, { viewport: { width, height } });
+    try {
+      const { heroBottom, windowTop, cues } = await page.page.evaluate(() => ({
+        heroBottom: document.querySelector('#hero').getBoundingClientRect().bottom,
+        windowTop: document.querySelector('#scene-wood-felt .window').getBoundingClientRect().top,
+        cues: document.querySelectorAll('.scroll-cue').length,
+      }));
+      assert.ok(heroBottom < height - 60, `the opening screen ends at ${heroBottom}px of a ${height}px viewport`);
+      assert.ok(windowTop < height - 60, `the first scene starts at ${windowTop}px, below the fold of a ${height}px viewport`);
+      assert.equal(cues, 0, 'the scroll cue is still on the page');
+    } finally {
+      await page.close();
+    }
+  });
+}

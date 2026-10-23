@@ -4,13 +4,14 @@ body {
   color: #e9e9ec;
 }
 
-/* The opening screen is the kit's stitched leather frame at full width and one screen tall */
+/* The opening screen is the kit's stitched leather frame at full width. It stops at 78% of the screen so the top of the first scene shows
+   below it, which is what tells a visitor to scroll. */
 .hero {
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 78vh;
+  min-height: 78svh;
   border-width: 40px;
   border-image-width: 40px;
   border-radius: 0;
@@ -29,13 +30,6 @@ body {
 .hero .tagline {
   margin: 14px 0 0;
   font-size: clamp(20px, 3.2vw, 28px);
-}
-
-.hero .scroll-cue {
-  margin: 40px 0 0;
-  font-size: 20px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
 }
 
 #credits {
