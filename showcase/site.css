@@ -530,6 +530,30 @@ html { scroll-behavior: smooth; }
   padding: 28px;
 }
 
+/* A heading that groups the scenes below it, so it reads as a rule with a label rather than as another scene title */
+.group-title {
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  font: 900 14px/1.2 var(--site-font);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--site-accent);
+}
+
+/* Each cell is a different surface, so the focus ring is seen against metal, felt and wood */
+.focus-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.focus-cell {
+  display: grid;
+  place-items: center;
+  min-height: 130px;
+  padding: 28px;
+}
+
 /* A scene with several demos separates each one from the code block above it */
 .code-block + .window { margin-top: 20px; }
 .code-block + .scene-lead { margin-top: 28px; }
@@ -550,13 +574,17 @@ html { scroll-behavior: smooth; }
 
 #scene-switch-knob .controls-stage { gap: 28px; }
 
-#scene-progress .controls-stage,
-#scene-glass-fields .controls-stage {
+#scene-progress .controls-stage {
   display: grid;
   gap: 18px;
 }
 
-#scene-glass-fields .controls-stage > * { max-width: 320px; }
+#scene-glass-fields .controls-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 18px;
+  align-items: start;
+}
 #scene-search-list .controls-stage { display: block; padding: 20px; }
 #scene-recessed .controls-stage { display: block; padding: 22px; }
 #scene-recessed .fam-leather-button { margin-top: 14px; margin-right: 12px; }
