@@ -411,6 +411,139 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-glass-button:active:not(:disabled) { transform: translateY(1px); }
 
+/* ---------- Radio buttons ----------
+   A real radio input sits invisibly over the dot, so grouping, arrow keys and form behavior come from the browser.
+   Plastic and metal dots light an orange LED when checked; glossy and glass dots show a plain dot. */
+
+.fam-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 14px 4px 0;
+  cursor: pointer;
+  font: 600 13px/1.2 var(--fam-font-ui);
+  color: rgb(18, 20, 26);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+}
+
+.fam-radio input {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.fam-radio-dot {
+  box-sizing: border-box;
+  position: relative;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.fam-radio-dot::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+}
+
+.fam-radio:has(input:focus-visible) .fam-radio-dot {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+}
+
+/* The cream plastic and the brushed metal share the dish and the LED. Every state lists the same five shadows so they can fade. */
+.fam-radio--plastic .fam-radio-dot,
+.fam-radio--metal .fam-radio-dot {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .4), 0 0 0 1px rgba(0, 0, 0, .45), 0 0 0 0 transparent;
+  transition: box-shadow .2s ease;
+}
+
+.fam-radio--plastic .fam-radio-dot {
+  background:
+    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    linear-gradient(to bottom, #fbf7ea, #e2dac3 60%, #cfc6ad);
+  background-blend-mode: soft-light, normal;
+}
+
+.fam-radio--metal .fam-radio-dot {
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, .6), rgba(255, 255, 255, .3)),
+    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
+}
+
+.fam-radio--plastic .fam-radio-dot::after,
+.fam-radio--metal .fam-radio-dot::after {
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .6);
+  background: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, .15), rgba(0, 0, 0, 0) 75%);
+}
+
+.fam-radio--plastic input:checked + .fam-radio-dot,
+.fam-radio--metal input:checked + .fam-radio-dot {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .4), 0 0 0 1px rgba(0, 0, 0, .45), 0 0 9px 2px var(--fam-led);
+}
+
+.fam-radio--plastic input:checked + .fam-radio-dot::after,
+.fam-radio--metal input:checked + .fam-radio-dot::after {
+  background: radial-gradient(circle at 50% 38%, #ffe0c4 0, var(--fam-led) 55%, #b8380a 100%);
+  box-shadow: inset 0 0 0 1px rgba(120, 30, 0, .5);
+}
+
+.fam-radio--glossy .fam-radio-dot {
+  --fam-aqua-rim: #787c84;
+  background: linear-gradient(to bottom, #fcfcfd 0%, #e4e6ea 52%, #c6cad1 100%);
+  border: 1px solid var(--fam-aqua-rim);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 2px 3px rgba(0, 0, 0, .4);
+}
+
+.fam-radio--glossy input:checked + .fam-radio-dot {
+  --fam-aqua-rim: #2a4aa8;
+  background: linear-gradient(to bottom, #3556c4 0%, #5a85ea 52%, #8db0f7 100%);
+}
+
+.fam-radio--glossy input:checked + .fam-radio-dot::after { background: #fff; box-shadow: 0 1px 1px rgba(0, 0, 40, .5); }
+
+.fam-radio--glass {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+
+.fam-radio--glass .fam-radio-dot {
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 46%, rgba(255, 255, 255, 0) 54%),
+    linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, .42));
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 3px 6px -2px rgba(0, 0, 0, .55);
+}
+
+/* The ink outline alone vanishes on dark felt, so the glass dot gets the white halo too */
+.fam-radio--glass:has(input:focus-visible) .fam-radio-dot {
+  box-shadow: var(--fam-focus-halo), inset 0 0 0 1px rgba(255, 255, 255, .55), 0 3px 6px -2px rgba(0, 0, 0, .55);
+}
+
+.fam-radio--glass input:checked + .fam-radio-dot::after { background: #fff; box-shadow: 0 0 4px rgba(255, 255, 255, .8); }
+
+.fam-radio:has(input:disabled) { cursor: default; }
+
+.fam-radio:has(input:disabled) .fam-radio-dot {
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .55);
+}
+
+.fam-radio--glass:has(input:disabled) .fam-radio-dot {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 2px 3px rgba(0, 0, 0, .55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fam-radio .fam-radio-dot { transition: none; }
+}
+
 /* ---------- Button groups: one case holding plastic, metal, glossy or leather buttons ----------
    Only the outer corners are rounded and neighbours overlap by one border, so the cells share a divider. A cell is lit by
    aria-pressed="true", or by aria-selected="true" when the group is a tab strip. The padding keeps the cells' shadows and focus
@@ -845,6 +978,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 /* ---------- Disabled controls: dimmed, no pointer cursor, no pressed look (disabled text is exempt from WCAG contrast) ---------- */
 
 .fam-leather-button:disabled,
+.fam-radio:has(input:disabled),
 .fam-glossy-button:disabled,
 .fam-glass-button:disabled,
 .fam-switch:has(input:disabled),
@@ -888,6 +1022,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     outline: 2px solid Highlight;
     outline-offset: -4px;
   }
+
+  .fam-radio-dot { border: 1px solid CanvasText; }
+  .fam-radio input:checked + .fam-radio-dot::after { background: Highlight; }
 
   .fam-recessed,
   .fam-search { border: 1px solid CanvasText; }

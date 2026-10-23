@@ -221,3 +221,77 @@ test('a leather group is a leather case like the leather navigation, with the li
     await kit.close();
   }
 });
+
+const radioDot = (id) => `#${id}`;
+
+test('checked plastic and metal radios glow like an LED and unchecked ones do not', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const id of ['radio-plastic-on', 'radio-metal-on']) {
+      assert.ok((await read(page, radioDot(id), 'boxShadow')).includes('255, 106, 31'), `${id} does not glow`);
+    }
+    assert.ok(!(await read(page, radioDot('radio-plastic-off'), 'boxShadow')).includes('255, 106, 31'), 'an unchecked radio glows');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('checked glossy and glass radios show a dot with no glow', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const id of ['radio-glossy-on', 'radio-glass-on']) {
+      assert.equal(await read(page, radioDot(id), 'content', '::after'), '""', `${id} shows no dot`);
+      assert.ok(!(await read(page, radioDot(id), 'boxShadow')).includes('255, 106, 31'), `${id} glows`);
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
+test('arrow keys move the selection inside one radio group', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    await page.locator('#speed-1').focus();
+    await page.keyboard.press('ArrowRight');
+    assert.equal(await page.isChecked('#speed-2'), true);
+    assert.equal(await page.isChecked('#speed-1'), false);
+    assert.equal(await page.evaluate(() => document.querySelectorAll('input[name=speed]:checked').length), 1);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a disabled radio is dimmed, shows no interactive cursor and is skipped by Tab', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.equal(await read(page, '#radio-plastic-disabled-label', 'opacity'), '0.5');
+    assert.equal(await read(page, '#radio-plastic-disabled-label', 'cursor'), 'default');
+    await page.locator('#radio-plastic-disabled-label').scrollIntoViewIfNeeded();
+    await page.evaluate(() => document.querySelector('#glossy-disabled').focus());
+    for (let press = 0; press < 3; press += 1) {
+      await page.keyboard.press('Tab');
+      assert.notEqual(await page.evaluate(() => document.activeElement.id), 'radio-plastic-disabled');
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the radio glow does not animate under reduced motion', async () => {
+  const moving = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.notEqual(await read(moving.page, radioDot('radio-plastic-on'), 'transitionDuration'), '0s');
+  } finally {
+    await moving.close();
+  }
+  const still = await openUrl(fixtureUrl('kit'), { reducedMotion: 'reduce' });
+  try {
+    assert.equal(await read(still.page, radioDot('radio-plastic-on'), 'transitionDuration'), '0s');
+  } finally {
+    await still.close();
+  }
+});

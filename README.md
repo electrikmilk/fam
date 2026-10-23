@@ -190,6 +190,13 @@ Button groups put plastic, metal, glossy or leather buttons in one case. Mark th
 
 Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 
+Radio buttons are real radio inputs in a label, so arrow keys and forms work without JavaScript. Use `fam-radio--plastic`, `--metal`, `--glossy` or `--glass`; the checked plastic and metal ones glow like an LED (`--fam-led`).
+
+```html
+<label class="fam-radio fam-radio--plastic"><input type="radio" name="mode" checked><span class="fam-radio-dot"></span>Record</label>
+<label class="fam-radio fam-radio--plastic"><input type="radio" name="mode"><span class="fam-radio-dot"></span>Play</label>
+```
+
 Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
 
 ```html

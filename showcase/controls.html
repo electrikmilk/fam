@@ -31,6 +31,7 @@
     <nav class="jump" aria-label="On this page">
       <a href="#scene-buttons">Plastic and metal buttons</a>
       <a href="#scene-glossy-glass">Glossy and glass buttons</a>
+      <a href="#scene-radios">Radio buttons</a>
       <a href="#scene-switch-knob">Switch and knob</a>
       <a href="#scene-progress">Progress tubes</a>
       <a href="#scene-glass-fields">Glass field and dropdown</a>
@@ -189,6 +190,49 @@
   &lt;button class="fam-glass fam-glass-button" type="button"&gt;Share&lt;/button&gt;
   &lt;button class="fam-glass fam-glass-button" type="button"&gt;Send&lt;/button&gt;
   &lt;button class="fam-glass fam-glass-button" type="button" disabled&gt;Disabled&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-radios">
+      <h2 class="scene-title">Radio buttons</h2>
+      <p class="scene-lead">Real radio inputs, so arrow keys and forms work with no JavaScript. The checked plastic and metal radios glow like an LED. Glossy and glass radios show a plain dot.</p>
+      <div class="window fam-metal controls-stage">
+        <label class="fam-radio fam-radio--plastic"><input type="radio" name="plastic-mode" checked><span class="fam-radio-dot"></span>Record</label>
+        <label class="fam-radio fam-radio--plastic"><input type="radio" name="plastic-mode"><span class="fam-radio-dot"></span>Play</label>
+        <label class="fam-radio fam-radio--plastic"><input type="radio" name="plastic-mode" disabled><span class="fam-radio-dot"></span>Locked</label>
+        <label class="fam-radio fam-radio--metal"><input type="radio" name="metal-mode" checked><span class="fam-radio-dot"></span>Record</label>
+        <label class="fam-radio fam-radio--metal"><input type="radio" name="metal-mode"><span class="fam-radio-dot"></span>Play</label>
+        <label class="fam-radio fam-radio--metal"><input type="radio" name="metal-mode" disabled><span class="fam-radio-dot"></span>Locked</label>
+        <label class="fam-radio fam-radio--glossy"><input type="radio" name="glossy-mode" checked><span class="fam-radio-dot"></span>Record</label>
+        <label class="fam-radio fam-radio--glossy"><input type="radio" name="glossy-mode"><span class="fam-radio-dot"></span>Play</label>
+        <label class="fam-radio fam-radio--glossy"><input type="radio" name="glossy-mode" disabled><span class="fam-radio-dot"></span>Locked</label>
+      </div>
+      <div class="code-block" role="group" aria-label="The plastic, metal and glossy radio markup" data-label="the plastic, metal and glossy radio markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; padding: 28px"&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="plastic-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Record&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="plastic-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Play&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="plastic-mode" disabled&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Locked&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--metal"&gt;&lt;input type="radio" name="metal-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Record&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--metal"&gt;&lt;input type="radio" name="metal-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Play&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--metal"&gt;&lt;input type="radio" name="metal-mode" disabled&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Locked&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--glossy"&gt;&lt;input type="radio" name="glossy-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Record&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--glossy"&gt;&lt;input type="radio" name="glossy-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Play&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--glossy"&gt;&lt;input type="radio" name="glossy-mode" disabled&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Locked&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-felt controls-stage">
+        <label class="fam-radio fam-radio--glass"><input type="radio" name="glass-mode" checked><span class="fam-radio-dot"></span>Record</label>
+        <label class="fam-radio fam-radio--glass"><input type="radio" name="glass-mode"><span class="fam-radio-dot"></span>Play</label>
+        <label class="fam-radio fam-radio--glass"><input type="radio" name="glass-mode" disabled><span class="fam-radio-dot"></span>Locked</label>
+      </div>
+      <div class="code-block" role="group" aria-label="The glass radio markup" data-label="the glass radio markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt" style="display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; padding: 28px"&gt;
+  &lt;label class="fam-radio fam-radio--glass"&gt;&lt;input type="radio" name="glass-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Record&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--glass"&gt;&lt;input type="radio" name="glass-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Play&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--glass"&gt;&lt;input type="radio" name="glass-mode" disabled&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Locked&lt;/label&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>
