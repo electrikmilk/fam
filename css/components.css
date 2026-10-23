@@ -441,7 +441,11 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-leather-bar .fam-nav-brand,
 .fam-leather-bar .fam-nav-item { color: #000; }
 
-.fam-leather-bar .fam-nav-item[aria-current="page"] { background: none; }
+/* A lighter pocket than the wood bar's: its shadow darkens the tan under the glyphs, and the stock one left the label under 4.5:1 at some pixel alignments */
+.fam-leather-bar .fam-nav-item[aria-current="page"] {
+  background: none;
+  box-shadow: inset 0 2px 3px rgba(50, 25, 5, .38), inset 0 0 0 1px rgba(50, 25, 5, .3), 0 1px 0 rgba(255, 238, 205, .6);
+}
 
 .fam-nav.fam-leather-bar--black {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 4px 9px rgba(0, 0, 0, .6);
