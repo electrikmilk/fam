@@ -1,7 +1,18 @@
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { chromium } from 'playwright-core';
+import { chromium, firefox, webkit } from 'playwright-core';
 
 const testsRoot = new URL('../', import.meta.url);
+
+// FAM_BROWSER selects the engine: chrome (default, the installed Google Chrome), firefox or webkit
+const ENGINE = process.env.FAM_BROWSER ?? 'chrome';
+export const isChromium = ENGINE === 'chrome';
+
+function launchEngine() {
+  if (ENGINE === 'chrome') return chromium.launch({ channel: 'chrome' });
+  if (ENGINE === 'firefox') return firefox.launch();
+  if (ENGINE === 'webkit') return webkit.launch();
+  throw new Error(`FAM_BROWSER must be chrome, firefox or webkit, got "${ENGINE}"`);
+}
 
 export const fixtureUrl = (name) => pathToFileURL(fileURLToPath(new URL(`fixtures/${name}.html`, testsRoot))).href;
 export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../examples/${name}.html`, testsRoot))).href;
@@ -10,7 +21,7 @@ export async function openUrl(
   url,
   { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference' } = {},
 ) {
-  const browser = await chromium.launch({ channel: 'chrome' });
+  const browser = await launchEngine();
   const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion });
   const page = await context.newPage();
 

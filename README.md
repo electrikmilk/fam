@@ -139,6 +139,16 @@ The kit is built for WCAG AA. The test suite measures contrast on the real rende
 
 Evergreen browsers with `backdrop-filter`, `color-mix()` and `:has()`. Refraction is Chromium only and degrades to a clear pane.
 
+| Engine | How it was tested | Result |
+|---|---|---|
+| Chrome | Installed Google Chrome, driven by Playwright | Everything, including the frosted glass, glow and refraction |
+| Firefox | Playwright's Firefox build | The full test suite and contrast audit pass. That build does not render `backdrop-filter` at all (not even a bare `blur()`), so the frost and glow could not be checked. |
+| WebKit | Playwright's WebKit build | The same as Firefox. Safari skips links and buttons on Tab unless you hold Option. |
+
+Without backdrop blur, glass is a dark translucent pane with a highlight. Text on it still reaches 4.5:1, because the audit passes in the engines that render no blur. Frost, glow and refraction in the real Firefox and Safari have not been looked at yet.
+
+Run the suite in another engine with `FAM_BROWSER=firefox npm test` or `FAM_BROWSER=webkit npm test` (after `npx playwright-core install firefox webkit`).
+
 ## Credits
 
 The textures are processed from photographs on Unsplash. See `CREDITS.md`.

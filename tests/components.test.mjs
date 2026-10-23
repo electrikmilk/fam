@@ -33,6 +33,9 @@ test('switch toggles without JavaScript', async () => {
   }
 });
 
+// Safari and WebKit skip links and buttons on Tab by default; Option+Tab visits every focusable control
+const TAB_KEY = process.env.FAM_BROWSER === 'webkit' ? 'Alt+Tab' : 'Tab';
+
 const FOCUS_TARGETS = [
   'glass-input',
   'glass-select',
@@ -65,7 +68,7 @@ test('every interactive control shows a focus indicator', async () => {
 
     const seen = new Set();
     for (let press = 0; press < 80 && seen.size < FOCUS_TARGETS.length; press += 1) {
-      await page.keyboard.press('Tab');
+      await page.keyboard.press(TAB_KEY);
       const focusedId = await page.evaluate(() => {
         const active = document.activeElement;
         return active.closest('#switch-off') ? 'switch-off' : active.id;

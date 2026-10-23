@@ -79,7 +79,7 @@ Each item states what was decided. Where something is my own call and not the ow
 - Reference values: lens `backdrop-filter: blur(14px) saturate(125%) brightness(110%)` with a 42% black shade on top of the fill; glow `blur(25px) saturate(190%) brightness(135%)`, `--glow-depth: 18px`, bleed `2rem`; the white top highlight is soft (about 30% fading out by 54%).
 - **Refraction (decided to include):** an SVG filter (`feImage` displacement map plus `feDisplacementMap`, scale about `0.2`, `primitiveUnits="objectBoundingBox"`) used as `backdrop-filter: url(#refract) blur(1px) saturate(110%) brightness(105%)`. The displacement map is a data-URI SVG with red and green edge ramps that are neutral in the middle. It needs an inline SVG snippet in the page. Chromium only.
 - Saturation and refraction strength were deliberately reduced after the owner found them too strong; keep them subtle and expose them as variables.
-- Text on glass: the placeholder is 62% white and needs the dark shade in the fill to reach 4.5:1.
+- Text on glass: the placeholder is 72% white and needs the dark shade in the fill to reach 4.5:1. It was 62% in the prototype, which passed in Chrome but scored 4.33 to 4.36 at the worst pixel in Firefox and WebKit.
 
 ### Gloss, shadow and rounding
 
@@ -155,7 +155,7 @@ Two lessons that apply to any new texture: periodic patterns (such as a diamond 
 ### Browser support
 
 - `backdrop-filter`, `color-mix`, `border-image`: evergreen browsers.
-- Refraction: Chromium only, with a clear-pane fallback (the fallback declaration ordering must be verified in Safari and Firefox, which was not tested).
+- Refraction: Chromium only, with a clear-pane fallback. The package tests pass in Playwright's Firefox and WebKit builds, but those builds do not render any `backdrop-filter`, so frost, glow and refraction in the real Firefox and Safari still need a look by eye.
 - The CSS `.stitched` alternative uses `-webkit-mask-box-image`, which Chromium and Safari support. Verify and provide a fallback elsewhere. The photo frames use plain `border-image` and have no such limit.
 
 ## Calls made by me
