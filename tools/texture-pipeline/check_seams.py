@@ -16,13 +16,29 @@ def mean_difference(a, b):
     return sum(ImageStat.Stat(ImageChops.difference(a, b)).mean) / len(a.getbands())
 
 
-def axis_ratio(image, horizontal):
+def pixel_values(image):
+    return list(image.get_flattened_data() if hasattr(image, "get_flattened_data") else image.getdata())
+
+
+def neighbour_jumps(image, horizontal):
+    """Mean difference between each pair of neighbouring columns (rows), averaged over the bands, in float so no precision is lost."""
     width, height = image.size
     if horizontal:
-        interior = max(mean_difference(image.crop((x, 0, x + 1, height)), image.crop((x + 1, 0, x + 2, height))) for x in range(width - 1))
+        difference = ImageChops.difference(image.crop((0, 0, width - 1, height)), image.crop((1, 0, width, height)))
+        size = (width - 1, 1)
+    else:
+        difference = ImageChops.difference(image.crop((0, 0, width, height - 1)), image.crop((0, 1, width, height)))
+        size = (1, height - 1)
+    band_means = [pixel_values(band.convert("F").resize(size, Image.BOX)) for band in difference.split()]
+    return [sum(means) / len(band_means) for means in zip(*band_means)]
+
+
+def axis_ratio(image, horizontal):
+    width, height = image.size
+    interior = max(neighbour_jumps(image, horizontal))
+    if horizontal:
         wrap = mean_difference(image.crop((width - 1, 0, width, height)), image.crop((0, 0, 1, height)))
     else:
-        interior = max(mean_difference(image.crop((0, y, width, y + 1)), image.crop((0, y + 1, width, y + 2))) for y in range(height - 1))
         wrap = mean_difference(image.crop((0, height - 1, width, height)), image.crop((0, 0, width, 1)))
     return wrap / interior if interior else 0.0
 
