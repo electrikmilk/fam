@@ -192,6 +192,20 @@ body {
   background: conic-gradient(#ff2d6f, #ffb400, #3ddc84, #1fb6ff, #8a3dff, #ff2d6f);
 }
 
+/* A neutral cut-out that reaches only a little past the pane, with a blurred edge, so no color sits directly behind the glass and the
+   rainbow starts just outside the rim. Any color inside the pane is the glow bleeding in from there. */
+.glass-backdrop--ringed::before {
+  content: '';
+  grid-area: 1 / 1;
+  width: calc(64% + 20px);
+  height: 104px;
+  border-radius: 44px;
+  background: #3b3e46;
+  filter: blur(10px);
+}
+
+.glass-backdrop--ringed .glass-pane { grid-area: 1 / 1; }
+
 /* A pale blue plate that darkens toward one corner, cut into cells by hairlines. The long straight lines are what the rim bends. */
 .glass-backdrop--plate {
   --glass-cell: 60px;
