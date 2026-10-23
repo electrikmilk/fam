@@ -182,7 +182,7 @@ Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam
 <button class="fam-glass fam-glass--blue fam-glass-button" type="button">Save</button>
 ```
 
-Glass is dark by default. Add `fam-glass--light` for light glass with dark text, or `fam-glass--blue` for blue glass with white text, which suits the primary or active control. The tints work on any frosted `fam-glass` (buttons, fields and plain panes), not on `fam-glass--refract`, which has no shade. Each one sets the shade and the text color together, so the text keeps its contrast.
+Glass is dark by default. Add `fam-glass--light` for light glass with dark text, or `fam-glass--blue` for blue glass with white text, which suits the primary or active control. The tints work on any frosted `fam-glass` (buttons, fields and plain panes), and on `fam-glass--refract`, which has no shade, they only change the text color and the rim. `fam-glass--refract fam-glass--light` gives clear glass with dark text for pale backdrops. Each one sets the shade and the text color together, so the text keeps its contrast.
 
 Button groups put plastic, metal or glossy buttons in one case. Mark the lit button with `aria-pressed="true"` (or `aria-selected="true"` in a tab strip) and set it from your own script; a lit plastic or metal button shows an LED (`--fam-led`), a lit silver glossy button turns aqua. A long group scrolls inside itself. Leather buttons only group inside `fam-button-group--leather`: `fam-button-group fam-button-group--leather` with `fam-leather-button` cells is a pill of the leather navigation bar's leather, with the lit item cut as the same dark pocket.
 
