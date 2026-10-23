@@ -16,6 +16,29 @@ const urlFor = (pageName) => (pageName in SHOWCASE_PAGE_FILES ? showcasePageUrl(
 const collectScript = fileURLToPath(new URL('contrast-audit/collect.js', import.meta.url));
 const measureScript = fileURLToPath(new URL('contrast-audit/measure.py', import.meta.url));
 
+// Chrome cannot screenshot more than 16384 device pixels in one image, and the audit runs at a device pixel ratio of 2.
+// A taller page is measured in slices that overlap, so every item lies fully inside at least one slice.
+const SLICE_HEIGHT = 7000;
+const SLICE_OVERLAP = 300;
+
+function slicesFor(pageHeight) {
+  const slices = [];
+  for (let top = 0; top < pageHeight; top += SLICE_HEIGHT) {
+    slices.push({ top, height: Math.min(SLICE_HEIGHT + SLICE_OVERLAP, pageHeight - top) });
+  }
+  return slices;
+}
+
+async function measureSlice(page, { width, top, height }, items, directory, index) {
+  const itemsPath = join(directory, `items-${index}.json`);
+  const screenshotPath = join(directory, `page-${index}.png`);
+  const resultsPath = join(directory, `results-${index}.json`);
+  await writeFile(itemsPath, JSON.stringify({ items: items.map((item) => ({ ...item, y: item.y - top })) }));
+  await page.screenshot({ path: screenshotPath, fullPage: true, clip: { x: 0, y: top, width, height } });
+  await execFileAsync('python3', ['-I', measureScript, itemsPath, screenshotPath, resultsPath]);
+  return JSON.parse(await readFile(resultsPath, 'utf8'));
+}
+
 // measure.py maps page coordinates to screenshot pixels with a device pixel ratio of 2
 export async function runAudit(pageName, { width = 1440 } = {}) {
   const collectSource = await readFile(collectScript, 'utf8');
@@ -23,13 +46,22 @@ export async function runAudit(pageName, { width = 1440 } = {}) {
   try {
     const collected = await example.page.evaluate(`(${collectSource})()`);
     const directory = await mkdtemp(join(tmpdir(), 'fam-audit-'));
-    const itemsPath = join(directory, 'items.json');
-    const screenshotPath = join(directory, 'page.png');
-    const resultsPath = join(directory, 'results.json');
-    await writeFile(itemsPath, JSON.stringify(collected));
-    await example.page.screenshot({ path: screenshotPath, fullPage: true });
-    await execFileAsync('python3', ['-I', measureScript, itemsPath, screenshotPath, resultsPath]);
-    return JSON.parse(await readFile(resultsPath, 'utf8'));
+    const pageHeight = await example.page.evaluate(() => document.documentElement.scrollHeight);
+    const claimed = new Set();
+    let measured = 0;
+    const failures = [];
+    const slices = slicesFor(pageHeight);
+    for (const [index, slice] of slices.entries()) {
+      const inside = collected.items.filter((item) => !claimed.has(item) && item.y >= slice.top && item.y + item.h <= slice.top + slice.height);
+      for (const item of inside) claimed.add(item);
+      if (inside.length === 0) continue;
+      const result = await measureSlice(example.page, { width, ...slice }, inside, directory, index);
+      measured += result.measured;
+      failures.push(...result.failures);
+    }
+    const unmeasured = collected.items.length - claimed.size;
+    if (unmeasured > 0) throw new Error(`${pageName}: ${unmeasured} items straddle a slice boundary and were not measured`);
+    return { measured, failures };
   } finally {
     await example.close();
   }
