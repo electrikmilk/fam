@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "node tools/bundle.mjs",
-    "test": "npm run build && node --test tests/",
+    "test": "npm run build && node --test --test-concurrency=4 tests/",
     "audit": "npm run build && node tools/contrast-audit.mjs",
     "prepack": "npm run build"
   },
