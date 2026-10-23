@@ -25,3 +25,5 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `wood-frame.jpg` | `wood-frame_se-tsuchiya--EkbLo1LdEM-unsplash.png` | se-tsuchiya | `make_wood_frame.py ... 556` |
 
 The scripts are in `tools/texture-pipeline/` and the source photos are in `textures/`.
+
+`examples/tree.jpg` is the photo on the frames example page, resized from `references/mehrab-sium-2r9AoOb1Ias-unsplash.jpg` by mehrab-sium.

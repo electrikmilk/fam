@@ -158,7 +158,7 @@ Selected rows and menu items use the blue family `--fam-blue-top` to `--fam-blue
 
 ## Templates
 
-Working pages are in `examples/` in the source repository: a felt controls screen (`fam-screen`), a notes app (`fam-notes`, `fam-notes-list`, `fam-pad`, `fam-pad-bar`, `fam-pad-sheet`) and a sign-in card (`fam-signin`). Copy the markup from there.
+Working pages are in `examples/` in the source repository: a felt controls screen (`fam-screen`), a notes app (`fam-notes`, `fam-notes-list`, `fam-pad`, `fam-pad-bar`, `fam-pad-sheet`) and a sign-in card (`fam-signin`). `examples/frames.html` shows the photo frames and a corkboard in a wood frame. Copy the markup from there.
 
 ## Accessibility
 

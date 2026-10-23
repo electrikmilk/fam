@@ -4,7 +4,7 @@ import test from 'node:test';
 import { exampleUrl, openUrl } from './helpers/browser.mjs';
 import { OFFENDERS_SOURCE } from './helpers/layout.mjs';
 
-const PAGES = ['controls', 'notes', 'sign-in', 'components'];
+const PAGES = ['controls', 'notes', 'sign-in', 'components', 'frames'];
 const TEMPLATE_PAGES = ['controls', 'notes', 'sign-in'];
 const LOAD_BUDGET_BYTES = 1.5 * 1024 * 1024;
 
