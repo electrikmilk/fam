@@ -1,6 +1,6 @@
 # fam-ui
 
-Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper and plastic. No JavaScript, no build step.
+Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
 ## Use it
 
@@ -21,7 +21,15 @@ Class names start with `fam-` and custom properties with `--fam-`.
 
 ## Materials
 
-Put a material class on any box: `fam-felt`, `fam-wood`, `fam-metal`, `fam-leather`, `fam-cardstock`, `fam-legal-pad`, `fam-paper`.
+Put a material class on any box:
+
+- `fam-felt`: tintable felt, for screen backgrounds.
+- `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
+- `fam-metal`: brushed metal, for plates, toolbars and panels.
+- `fam-leather`: tan leather, for panels and fields.
+- `fam-paper`: white textured paper, for lists and note panels.
+- `fam-cardstock`: brown cardstock, for title bars. The texture is multiplied onto brown, so white text reads well on it.
+- `fam-legal-pad`: yellow ruled paper with a red double margin. Its rules are 24px apart, so give text a 24px line height to sit on them.
 
 Felt is grayscale and multiplied onto one color, so one variable recolors it:
 
