@@ -169,6 +169,52 @@
       <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-metal fam-leather fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
     </section>
 
+    <section class="scene" id="scene-glass">
+      <div class="window glass-lab">
+        <h2>Frosted glass</h2>
+        <p class="glass-lead">Blur and a dark shade keep text readable on any backdrop.</p>
+        <div class="glass-tiles glass-tiles--single">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid glass-backdrop--dim">
+              <div class="fam-glass glass-pane"><input class="fam-glass-input" placeholder="Search" aria-label="Search the frosted sample"></div>
+            </div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+        </div>
+
+        <h2>Specular ambient glow <span>every browser</span></h2>
+        <p class="glass-lead">The glass picks up the colors next to its rim and bleeds them inward. <code>--fam-glow-depth</code> sets how far.</p>
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop"><div class="fam-glass glass-pane" style="--fam-glow-depth: 0px"></div></div>
+            <figcaption>--fam-glow-depth: 0px</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop"><div class="fam-glass glass-pane"></div></div>
+            <figcaption>--fam-glow-depth: 18px</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop"><div class="fam-glass glass-pane" style="--fam-glow-depth: 40px"></div></div>
+            <figcaption>--fam-glow-depth: 40px</figcaption>
+          </figure>
+        </div>
+
+        <h2>Refraction <span>Chromium only</span></h2>
+        <p class="glass-lead">Clear glass bends the grid behind its rim. Other browsers show the same pane without the bending.</p>
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass glass-pane"></div></div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass fam-glass--refract glass-pane"></div></div>
+            <figcaption>fam-glass--refract</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="cap"><b>glass</b> <code class="copyable">fam-glass fam-glass-input fam-glass--refract</code></p>
+    </section>
+
     <section class="glass-band" id="glass" aria-labelledby="glass-heading">
       <h2 class="visually-hidden" id="glass-heading">Try the glass</h2>
       <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>

@@ -141,10 +141,83 @@ body {
   .panels { grid-template-columns: 1fr; }
 }
 
-.build-panel {
+.build-panel,
+.glass-lab {
   padding: 22px 24px 26px;
   background: #24272d;
 }
+
+.glass-lab h2 {
+  margin: 26px 0 6px;
+  font: 600 12px ui-monospace, Menlo, monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.glass-lab h2:first-child { margin-top: 0; }
+
+.glass-lab h2 span {
+  margin-left: 8px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #b8bcc6;
+}
+
+.glass-lead {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #b8bcc6;
+}
+
+.glass-lead code { font: 12px ui-monospace, Menlo, monospace; color: #fff; }
+
+.glass-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.glass-tile { margin: 0; }
+
+.glass-tile figcaption {
+  margin-top: 8px;
+  text-align: center;
+  font: 11px ui-monospace, Menlo, monospace;
+  color: #b8bcc6;
+}
+
+/* Saturated hues all around the pane give the glow something to pick up; the grid variant gives refraction straight lines to bend */
+.glass-backdrop {
+  display: grid;
+  place-items: center;
+  height: 170px;
+  border-radius: 10px;
+  background: conic-gradient(#ff2d6f, #ffb400, #3ddc84, #1fb6ff, #8a3dff, #ff2d6f);
+}
+
+.glass-backdrop--grid {
+  background:
+    repeating-linear-gradient(90deg, var(--glass-grid-line, rgba(255, 255, 255, .85)) 0 2px, transparent 2px 20px),
+    repeating-linear-gradient(0deg, var(--glass-grid-line, rgba(255, 255, 255, .85)) 0 2px, transparent 2px 20px),
+    var(--glass-grid-base, #1b3a6b);
+}
+
+/* The frosted sample carries text, so its backdrop stays dark enough for the placeholder to keep 4.5:1 */
+.glass-backdrop--dim {
+  --glass-grid-line: rgba(255, 255, 255, .14);
+  --glass-grid-base: #12233f;
+}
+
+.glass-pane {
+  --fam-r: 24px;
+  width: 64%;
+  height: 84px;
+}
+
+.glass-pane .fam-glass-input { width: 100%; box-sizing: border-box; }
 
 .build-panel h2 {
   margin: 22px 0 10px;
