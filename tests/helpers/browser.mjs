@@ -35,7 +35,7 @@ export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../exam
 
 export async function openUrl(
   url,
-  { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference', forcedColors = 'none', javaScriptEnabled = true } = {},
+  { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference', forcedColors = 'none', javaScriptEnabled = true, initScript } = {},
 ) {
   const browser = await sharedBrowserForThisFile();
   const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion, forcedColors, javaScriptEnabled });
@@ -51,6 +51,8 @@ export async function openUrl(
   page.on('console', (message) => {
     if (message.type() === 'error') issues.push(`console error: ${message.text()}`);
   });
+
+  if (initScript) await page.addInitScript(initScript);
 
   try {
     await page.goto(url, { waitUntil: 'load' });

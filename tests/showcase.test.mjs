@@ -207,3 +207,49 @@ test('build your own shows gloss, rounding and shadow utilities', async () => {
     await page.close();
   }
 });
+
+// A page stub for navigator.clipboard that records what the page asks to copy
+const RECORDING_CLIPBOARD = `window.__copied = []; Object.defineProperty(navigator, 'clipboard', { value: { writeText: async (text) => { window.__copied.push(text); } } });`;
+const REJECTING_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { value: { writeText: async () => { throw new Error('denied'); } } });`;
+const NO_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { value: undefined });`;
+
+test('every caption gets a copy button that copies its classes', async () => {
+  const page = await openUrl(showcaseUrl, { initScript: RECORDING_CLIPBOARD });
+  try {
+    const counts = await page.page.evaluate(() => ({ codes: document.querySelectorAll('code.copyable').length, buttons: document.querySelectorAll('code.copyable + button.copy').length }));
+    assert.ok(counts.codes >= 7, 'the captions are missing');
+    assert.equal(counts.buttons, counts.codes);
+
+    const first = page.page.locator('#scene-wood-felt .copy');
+    assert.ok((await first.getAttribute('aria-label')).includes('wood + felt'), 'the button does not say what it copies');
+    await first.click();
+    const expected = await page.page.textContent('#scene-wood-felt code');
+    assert.deepEqual(await page.page.evaluate(() => window.__copied), [expected]);
+    assert.equal(await first.textContent(), 'Copied');
+    assert.ok((await page.page.textContent('[role="status"]')).includes('Copied'));
+    await page.page.waitForFunction(() => document.querySelector('#scene-wood-felt .copy').textContent === 'Copy', null, { timeout: 4000 });
+  } finally {
+    await page.close();
+  }
+});
+
+test('a refused copy says so', async () => {
+  const page = await openUrl(showcaseUrl, { initScript: REJECTING_CLIPBOARD });
+  try {
+    const button = page.page.locator('#scene-wood-felt .copy');
+    await button.click();
+    await page.page.waitForFunction(() => document.querySelector('#scene-wood-felt .copy').textContent === 'Copy failed');
+    assert.ok((await page.page.textContent('[role="status"]')).includes('Copy failed'));
+  } finally {
+    await page.close();
+  }
+});
+
+test('no copy buttons appear without the clipboard API', async () => {
+  const page = await openUrl(showcaseUrl, { initScript: NO_CLIPBOARD });
+  try {
+    assert.equal(await page.page.locator('.copy').count(), 0);
+  } finally {
+    await page.close();
+  }
+});
