@@ -2,7 +2,7 @@
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
-Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials.
+Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials, as it can be used as a full CSS framework, or just to add a little skeuomorphism as a backdrop to a modern flat UI.
 
 Skeuomorphism exists to make an interface feel familiar. A recessed field invites typing, a raised button invites a press and a switch looks like a switch. Fam builds those cues from real photographs of materials, processed into seamless tiles and credited in [CREDITS.md](CREDITS.md), not from gradients that imitate them.
 
