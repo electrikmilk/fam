@@ -77,3 +77,66 @@ test('showcase has no horizontal scroll at phone width', async () => {
     await page.close();
   }
 });
+
+const SCENES = ['scene-wood-felt', 'scene-legal-leather', 'scene-leather-paper', 'scene-metal', 'scene-frames', 'scene-engraved'];
+
+test('showcase has the paired scenes in order', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
+    assert.deepEqual(ids.slice(0, SCENES.length), SCENES);
+  } finally {
+    await page.close();
+  }
+});
+
+// The page may only claim what the package does: every class a caption names must be defined in the real stylesheet
+test('every class in a caption exists in the kit', async () => {
+  const [css, page] = await Promise.all([readFile(new URL('../dist/fam-ui.css', import.meta.url), 'utf8'), openUrl(showcaseUrl)]);
+  try {
+    const names = await page.page.$$eval('.cap code', (codes) => [...new Set(codes.flatMap((code) => code.textContent.match(/fam-[a-z0-9-]+/g) ?? []))]);
+    assert.ok(names.length >= 25, `only ${names.length} classes are named in captions`);
+    for (const name of names) assert.ok(css.includes(`.${name}`), `a caption names .${name} but the stylesheet does not define it`);
+  } finally {
+    await page.close();
+  }
+});
+
+test('captions match the markup of their scene', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    assert.ok((await page.page.$$('section.scene')).length >= SCENES.length, 'the scenes are missing');
+    const missing = await page.page.evaluate(() =>
+      [...document.querySelectorAll('section.scene')].flatMap((scene) =>
+        (scene.querySelector('.cap code')?.textContent.match(/fam-[a-z0-9-]+/g) ?? [])
+          .filter((name) => !scene.querySelector(`:not(.cap) .${name}, .window.${name}`))
+          .map((name) => `${scene.id}: ${name}`),
+      ),
+    );
+    assert.deepEqual(missing, []);
+  } finally {
+    await page.close();
+  }
+});
+
+test('scenes are framed windows with real content and work with JavaScript off', async () => {
+  const page = await openUrl(showcaseUrl, { javaScriptEnabled: false });
+  try {
+    const scenes = await page.page.$$eval('section.scene', (sections) =>
+      sections.map((section) => ({
+        id: section.id,
+        height: section.getBoundingClientRect().height,
+        captionVisible: section.querySelector('.cap code').getBoundingClientRect().height > 0,
+        windows: [...section.querySelectorAll('.window')].map((window) => getComputedStyle(window).boxShadow !== 'none'),
+      })),
+    );
+    assert.ok(scenes.length >= SCENES.length, 'the scenes are missing');
+    for (const scene of scenes) {
+      assert.ok(scene.height > 100, `${scene.id} is empty`);
+      assert.ok(scene.captionVisible, `${scene.id} has no visible caption`);
+      assert.ok(scene.windows.length > 0 && scene.windows.every(Boolean), `${scene.id} has an unframed window`);
+    }
+  } finally {
+    await page.close();
+  }
+});

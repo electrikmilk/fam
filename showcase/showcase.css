@@ -49,3 +49,93 @@ body {
 }
 
 #credits a { color: #a9c2ff; }
+
+.scene {
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 20px 6px;
+}
+
+/* Frames made of the kit's own leather keep their kit shadow and radius; every other window gets the page's frame */
+.window:not(.fam-leather-frame) {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .14), 0 18px 34px -12px rgba(0, 0, 0, .7);
+}
+
+.cap {
+  margin: 12px 4px 0;
+  font: 12px/1.5 ui-monospace, Menlo, monospace;
+  color: #b8bcc6;
+}
+
+.cap b {
+  margin-right: 8px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.cap code { font: inherit; }
+
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: center;
+  padding: 24px 26px;
+}
+
+.controls-row .field { width: 220px; max-width: 100%; }
+.controls-row .bar { flex: 1 1 160px; }
+
+.pad-text {
+  padding: 4px 20px 24px 54px;
+  font: 20px/24px var(--fam-font-hand);
+  color: #2b2216;
+}
+
+.paper-list { padding: 14px; border-radius: 6px; }
+
+.metal-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  padding: 28px;
+}
+
+.frames-window {
+  display: grid;
+  gap: 26px;
+  padding: 28px;
+  background: #1d1f24;
+}
+
+.frames-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.frames-grid figure { margin: 0; }
+.frames-grid img { display: block; width: 100%; }
+.cork-board { height: 150px; }
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.panel {
+  display: grid;
+  place-items: center;
+  height: 110px;
+}
+
+@media (max-width: 600px) {
+  .frames-grid { grid-template-columns: repeat(2, 1fr); }
+  .panels { grid-template-columns: 1fr; }
+}
