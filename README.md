@@ -41,8 +41,9 @@ Put a material class on any box:
 
 - `fam-felt`: tintable felt, for screen backgrounds.
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
-- `fam-metal`: brushed metal, for plates, toolbars and panels.
+- `fam-metal`: brushed metal, for plates, toolbars, navigation bars and panels.
 - `fam-leather`: tan leather, for panels and fields.
+- `fam-leather-bar`: tan leather with a stitched bottom edge, for navigation bars. See [Navigation](#components).
 - `fam-paper`: white textured paper, for lists and note panels.
 - `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
 - `fam-cardstock`: natural light cardstock. Set `--fam-cardstock-tint` to multiply the texture onto a color; `#562a0e` gives brown cardstock for title bars, where white text reads well.
@@ -139,7 +140,7 @@ Plastic buttons and the knob:
 
 Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 
-Navigation (use with `fam-wood`; mark the current page with `aria-current="page"`):
+Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
 
 ```html
 <nav class="fam-nav fam-wood" aria-label="Main">
@@ -147,6 +148,13 @@ Navigation (use with `fam-wood`; mark the current page with `aria-current="page"
   <a class="fam-nav-item" href="/" aria-current="page">Home</a>
   <a class="fam-nav-item" href="/about">About</a>
 </nav>
+```
+
+`fam-leather-bar` is the leather of the frames with a row of stitches along the bottom edge. Add `fam-leather-bar--black` for black leather, which switches the text to light.
+
+```html
+<nav class="fam-nav fam-leather-bar" aria-label="Main">...</nav>
+<nav class="fam-nav fam-leather-bar fam-leather-bar--black" aria-label="Main">...</nav>
 ```
 
 Recessed fields, search pill, leather button, list rows:
