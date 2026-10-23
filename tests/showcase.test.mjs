@@ -94,7 +94,7 @@ test('showcase has the paired scenes in order', async () => {
 test('every class in a caption exists in the kit', async () => {
   const [css, page] = await Promise.all([readFile(new URL('../dist/fam-ui.css', import.meta.url), 'utf8'), openUrl(showcaseUrl)]);
   try {
-    const names = await page.page.$$eval('.cap code', (codes) => [...new Set(codes.flatMap((code) => code.textContent.match(/fam-[a-z0-9-]+/g) ?? []))]);
+    const names = await page.page.$$eval('.cap code', (codes) => [...new Set(codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []))]);
     assert.ok(names.length >= 25, `only ${names.length} classes are named in captions`);
     for (const name of names) assert.ok(css.includes(`.${name}`), `a caption names .${name} but the stylesheet does not define it`);
   } finally {
@@ -108,7 +108,7 @@ test('captions match the markup of their scene', async () => {
     assert.ok((await page.page.$$('section.scene')).length >= SCENES.length, 'the scenes are missing');
     const missing = await page.page.evaluate(() =>
       [...document.querySelectorAll('section.scene')].flatMap((scene) =>
-        (scene.querySelector('.cap code')?.textContent.match(/fam-[a-z0-9-]+/g) ?? [])
+        (scene.querySelector('.cap code')?.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? [])
           .filter((name) => !scene.querySelector(`:not(.cap) .${name}, .window.${name}`))
           .map((name) => `${scene.id}: ${name}`),
       ),

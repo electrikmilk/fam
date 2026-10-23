@@ -253,6 +253,11 @@ body {
   .swatches { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* On a phone the tray is two rows tall, so the lens starts higher to stay clear of it */
+@media (max-width: 600px) {
+  .glass-band .fam-glass { top: 40px; }
+}
+
 .copy {
   margin-left: 10px;
   padding: 2px 10px;
@@ -281,4 +286,92 @@ body {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* The glass band runs edge to edge on the ribbon photo, which is dark with a few bright colors, so the lens shows up well */
+.glass-band {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  min-height: 620px;
+  padding: 0 16px 24px;
+  margin-top: 56px;
+  overflow: hidden;
+  background: #0d1116 url(images/ribbon.jpg) 50% 45% / cover;
+  /* The lens replaces the system cursor over the picture; the controls below get it back */
+  cursor: none;
+  /* Horizontal drags move the lens, vertical ones still scroll the page */
+  touch-action: pan-y;
+}
+
+.glass-band .fam-glass {
+  position: absolute;
+  left: calc(50% - 90px);
+  top: 90px;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+}
+
+/* The tray and the notes sit in the band's flow, at its bottom, so they stack instead of overlapping when the tray wraps on a phone */
+.tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 34px;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 18px 26px;
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -3px 8px rgba(0, 0, 0, .35), 0 0 0 1px rgba(0, 0, 0, .55), 0 14px 30px -10px rgba(0, 0, 0, .7);
+  cursor: default;
+}
+
+.knobwrap {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  align-content: start;
+}
+
+.glass-band .fam-knob {
+  cursor: grab;
+  touch-action: none;
+}
+
+/* Knobs are controls here, so they get the kit's two-tone focus ring (the kit's knob is only a picture) */
+.glass-band .fam-knob:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), inset 0 -3px 6px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .8), 0 5px 9px rgba(0, 0, 0, .55), 0 0 0 1px rgba(0, 0, 0, .6);
+}
+
+.glass-notes {
+  text-align: center;
+  cursor: default;
+}
+
+.glass-notes .note {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .65);
+  font-size: 13px;
+  color: #e9e9ec;
+}
+
+.glass-notes .cap {
+  display: inline-block;
+  margin: 0;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, .65);
+  max-width: 100%;
+  word-break: break-word;
 }

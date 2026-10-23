@@ -139,6 +139,33 @@
       </div>
       <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-metal fam-leather fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
     </section>
+
+    <section class="glass-band" id="glass" aria-labelledby="glass-heading">
+      <h2 class="visually-hidden" id="glass-heading">Try the glass</h2>
+      <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>
+      <div class="tray fam-metal">
+        <div class="knobwrap">
+          <div class="fam-knob" id="knob-blur" role="slider" tabindex="0" aria-label="Blur" aria-valuemin="0" aria-valuemax="30" aria-valuenow="1" aria-valuetext="1px"></div>
+          <span class="fam-engraved-metal">Blur</span>
+        </div>
+        <div class="knobwrap">
+          <div class="fam-knob" id="knob-glow" role="slider" tabindex="0" aria-label="Glow" aria-valuemin="0" aria-valuemax="40" aria-valuenow="18" aria-valuetext="18px"></div>
+          <span class="fam-engraved-metal">Glow</span>
+        </div>
+        <div class="knobwrap">
+          <div class="fam-knob" id="knob-radius" role="slider" tabindex="0" aria-label="Radius" aria-valuemin="0" aria-valuemax="90" aria-valuenow="90" aria-valuetext="90px"></div>
+          <span class="fam-engraved-metal">Radius</span>
+        </div>
+        <div class="knobwrap">
+          <label class="fam-switch"><input type="checkbox" role="switch" id="refract-switch" aria-label="Refract" checked><span class="fam-switch-knob"></span></label>
+          <span class="fam-engraved-metal">Refract</span>
+        </div>
+      </div>
+      <div class="glass-notes">
+        <p class="note">Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.</p>
+        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"&gt;&lt;/div&gt;</code></p>
+      </div>
+    </section>
   </main>
 
   <footer id="credits">
@@ -147,5 +174,8 @@
   </footer>
 </div>
 <script src="copy.js"></script>
+<script src="knob.js"></script>
+<script src="lens.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
