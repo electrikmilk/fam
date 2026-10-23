@@ -64,6 +64,20 @@
   box-shadow: 0 26px 44px -16px rgba(0, 0, 0, .7);
 }
 
+/* A bar of the frame's leather with its stitched edge along the bottom. The 321x50 edge strip is drawn at half size so it stays sharp on 2x screens,
+   which puts the stitch row about 8.5px above the bottom edge. */
+.fam-leather-bar {
+  background:
+    var(--fam-tex-leather-bar-edge-tan) 0 100% / auto 25px repeat-x,
+    var(--fam-tex-leather-fill-tan-tile) 0 0 / 168px 51.5px repeat;
+}
+
+.fam-leather-bar--black {
+  background:
+    var(--fam-tex-leather-bar-edge-black) 0 100% / auto 25px repeat-x,
+    var(--fam-tex-leather-fill-black-tile) 0 0 / 168px 51.5px repeat;
+}
+
 /* 9-slice wood frame: 500px image, slices 51 51 54 53 device px, drawn at half size so a 26px border stays sharp on 2x screens.
    The ::after overlay sits over the content, so it can put the inset shadow where the content meets the frame and, for --glossy, a sheen over the image. */
 .fam-wood-frame {

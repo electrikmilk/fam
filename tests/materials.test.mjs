@@ -71,6 +71,11 @@ test('materials load their textures', async () => {
     assert.ok(frameSource.includes('leather-frame-tan-soft.png'), frameSource);
     const blackSource = await kit.page.evaluate(() => getComputedStyle(document.getElementById('frame-black')).borderImageSource);
     assert.ok(blackSource.includes('leather-frame-black-soft.png'), blackSource);
+    const barImages = await kit.page.evaluate(() =>
+      ['bar-tan', 'bar-black'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
+    );
+    assert.ok(barImages[0].includes('leather-bar-edge-tan.png') && barImages[0].includes('leather-fill-tan-tile.jpg'), barImages[0]);
+    assert.ok(barImages[1].includes('leather-bar-edge-black.png') && barImages[1].includes('leather-fill-black-tile.jpg'), barImages[1]);
   } finally {
     await kit.close();
   }
