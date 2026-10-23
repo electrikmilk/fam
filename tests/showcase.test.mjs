@@ -78,7 +78,7 @@ test('showcase has no horizontal scroll at phone width', async () => {
   }
 });
 
-const SCENES = ['scene-wood-felt', 'scene-legal-leather', 'scene-leather-paper', 'scene-metal', 'scene-frames', 'scene-engraved'];
+const SCENES = ['scene-wood-felt', 'scene-navs', 'scene-legal-leather', 'scene-leather-paper', 'scene-metal', 'scene-frames', 'scene-engraved'];
 
 test('showcase has the paired scenes in order', async () => {
   const page = await openUrl(showcaseUrl);
