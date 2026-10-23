@@ -3,7 +3,7 @@ import { describe, test } from 'node:test';
 import { runAudit } from '../tools/contrast-audit.mjs';
 
 // Fewest text, placeholder and icon items each page should yield, so an audit that measures nothing cannot pass
-const MINIMUM_MEASURED = { controls: 20, notes: 20, 'sign-in': 6, components: 15 };
+const MINIMUM_MEASURED = { controls: 20, notes: 20, 'sign-in': 6, components: 15, showcase: 60 };
 const WIDTHS = [1440, 375];
 
 // Each audit has its own browser context and temp directory, so they can run side by side
