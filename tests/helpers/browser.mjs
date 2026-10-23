@@ -19,10 +19,10 @@ export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../exam
 
 export async function openUrl(
   url,
-  { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference' } = {},
+  { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference', forcedColors = 'none' } = {},
 ) {
   const browser = await launchEngine();
-  const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion });
+  const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion, forcedColors });
   const page = await context.newPage();
 
   const issues = [];

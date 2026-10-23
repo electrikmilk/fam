@@ -501,3 +501,41 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-list-row[aria-current="true"]:focus-visible,
 .fam-list-row[aria-selected="true"]:focus-visible { outline-color: #fff; }
+
+/* ---------- Forced colors (Windows high contrast) ----------
+   The mode replaces authored colors and drops box-shadows and gradients, so state and focus are carried by system colors,
+   borders, outlines and underlines instead. A transparent outline is drawn in a system color in this mode. */
+@media (forced-colors: active) {
+  .fam-progress { border: 1px solid CanvasText; }
+
+  .fam-progress-fill {
+    background: Highlight;
+    box-shadow: none;
+  }
+
+  .fam-menu > [aria-selected="true"],
+  .fam-list-row[aria-current="true"],
+  .fam-list-row[aria-selected="true"] {
+    background: Highlight;
+    color: HighlightText;
+    text-shadow: none;
+  }
+
+  .fam-list-row[aria-current="true"] span,
+  .fam-list-row[aria-selected="true"] span { color: HighlightText; }
+
+  .fam-nav-item[aria-current="page"] { text-decoration: underline; }
+
+  .fam-switch { border: 1px solid CanvasText; }
+  .fam-switch:has(input:checked) { background: Highlight; }
+
+  .fam-recessed,
+  .fam-search { border: 1px solid CanvasText; }
+
+  .fam-glass:has(.fam-glass-input:focus-visible),
+  .fam-recessed:focus-within,
+  .fam-search:focus-within {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+}
