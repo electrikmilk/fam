@@ -183,7 +183,7 @@ body {
   color: #b8bcc6;
 }
 
-/* Saturated hues all around the pane give the glow something to pick up; the grid variant gives refraction straight lines to bend */
+/* Saturated hues all around the pane give the glow something to pick up; the plate gives refraction straight lines to bend */
 .glass-backdrop {
   display: grid;
   place-items: center;
@@ -192,23 +192,26 @@ body {
   background: conic-gradient(#ff2d6f, #ffb400, #3ddc84, #1fb6ff, #8a3dff, #ff2d6f);
 }
 
-.glass-backdrop--grid {
+/* A pale blue plate that darkens toward one corner, cut into cells by hairlines. The long straight lines are what the rim bends. */
+.glass-backdrop--plate {
+  --glass-cell: 60px;
+  height: 240px;
   background:
-    repeating-linear-gradient(90deg, var(--glass-grid-line, rgba(255, 255, 255, .85)) 0 2px, transparent 2px 20px),
-    repeating-linear-gradient(0deg, var(--glass-grid-line, rgba(255, 255, 255, .85)) 0 2px, transparent 2px 20px),
-    var(--glass-grid-base, #1b3a6b);
-}
-
-/* The frosted sample carries text, so its backdrop stays dark enough for the placeholder to keep 4.5:1 */
-.glass-backdrop--dim {
-  --glass-grid-line: rgba(255, 255, 255, .14);
-  --glass-grid-base: #12233f;
+    repeating-linear-gradient(90deg, rgba(22, 34, 64, .55) 0 1px, transparent 1px var(--glass-cell)) calc(var(--glass-cell) / 2) 0,
+    repeating-linear-gradient(0deg, rgba(22, 34, 64, .55) 0 1px, transparent 1px var(--glass-cell)) 0 calc(var(--glass-cell) / 2),
+    linear-gradient(135deg, #eef3fb 0%, #d0dbef 38%, #94a9cc 72%, #3f5178 100%);
 }
 
 .glass-pane {
   --fam-r: 24px;
   width: 64%;
   height: 84px;
+}
+
+.glass-pane--pill {
+  --fam-r: initial;
+  width: 80%;
+  height: 100px;
 }
 
 .glass-pane .fam-glass-input { width: 100%; box-sizing: border-box; }

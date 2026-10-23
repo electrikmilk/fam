@@ -44,18 +44,18 @@
     <section class="scene" id="scene-glass">
       <div class="window glass-lab">
         <h2>Frosted glass</h2>
-        <p class="glass-lead">Blur and a dark shade keep text readable on any backdrop.</p>
+        <p class="glass-lead">A light pane with a little blur that also bends the lines behind its rim. It has no shade, so the dark text of <code>fam-glass--light</code> is what keeps it readable on a pale backdrop.</p>
         <div class="glass-tiles glass-tiles--single">
           <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--grid glass-backdrop--dim">
-              <div class="fam-glass glass-pane"><input class="fam-glass-input" placeholder="Search" aria-label="Search the frosted sample"></div>
+            <div class="glass-backdrop glass-backdrop--plate">
+              <div class="fam-glass fam-glass--refract fam-glass--light glass-pane" style="--fam-refract-blur: 3px"><input class="fam-glass-input" placeholder="Search" aria-label="Search the frosted sample"></div>
             </div>
-            <figcaption>fam-glass</figcaption>
+            <figcaption>fam-glass--refract fam-glass--light</figcaption>
           </figure>
         </div>
         <div class="code-block" role="group" aria-label="The frosted glass markup" data-label="the frosted glass markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-glass"&gt;
+        <pre><code>&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-refract-blur: 3px"&gt;
   &lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;
 &lt;/div&gt;</code></pre>
       </div>
@@ -85,11 +85,11 @@
         <p class="glass-lead">Clear glass bends the grid behind its rim. Other browsers show the same pane without the bending.</p>
         <div class="glass-tiles">
           <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass glass-pane"></div></div>
+            <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass glass-pane glass-pane--pill"></div></div>
             <figcaption>fam-glass</figcaption>
           </figure>
           <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass fam-glass--refract glass-pane"></div></div>
+            <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass fam-glass--refract glass-pane glass-pane--pill"></div></div>
             <figcaption>fam-glass--refract</figcaption>
           </figure>
         </div>
