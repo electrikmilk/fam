@@ -160,6 +160,23 @@ body {
   color: #b8bcc6;
 }
 
+/* A warning badge: amber highlight with dark text, so the browser limit is not read as just another label */
+.glass-lab h2 span.glass-warning {
+  display: inline-block;
+  padding: 2px 12px 2px 10px;
+  border-radius: 999px;
+  background: #ffd23f;
+  color: #2e2200;
+  font-size: 14px;
+  font-weight: 700;
+  vertical-align: 3px;
+}
+
+.glass-warning::before {
+  content: '\26A0\FE0E' / '';
+  margin-right: 6px;
+}
+
 .glass-lead {
   margin: 0 0 16px;
   font: 400 17px/1.5 var(--site-font);
@@ -225,13 +242,44 @@ body {
 }
 
 /* The radius is half the height, so the glow's corner masks wrap the end caps. An unset radius gives straight glow bands. */
+/* Neutral and mid-dark, so the rim picks up no color of its own and white text on dark or blue glass and dark text on light glass all stay readable */
+.glass-backdrop--dusk {
+  background: linear-gradient(135deg, #43464e, #1c1e23);
+}
+
+.glass-pane--field {
+  --fam-r: 22px;
+  width: 76%;
+  height: 44px;
+}
+
 .glass-pane--pill {
   --fam-r: 50px;
   width: 80%;
   height: 100px;
 }
 
-.glass-pane .fam-glass-input { width: 100%; box-sizing: border-box; }
+.glass-pane .fam-glass-input { width: 100%; height: 100%; box-sizing: border-box; }
+
+/* Two pieces side by side on the plate: a rounded one and a circular one, the circle's radius being half its side */
+.glass-backdrop--pair {
+  display: flex;
+  justify-content: center;
+  gap: 8%;
+}
+
+.glass-piece--rounded {
+  --fam-r: 24px;
+  flex: 0 1 220px;
+  height: 110px;
+}
+
+.glass-piece--circle {
+  --fam-r: 55px;
+  flex: none;
+  width: 110px;
+  height: 110px;
+}
 
 .build-panel h2 {
   margin: 28px 0 12px;

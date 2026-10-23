@@ -4,13 +4,16 @@ import { openUrl, showcasePageUrl } from './helpers/browser.mjs';
 
 const glassUrl = showcasePageUrl('glass');
 
-const DEFAULT_READOUT = '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>';
+const DEFAULT_READOUT = '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"></div>';
 const KNOBS = {
-  blur: { min: 0, max: 30, initial: '1' },
+  blur: { min: 0, max: 30, initial: '3' },
   glow: { min: 0, max: 40, initial: '18' },
   radius: { min: 0, max: 90, initial: '90' },
 };
 
+// The tick sweeps from -135deg at the minimum to 135deg at the maximum
+const angleFor = ({ min, max, initial }) => `${-135 + (270 * (Number(initial) - min)) / (max - min)}deg`;
+const knobAngle = (page, selector) => page.evaluate((target) => document.querySelector(target).style.getPropertyValue('--fam-knob-angle'), selector);
 const attribute = (page, selector, name) => page.locator(selector).getAttribute(name);
 const lensVariable = (page, name) => page.evaluate((property) => document.querySelector('#lens').style.getPropertyValue(property), name);
 const readout = (page) => page.textContent('#readout');
@@ -27,6 +30,9 @@ test('the glass section is complete in the HTML with JavaScript off', async () =
       assert.equal(await attribute(page.page, `#knob-${name}`, 'aria-valuenow'), knob.initial, `${name} default`);
     }
     assert.equal(await readout(page.page), DEFAULT_READOUT);
+    for (const [name, knob] of Object.entries(KNOBS)) {
+      assert.equal(await knobAngle(page.page, `#knob-${name}`), angleFor(knob), `${name} knob is drawn at its value`);
+    }
     assert.ok((await page.page.textContent('#glass')).includes('Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.'));
     assert.equal(await page.page.isChecked('#refract-switch'), true);
   } finally {
@@ -37,6 +43,9 @@ test('the glass section is complete in the HTML with JavaScript off', async () =
 test('knobs are sliders that fit their touch behavior', async () => {
   const page = await openUrl(glassUrl);
   try {
+    for (const [name, knob] of Object.entries(KNOBS)) {
+      assert.equal(await knobAngle(page.page, `#knob-${name}`), angleFor(knob), `${name} knob is drawn at its value before it is touched`);
+    }
     for (const [name, knob] of Object.entries(KNOBS)) {
       const selector = `#knob-${name}`;
       assert.equal(await attribute(page.page, selector, 'role'), 'slider');
@@ -60,7 +69,7 @@ test('the keyboard turns each knob through its range', async () => {
     const cases = [
       ['glow', '--fam-glow-depth', 'ArrowUp', 3, 21, '40'],
       ['radius', '--fam-r', 'ArrowDown', 4, 86, '90'],
-      ['blur', '--fam-refract-blur', 'ArrowRight', 2, 3, '30'],
+      ['blur', '--fam-refract-blur', 'ArrowRight', 2, 5, '30'],
     ];
     for (const [name, variable, key, times, expected, maxValue] of cases) {
       await page.page.focus(`#knob-${name}`);
@@ -125,7 +134,7 @@ test('the switch changes the glass mode and each mode keeps its own blur', async
     assert.equal(await lensVariable(page.page, '--fam-glass-blur'), '20px');
 
     await page.page.locator('.fam-switch:has(#refract-switch)').click();
-    assert.equal(await attribute(page.page, '#knob-blur', 'aria-valuenow'), '1');
+    assert.equal(await attribute(page.page, '#knob-blur', 'aria-valuenow'), '3');
     assert.equal(await readout(page.page), DEFAULT_READOUT);
     assert.equal(await lensVariable(page.page, '--fam-glass-blur'), '');
 

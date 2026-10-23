@@ -57,6 +57,8 @@ window.FamShowcase.createKnob = function (element, onChange) {
     if (element.hasPointerCapture(event.pointerId)) turnTo(valueFromPointer(event));
   });
 
+  render();
+
   return {
     get value() { return value; },
     setValue: function (next) {

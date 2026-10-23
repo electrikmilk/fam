@@ -44,20 +44,49 @@
     <section class="scene" id="scene-glass">
       <div class="window glass-lab">
         <h2>Frosted glass</h2>
-        <p class="glass-lead">A light pane with a little blur that also bends the lines behind its rim. It has no shade, so the dark text of <code>fam-glass--light</code> is what keeps it readable on a pale backdrop.</p>
+        <p class="glass-lead">Two pieces of light glass, one rounded and one circular, each with a little blur and a rim that bends the lines behind it.</p>
         <div class="glass-tiles glass-tiles--single">
           <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--plate">
-              <div class="fam-glass fam-glass--refract fam-glass--light glass-pane" style="--fam-refract-blur: 3px"><input class="fam-glass-input" placeholder="Search" aria-label="Search the frosted sample"></div>
+            <div class="glass-backdrop glass-backdrop--plate glass-backdrop--pair">
+              <div class="fam-glass fam-glass--refract fam-glass--light glass-piece glass-piece--rounded" style="--fam-refract-blur: 3px"></div>
+              <div class="fam-glass fam-glass--refract fam-glass--light glass-piece glass-piece--circle" style="--fam-refract-blur: 3px"></div>
             </div>
             <figcaption>fam-glass--refract fam-glass--light</figcaption>
           </figure>
         </div>
         <div class="code-block" role="group" aria-label="The frosted glass markup" data-label="the frosted glass markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-refract-blur: 3px"&gt;
-  &lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;
-&lt;/div&gt;</code></pre>
+        <pre><code>&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 24px; --fam-refract-blur: 3px; width: 220px; height: 110px"&gt;&lt;/div&gt;
+&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 55px; --fam-refract-blur: 3px; width: 110px; height: 110px"&gt;&lt;/div&gt;</code></pre>
+      </div>
+
+        <h2>Dark, light and blue glass</h2>
+        <p class="glass-lead">Dark is the default. Add <code>fam-glass--light</code> for light glass with dark text, or <code>fam-glass--blue</code> for blue glass with white text, which suits a primary or active control.</p>
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--dusk">
+              <div class="fam-glass glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Dark" aria-label="Dark glass sample"></div>
+            </div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--dusk">
+              <div class="fam-glass fam-glass--light glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Light" aria-label="Light glass sample"></div>
+            </div>
+            <figcaption>fam-glass fam-glass--light</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--dusk">
+              <div class="fam-glass fam-glass--blue glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Blue" aria-label="Blue glass sample"></div>
+            </div>
+            <figcaption>fam-glass fam-glass--blue</figcaption>
+          </figure>
+        </div>
+        <div class="code-block" role="group" aria-label="The glass tint markup" data-label="the glass tint markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Dark" aria-label="Dark"&gt;&lt;/div&gt;
+&lt;div class="fam-glass fam-glass--light"&gt;&lt;input class="fam-glass-input" placeholder="Light" aria-label="Light"&gt;&lt;/div&gt;
+&lt;div class="fam-glass fam-glass--blue"&gt;&lt;input class="fam-glass-input" placeholder="Blue" aria-label="Blue"&gt;&lt;/div&gt;</code></pre>
       </div>
 
         <h2>Specular ambient glow <span>every browser</span></h2>
@@ -81,7 +110,7 @@
         <pre><code>&lt;div class="fam-glass" style="--fam-glow-depth: 40px"&gt;&lt;/div&gt;</code></pre>
       </div>
 
-        <h2>Refraction <span>Chromium only</span></h2>
+        <h2>Refraction <span class="glass-warning">Chromium only</span></h2>
         <p class="glass-lead">Clear glass bends the grid behind its rim. Other browsers show the same pane without the bending.</p>
         <div class="glass-tiles">
           <figure class="glass-tile">
@@ -103,18 +132,18 @@
 
     <section class="glass-band" id="glass" aria-labelledby="glass-heading">
       <h2 class="visually-hidden" id="glass-heading">Try the glass</h2>
-      <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>
+      <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"></div>
       <div class="tray fam-metal">
         <div class="knobwrap">
-          <div class="fam-knob" id="knob-blur" role="slider" tabindex="0" aria-label="Blur" aria-valuemin="0" aria-valuemax="30" aria-valuenow="1" aria-valuetext="1px"></div>
+          <div class="fam-knob" id="knob-blur" role="slider" tabindex="0" aria-label="Blur" aria-valuemin="0" aria-valuemax="30" aria-valuenow="3" aria-valuetext="3px" style="--fam-knob-angle: -108deg"></div>
           <span class="fam-engraved-metal">Blur</span>
         </div>
         <div class="knobwrap">
-          <div class="fam-knob" id="knob-glow" role="slider" tabindex="0" aria-label="Glow" aria-valuemin="0" aria-valuemax="40" aria-valuenow="18" aria-valuetext="18px"></div>
+          <div class="fam-knob" id="knob-glow" role="slider" tabindex="0" aria-label="Glow" aria-valuemin="0" aria-valuemax="40" aria-valuenow="18" aria-valuetext="18px" style="--fam-knob-angle: -13.5deg"></div>
           <span class="fam-engraved-metal">Glow</span>
         </div>
         <div class="knobwrap">
-          <div class="fam-knob" id="knob-radius" role="slider" tabindex="0" aria-label="Radius" aria-valuemin="0" aria-valuemax="90" aria-valuenow="90" aria-valuetext="90px"></div>
+          <div class="fam-knob" id="knob-radius" role="slider" tabindex="0" aria-label="Radius" aria-valuemin="0" aria-valuemax="90" aria-valuenow="90" aria-valuetext="90px" style="--fam-knob-angle: 135deg"></div>
           <span class="fam-engraved-metal">Radius</span>
         </div>
         <div class="knobwrap">
@@ -124,7 +153,7 @@
       </div>
       <div class="glass-notes">
         <p class="note">Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.</p>
-        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"&gt;&lt;/div&gt;</code></p>
+        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"&gt;&lt;/div&gt;</code></p>
       </div>
     </section>
   </main>

@@ -6,7 +6,7 @@
   var band = document.getElementById('glass');
 
   // Frosted and refracting glass have different default blurs, so each mode remembers its own
-  var blur = { refract: 1, frosted: 14 };
+  var blur = { refract: 3, frosted: 14 };
   var radius = 90;
   var glow = 18;
 
