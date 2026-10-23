@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import test from 'node:test';
-import { fixtureUrl, openUrl } from './helpers/browser.mjs';
+import { exampleUrl, fixtureUrl, openUrl } from './helpers/browser.mjs';
 import { statistics } from './helpers/pixels.mjs';
 
 const prototypeUrl = pathToFileURL(
@@ -32,6 +32,23 @@ test('felt tint matches the prototype multiply technique', async () => {
   } finally {
     await prototype.close();
     await kit.close();
+  }
+});
+
+test('cardstock is natural by default and --fam-cardstock-tint multiplies it onto a color', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  const notes = await openUrl(exampleUrl('notes'));
+  try {
+    const natural = statistics(await centerShot(kit.page, '#cardstock'));
+    await kit.page.evaluate(() => document.getElementById('cardstock').style.setProperty('--fam-cardstock-tint', '#562a0e'));
+    const brown = statistics(await centerShot(kit.page, '#cardstock'));
+    const bar = statistics(await centerShot(notes.page, '.fam-pad-bar'));
+    assert.ok(natural.mean.every((channel) => channel > 150), `default cardstock mean is ${natural.mean}`);
+    assert.ok(brown.mean[0] < 90, `tinted cardstock mean is ${brown.mean}`);
+    assert.ok(bar.mean[0] < 90, `the notes title bar lost its brown: ${bar.mean}`);
+  } finally {
+    await kit.close();
+    await notes.close();
   }
 });
 

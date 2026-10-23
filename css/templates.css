@@ -109,8 +109,9 @@
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .6), 0 6px 14px -4px rgba(0, 0, 0, .6);
 }
 
-/* Use with .fam-cardstock: the cardstock is multiplied onto brown */
+/* Use with .fam-cardstock: the cardstock is tinted brown so the white title text keeps its contrast */
 .fam-pad-bar {
+  --fam-cardstock-tint: #562a0e;
   position: relative;
   z-index: 1;
   display: grid;

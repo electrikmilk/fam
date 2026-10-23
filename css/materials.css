@@ -28,8 +28,9 @@
     var(--fam-tex-leather-tile) 0 0 / 360px repeat;
 }
 
+/* The tile is already light cardstock, so white leaves it natural and any other tint multiplies onto it */
 .fam-cardstock {
-  background: var(--fam-tex-cardstock-tile) 0 0 / 256px repeat, #562a0e;
+  background: var(--fam-tex-cardstock-tile) 0 0 / 256px repeat, var(--fam-cardstock-tint, #fff);
   background-blend-mode: multiply;
 }
 

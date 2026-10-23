@@ -29,7 +29,7 @@ Put a material class on any box:
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-paper`: white textured paper, for lists and note panels.
 - `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
-- `fam-cardstock`: brown cardstock, for title bars. The texture is multiplied onto brown, so white text reads well on it.
+- `fam-cardstock`: natural light cardstock. Set `--fam-cardstock-tint` to multiply the texture onto a color; `#562a0e` gives brown cardstock for title bars, where white text reads well.
 - `fam-legal-pad`: yellow ruled paper with a red double margin. Its rules are 24px apart, so give text a 24px line height to sit on them.
 
 Felt is grayscale and multiplied onto one color, so one variable recolors it:
@@ -67,7 +67,7 @@ Add `fam-wood-frame--glossy` for a glass sheen over a photo. Leave it off for a 
 
 ### Print frame
 
-`fam-print-frame` is a print with a margin, a soft drop shadow and a faint edge around the photo. The margin is the material you pair it with: `fam-paper` for a white margin or `fam-cardstock` for a brown one. The margin is 14px; change it with `--fam-print-margin`.
+`fam-print-frame` is a print with a margin, a soft drop shadow and a faint edge around the photo. The margin is the material you pair it with: `fam-paper` for a white margin or `fam-cardstock` for a natural cardstock one (tint it with `--fam-cardstock-tint`). The margin is 14px; change it with `--fam-print-margin`.
 
 ```html
 <figure class="fam-print-frame fam-paper"><img src="photo.jpg" alt="..."></figure>
