@@ -7,7 +7,7 @@ import { OFFENDERS_SOURCE } from './helpers/layout.mjs';
 const IMAGE_BUDGET_BYTES = 300 * 1024;
 const TOTAL_IMAGE_BUDGET_BYTES = 3 * 1024 * 1024;
 
-const PAGE_NAMES = ['index', 'pairings', 'materials', 'glass', 'examples'];
+const PAGE_NAMES = ['index', 'pairings', 'materials', 'controls', 'glass', 'examples'];
 const pairingsUrl = showcasePageUrl('pairings');
 const materialsUrl = showcasePageUrl('materials');
 
@@ -94,7 +94,7 @@ for (const pageName of PAGE_NAMES) {
   });
 }
 
-const SCENES = ['scene-wood-felt', 'scene-navs', 'scene-legal-leather', 'scene-leather-paper', 'scene-metal', 'scene-frames', 'scene-engraved'];
+const SCENES = ['scene-wood-felt', 'scene-legal-leather', 'scene-leather-paper'];
 
 test('showcase has the paired scenes in order', async () => {
   const page = await openUrl(pairingsUrl);
@@ -123,7 +123,7 @@ test('every class in a caption exists in the kit', async () => {
   for (const name of names) assert.ok(css.includes(`.${name}`), `a caption names .${name} but the stylesheet does not define it`);
 });
 
-const SCENE_PAGE_NAMES = ['pairings', 'materials', 'glass'];
+const SCENE_PAGE_NAMES = ['pairings', 'materials', 'controls', 'glass'];
 
 // Runs in the page. A snippet or caption may only name kit classes its demo uses. A scene with a code block must also name every
 // kit class its demo uses, so what a visitor copies is the whole demo.
@@ -178,11 +178,11 @@ for (const pageName of SCENE_PAGE_NAMES) {
   });
 }
 
-test('the materials page holds build your own', async () => {
+test('the materials page holds the textures, then the bars, frames and engraved text', async () => {
   const page = await openUrl(materialsUrl);
   try {
     const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
-    assert.deepEqual(ids, ['scene-build']);
+    assert.deepEqual(ids, ['scene-build', 'scene-navs', 'scene-frames', 'scene-engraved']);
   } finally {
     await page.close();
   }
@@ -259,7 +259,7 @@ test('every code block gets a copy button in its header that copies its markup',
       captions: document.querySelectorAll('code.copyable').length,
       captionButtons: document.querySelectorAll('code.copyable + button.copy').length,
     }));
-    assert.ok(counts.blocks >= 7, 'the code blocks are missing');
+    assert.ok(counts.blocks >= SCENES.length, 'the code blocks are missing');
     assert.equal(counts.headerButtons, counts.blocks);
     assert.equal(counts.captionButtons, counts.captions);
 
@@ -384,5 +384,57 @@ test('the home page pairings show the markup that builds them', async () => {
     assert.equal(await page.page.locator('.pairing-panel .code-block').count(), 5);
   } finally {
     await page.close();
+  }
+});
+
+test('the controls page shows each control alone with its variants', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    const found = await page.page.evaluate(() => {
+      const count = (selector) => document.querySelectorAll(`main ${selector}`).length;
+      return {
+        sections: [...document.querySelectorAll('section.scene')].map((scene) => scene.id),
+        plasticColors: ['red', 'green', 'amber', 'blue', 'purple'].map((color) => count(`.window .fam-plastic--${color}`)),
+        roundButtons: count('.window .fam-plastic--round'),
+        switches: count('.window .fam-switch'),
+        disabledSwitches: count('.window .fam-switch input:disabled'),
+        knobs: count('.window .fam-knob'),
+        fills: ['candy', 'aqua', 'green'].map((fill) => count(`.window .fam-progress-fill--${fill}`)),
+        selects: count('.window select.fam-glass-input'),
+        menus: count('.window .fam-menu'),
+        searches: count('.window .fam-search'),
+        selectedRows: count('.window .fam-list-row[aria-current="true"]'),
+        recessedRows: count('.window .fam-recessed-row'),
+        leatherButtons: count('.window .fam-leather-button'),
+        disabledControls: count('.window :disabled'),
+      };
+    });
+    assert.equal(found.sections.length, 6);
+    assert.ok(found.plasticColors.every((total) => total >= 1), 'a plastic color is missing');
+    assert.ok(found.roundButtons >= 1 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
+    assert.deepEqual(found.fills, [1, 1, 1]);
+    assert.ok(found.selects >= 1 && found.menus >= 1 && found.searches >= 1 && found.selectedRows === 1);
+    assert.ok(found.recessedRows >= 2 && found.leatherButtons >= 2);
+    assert.ok(found.disabledControls >= 4, 'the disabled looks are missing');
+  } finally {
+    await page.close();
+  }
+});
+
+test('the site bar fits a phone screen on every page', async () => {
+  for (const pageName of PAGE_NAMES) {
+    const page = await openUrl(showcasePageUrl(pageName), { viewport: { width: 375, height: 800 } });
+    try {
+      const overflow = await page.page.evaluate(() =>
+        [...document.querySelectorAll('.site-nav a')]
+          .filter((link) => link.getBoundingClientRect().width > 0)
+          .filter((link) => link.getBoundingClientRect().right > window.innerWidth)
+          .map((link) => link.textContent),
+      );
+      assert.deepEqual(overflow, [], `${pageName}: these site bar items run off a 375px screen`);
+      assert.ok(await page.page.evaluate(() => getComputedStyle(document.querySelector('.site-nav-home')).display === 'none'), 'Home should give way to the brand link on a phone');
+    } finally {
+      await page.close();
+    }
   }
 });

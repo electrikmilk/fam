@@ -171,7 +171,7 @@ html { scroll-behavior: smooth; }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   margin-top: 36px;
 }
@@ -424,3 +424,30 @@ html { scroll-behavior: smooth; }
 .code-block code { font: inherit; }
 
 .glass-lab .code-block { margin: 16px 0 0; }
+
+/* Each control sits alone on the surface it suits. The kit's own box rules do the layout; these only set spacing for the demo. */
+.controls-stage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  padding: 28px;
+}
+
+#scene-switch-knob .controls-stage { gap: 28px; }
+
+#scene-progress .controls-stage,
+#scene-glass-fields .controls-stage {
+  display: grid;
+  gap: 18px;
+}
+
+#scene-glass-fields .controls-stage > * { max-width: 320px; }
+#scene-search-list .controls-stage { display: block; padding: 20px; }
+#scene-recessed .controls-stage { display: block; padding: 22px; }
+#scene-recessed .fam-leather-button { margin-top: 14px; margin-right: 12px; }
+
+/* Six items do not fit a phone, and the brand already links home */
+@media (max-width: 480px) {
+  .site-nav-home { display: none; }
+}

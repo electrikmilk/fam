@@ -16,9 +16,10 @@
 <div class="fam">
   <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
     <a class="fam-nav-brand" href="index.html">Fam</a>
-    <a class="fam-nav-item" href="index.html">Home</a>
+    <a class="fam-nav-item site-nav-home" href="index.html">Home</a>
     <a class="fam-nav-item" href="pairings.html" aria-current="page">Pairings</a>
     <a class="fam-nav-item" href="materials.html">Materials</a>
+    <a class="fam-nav-item" href="controls.html">Controls</a>
     <a class="fam-nav-item" href="glass.html">Glass</a>
     <a class="fam-nav-item" href="examples.html">Examples</a>
   </nav>
@@ -29,12 +30,8 @@
       <p class="lead">Each scene combines two or more materials. Under every scene is its markup, with a button that copies it.</p>
     <nav class="jump" aria-label="On this page">
       <a href="#scene-wood-felt">Wood and felt</a>
-      <a href="#scene-navs">Navigation bars</a>
       <a href="#scene-legal-leather">Legal pad and leather</a>
       <a href="#scene-leather-paper">Leather and paper</a>
-      <a href="#scene-metal">Metal and plastic</a>
-      <a href="#scene-frames">Photo frames and cork</a>
-      <a href="#scene-engraved">Engraved text</a>
     </nav>
     </header>
 
@@ -69,47 +66,6 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-navs">
-      <h2 class="scene-title">Navigation bars</h2>
-      <p class="scene-lead">Wood, metal, tan leather and black leather bars share one set of items.</p>
-      <div class="window navs-window">
-        <nav class="fam-nav fam-wood" aria-label="Wood navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-        <nav class="fam-nav fam-metal" aria-label="Metal navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-        <nav class="fam-nav fam-leather-bar" aria-label="Tan leather navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-        <nav class="fam-nav fam-leather-bar fam-leather-bar--black" aria-label="Black leather navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-      </div>
-      <div class="code-block" role="group" aria-label="The navigation bar markup" data-label="the navigation bar markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;nav class="fam-nav fam-wood" aria-label="Wood navigation"&gt;
-  &lt;span class="fam-nav-brand"&gt;fam&lt;/span&gt;
-  &lt;span class="fam-nav-item" aria-current="page"&gt;Home&lt;/span&gt;
-  &lt;span class="fam-nav-item"&gt;Library&lt;/span&gt;
-  &lt;span class="fam-nav-item"&gt;About&lt;/span&gt;
-&lt;/nav&gt;
-&lt;!-- Swap fam-wood for fam-metal, fam-leather-bar or fam-leather-bar fam-leather-bar--black --&gt;</code></pre>
       </div>
     </section>
 
@@ -155,65 +111,6 @@
       </div>
     </section>
 
-    <section class="scene" id="scene-metal">
-      <h2 class="scene-title">Metal and plastic</h2>
-      <p class="scene-lead">Plastic buttons, a knob and a switch on brushed metal.</p>
-      <div class="window fam-metal metal-controls">
-        <button class="fam-plastic fam-plastic--red" type="button">Record</button>
-        <button class="fam-plastic fam-plastic--green" type="button">Play</button>
-        <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
-        <span class="fam-knob" role="img" aria-label="Metal knob"></span>
-        <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Loop" checked><span class="fam-switch-knob"></span></label>
-      </div>
-      <div class="code-block" role="group" aria-label="The metal and plastic markup" data-label="the metal and plastic markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
-  &lt;button class="fam-plastic fam-plastic--red" type="button"&gt;Record&lt;/button&gt;
-  &lt;button class="fam-plastic fam-plastic--green" type="button"&gt;Play&lt;/button&gt;
-  &lt;button class="fam-plastic fam-plastic--amber" type="button"&gt;Pause&lt;/button&gt;
-  &lt;span class="fam-knob" role="img" aria-label="Metal knob"&gt;&lt;/span&gt;
-  &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Loop" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-frames">
-      <h2 class="scene-title">Photo frames and cork</h2>
-      <p class="scene-lead">Four ways to frame a photo, and a corkboard inside a wood frame.</p>
-      <div class="window frames-window">
-        <div class="frames-grid">
-          <figure class="fam-print-frame fam-paper"><img src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
-          <figure class="fam-print-frame fam-cardstock"><img src="images/tree.jpg" alt=""></figure>
-          <figure class="fam-wood-frame"><img src="images/tree.jpg" alt=""></figure>
-          <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="images/tree.jpg" alt=""></figure>
-        </div>
-        <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
-      </div>
-      <div class="code-block" role="group" aria-label="The photo frame and cork markup" data-label="the photo frame and cork markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;figure class="fam-print-frame fam-paper"&gt;&lt;img src="photo.jpg" alt="A lone tree on a hill"&gt;&lt;/figure&gt;
-&lt;figure class="fam-print-frame fam-cardstock"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
-&lt;figure class="fam-wood-frame"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
-&lt;figure class="fam-wood-frame fam-wood-frame--glossy"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
-&lt;div class="fam-wood-frame"&gt;&lt;div class="fam-cork" style="height: 150px"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-engraved">
-      <h2 class="scene-title">Engraved text</h2>
-      <p class="scene-lead">Text pressed into metal, leather and wood.</p>
-      <div class="panels">
-        <div class="window fam-metal panel"><span class="fam-engraved-metal">SETTINGS</span></div>
-        <div class="window fam-leather panel"><span class="fam-engraved-leather">Notebook</span></div>
-        <div class="window fam-wood panel"><span class="fam-engraved-wood">LIBRARY</span></div>
-      </div>
-      <div class="code-block" role="group" aria-label="The engraved text markup" data-label="the engraved text markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;SETTINGS&lt;/span&gt;&lt;/div&gt;
-&lt;div class="fam-leather" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather"&gt;Notebook&lt;/span&gt;&lt;/div&gt;
-&lt;div class="fam-wood" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood"&gt;LIBRARY&lt;/span&gt;&lt;/div&gt;</code></pre>
-      </div>
-    </section>
   </main>
 
   <footer id="credits">

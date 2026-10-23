@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controls - Fam</title>
+  <meta name="description" content="Fam controls shown alone: plastic buttons, the metal switch and knob, progress tubes, glass fields, a search pill, list rows, recessed fields and the leather button.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
+  <link rel="stylesheet" href="../dist/fam-ui.css">
+  <link rel="stylesheet" href="showcase.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="fam">
+  <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
+    <a class="fam-nav-brand" href="index.html">Fam</a>
+    <a class="fam-nav-item site-nav-home" href="index.html">Home</a>
+    <a class="fam-nav-item" href="pairings.html">Pairings</a>
+    <a class="fam-nav-item" href="materials.html">Materials</a>
+    <a class="fam-nav-item" href="controls.html" aria-current="page">Controls</a>
+    <a class="fam-nav-item" href="glass.html">Glass</a>
+    <a class="fam-nav-item" href="examples.html">Examples</a>
+  </nav>
+  <main>
+    <header class="page-head">
+      <p class="eyebrow">Controls</p>
+      <h1>Controls, one at a time</h1>
+      <p class="lead">Each control on its own, with its variants and its disabled look. Under each one is the markup, with a button that copies it.</p>
+    <nav class="jump" aria-label="On this page">
+      <a href="#scene-buttons">Plastic buttons</a>
+      <a href="#scene-switch-knob">Switch and knob</a>
+      <a href="#scene-progress">Progress tubes</a>
+      <a href="#scene-glass-fields">Glass field and dropdown</a>
+      <a href="#scene-search-list">Search pill and list rows</a>
+      <a href="#scene-recessed">Recessed fields and the leather button</a>
+    </nav>
+    </header>
+
+    <section class="scene" id="scene-buttons">
+      <h2 class="scene-title">Plastic buttons</h2>
+      <p class="scene-lead">Raised buttons in five colors, a round one for icons, and the disabled look. They sit best on metal.</p>
+      <div class="window fam-metal controls-stage">
+        <button class="fam-plastic fam-plastic--red" type="button">Record</button>
+        <button class="fam-plastic fam-plastic--green" type="button">Play</button>
+        <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
+        <button class="fam-plastic fam-plastic--blue" type="button">Share</button>
+        <button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button>
+        <button class="fam-plastic fam-plastic--blue" type="button" disabled>Disabled</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The plastic button markup" data-label="the plastic button markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-plastic fam-plastic--red" type="button"&gt;Record&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--green" type="button"&gt;Play&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--amber" type="button"&gt;Pause&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--blue" type="button"&gt;Share&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info"&gt;i&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--blue" type="button" disabled&gt;Disabled&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-switch-knob">
+      <h2 class="scene-title">Switch and knob</h2>
+      <p class="scene-lead">The switch is a checkbox, so it toggles with no JavaScript. The knob is a picture, and --fam-knob-angle turns its tick.</p>
+      <div class="window fam-metal controls-stage">
+        <label class="fam-switch"><input type="checkbox" role="switch" aria-label="On example" checked><span class="fam-switch-knob"></span></label>
+        <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Off example"><span class="fam-switch-knob"></span></label>
+        <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Disabled example" disabled><span class="fam-switch-knob"></span></label>
+        <span class="fam-knob" role="img" aria-label="Volume low" style="--fam-knob-angle: -100deg"></span>
+        <span class="fam-knob" role="img" aria-label="Volume medium"></span>
+        <span class="fam-knob" role="img" aria-label="Volume high" style="--fam-knob-angle: 100deg"></span>
+      </div>
+      <div class="code-block" role="group" aria-label="The switch and knob markup" data-label="the switch and knob markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center; padding: 28px"&gt;
+  &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="On example" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Off example"&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Disabled example" disabled&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
+  &lt;span class="fam-knob" role="img" aria-label="Volume low" style="--fam-knob-angle: -100deg"&gt;&lt;/span&gt;
+  &lt;span class="fam-knob" role="img" aria-label="Volume medium"&gt;&lt;/span&gt;
+  &lt;span class="fam-knob" role="img" aria-label="Volume high" style="--fam-knob-angle: 100deg"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-progress">
+      <h2 class="scene-title">Progress tubes</h2>
+      <p class="scene-lead">Set the value with --fam-value and pick a fill: candy, aqua or green.</p>
+      <div class="window fam-felt controls-stage">
+        <div class="fam-progress" role="progressbar" aria-label="Candy cane progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value: 68%">
+          <div class="fam-progress-fill fam-progress-fill--candy"></div>
+        </div>
+        <div class="fam-progress" role="progressbar" aria-label="Blue progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="52" style="--fam-value: 52%">
+          <div class="fam-progress-fill fam-progress-fill--aqua"></div>
+        </div>
+        <div class="fam-progress" role="progressbar" aria-label="Green progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="84" style="--fam-value: 84%">
+          <div class="fam-progress-fill fam-progress-fill--green"></div>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The progress tube markup" data-label="the progress tube markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt" style="display: grid; gap: 18px; padding: 28px"&gt;
+  &lt;div class="fam-progress" role="progressbar" aria-label="Candy cane progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value: 68%"&gt;
+    &lt;div class="fam-progress-fill fam-progress-fill--candy"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="fam-progress" role="progressbar" aria-label="Blue progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="52" style="--fam-value: 52%"&gt;
+    &lt;div class="fam-progress-fill fam-progress-fill--aqua"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="fam-progress" role="progressbar" aria-label="Green progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="84" style="--fam-value: 84%"&gt;
+    &lt;div class="fam-progress-fill fam-progress-fill--green"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-fields">
+      <h2 class="scene-title">Glass field and dropdown</h2>
+      <p class="scene-lead">A frosted field and a dropdown made from the same field with a select. The open list is a plain styled list for your own menus.</p>
+      <div class="window fam-felt controls-stage">
+        <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+        <div class="fam-glass">
+          <select class="fam-glass-input" aria-label="Wood">
+            <option>Walnut</option>
+            <option>Oak</option>
+            <option>Cherry</option>
+          </select>
+        </div>
+        <ul class="fam-menu">
+          <li>Oak</li>
+          <li aria-selected="true">Walnut</li>
+          <li>Cherry</li>
+        </ul>
+        <div class="fam-glass"><input class="fam-glass-input" placeholder="Disabled" aria-label="Disabled" disabled></div>
+      </div>
+      <div class="code-block" role="group" aria-label="The glass field and dropdown markup" data-label="the glass field and dropdown markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt" style="display: grid; gap: 18px; max-width: 320px; padding: 28px"&gt;
+  &lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;
+  &lt;div class="fam-glass"&gt;
+    &lt;select class="fam-glass-input" aria-label="Wood"&gt;
+      &lt;option&gt;Walnut&lt;/option&gt;
+      &lt;option&gt;Oak&lt;/option&gt;
+      &lt;option&gt;Cherry&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;ul class="fam-menu"&gt;
+    &lt;li&gt;Oak&lt;/li&gt;
+    &lt;li aria-selected="true"&gt;Walnut&lt;/li&gt;
+    &lt;li&gt;Cherry&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Disabled" aria-label="Disabled" disabled&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-search-list">
+      <h2 class="scene-title">Search pill and list rows</h2>
+      <p class="scene-lead">A recessed search pill and a list with a selected row, on paper.</p>
+      <div class="window fam-paper controls-stage">
+        <label class="fam-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+          <input placeholder="Search" aria-label="Search notes">
+        </label>
+        <ul class="fam-list" style="margin-top: 12px" aria-label="Notes">
+          <li><a class="fam-list-row" href="#"><b>Grocery run</b><span>Today</span></a></li>
+          <li><a class="fam-list-row" href="#" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
+          <li><a class="fam-list-row" href="#"><b>Book ideas</b><span>Monday</span></a></li>
+        </ul>
+      </div>
+      <div class="code-block" role="group" aria-label="The search pill and list markup" data-label="the search pill and list markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-paper" style="padding: 20px"&gt;
+  &lt;label class="fam-search"&gt;
+    &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"&gt;&lt;circle cx="10" cy="10" r="6.5"/&gt;&lt;path d="M15 15l6 6"/&gt;&lt;/svg&gt;
+    &lt;input placeholder="Search" aria-label="Search notes"&gt;
+  &lt;/label&gt;
+  &lt;ul class="fam-list" style="margin-top: 12px" aria-label="Notes"&gt;
+    &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Grocery run&lt;/b&gt;&lt;span&gt;Today&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a class="fam-list-row" href="#" aria-current="true"&gt;&lt;b&gt;Picnic plans&lt;/b&gt;&lt;span&gt;Yesterday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Book ideas&lt;/b&gt;&lt;span&gt;Monday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-recessed">
+      <h2 class="scene-title">Recessed fields and the leather button</h2>
+      <p class="scene-lead">Labeled fields cut into leather, and a leather button to submit them.</p>
+      <div class="window fam-leather controls-stage">
+        <div class="fam-recessed">
+          <div class="fam-recessed-row"><label for="name">Name</label><input id="name" placeholder="Required"></div>
+          <div class="fam-recessed-row"><label for="email">Email</label><input id="email" type="email" placeholder="Required"></div>
+        </div>
+        <button class="fam-leather-button" type="button">Save</button>
+        <button class="fam-leather-button" type="button" disabled>Disabled</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The recessed field and leather button markup" data-label="the recessed field and leather button markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-leather" style="padding: 22px"&gt;
+  &lt;div class="fam-recessed"&gt;
+    &lt;div class="fam-recessed-row"&gt;&lt;label for="name"&gt;Name&lt;/label&gt;&lt;input id="name" placeholder="Required"&gt;&lt;/div&gt;
+    &lt;div class="fam-recessed-row"&gt;&lt;label for="email"&gt;Email&lt;/label&gt;&lt;input id="email" type="email" placeholder="Required"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="fam-leather-button" type="button"&gt;Save&lt;/button&gt;
+  &lt;button class="fam-leather-button" type="button" disabled&gt;Disabled&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer id="credits">
+    <p>Photos on Unsplash: the ribbon by boliviainteligente and the tree by mehrab-sium. The textures are processed from Unsplash photographs and credited one by one in <a href="https://github.com/electrikmilk/fam/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+    <p>Fam stands for Fam Adds Materials.</p>
+    <p><a href="https://github.com/electrikmilk/fam">fam-ui on GitHub</a></p>
+  </footer>
+</div>
+<script src="copy.js"></script>
+</body>
+</html>

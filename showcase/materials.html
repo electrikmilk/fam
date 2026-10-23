@@ -16,9 +16,10 @@
 <div class="fam">
   <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
     <a class="fam-nav-brand" href="index.html">Fam</a>
-    <a class="fam-nav-item" href="index.html">Home</a>
+    <a class="fam-nav-item site-nav-home" href="index.html">Home</a>
     <a class="fam-nav-item" href="pairings.html">Pairings</a>
     <a class="fam-nav-item" href="materials.html" aria-current="page">Materials</a>
+    <a class="fam-nav-item" href="controls.html">Controls</a>
     <a class="fam-nav-item" href="glass.html">Glass</a>
     <a class="fam-nav-item" href="examples.html">Examples</a>
   </nav>
@@ -26,7 +27,13 @@
     <header class="page-head">
       <p class="eyebrow">Materials</p>
       <h1>One class for every texture</h1>
-      <p class="lead">Each material is a single class on any box. Felt takes a tint, cardstock takes a tint, and gloss, rounding and shadows are classes too.</p>
+      <p class="lead">Each material is a single class on any box. Felt takes a tint, cardstock takes a tint, and gloss, rounding and shadows are classes too. Below the textures are the navigation bars, photo frames and engraved text made from them.</p>
+    <nav class="jump" aria-label="On this page">
+      <a href="#scene-build">Textures</a>
+      <a href="#scene-navs">Navigation bars</a>
+      <a href="#scene-frames">Photo frames and cork</a>
+      <a href="#scene-engraved">Engraved text</a>
+    </nav>
     </header>
 
     <section class="scene" id="scene-build">
@@ -72,6 +79,85 @@
         </div>
       </div>
       <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-metal fam-leather fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
+    </section>
+
+    <section class="scene" id="scene-navs">
+      <h2 class="scene-title">Navigation bars</h2>
+      <p class="scene-lead">Wood, metal, tan leather and black leather bars share one set of items.</p>
+      <div class="window navs-window">
+        <nav class="fam-nav fam-wood" aria-label="Wood navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-metal" aria-label="Metal navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-leather-bar" aria-label="Tan leather navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-leather-bar fam-leather-bar--black" aria-label="Black leather navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+      </div>
+      <div class="code-block" role="group" aria-label="The navigation bar markup" data-label="the navigation bar markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;nav class="fam-nav fam-wood" aria-label="Wood navigation"&gt;
+  &lt;span class="fam-nav-brand"&gt;fam&lt;/span&gt;
+  &lt;span class="fam-nav-item" aria-current="page"&gt;Home&lt;/span&gt;
+  &lt;span class="fam-nav-item"&gt;Library&lt;/span&gt;
+  &lt;span class="fam-nav-item"&gt;About&lt;/span&gt;
+&lt;/nav&gt;
+&lt;!-- Swap fam-wood for fam-metal, fam-leather-bar or fam-leather-bar fam-leather-bar--black --&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-frames">
+      <h2 class="scene-title">Photo frames and cork</h2>
+      <p class="scene-lead">Four ways to frame a photo, and a corkboard inside a wood frame.</p>
+      <div class="window frames-window">
+        <div class="frames-grid">
+          <figure class="fam-print-frame fam-paper"><img src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
+          <figure class="fam-print-frame fam-cardstock"><img src="images/tree.jpg" alt=""></figure>
+          <figure class="fam-wood-frame"><img src="images/tree.jpg" alt=""></figure>
+          <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="images/tree.jpg" alt=""></figure>
+        </div>
+        <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
+      </div>
+      <div class="code-block" role="group" aria-label="The photo frame and cork markup" data-label="the photo frame and cork markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;figure class="fam-print-frame fam-paper"&gt;&lt;img src="photo.jpg" alt="A lone tree on a hill"&gt;&lt;/figure&gt;
+&lt;figure class="fam-print-frame fam-cardstock"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
+&lt;figure class="fam-wood-frame"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
+&lt;figure class="fam-wood-frame fam-wood-frame--glossy"&gt;&lt;img src="photo.jpg" alt=""&gt;&lt;/figure&gt;
+&lt;div class="fam-wood-frame"&gt;&lt;div class="fam-cork" style="height: 150px"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-engraved">
+      <h2 class="scene-title">Engraved text</h2>
+      <p class="scene-lead">Text pressed into metal, leather and wood.</p>
+      <div class="panels">
+        <div class="window fam-metal panel"><span class="fam-engraved-metal">SETTINGS</span></div>
+        <div class="window fam-leather panel"><span class="fam-engraved-leather">Notebook</span></div>
+        <div class="window fam-wood panel"><span class="fam-engraved-wood">LIBRARY</span></div>
+      </div>
+      <div class="code-block" role="group" aria-label="The engraved text markup" data-label="the engraved text markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;SETTINGS&lt;/span&gt;&lt;/div&gt;
+&lt;div class="fam-leather" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather"&gt;Notebook&lt;/span&gt;&lt;/div&gt;
+&lt;div class="fam-wood" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood"&gt;LIBRARY&lt;/span&gt;&lt;/div&gt;</code></pre>
+      </div>
     </section>
   </main>
 

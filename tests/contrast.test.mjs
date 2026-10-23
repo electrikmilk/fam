@@ -11,6 +11,7 @@ const MINIMUM_MEASURED = {
   showcase: 30,
   'showcase-pairings': 50,
   'showcase-materials': 15,
+  'showcase-controls': 30,
   'showcase-glass': 15,
   'showcase-examples': 10,
 };
