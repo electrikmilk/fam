@@ -7,8 +7,7 @@ import { OFFENDERS_SOURCE } from './helpers/layout.mjs';
 const IMAGE_BUDGET_BYTES = 300 * 1024;
 const TOTAL_IMAGE_BUDGET_BYTES = 3 * 1024 * 1024;
 
-const PAGE_NAMES = ['index', 'pairings', 'materials', 'controls', 'glass', 'examples'];
-const pairingsUrl = showcasePageUrl('pairings');
+const PAGE_NAMES = ['index', 'materials', 'controls', 'glass', 'examples'];
 const materialsUrl = showcasePageUrl('materials');
 
 for (const pageName of PAGE_NAMES) {
@@ -96,16 +95,6 @@ for (const pageName of PAGE_NAMES) {
 
 const SCENES = ['scene-wood-felt', 'scene-legal-leather', 'scene-leather-paper'];
 
-test('showcase has the paired scenes in order', async () => {
-  const page = await openUrl(pairingsUrl);
-  try {
-    const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
-    assert.deepEqual(ids.slice(0, SCENES.length), SCENES);
-  } finally {
-    await page.close();
-  }
-});
-
 // The page may only claim what the package does: every class a caption names must be defined in the real stylesheet
 test('every class in a caption exists in the kit', async () => {
   const css = await readFile(new URL('../dist/fam-ui.css', import.meta.url), 'utf8');
@@ -123,7 +112,7 @@ test('every class in a caption exists in the kit', async () => {
   for (const name of names) assert.ok(css.includes(`.${name}`), `a caption names .${name} but the stylesheet does not define it`);
 });
 
-const SCENE_PAGE_NAMES = ['pairings', 'materials', 'controls', 'glass'];
+const SCENE_PAGE_NAMES = ['materials', 'controls', 'glass'];
 
 // Runs in the page. A snippet or caption may only name kit classes its demo uses. A scene with a code block must also name every
 // kit class its demo uses, so what a visitor copies is the whole demo.
@@ -178,11 +167,11 @@ for (const pageName of SCENE_PAGE_NAMES) {
   });
 }
 
-test('the materials page holds the textures, then the bars, frames and engraved text', async () => {
+test('the materials page holds the textures, then the bars, frames and engraved text, then the paired scenes', async () => {
   const page = await openUrl(materialsUrl);
   try {
     const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
-    assert.deepEqual(ids, ['scene-build', 'scene-navs', 'scene-frames', 'scene-engraved']);
+    assert.deepEqual(ids, ['scene-build', 'scene-navs', 'scene-frames', 'scene-engraved', ...SCENES]);
   } finally {
     await page.close();
   }
@@ -251,7 +240,7 @@ const REJECTING_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { val
 const NO_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { value: undefined });`;
 
 test('every code block gets a copy button in its header that copies its markup', async () => {
-  const page = await openUrl(pairingsUrl, { initScript: RECORDING_CLIPBOARD });
+  const page = await openUrl(materialsUrl, { initScript: RECORDING_CLIPBOARD });
   try {
     const counts = await page.page.evaluate(() => ({
       blocks: document.querySelectorAll('.code-block').length,
@@ -278,7 +267,7 @@ test('every code block gets a copy button in its header that copies its markup',
 });
 
 test('a refused copy says so', async () => {
-  const page = await openUrl(pairingsUrl, { initScript: REJECTING_CLIPBOARD });
+  const page = await openUrl(materialsUrl, { initScript: REJECTING_CLIPBOARD });
   try {
     const button = page.page.locator('#scene-wood-felt .copy');
     await button.click();
@@ -290,7 +279,7 @@ test('a refused copy says so', async () => {
 });
 
 test('no copy buttons appear without the clipboard API', async () => {
-  const page = await openUrl(pairingsUrl, { initScript: NO_CLIPBOARD });
+  const page = await openUrl(materialsUrl, { initScript: NO_CLIPBOARD });
   try {
     assert.equal(await page.page.locator('.copy').count(), 0);
   } finally {

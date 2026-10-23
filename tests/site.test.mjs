@@ -39,7 +39,7 @@ test('the site holds only what the page needs', async () => {
 
 // The site is served under /fam/, so a URL that starts with a slash would point at the wrong place
 test('the page, its stylesheet and its scripts use only relative URLs', async () => {
-  const files = ['index.html', 'pairings.html', 'materials.html', 'controls.html', 'glass.html', 'examples.html', 'showcase.css', 'site.css', 'copy.js', 'knob.js', 'lens.js', 'main.js', 'site.js'];
+  const files = ['index.html', 'materials.html', 'controls.html', 'glass.html', 'examples.html', 'showcase.css', 'site.css', 'copy.js', 'knob.js', 'lens.js', 'main.js', 'site.js'];
   for (const name of files) {
     const text = await repoFile(`showcase/${name}`);
     assert.ok(!/(?:src|href|action)=["']\/(?!\/)/.test(text), `${name} has an attribute URL that starts with a slash`);
@@ -48,8 +48,8 @@ test('the page, its stylesheet and its scripts use only relative URLs', async ()
   }
 });
 
-const SHOWCASE_PAGES = ['index', 'pairings', 'materials', 'controls', 'glass', 'examples'];
-const SITE_NAV_LABELS = ['Home', 'Pairings', 'Materials', 'Controls', 'Glass', 'Examples'];
+const SHOWCASE_PAGES = ['index', 'materials', 'controls', 'glass', 'examples'];
+const SITE_NAV_LABELS = ['Home', 'Materials', 'Controls', 'Glass', 'Examples'];
 
 test('every page carries the same site bar with its own page marked current', async () => {
   for (const [position, name] of SHOWCASE_PAGES.entries()) {

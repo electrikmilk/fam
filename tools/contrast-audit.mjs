@@ -8,7 +8,7 @@ import { promisify } from 'node:util';
 import { closeSharedBrowser, exampleUrl, openUrl, showcasePageUrl } from '../tests/helpers/browser.mjs';
 
 const execFileAsync = promisify(execFile);
-const SHOWCASE_PAGE_FILES = { showcase: 'index', 'showcase-pairings': 'pairings', 'showcase-materials': 'materials', 'showcase-controls': 'controls', 'showcase-glass': 'glass', 'showcase-examples': 'examples' };
+const SHOWCASE_PAGE_FILES = { showcase: 'index', 'showcase-materials': 'materials', 'showcase-controls': 'controls', 'showcase-glass': 'glass', 'showcase-examples': 'examples' };
 const AUDITED_PAGES = ['controls', 'notes', 'sign-in', ...Object.keys(SHOWCASE_PAGE_FILES)];
 
 // The showcase pages are not example pages, so they have their own location

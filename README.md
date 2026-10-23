@@ -25,8 +25,7 @@ Beyond the look:
 A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 
 - Home: a switcher that shows one pairing at a time, with the classes it uses.
-- Pairings: scenes that combine materials: wood and felt, legal pad and leather, leather and paper.
-- Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork and engraved text.
+- Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, legal pad and leather, leather and paper.
 - Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
 - Examples: the pages in `examples/`.
