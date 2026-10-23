@@ -86,10 +86,28 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .08) 42%, transparent 42.5%);
 }
 
-.fam-wood-frame > img {
+.fam-wood-frame > img,
+.fam-print-frame > img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* A print with a margin. The margin is the box's own material, so pair this with fam-paper (white) or fam-cardstock (brown).
+   The ::after overlay draws the faint edge around the photo; it spans the padding box minus the margin. */
+.fam-print-frame {
+  --fam-print-margin: 14px;
+  position: relative;
+  padding: var(--fam-print-margin);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 6px 14px -2px rgba(0, 0, 0, .4), 0 18px 28px -10px rgba(0, 0, 0, .35);
+}
+
+.fam-print-frame::after {
+  content: '';
+  position: absolute;
+  inset: var(--fam-print-margin);
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .3), inset 0 2px 4px rgba(0, 0, 0, .25);
 }
 
 /* ---------- CSS stitched frame: a tintable alternative to the photo frames ---------- */

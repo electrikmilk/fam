@@ -65,6 +65,15 @@ For any other color, use `fam-stitched`: a CSS stitched border whose thread is t
 
 Add `fam-wood-frame--glossy` for a glass sheen over a photo. Leave it off for a page or a board.
 
+### Print frame
+
+`fam-print-frame` is a print with a margin, a soft drop shadow and a faint edge around the photo. The margin is the material you pair it with: `fam-paper` for a white margin or `fam-cardstock` for a brown one. The margin is 14px; change it with `--fam-print-margin`.
+
+```html
+<figure class="fam-print-frame fam-paper"><img src="photo.jpg" alt="..."></figure>
+<figure class="fam-print-frame fam-cardstock"><img src="photo.jpg" alt="..."></figure>
+```
+
 ## Glass
 
 ```html

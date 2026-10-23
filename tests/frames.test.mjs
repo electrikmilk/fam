@@ -37,6 +37,37 @@ test('only the glossy wood frame has a sheen over the image', async () => {
   }
 });
 
+test('print frame takes its margin from the paper or cardstock material and edges the photo', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const styles = await kit.page.evaluate(() =>
+      Object.fromEntries(
+        ['print-paper', 'print-cardstock'].map((id) => {
+          const frame = document.getElementById(id);
+          const overlay = getComputedStyle(frame, '::after');
+          return [id, {
+            padding: getComputedStyle(frame).paddingLeft,
+            texture: getComputedStyle(frame).backgroundImage,
+            overlayInset: overlay.top,
+            overlayShadow: overlay.boxShadow,
+            overlayPointerEvents: overlay.pointerEvents,
+          }];
+        }),
+      ),
+    );
+    assert.ok(styles['print-paper'].texture.includes('paper-tile.jpg'), styles['print-paper'].texture);
+    assert.ok(styles['print-cardstock'].texture.includes('cardstock-tile.jpg'), styles['print-cardstock'].texture);
+    for (const [id, style] of Object.entries(styles)) {
+      assert.equal(style.padding, '14px', id);
+      assert.equal(style.overlayInset, '14px', id);
+      assert.ok(style.overlayShadow.includes('inset'), `${id}: ${style.overlayShadow}`);
+      assert.equal(style.overlayPointerEvents, 'none', id);
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
 test('the wood frame overlay does not block the content inside it', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
