@@ -179,7 +179,7 @@ Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam
 <button class="fam-glass fam-glass-button" type="button">Share</button>
 ```
 
-Button groups put plastic, metal, glossy or leather buttons in one case. Mark the lit button with `aria-pressed="true"` (or `aria-selected="true"` in a tab strip) and set it from your own script; a lit plastic or metal button shows an LED (`--fam-led`), a lit silver glossy button turns aqua. A long group scrolls inside itself.
+Button groups put plastic, metal, glossy or leather buttons in one case. Mark the lit button with `aria-pressed="true"` (or `aria-selected="true"` in a tab strip) and set it from your own script; a lit plastic or metal button shows an LED (`--fam-led`), a lit silver glossy button turns aqua. A long group scrolls inside itself. `fam-button-group--leather` with `fam-leather-button` cells is a pill of the leather navigation bar's leather, with the lit item cut as the same dark pocket.
 
 ```html
 <div class="fam-button-group" role="group" aria-label="Playback mode">

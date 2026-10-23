@@ -207,3 +207,17 @@ test('a long group scrolls inside itself on a phone instead of overflowing', asy
     await kit.close();
   }
 });
+
+test('a leather group is a leather case like the leather navigation, with the lit cell cut as a dark pocket', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.ok((await read(page, '#group-leather', 'backgroundImage')).includes('leather-fill-tan-tile'), 'the case is not leather');
+    assert.equal(await read(page, '#group-leather-plain', 'color'), 'rgb(0, 0, 0)');
+    assert.equal(await read(page, '#group-leather-lit', 'color'), 'rgb(236, 227, 207)');
+    assert.ok((await read(page, '#group-leather-lit', 'backgroundImage')).includes('rgba(30, 14, 3'), 'the lit cell is not the nav pocket');
+    assert.equal(await read(page, '#group-leather-plain', 'backgroundImage'), 'none', 'a plain cell has its own button face');
+  } finally {
+    await kit.close();
+  }
+});

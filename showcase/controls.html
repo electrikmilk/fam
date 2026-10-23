@@ -84,7 +84,7 @@
   &lt;button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <p class="scene-lead">Buttons can share one case. Wrap them in a group, and mark the lit one with aria-pressed="true". A lit square plastic button shows its LED in the dish, and the others show a dot above the label.</p>
+      <p class="scene-lead">Buttons can share one case. Wrap them in a group, and mark the lit one with aria-pressed="true". A lit square plastic button shows its LED in the dish, and the others show a dot above the label. A leather group (fam-button-group--leather) is the leather of the navigation bar, and its lit item is the same dark pocket.</p>
       <div class="window fam-metal controls-stage">
         <div class="fam-button-group" role="group" aria-label="Playback mode">
           <button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"></button>
@@ -114,8 +114,8 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <div class="window fam-leather controls-stage">
-        <div class="fam-button-group" role="group" aria-label="Sort by">
+      <div class="window fam-felt controls-stage">
+        <div class="fam-button-group fam-button-group--leather" role="group" aria-label="Sort by">
           <button class="fam-leather-button" type="button" aria-pressed="false">Name</button>
           <button class="fam-leather-button" type="button" aria-pressed="true">Date</button>
           <button class="fam-leather-button" type="button" aria-pressed="false">Size</button>
@@ -123,8 +123,8 @@
       </div>
       <div class="code-block" role="group" aria-label="The leather button group markup" data-label="the leather button group markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-leather" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
-  &lt;div class="fam-button-group" role="group" aria-label="Sort by"&gt;
+        <pre><code>&lt;div class="fam-felt" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;div class="fam-button-group fam-button-group--leather" role="group" aria-label="Sort by"&gt;
     &lt;button class="fam-leather-button" type="button" aria-pressed="false"&gt;Name&lt;/button&gt;
     &lt;button class="fam-leather-button" type="button" aria-pressed="true"&gt;Date&lt;/button&gt;
     &lt;button class="fam-leather-button" type="button" aria-pressed="false"&gt;Size&lt;/button&gt;
