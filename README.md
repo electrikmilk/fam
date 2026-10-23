@@ -1,6 +1,4 @@
-<p align="center"><img src="docs/header.png" alt="Fam: familiar materials for the web, engraved in stitched tan leather" width="880"></p>
-
-# Fam
+<h1 align="center"><img src="docs/header.png" alt="Fam: familiar materials for the web" width="880"></h1>
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
