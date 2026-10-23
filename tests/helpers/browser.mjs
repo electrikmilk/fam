@@ -1,3 +1,4 @@
+import { after } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { chromium, firefox, webkit } from 'playwright-core';
 
@@ -14,14 +15,22 @@ function launchEngine() {
   throw new Error(`FAM_BROWSER must be chrome, firefox or webkit, got "${ENGINE}"`);
 }
 
-export const fixtureUrl = (name) => pathToFileURL(fileURLToPath(new URL(`fixtures/${name}.html`, testsRoot))).href;
+// One browser per test file: launching Chrome costs about as much as the page checks themselves.
+// Each test still gets its own context, so viewport, motion and color settings stay isolated.
+let sharedBrowser;
+const sharedBrowserForThisFile = () => (sharedBrowser ??= launchEngine());
+after(async () => {
+  if (sharedBrowser) await (await sharedBrowser).close();
+});
+
+export const fixtureUrl =(name) => pathToFileURL(fileURLToPath(new URL(`fixtures/${name}.html`, testsRoot))).href;
 export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../examples/${name}.html`, testsRoot))).href;
 
 export async function openUrl(
   url,
   { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference', forcedColors = 'none' } = {},
 ) {
-  const browser = await launchEngine();
+  const browser = await sharedBrowserForThisFile();
   const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion, forcedColors });
   const page = await context.newPage();
 
@@ -40,7 +49,7 @@ export async function openUrl(
     await page.goto(url, { waitUntil: 'load' });
     await page.waitForLoadState('networkidle');
   } catch (error) {
-    await browser.close();
+    await context.close();
     throw error;
   }
 
@@ -48,6 +57,6 @@ export async function openUrl(
     page,
     issues,
     imageBytes: async () => (await Promise.all(imageBytesPending)).reduce((sum, bytes) => sum + bytes, 0),
-    close: () => browser.close(),
+    close: () => context.close(),
   };
 }
