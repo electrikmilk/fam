@@ -8,6 +8,7 @@
   --fam-glow-depth: 18px;
   --fam-glow-corner: min(var(--fam-r, 0px), 50%);
   --fam-glow-tile: min(calc(var(--fam-glow-corner) * 1000), max(var(--fam-glow-corner), var(--fam-glow-depth)), 50%);
+  --fam-shade-inset: 1px;
   --fam-glass-blur: 14px;
   --fam-refract-blur: 1px;
   --fam-glass-saturate: 125%;
@@ -22,18 +23,23 @@
   box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .55);
 }
 
-/* The dark shade under the highlight is what keeps white text readable on any backdrop, with or without backdrop-filter */
+/* The dark shade under the highlight is what keeps white text readable on any backdrop, with or without backdrop-filter.
+   The transparent border keeps the shade --fam-shade-inset short of the rim: the glow layer samples everything below it, so a shade
+   that reached the rim would darken the colors the rim is meant to pick up. Only the shade layer is clipped to the padding box. */
 .fam-glass::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
+  border: var(--fam-shade-inset) solid transparent;
   border-radius: inherit;
   backdrop-filter: blur(var(--fam-glass-blur)) saturate(var(--fam-glass-saturate)) brightness(110%);
   background:
     linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)),
     linear-gradient(to bottom, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 46%, rgba(255, 255, 255, 0) 54%),
     linear-gradient(rgba(255, 255, 255, .14), rgba(255, 255, 255, .32));
+  background-origin: border-box;
+  background-clip: padding-box, border-box, border-box;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -8px 12px -6px rgba(0, 0, 0, .35);
 }
 
@@ -71,6 +77,7 @@
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, .24) 0%, rgba(255, 255, 255, .05) 46%, rgba(255, 255, 255, 0) 54%),
     linear-gradient(rgba(255, 255, 255, .06), rgba(255, 255, 255, .18));
+  background-clip: border-box;
 }
 
 .fam-shadow-sm { box-shadow: var(--fam-shadow-sm); }
