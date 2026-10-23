@@ -34,7 +34,7 @@ async () => {
     const el = node.parentElement;
     if (!text || !el || ['SCRIPT', 'STYLE', 'TITLE'].includes(el.tagName)) continue;
     // Disabled controls are inactive components, which WCAG 1.4.3 exempts from contrast
-    if (el.closest('header, [aria-hidden="true"], svg, :disabled')) continue;
+    if (el.closest('header, [aria-hidden="true"], svg, :disabled, label:has(input:disabled)')) continue;
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
     const range = document.createRange(); range.selectNodeContents(node);
