@@ -16,6 +16,7 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `cardstock-tile.jpg` | `cardstock_kiwihug-qv05FvdE26k-unsplash.jpg` | kiwihug | `make_tile.py 0.3 512 80` |
 | `legal-tile.jpg` | `lined-paper_heather-green-hKfKmfvPY44-unsplash.jpg` | heather-green | `make_legal_tile.py` |
 | `paper-tile.jpg` | `paper_olga-thelavart-vS3idIiYxX0-unsplash.jpg` | olga-thelavart | `make_tile.py 0.3 512 80` |
+| `cork-tile.jpg` | `corkboard_josephine-barham-KsAo8ouBn8A-unsplash.jpg` | josephine-barham | `make_tile.py 0.3 512 60` |
 | `leather-tile.jpg` | `leather_felipe-santana-xJkTCbtuqAY-unsplash.jpg` | felipe-santana | `make_tile.py 0.55 512 70` |
 | `leather-fill-tan-tile.jpg` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `soft_interior.py`, then `tan_leather.py` |
 | `leather-fill-black-tile.jpg` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `soft_interior.py` |

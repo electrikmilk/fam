@@ -44,6 +44,10 @@
   background: #f7f6f2 var(--fam-tex-paper-tile) 0 0 / 256px repeat;
 }
 
+.fam-cork {
+  background: #b9763c var(--fam-tex-cork-tile) 0 0 / 256px repeat;
+}
+
 /* 9-slice photo frame: 457px image, slice 68 device px, 34px border */
 .fam-leather-frame {
   border: 34px solid transparent;

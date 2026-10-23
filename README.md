@@ -28,6 +28,7 @@ Put a material class on any box:
 - `fam-metal`: brushed metal, for plates, toolbars and panels.
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-paper`: white textured paper, for lists and note panels.
+- `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
 - `fam-cardstock`: brown cardstock, for title bars. The texture is multiplied onto brown, so white text reads well on it.
 - `fam-legal-pad`: yellow ruled paper with a red double margin. Its rules are 24px apart, so give text a 24px line height to sit on them.
 
