@@ -332,6 +332,9 @@ body {
   gap: 14px;
   justify-items: center;
   align-content: start;
+  /* The control row is as tall as a knob, so the shorter switch centers in it and its label lines up with the knob labels */
+  grid-template-rows: 72px auto;
+  align-items: center;
 }
 
 .glass-band .fam-knob {
