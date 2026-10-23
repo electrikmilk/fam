@@ -1,4 +1,4 @@
-# fam-ui
+# Fam
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
