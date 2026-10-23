@@ -28,7 +28,8 @@
     "build": "node tools/bundle.mjs",
     "test": "npm run build && node --test --test-concurrency=4 tests/",
     "audit": "npm run build && node tools/contrast-audit.mjs",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "header": "npm run build && node tools/make-header.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.58.2",
