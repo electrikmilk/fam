@@ -74,7 +74,7 @@ The spec is silent on these. Each has a test in the named task.
   - `loads cleanly`: `issues` is empty; ribbon and tree images are each 300 KB or less; total image bytes 3 MB or less (my budget: the page uses every texture).
   - `opening screen`: `#hero h1` text is `Fam`; the tagline text is `Familiar materials for the web`; both computed `fontFamily` start with `Georgia`; the hero element has a computed `borderImageSource` containing `leather-frame-tan-soft.png`.
   - `credits`: `#credits` text contains `boliviainteligente` and `mehrab-sium` and has a link whose `href` ends with `CREDITS.md`.
-  - `no em dashes`: the page's `textContent` contains no `—`.
+  - `no em dashes`: the page's `textContent` contains no em dash (U+2014, written as `\u2014` in the test).
   - `carries the current refraction snippet`: the page source contains `snippets/refraction-filter.html`'s trimmed text (as `tests/templates.test.mjs` does).
   - `has no horizontal scroll at phone width` at 375px, using `OFFENDERS_SOURCE` from `tests/helpers/layout.mjs` against `main`.
 - [ ] **Step 2: Run** `node --test tests/showcase.test.mjs`. Expected: FAIL, the page does not exist.
