@@ -183,14 +183,16 @@
       </div>
       <div class="window fam-felt controls-stage">
         <button class="fam-glass fam-glass-button" type="button">Share</button>
-        <button class="fam-glass fam-glass-button" type="button">Send</button>
+        <button class="fam-glass fam-glass--light fam-glass-button" type="button">Send</button>
+        <button class="fam-glass fam-glass--blue fam-glass-button" type="button">Save</button>
         <button class="fam-glass fam-glass-button" type="button" disabled>Disabled</button>
       </div>
       <div class="code-block" role="group" aria-label="The glass button markup" data-label="the glass button markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;div class="fam-felt" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;button class="fam-glass fam-glass-button" type="button"&gt;Share&lt;/button&gt;
-  &lt;button class="fam-glass fam-glass-button" type="button"&gt;Send&lt;/button&gt;
+  &lt;button class="fam-glass fam-glass--light fam-glass-button" type="button"&gt;Send&lt;/button&gt;
+  &lt;button class="fam-glass fam-glass--blue fam-glass-button" type="button"&gt;Save&lt;/button&gt;
   &lt;button class="fam-glass fam-glass-button" type="button" disabled&gt;Disabled&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
@@ -494,8 +496,16 @@
       <p class="scene-lead">A frosted field and a dropdown made from the same field with a select. The open list is a plain styled list for your own menus.</p>
       <div class="window fam-felt controls-stage">
         <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+        <div class="fam-glass fam-glass--light"><input class="fam-glass-input" placeholder="Light search" aria-label="Light search"></div>
         <div class="fam-glass">
           <select class="fam-glass-input" aria-label="Wood">
+            <option>Walnut</option>
+            <option>Oak</option>
+            <option>Cherry</option>
+          </select>
+        </div>
+        <div class="fam-glass fam-glass--light">
+          <select class="fam-glass-input" aria-label="Light wood">
             <option>Walnut</option>
             <option>Oak</option>
             <option>Cherry</option>
@@ -512,8 +522,16 @@
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;div class="fam-felt" style="display: grid; gap: 18px; max-width: 320px; padding: 28px"&gt;
   &lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;
+  &lt;div class="fam-glass fam-glass--light"&gt;&lt;input class="fam-glass-input" placeholder="Light search" aria-label="Light search"&gt;&lt;/div&gt;
   &lt;div class="fam-glass"&gt;
     &lt;select class="fam-glass-input" aria-label="Wood"&gt;
+      &lt;option&gt;Walnut&lt;/option&gt;
+      &lt;option&gt;Oak&lt;/option&gt;
+      &lt;option&gt;Cherry&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class="fam-glass fam-glass--light"&gt;
+    &lt;select class="fam-glass-input" aria-label="Light wood"&gt;
       &lt;option&gt;Walnut&lt;/option&gt;
       &lt;option&gt;Oak&lt;/option&gt;
       &lt;option&gt;Cherry&lt;/option&gt;
