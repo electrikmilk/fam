@@ -140,3 +140,70 @@ test('scenes are framed windows with real content and work with JavaScript off',
     await page.close();
   }
 });
+
+test('build your own comes after the paired scenes', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
+    assert.equal(ids[SCENES.length], 'scene-build');
+  } finally {
+    await page.close();
+  }
+});
+
+test('build your own shows every texture, labeled with the classes it uses', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    const squares = await page.page.$$eval('#scene-build .swatches .sq', (figures) =>
+      figures.map((figure) => ({
+        classes: [...figure.querySelector('.swatch').classList],
+        properties: [...figure.querySelector('.swatch').style].filter((name) => name.startsWith('--')),
+        label: figure.querySelector('figcaption').textContent.trim(),
+      })),
+    );
+    assert.equal(squares.length, 10);
+    for (const square of squares) {
+      for (const token of square.label.split(/\s+/)) {
+        if (token.startsWith('--fam-')) assert.ok(square.properties.includes(token), `${token} is labeled but not set on its square`);
+        else assert.ok(square.classes.includes(token), `${token} is labeled but not on its square (${square.classes.join(' ')})`);
+      }
+    }
+    const textures = ['fam-felt', 'fam-wood', 'fam-metal', 'fam-leather', 'fam-paper', 'fam-cork', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
+    const shown = new Set(squares.flatMap((square) => square.classes));
+    for (const texture of textures) assert.ok(shown.has(texture), `${texture} has no square`);
+    assert.ok(squares.some((square) => square.properties.includes('--fam-cardstock-tint')), 'tinted cardstock has no square');
+  } finally {
+    await page.close();
+  }
+});
+
+test('build your own shows felt in five colors', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    const colors = await page.page.$$eval('#scene-build .tint', (tints) => tints.map((tint) => getComputedStyle(tint).backgroundColor));
+    assert.equal(colors.length, 5);
+    assert.equal(new Set(colors).size, 5);
+  } finally {
+    await page.close();
+  }
+});
+
+test('build your own shows gloss, rounding and shadow utilities', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    const found = await page.page.evaluate(() => {
+      const scene = document.querySelector('#scene-build');
+      const has = (names) => names.map((name) => Boolean(scene.querySelector(`.${name}`)));
+      return {
+        gloss: has(['fam-gloss-none', 'fam-gloss-soft', 'fam-gloss-strong']),
+        rounding: has(['fam-round-sm', 'fam-round-md', 'fam-round-lg', 'fam-round-pill']),
+        shadows: ['sm', 'md', 'lg', 'inset'].map((size) => getComputedStyle(scene.querySelector(`.fam-shadow-${size}`)).boxShadow),
+      };
+    });
+    assert.ok(found.gloss.every(Boolean) && found.rounding.every(Boolean));
+    assert.ok(found.shadows.every((shadow) => shadow !== 'none'));
+    assert.equal(new Set(found.shadows).size, 4);
+  } finally {
+    await page.close();
+  }
+});

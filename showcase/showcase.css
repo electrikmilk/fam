@@ -139,3 +139,116 @@ body {
   .frames-grid { grid-template-columns: repeat(2, 1fr); }
   .panels { grid-template-columns: 1fr; }
 }
+
+.build-panel {
+  padding: 22px 24px 26px;
+  background: #24272d;
+}
+
+.build-panel h2 {
+  margin: 22px 0 10px;
+  font: 600 12px ui-monospace, Menlo, monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.build-panel h2:first-child { margin-top: 0; }
+.build-panel h2 code { font: inherit; text-transform: none; }
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.sq { margin: 0; text-align: center; }
+
+.sq figcaption {
+  margin-top: 6px;
+  font: 11px ui-monospace, Menlo, monospace;
+  color: #b8bcc6;
+}
+
+.swatch {
+  display: block;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .6), 0 6px 12px -4px rgba(0, 0, 0, .6);
+}
+
+.swatch.fam-leather-frame { box-shadow: none; }
+
+.tints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.tint {
+  display: block;
+  width: 64px;
+  height: 44px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .6);
+}
+
+/* Light stage so the shadows, gloss and rounding read against something */
+.stage {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(#dfe3e9, #c4cad3);
+}
+
+.stage h2 { color: #1b2a40; }
+.stage h2:first-child { margin-top: 0; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.gl {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  font: 11px ui-monospace, Menlo, monospace;
+  color: #2a2f38;
+}
+
+.gl .fam-pill {
+  width: 120px;
+  height: 40px;
+}
+
+.chip,
+.elev {
+  display: grid;
+  place-items: center;
+  font: 11px ui-monospace, Menlo, monospace;
+  color: #1b2a40;
+}
+
+.chip {
+  width: 84px;
+  height: 56px;
+  background: linear-gradient(#f8fafd, #cdd8ea);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4), inset 0 1px 0 #fff;
+}
+
+.elev {
+  width: 96px;
+  height: 64px;
+  border-radius: 12px;
+  background: #f7f8fa;
+}
+
+.elev.fam-shadow-inset { background: #e3e7ee; }
+
+@media (max-width: 600px) {
+  .swatches { grid-template-columns: repeat(2, 1fr); }
+}
