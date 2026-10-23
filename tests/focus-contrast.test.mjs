@@ -5,7 +5,7 @@ import { changedPixelContrast } from './helpers/pixels.mjs';
 
 // Each control on the surface the kit puts it on. The visible box is the wrapper that draws the ring, or the control itself.
 const CONTROLS = [
-  ['glass field on felt', '#glass-input', '.fam-glass'],
+  ['glass field on felt', '#glass-input', '.fam-glass', { ringIsOutside: true }],
   ['plastic button on felt', '#plastic-red', null],
   ['switch on felt', '#switch-off input', '.fam-switch'],
   ['plastic button on metal', '#plastic-on-metal', null],
@@ -30,7 +30,7 @@ const CONTROLS = [
 const REQUIRED_FRACTION = 0.33;
 const MINIMUM_RING_PIXELS = 40;
 
-for (const [name, inputSelector, wrapperSelector] of CONTROLS) {
+for (const [name, inputSelector, wrapperSelector, { ringIsOutside = false } = {}] of CONTROLS) {
   test(`focus ring on the ${name} contrasts with the surface`, async () => {
     const kit = await openUrl(fixtureUrl('kit'));
     try {
@@ -44,7 +44,9 @@ for (const [name, inputSelector, wrapperSelector] of CONTROLS) {
       await input.focus();
       await page.waitForTimeout(150);
       const after = await page.screenshot({ clip });
-      const { changed, fraction } = changedPixelContrast(before, after);
+      // The glass lights its own rim when the halo sits next to it. That is the glass responding to the ring, not part of the ring.
+      const ignoreRect = ringIsOutside ? { x: box.x - clip.x, y: box.y - clip.y, width: box.width, height: box.height } : null;
+      const { changed, fraction } = changedPixelContrast(before, after, { ignoreRect });
       assert.ok(changed >= MINIMUM_RING_PIXELS, `no visible ring: only ${changed} pixels changed`);
       assert.ok(fraction >= REQUIRED_FRACTION, `only ${(fraction * 100).toFixed(0)}% of the ring pixels reach 3:1 against the surface`);
     } finally {

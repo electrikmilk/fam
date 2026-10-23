@@ -25,12 +25,17 @@ const contrast = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 
 // Compares two screenshots of the same region. A pixel "changed" when any channel moved by more than `threshold`;
 // of the changed pixels, reports how many differ from what was there before by at least `ratio`:1 (WCAG non-text contrast is 3:1).
-export function changedPixelContrast(beforeBuffer, afterBuffer, { threshold = 24, ratio = 3 } = {}) {
+// Pixels inside `ignoreRect` ({ x, y, width, height } in screenshot coordinates) are skipped.
+export function changedPixelContrast(beforeBuffer, afterBuffer, { threshold = 24, ratio = 3, ignoreRect = null } = {}) {
   const before = PNG.sync.read(beforeBuffer);
   const after = PNG.sync.read(afterBuffer);
   let changed = 0;
   let distinct = 0;
   for (let index = 0; index < before.data.length; index += 4) {
+    const pixel = index / 4;
+    const x = pixel % before.width;
+    const y = Math.floor(pixel / before.width);
+    if (ignoreRect && x >= ignoreRect.x && x < ignoreRect.x + ignoreRect.width && y >= ignoreRect.y && y < ignoreRect.y + ignoreRect.height) continue;
     const moved = [0, 1, 2].some((channel) => Math.abs(before.data[index + channel] - after.data[index + channel]) > threshold);
     if (!moved) continue;
     changed += 1;
