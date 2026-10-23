@@ -111,7 +111,7 @@
       </div>
 
         <h2>Refraction <span class="glass-warning">Chromium only</span></h2>
-        <p class="glass-lead">Clear glass bends the grid behind its rim. Other browsers show the same pane without the bending.</p>
+        <p class="glass-lead">Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. That rounding comes from the optional <code>fam-ui/refraction</code> script. Other browsers show the same pane without the bending.</p>
         <div class="glass-tiles">
           <figure class="glass-tile">
             <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass glass-pane glass-pane--pill"></div></div>
@@ -125,7 +125,10 @@
         <div class="code-block" role="group" aria-label="The refracting glass markup" data-label="the refracting glass markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;!-- Paste snippets/refraction-filter.html once in the page, then: --&gt;
-&lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;</code></pre>
+&lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;
+
+&lt;!-- Optional: bend along each glass's own radius --&gt;
+&lt;script src="snippets/refraction-round.js" defer&gt;&lt;/script&gt;</code></pre>
       </div>
       </div>
     </section>
