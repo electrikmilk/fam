@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  background: #1d1f24;
+  color: #e9e9ec;
+}
+
+/* The opening screen is the kit's stitched leather frame at full width and one screen tall */
+.hero {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  border-width: 40px;
+  border-image-width: 40px;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(64px, 14vw, 120px);
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.hero .tagline {
+  margin: 14px 0 0;
+  font-size: clamp(20px, 3.2vw, 28px);
+}
+
+.hero .scroll-cue {
+  margin: 40px 0 0;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+#credits {
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #b8bcc6;
+}
+
+#credits a { color: #a9c2ff; }
