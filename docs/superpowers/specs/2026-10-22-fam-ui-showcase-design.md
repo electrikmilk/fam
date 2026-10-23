@@ -101,12 +101,15 @@ A utility-classes section for building your own, shown in one framed panel:
 ## Left to the builder
 
 - How the page detects a non-Chromium browser for its refraction note (a user-agent check is a poor fit, so a feature test or a plain note for everyone are both fine).
-- The page's file layout, and whether the scenes are copied from the `examples/` markup or written fresh.
+- The layout of the published site (the page and the `dist/` and `assets/` folders it links must keep working relative paths), and the page's own file layout, and whether the scenes are copied from the `examples/` markup or written fresh.
 - The exact markup for each scene, and the exact copy under the scenes.
 - How the "copy" buttons and the live CSS readout look.
 - Page title, description and share image.
 - A test strategy. At minimum the contrast audit and a smoke check that the page loads with no missing files. `tools/contrast-audit.mjs` currently lists three example pages by name and loads them from `examples/`, so it needs a small change to run on the showcase.
 
-## Open question for the owner
+## Decided by the owner
 
-Where should the showcase live and be published? The owner raised two options: inside the repo (`showcase/`) deployed to GitHub Pages, or a separate project such as `~/fam-ui-test/`. My recommendation is the first, because the page then links `../dist/fam-ui.css` and `../assets/` directly and always matches the package. Two consequences either way: `dist/` is git-ignored, so a Pages deploy has to run `npm run build` first, and a separate project would need copies of the CSS and assets or a build step, which this design rules out.
+The showcase lives in the repo, in a `showcase/` folder (not shipped in the npm package), and is published with GitHub Pages. The page links the package's real `dist/fam-ui.css` and `assets/`. Two consequences follow:
+
+- `dist/` is git-ignored, so the deploy workflow has to run `npm run build` before it publishes, and the published site has to keep the page's relative paths to `dist/` and `assets/` working.
+- The repo has no git remote yet. Creating the GitHub repository, pushing, and switching Pages on in its settings are the owner's steps. The plan covers the workflow file and everything in the repo, not those.
