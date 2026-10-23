@@ -100,3 +100,17 @@ test('controls navigation labels are not truncated at phone width', async () => 
     await example.close();
   }
 });
+
+for (const width of [640, 768, 820, 840]) {
+  test(`notes stacks the list and the pad at full width on a ${width}px viewport`, async () => {
+    const example = await openUrl(exampleUrl('notes'), { viewport: { width, height: 900 } });
+    try {
+      const list = await example.page.locator('.fam-notes-list').boundingBox();
+      const pad = await example.page.locator('.fam-pad').boundingBox();
+      if (list.x + list.width <= pad.x + 1) return; // side by side is also a valid layout when both fit
+      assert.ok(Math.abs(list.width - pad.width) <= 1, `the list is ${list.width}px wide above a ${pad.width}px pad, leaving empty leather beside it`);
+    } finally {
+      await example.close();
+    }
+  });
+}

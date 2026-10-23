@@ -61,19 +61,27 @@
 
 /* ---------- Notes app, after the iOS 4 Notes reference. Use .fam-notes with .fam-leather-frame and .fam-leather-frame--black. ---------- */
 
-.fam-notes { padding: 8px; }
+/* The frame is a size container so the layout follows the room the notes actually have, not the viewport */
+.fam-notes {
+  padding: 8px;
+  container-type: inline-size;
+}
 
+/* One column by default: the list above the pad, both full width */
 .fam-notes-split {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
-/* Use with .fam-paper. The flex basis lets the list sit beside the pad on wide screens and shrink to the frame on a phone. */
+/* 300px list + 12px gap + a pad of at least 420px */
+@container (min-width: 732px) {
+  .fam-notes-split { grid-template-columns: 300px minmax(0, 1fr); }
+}
+
+/* Use with .fam-paper */
 .fam-notes-list {
   position: relative;
-  flex: 0 1 300px;
   min-width: 0;
   min-height: 560px;
   border-radius: 6px;
@@ -94,7 +102,6 @@
 .fam-pad {
   position: relative;
   display: flex;
-  flex: 1 1 420px;
   flex-direction: column;
   min-width: 0;
   border-radius: 6px;
