@@ -98,7 +98,7 @@ Each item is what the owner said unless marked as my call.
 - **Tab keyboard model:** tab cells are `<button role="tab">` elements, so every tab is in the Tab order and a disabled tab uses native `disabled`. Arrow-key movement between tabs needs a few lines of script, which the showcase demo supplies and the markup block notes. The kit stays JavaScript-free.
 - **Plastic dial:** decorative like the existing knob. It is `role="img"` with an `aria-label` that states its value, so it has no focus ring or disabled look.
 - **Glass button contrast:** measured on the dark felt stage the existing glass fields use, because that is where the page shows them.
-- **Metal buttons:** round and square metal buttons get the same circular dish as plastic. Wide labeled pills stay plain.
+- **Metal buttons:** no circular dish (the owner said metal buttons do not need it), and they are shown on metal in the showcase.
 
 ## Constraints
 

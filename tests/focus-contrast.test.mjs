@@ -9,6 +9,8 @@ const CONTROLS = [
   ['plastic button on felt', '#plastic-red', null],
   ['switch on felt', '#switch-off input', '.fam-switch'],
   ['plastic button on metal', '#plastic-on-metal', null],
+  ['metal button on felt', '#metal-button-on-felt', null],
+  ['metal button on metal', '#metal-button', null],
   ['switch on metal', '#switch-on-metal input', '.fam-switch'],
   ['recessed field on leather', '#recessed-input', '.fam-recessed'],
   ['leather button on leather', '#leather-button', null],

@@ -40,7 +40,7 @@
 
     <section class="scene" id="scene-buttons">
       <h2 class="scene-title">Plastic and metal buttons</h2>
-      <p class="scene-lead">Raised plastic buttons in five colors. Round and square ones have a dish. A disabled button sinks into its case with a darker face and a muted label, like a button that has not popped up yet. They sit best on metal.</p>
+      <p class="scene-lead">Raised plastic buttons in five colors. Round and square ones have a dish. A disabled button sinks into its case with a darker face and a muted label, like a button that has not popped up yet. They sit best on metal. Metal buttons are made the same way from brushed metal, and are shown on a metal plate.</p>
       <div class="window fam-metal controls-stage">
         <button class="fam-plastic fam-plastic--red" type="button">Record</button>
         <button class="fam-plastic fam-plastic--green" type="button">Play</button>
@@ -64,6 +64,23 @@
   &lt;button class="fam-plastic fam-plastic--blue" type="button" disabled&gt;Disabled&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--red fam-plastic--square" type="button" aria-label="Eject, disabled" disabled&gt;E&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-metal controls-stage">
+        <button class="fam-metal-button" type="button">Eject</button>
+        <button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info">i</button>
+        <button class="fam-metal-button fam-metal-button--square" type="button" aria-label="Eject">E</button>
+        <button class="fam-metal-button" type="button" disabled>Disabled</button>
+        <button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info, disabled" disabled>i</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The metal button markup" data-label="the metal button markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-metal-button" type="button"&gt;Eject&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info"&gt;i&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--square" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
+  &lt;button class="fam-metal-button" type="button" disabled&gt;Disabled&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>

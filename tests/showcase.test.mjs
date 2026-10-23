@@ -397,6 +397,7 @@ test('the controls page shows each control alone with its variants', async () =>
         plasticColors: ['red', 'green', 'amber', 'blue', 'purple'].map((color) => count(`.window .fam-plastic--${color}`)),
         roundButtons: count('.window .fam-plastic--round'),
         squareButtons: count('.window .fam-plastic--square'),
+        metalButtons: count('.window .fam-metal-button'),
         switches: count('.window .fam-switch'),
         disabledSwitches: count('.window .fam-switch input:disabled'),
         knobs: count('.window .fam-knob'),
@@ -412,7 +413,7 @@ test('the controls page shows each control alone with its variants', async () =>
     });
     assert.equal(found.sections.length, 6);
     assert.ok(found.plasticColors.every((total) => total >= 1), 'a plastic color is missing');
-    assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
+    assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
     assert.deepEqual(found.fills, [1, 1, 1]);
     assert.ok(found.selects >= 1 && found.menus >= 1 && found.searches >= 1 && found.selectedRows === 1);
     assert.ok(found.recessedRows >= 2 && found.leatherButtons >= 2);

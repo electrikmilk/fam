@@ -164,6 +164,13 @@ Plastic buttons and the knob:
 
 Round and square buttons have a round dish. A disabled button sinks into its case with a darker face and a muted label.
 
+Metal buttons are the same family in brushed metal, with `--round` and `--square` for icons:
+
+```html
+<button class="fam-metal-button" type="button">Eject</button>
+<button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info">i</button>
+```
+
 Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 
 Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):

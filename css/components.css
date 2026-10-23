@@ -250,32 +250,6 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   text-shadow: 0 1px 0 rgba(255, 255, 255, .35);
 }
 
-.fam-plastic--round,
-.fam-plastic--square {
-  width: 34px;
-  min-width: 0;
-  padding: 0;
-  font-size: 20px;
-}
-
-.fam-plastic--square {
-  border-radius: var(--fam-radius-md);
-  font-size: 16px;
-}
-
-/* The round dish in the middle of a round or square button, as in the cells of the grouped strip in references/plastic.png */
-.fam-plastic--round::after,
-.fam-plastic--square::after {
-  content: '';
-  position: absolute;
-  inset: 5px;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, .18), rgba(0, 0, 0, 0) 75%);
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .35);
-  pointer-events: none;
-}
-
 /* A button that has not popped up yet: sunk into its case with a darker face, a muted label and no outer shadow */
 .fam-plastic:disabled {
   opacity: .7;
@@ -287,6 +261,82 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 55%, black) 0%, color-mix(in srgb, var(--fam-c) 48%, black) 100%);
   background-blend-mode: soft-light, normal;
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18);
+}
+
+/* Brushed metal button: the metal photo under a soft top light, with the same case, dish and disabled look as the plastic ones */
+.fam-metal-button {
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: var(--fam-radius-pill);
+  border: 1px solid rgba(0, 0, 0, .55);
+  color: rgb(18, 20, 26);
+  font: 600 13px/1 var(--fam-font-ui);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
+  cursor: pointer;
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .12) 48%, rgba(0, 0, 0, .08) 52%, rgba(0, 0, 0, .2) 100%),
+    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
+  --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .45);
+  box-shadow: var(--fam-rest-shadow);
+}
+
+.fam-metal-button:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
+}
+
+.fam-metal-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .45), 0 1px 1px rgba(0, 0, 0, .4);
+}
+
+.fam-metal-button:disabled {
+  opacity: .7;
+  cursor: default;
+  color: rgba(18, 20, 26, .45);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
+  background:
+    linear-gradient(rgba(0, 0, 0, .38), rgba(0, 0, 0, .38)),
+    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .25);
+}
+
+/* Round and square buttons of both families. They come after both base rules so their size wins. */
+.fam-plastic--round,
+.fam-plastic--square,
+.fam-metal-button--round,
+.fam-metal-button--square {
+  width: 34px;
+  min-width: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.fam-plastic--square,
+.fam-metal-button--square {
+  border-radius: var(--fam-radius-md);
+  font-size: 16px;
+}
+
+/* The round dish in the middle of a round or square plastic button (metal buttons have none), as in the cells of the grouped strip in references/plastic.png */
+.fam-plastic--round::after,
+.fam-plastic--square::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, .18), rgba(0, 0, 0, 0) 75%);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .35);
+  pointer-events: none;
 }
 
 /* Face built from the spiral photo: clean rings with the photo's own bright and dark wedges baked in, so it reflects light like spun metal.
