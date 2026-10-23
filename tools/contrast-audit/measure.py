@@ -32,7 +32,10 @@ def required_ratio(item):
 
 results = []
 for item in data["items"]:
-    box = tuple(int(round(v * 2)) for v in (item["x"], item["y"], item["x"] + item["w"], item["y"] + item["h"]))
+    # A text range's box is the font's ascent plus descent, which reaches 1 to 2px past the glyphs and, depending on the engine, onto a
+    # ruled line next to them. Measure the glyph band instead; icons and placeholders keep their full box.
+    inset = 1 if item["kind"] == "text" and item["h"] > 8 else 0
+    box = tuple(int(round(v * 2)) for v in (item["x"], item["y"] + inset, item["x"] + item["w"], item["y"] + item["h"] - inset))
     region = image.crop(box)
     pixels = list(region.get_flattened_data()) if hasattr(region, "get_flattened_data") else list(region.getdata())
     if not pixels:
