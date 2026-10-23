@@ -197,9 +197,9 @@ body {
 .glass-backdrop--ringed::before {
   content: '';
   grid-area: 1 / 1;
-  width: calc(64% + 20px);
-  height: 104px;
-  border-radius: 44px;
+  width: calc(64% + 44px);
+  height: 128px;
+  border-radius: 56px;
   background: #3b3e46;
   filter: blur(10px);
 }
