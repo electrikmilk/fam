@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>fam-ui showcase mockup</title>
+<link rel="stylesheet" href="../../../dist/fam-ui.css">
+<style>
+  body { margin: 0; background: #1d1f24; font-family: -apple-system, "Helvetica Neue", sans-serif; color: #e9e9ec; }
+  .top { padding: 22px 28px 6px; max-width: 1000px; }
+  .top h2 { margin: 0 0 4px; font-size: 20px; }
+  .top p { margin: 0; color: #a9adb6; font-size: 13px; }
+  .layout { display: grid; grid-template-columns: 620px 1fr; gap: 34px; padding: 18px 28px 50px; align-items: start; }
+  .page { zoom: .78; width: 780px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.12); background: #1d1f24; }
+  .notes { font-size: 13px; line-height: 1.5; color: #c9ccd4; position: sticky; top: 20px; }
+  .notes h3 { margin: 0 0 6px; font-size: 14px; color: #fff; }
+  .notes ul { margin: 0 0 16px; padding-left: 18px; }
+
+  .hero { box-sizing: border-box; min-height: 460px; display: grid; place-items: center; text-align: center; border-radius: 0; margin: 0; width: 100%; border-width: 40px; border-image-width: 40px; }
+  .hero, .hero * { font-family: Georgia, "Times New Roman", serif; }
+  .hero h1 { margin: 0; font-size: 96px; line-height: 1; letter-spacing: 2px; }
+  .hero p { margin: 14px 0 0; font-size: 24px; }
+  .hint { margin-top: 36px; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
+
+  .section { padding: 34px 40px 14px; }
+  .window { border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 18px 34px -12px rgba(0,0,0,.7); }
+  .cap { margin: 10px 4px 0; font: 12px/1.3 ui-monospace, Menlo, monospace; color: #b8bcc6; }
+  .cap b { color: #fff; font-weight: 600; }
+  .controls-row { display: flex; gap: 22px; align-items: center; padding: 22px 26px; }
+  .progress { flex: 1; }
+  .pad-text { font: 20px/24px var(--fam-font-hand); color: #2b2216; padding: 0 20px 24px 54px; }
+
+  /* dark glass band, full bleed */
+  .glassband { position: relative; height: 520px; margin-top: 30px; background: #0d1116 url(showcase-assets/ribbon.jpg) 30% 50% / 1200px auto; overflow: hidden; }
+  .lens { position: absolute; width: 180px; height: 180px; border-radius: 50%; left: 44%; top: 20%; --fam-r: 90px; }
+  .cursor-hint { position: absolute; left: 44%; top: 20%; width: 180px; text-align: center; margin-top: 196px; font-size: 12px; color: rgba(255,255,255,.7); }
+  .tray { position: absolute; left: 40px; right: 40px; bottom: 28px; display: flex; gap: 30px; align-items: center; justify-content: center; padding: 14px 22px; border-radius: 16px; }
+  .tray .fam-engraved-metal { font-size: 20px; }
+  .knobwrap { display: grid; place-items: center; gap: 4px; }
+  .knobwrap .fam-knob { width: 64px; height: 64px; }
+
+  .utils h4 { margin: 18px 0 8px; font: 600 12px ui-monospace, Menlo, monospace; letter-spacing: 1px; text-transform: uppercase; color: #fff; }
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sq { text-align: center; font: 11px ui-monospace, Menlo, monospace; color: #b8bcc6; }
+  .sq i { display: block; aspect-ratio: 1; border-radius: 10px; box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 6px 12px -4px rgba(0,0,0,.6); margin-bottom: 6px; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; }
+  .stage { padding: 20px; border-radius: 14px; background: linear-gradient(#dfe3e9, #c4cad3); }
+  .chip2 { width: 84px; height: 56px; display: grid; place-items: center; font: 11px ui-monospace, Menlo, monospace; color: #1b2a40; background: linear-gradient(#f8fafd, #cdd8ea); box-shadow: 0 2px 4px rgba(0,0,0,.4), inset 0 1px 0 #fff; }
+  .elev { width: 96px; height: 64px; display: grid; place-items: center; font: 11px ui-monospace, Menlo, monospace; color: #2a2f38; background: #f7f8fa; border-radius: 12px; }
+  .gl { display: grid; gap: 6px; justify-items: center; font: 11px ui-monospace, Menlo, monospace; color: #2a2f38; }
+  .gl .fam-pill { width: 120px; height: 40px; }
+</style>
+</head>
+<body>
+<div class="top">
+  <h2>Structure A, with a leather opening screen and a dark glass band</h2>
+  <p>One scrolling page. The opening screen is tan stitched leather with engraved text. The scenes, including engraved text and a build-your-own utilities section, sit in framed windows on a dark page with their classes underneath. The glass section runs edge to edge on the ribbon photo, with the controls on a metal plate.</p>
+</div>
+
+<div class="layout">
+  <div class="page">
+    <div class="hero fam-leather-frame" style="box-shadow:none">
+      <div>
+        <h1 class="fam-engraved-leather" style="font-size:96px">Fam</h1>
+        <p class="fam-engraved-leather" style="font-size:24px">Familiar materials for the web</p>
+        <div class="hint fam-engraved-leather" style="font-size:20px">scroll</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="window fam-felt">
+        <nav class="fam-nav fam-wood"><span class="fam-nav-brand">fam</span><a class="fam-nav-item" aria-current="page">Controls</a><a class="fam-nav-item">Progress</a></nav>
+        <div class="controls-row">
+          <div class="fam-glass" style="width:200px"><input class="fam-glass-input" placeholder="Search"></div>
+          <label class="fam-switch"><input type="checkbox" role="switch" checked aria-label="a"><span class="fam-switch-knob"></span></label>
+          <div class="progress"><div class="fam-progress" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div></div>
+        </div>
+      </div>
+      <div class="cap"><b>wood + felt</b> &nbsp; fam-nav fam-wood on fam-felt</div>
+    </div>
+
+    <div class="section">
+      <div class="window fam-leather-frame fam-leather-frame--black" style="border-radius:34px;overflow:visible;box-shadow:0 18px 34px -12px rgba(0,0,0,.7)">
+        <div class="fam-legal-pad pad-text" style="height:150px"><div class="fam-pad-meta" style="margin-left:-4px"><span>Yesterday</span></div>Picnic plans<br>- Bring the blue blanket<br>- Sandwiches</div>
+      </div>
+      <div class="cap"><b>legal pad + leather</b> &nbsp; fam-legal-pad in fam-leather-frame--black</div>
+    </div>
+
+    <div class="section">
+      <div class="window fam-leather-frame" style="border-radius:34px;overflow:visible;box-shadow:0 18px 34px -12px rgba(0,0,0,.7)">
+        <div class="fam-paper" style="padding:14px;border-radius:6px"><ul class="fam-list"><li><a class="fam-list-row">Grocery run<span>Today</span></a></li><li><a class="fam-list-row" aria-current="true">Picnic plans<span>Yesterday</span></a></li></ul></div>
+      </div>
+      <div class="cap"><b>leather + paper</b> &nbsp; fam-paper in fam-leather-frame</div>
+    </div>
+
+    <div class="section">
+      <div class="window fam-metal" style="padding:26px;display:flex;gap:16px;align-items:center">
+        <button class="fam-plastic fam-plastic--red">Record</button><button class="fam-plastic fam-plastic--green">Play</button><button class="fam-plastic fam-plastic--amber">Pause</button>
+        <span class="fam-knob"></span>
+        <label class="fam-switch"><input type="checkbox" role="switch" checked aria-label="b"><span class="fam-switch-knob"></span></label>
+      </div>
+      <div class="cap"><b>metal + controls</b> &nbsp; fam-plastic, fam-knob, fam-switch on fam-metal</div>
+    </div>
+
+    <div class="section">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+        <div class="window fam-metal" style="display:grid;place-items:center;height:110px"><span class="fam-engraved-metal">SETTINGS</span></div>
+        <div class="window fam-leather" style="display:grid;place-items:center;height:110px"><span class="fam-engraved-leather">Notebook</span></div>
+        <div class="window fam-wood" style="display:grid;place-items:center;height:110px"><span class="fam-engraved-wood">LIBRARY</span></div>
+      </div>
+      <div class="cap"><b>engraved text</b> &nbsp; fam-engraved-metal, fam-engraved-leather and fam-engraved-wood, each on its own material</div>
+    </div>
+
+    <div class="section utils">
+      <div style="padding:18px 20px 22px;border-radius:14px;background:#24272d;box-shadow:0 0 0 1px rgba(255,255,255,.14)">
+        <h4 style="margin-top:0">Textures: one class each</h4>
+        <div class="swatches">
+          <div class="sq"><i class="fam-felt"></i>fam-felt</div>
+          <div class="sq"><i class="fam-wood"></i>fam-wood</div>
+          <div class="sq"><i class="fam-metal"></i>fam-metal</div>
+          <div class="sq"><i class="fam-leather"></i>fam-leather</div>
+          <div class="sq"><i class="fam-paper"></i>fam-paper</div>
+          <div class="sq"><i class="fam-cardstock"></i>fam-cardstock</div>
+          <div class="sq"><i class="fam-legal-pad"></i>fam-legal-pad</div>
+          <div class="sq"><i class="fam-leather-frame fam-leather-frame--black" style="border-radius:10px"></i>fam-leather-frame</div>
+        </div>
+        <h4>Felt in any color: --fam-tint</h4>
+        <div class="row"><i class="fam-felt" style="width:64px;height:44px;border-radius:8px;--fam-tint:#1f7a3d"></i><i class="fam-felt" style="width:64px;height:44px;border-radius:8px;--fam-tint:#1d4fa8"></i><i class="fam-felt" style="width:64px;height:44px;border-radius:8px;--fam-tint:#8a1f2b"></i><i class="fam-felt" style="width:64px;height:44px;border-radius:8px;--fam-tint:#6b3fa0"></i><i class="fam-felt" style="width:64px;height:44px;border-radius:8px;--fam-tint:#c7a23a"></i></div>
+        <div class="stage" style="margin-top:18px">
+          <h4 style="margin:0 0 8px;color:#1b2a40">Gloss</h4>
+          <div class="row">
+            <div class="gl"><div class="fam-pill fam-gloss-none"></div>fam-gloss-none</div>
+            <div class="gl"><div class="fam-pill fam-gloss-soft"></div>fam-gloss-soft</div>
+            <div class="gl"><div class="fam-pill fam-gloss-strong"></div>fam-gloss-strong</div>
+          </div>
+          <h4 style="margin:18px 0 8px;color:#1b2a40">Rounding</h4>
+          <div class="row">
+            <div class="chip2 fam-round-sm">round-sm</div><div class="chip2 fam-round-md">round-md</div><div class="chip2 fam-round-lg">round-lg</div><div class="chip2 fam-round-pill">round-pill</div>
+          </div>
+          <h4 style="margin:18px 0 8px;color:#1b2a40">Shadows</h4>
+          <div class="row">
+            <div class="elev fam-shadow-sm">shadow-sm</div><div class="elev fam-shadow-md">shadow-md</div><div class="elev fam-shadow-lg">shadow-lg</div><div class="elev fam-shadow-inset" style="background:#e3e7ee">shadow-inset</div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>build your own</b> &nbsp; every texture, plus gloss, rounding and shadow utilities, one class each</div>
+    </div>
+
+    <div class="glassband">
+      <div class="fam-glass lens"></div>
+      <div class="cursor-hint">the lens follows your cursor</div>
+      <div class="tray fam-metal">
+        <div class="knobwrap"><span class="fam-knob" style="--fam-knob-angle:-40deg"></span><span class="fam-engraved-metal">Blur</span></div>
+        <div class="knobwrap"><span class="fam-knob" style="--fam-knob-angle:20deg"></span><span class="fam-engraved-metal">Glow</span></div>
+        <div class="knobwrap"><span class="fam-knob" style="--fam-knob-angle:70deg"></span><span class="fam-engraved-metal">Radius</span></div>
+        <div class="knobwrap"><label class="fam-switch"><input type="checkbox" role="switch" aria-label="Refract" checked><span class="fam-switch-knob"></span></label><span class="fam-engraved-metal">Refract</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <h3>What changed</h3>
+    <ul>
+      <li>Opening screen is tan stitched leather with the title engraved into it, instead of the photo.</li>
+      <li>The opening screen text is serif (Georgia, then Times New Roman), the same face as the sign-in card title.</li>
+      <li>Engraved text: one panel each for metal, leather and wood.</li>
+      <li>New "build your own" section before the glass: a square for every texture, felt in five tints, then gloss, rounding and shadow utilities (shadows are my guess).</li>
+      <li>The ribbon photo now belongs to the glass section only, which runs edge to edge on a dark background.</li>
+    </ul>
+    <h3>My guess: knobs, not sliders</h3>
+    <ul>
+      <li>The kit has no slider, so the glass controls are the metal knobs you would turn (blur, glow, corner radius) plus a switch for frosted or refracting.</li>
+      <li>The knob's reflections stay fixed while the orange tick turns, like a real knob under a light.</li>
+      <li>Turning a knob updates the CSS variables shown with the lens, so people can copy them.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
