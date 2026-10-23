@@ -109,6 +109,30 @@ test('glass buttons are frosted with a white label', async () => {
   }
 });
 
+test('light glass buttons have a dark label and blue glass buttons keep the white one', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.equal(await read(page, '#glass-button-light', 'color'), 'rgb(20, 22, 28)');
+    assert.equal(await read(page, '#glass-button-blue', 'color'), 'rgb(255, 255, 255)');
+    assert.ok((await read(page, '#glass-button-blue', 'backgroundImage', '::before')).includes('rgba(36, 63, 160, 0.72)'));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a checked glass radio dot is blue and an unchecked one stays dark', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.ok((await read(page, radioDot('radio-glass-on'), 'backgroundImage')).includes('rgba(36, 63, 160, 0.72)'));
+    await page.locator('#radio-glass-input').evaluate((input) => { input.checked = false; });
+    assert.ok((await read(page, radioDot('radio-glass-on'), 'backgroundImage')).includes('rgba(0, 0, 0, 0.42)'));
+  } finally {
+    await kit.close();
+  }
+});
+
 test('disabled glossy and glass buttons are dimmed and show no interactive cursor', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {

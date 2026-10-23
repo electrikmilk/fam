@@ -27,6 +27,16 @@ test('glass keeps its dark shade, so text stays readable without backdrop blur',
   }
 });
 
+test('light and blue glass keep a shade of their own, so text stays readable without backdrop blur', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.ok((await style(kit.page, '#glass-light', '::before', 'backgroundImage')).includes('rgba(255, 255, 255, 0.5)'));
+    assert.ok((await style(kit.page, '#glass-blue', '::before', 'backgroundImage')).includes('rgba(36, 63, 160, 0.72)'));
+  } finally {
+    await kit.close();
+  }
+});
+
 test('refracting glass stays a clear pane with a highlight and no dark shade', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
