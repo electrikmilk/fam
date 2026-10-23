@@ -13,7 +13,7 @@ const CONTROLS = [
   ['metal button on metal', '#metal-button', null],
   ['glossy button on metal', '#glossy-button', null],
   ['glossy silver button on metal', '#glossy-silver', null],
-  ['glass button on felt', '#glass-button', null],
+  ['glass button on felt', '#glass-button', null, { ringIsOutside: true }],
   ['plastic radio on metal', '#speed-2', '.fam-radio'],
   ['glass radio on felt', '#radio-glass-input', '.fam-radio'],
   ['plastic button on the plastic panel', '#plastic-on-panel', null],
