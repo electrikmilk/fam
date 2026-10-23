@@ -1,1 +1,127 @@
 /* fam-ui effects */
+
+/* Frosted glass. The lens layer and the glow layer are pseudo-elements so the element's own content stays above both.
+   The filter layer gets a real border-radius: clip-path and overflow:hidden do not round a backdrop-filter in Chromium. */
+.fam-glass {
+  --fam-r: 999px;
+  --fam-bleed: 2rem;
+  --fam-glow-depth: 18px;
+  --fam-glass-saturate: 125%;
+  --fam-glow-saturate: 190%;
+  --fam-refract-saturate: 110%;
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--fam-r);
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .55);
+}
+
+/* The dark shade under the highlight is what keeps white text readable on any backdrop, with or without backdrop-filter */
+.fam-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(14px) saturate(var(--fam-glass-saturate)) brightness(110%);
+  background:
+    linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)),
+    linear-gradient(to bottom, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 46%, rgba(255, 255, 255, 0) 54%),
+    linear-gradient(rgba(255, 255, 255, .14), rgba(255, 255, 255, .32));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -8px 12px -6px rgba(0, 0, 0, .35);
+}
+
+/* Ambient glow. The transparent border is the bleed: the backdrop is sampled across the whole extended box, while the mask
+   (four soft edge gradients clipped to the rounded padding box) keeps a glow that is strongest at the lens edge and fades
+   inward over --fam-glow-depth. */
+.fam-glass::after {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--fam-bleed));
+  pointer-events: none;
+  border: var(--fam-bleed) solid transparent;
+  border-radius: calc(var(--fam-r) + var(--fam-bleed));
+  backdrop-filter: blur(25px) saturate(var(--fam-glow-saturate)) brightness(135%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, .04) 35%, rgba(255, 255, 255, .04) 65%, rgba(255, 255, 255, .3)) padding-box;
+  mask:
+    linear-gradient(to bottom, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box,
+    linear-gradient(to top, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box,
+    linear-gradient(to right, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box,
+    linear-gradient(to left, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box;
+}
+
+/* Clear glass that bends the backdrop at its rim. The plain declaration comes first so an engine that rejects url() filters keeps it.
+   Chromium only; the displacement filter itself is the inline snippet in snippets/refraction-filter.html. */
+.fam-glass--refract::before {
+  backdrop-filter: blur(1px) saturate(var(--fam-refract-saturate)) brightness(105%);
+  backdrop-filter: url(#fam-refract) blur(1px) saturate(var(--fam-refract-saturate)) brightness(105%);
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, .24) 0%, rgba(255, 255, 255, .05) 46%, rgba(255, 255, 255, 0) 54%),
+    linear-gradient(rgba(255, 255, 255, .06), rgba(255, 255, 255, .18));
+}
+
+.fam-shadow-sm { box-shadow: var(--fam-shadow-sm); }
+.fam-shadow-md { box-shadow: var(--fam-shadow-md); }
+.fam-shadow-lg { box-shadow: var(--fam-shadow-lg); }
+.fam-shadow-inset { box-shadow: var(--fam-shadow-inset); }
+
+.fam-round-sm { border-radius: var(--fam-radius-sm); }
+.fam-round-md { border-radius: var(--fam-radius-md); }
+.fam-round-lg { border-radius: var(--fam-radius-lg); }
+.fam-round-pill { border-radius: var(--fam-radius-pill); }
+
+/* An inner box inside padding looks even when its radius is the outer radius minus the padding */
+.fam-concentric { border-radius: calc(var(--fam-outer-radius) - var(--fam-pad)); }
+
+/* Aqua pill: dark rim, a body that gets lighter toward the bottom, and a soft sheen in the upper half whose strength is --fam-gloss */
+.fam-pill {
+  --fam-gloss: .28;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--fam-radius-pill);
+  border: 1px solid #243fa0;
+  background: linear-gradient(to bottom, #3556c4 0%, #5a85ea 52%, #8db0f7 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 3px 6px rgba(0, 0, 0, .35);
+}
+
+.fam-pill::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 2px;
+  height: 50%;
+  border-radius: var(--fam-radius-pill);
+  background: linear-gradient(rgba(255, 255, 255, var(--fam-gloss)), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.fam-gloss-none {
+  --fam-gloss: 0;
+  background: linear-gradient(#4574e2, #3a66d4);
+}
+
+.fam-gloss-soft { --fam-gloss: .28; }
+.fam-gloss-strong { --fam-gloss: .55; }
+
+/* Engraved text: an opaque dark glyph with a light lip along the lower edge, so it looks cut into the surface.
+   The glyph colors were fitted to the real texture pixels to pass WCAG contrast. */
+.fam-engraved-metal {
+  color: rgb(18, 20, 26);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .9), 0 -1px 0 rgba(0, 0, 0, .2);
+}
+
+.fam-engraved-leather {
+  color: rgb(55, 28, 10);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 rgba(255, 225, 185, .55), 0 -1px 1px rgba(0, 0, 0, .25);
+}
+
+.fam-engraved-wood {
+  color: rgb(66, 38, 14);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 rgba(255, 238, 205, .55), 0 -1px 1px rgba(0, 0, 0, .25);
+}
