@@ -29,7 +29,7 @@
       <h1>Controls, one at a time</h1>
       <p class="lead">Each control on its own, with its variants and its disabled look. Under each one is the markup, with a button that copies it.</p>
     <nav class="jump" aria-label="On this page">
-      <a href="#scene-buttons">Plastic buttons</a>
+      <a href="#scene-buttons">Plastic and metal buttons</a>
       <a href="#scene-switch-knob">Switch and knob</a>
       <a href="#scene-progress">Progress tubes</a>
       <a href="#scene-glass-fields">Glass field and dropdown</a>
@@ -39,15 +39,18 @@
     </header>
 
     <section class="scene" id="scene-buttons">
-      <h2 class="scene-title">Plastic buttons</h2>
-      <p class="scene-lead">Raised buttons in five colors, a round one for icons, and the disabled look. They sit best on metal.</p>
+      <h2 class="scene-title">Plastic and metal buttons</h2>
+      <p class="scene-lead">Raised plastic buttons in five colors. Round and square ones have a dish. A disabled button sinks into its case with a darker face and a muted label, like a button that has not popped up yet. They sit best on metal.</p>
       <div class="window fam-metal controls-stage">
         <button class="fam-plastic fam-plastic--red" type="button">Record</button>
         <button class="fam-plastic fam-plastic--green" type="button">Play</button>
         <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
         <button class="fam-plastic fam-plastic--blue" type="button">Share</button>
         <button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button>
+        <button class="fam-plastic fam-plastic--blue fam-plastic--square" type="button" aria-label="Eject">E</button>
         <button class="fam-plastic fam-plastic--blue" type="button" disabled>Disabled</button>
+        <button class="fam-plastic fam-plastic--red fam-plastic--square" type="button" aria-label="Eject, disabled" disabled>E</button>
+        <button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info, disabled" disabled>i</button>
       </div>
       <div class="code-block" role="group" aria-label="The plastic button markup" data-label="the plastic button markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
@@ -57,7 +60,10 @@
   &lt;button class="fam-plastic fam-plastic--amber" type="button"&gt;Pause&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--blue" type="button"&gt;Share&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info"&gt;i&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--blue fam-plastic--square" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--blue" type="button" disabled&gt;Disabled&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--red fam-plastic--square" type="button" aria-label="Eject, disabled" disabled&gt;E&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>

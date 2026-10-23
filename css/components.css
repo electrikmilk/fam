@@ -192,11 +192,13 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 /* ---------- Plastic buttons and the metal knob ---------- */
 
-/* Satin plastic: a fine grain blended with overlay and a very soft sheen, never a hard specular band */
+/* Satin plastic: the gradient and the shadows carry the shape, and a fine grain blended softly over them only adds texture.
+   isolation keeps the dish (z-index -1) above the face and below the label. */
 .fam-plastic {
   --fam-c: #264eae;
   box-sizing: border-box;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   display: inline-grid;
   place-items: center;
@@ -211,9 +213,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   border: 1px solid color-mix(in srgb, var(--fam-c) 40%, black);
   background:
     var(--fam-tex-grain-fine) 0 0 / 128px 128px,
-    linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 95%, white) 0%, var(--fam-c) 55%, color-mix(in srgb, var(--fam-c) 86%, black) 100%);
-  background-blend-mode: overlay, normal;
-  --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 -2px 3px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .4);
+    linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 82%, white) 0%, color-mix(in srgb, var(--fam-c) 94%, white) 38%, var(--fam-c) 62%, color-mix(in srgb, var(--fam-c) 80%, black) 100%);
+  background-blend-mode: soft-light, normal;
+  --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), inset 0 -2px 3px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .4);
   box-shadow: var(--fam-rest-shadow);
 }
 
@@ -248,11 +250,43 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   text-shadow: 0 1px 0 rgba(255, 255, 255, .35);
 }
 
-.fam-plastic--round {
+.fam-plastic--round,
+.fam-plastic--square {
   width: 34px;
   min-width: 0;
   padding: 0;
   font-size: 20px;
+}
+
+.fam-plastic--square {
+  border-radius: var(--fam-radius-md);
+  font-size: 16px;
+}
+
+/* The round dish in the middle of a round or square button, as in the cells of the grouped strip in references/plastic.png */
+.fam-plastic--round::after,
+.fam-plastic--square::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 0, 0, .18), rgba(0, 0, 0, 0) 75%);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .35);
+  pointer-events: none;
+}
+
+/* A button that has not popped up yet: sunk into its case with a darker face, a muted label and no outer shadow */
+.fam-plastic:disabled {
+  opacity: .7;
+  cursor: default;
+  color: rgba(255, 255, 255, .5);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
+  background:
+    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 55%, black) 0%, color-mix(in srgb, var(--fam-c) 48%, black) 100%);
+  background-blend-mode: soft-light, normal;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18);
 }
 
 /* Face built from the spiral photo: clean rings with the photo's own bright and dark wedges baked in, so it reflects light like spun metal.
@@ -577,7 +611,6 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 /* ---------- Disabled controls: dimmed, no pointer cursor, no pressed look (disabled text is exempt from WCAG contrast) ---------- */
 
-.fam-plastic:disabled,
 .fam-leather-button:disabled,
 .fam-switch:has(input:disabled),
 .fam-glass:has(.fam-glass-input:disabled) {

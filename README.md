@@ -158,8 +158,11 @@ Plastic buttons and the knob:
 ```html
 <button class="fam-plastic fam-plastic--red" type="button">Record</button>
 <button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button>
+<button class="fam-plastic fam-plastic--blue fam-plastic--square" type="button" aria-label="Eject">E</button>
 <span class="fam-knob" role="img" aria-label="Volume" style="--fam-knob-angle:35deg"></span>
 ```
+
+Round and square buttons have a round dish. A disabled button sinks into its case with a darker face and a muted label.
 
 Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 

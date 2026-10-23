@@ -8,9 +8,10 @@ test('disabled controls look and behave disabled', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const { page } = kit;
-    for (const selector of ['#plastic-disabled', '#leather-disabled', '#switch-disabled', '#glass-disabled']) {
+    for (const selector of ['#leather-disabled', '#switch-disabled', '#glass-disabled']) {
       assert.equal(await read(page, selector, 'opacity'), '0.5', `${selector} is not dimmed`);
     }
+    assert.equal(await read(page, '#plastic-disabled', 'opacity'), '0.7', '#plastic-disabled is not a little faded');
     for (const selector of ['#plastic-disabled', '#leather-disabled', '#switch-disabled', '#glass-disabled input']) {
       assert.equal(await read(page, selector, 'cursor'), 'default', `${selector} still shows an interactive cursor`);
     }
