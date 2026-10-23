@@ -1,9 +1,9 @@
 // Contrast audit, step 1 of 2 (browser). Run in the page (for example with the Chrome DevTools evaluate_script tool) on the demo page.
 // It records every text node, input placeholder and SVG icon with its real color, size and position, then hides all text and icons.
-// Step 2: take a full-page screenshot, then run audit_contrast.py ITEMS.json SCREENSHOT.png to measure each item against the pixels behind it.
+// Step 2: take a full-page screenshot, then run measure.py ITEMS.json SCREENSHOT.png [RESULTS.json] to measure each item against the pixels behind it.
 //
 // The demo page scrolls inside a container, so the script first expands the scroll containers above `.fam` so a full-page screenshot works.
-// Adjust the root selector ('.fam') for another page. Device pixel ratio is assumed to be 2 in audit_contrast.py.
+// Adjust the root selector ('.fam') for another page. Device pixel ratio is assumed to be 2 in measure.py.
 async () => {
   for (let n = document.querySelector('.fam'); n; n = n.parentElement) {
     const cs = getComputedStyle(n);

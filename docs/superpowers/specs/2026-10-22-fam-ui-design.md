@@ -11,7 +11,7 @@ Everything below was worked out against a working prototype. Treat it as the spe
 
 - `docs/superpowers/reference/demo-reference.html` - the final prototype page. Open it in Chrome. It contains the felt controls screen, the glass and refraction tests, a "glass cursor" test area, engraved text, the notes app template, the sign-in card template, plastic controls, the rounding comparison, and the shadow and gloss utilities.
 - `docs/superpowers/reference/demo-assets/` - the processed texture files the prototype uses.
-- `tools/texture-pipeline/` - the scripts that produced those textures, plus the contrast audit.
+- `tools/texture-pipeline/` - the scripts that produced those textures. `tools/contrast-audit/` - the contrast audit.
 - `references/` - the user's reference screenshots (Snow Leopard GUI, Soft Aqua UI kit, iOS 4 Notes, Find My Friends leather, plastic controls, iBooks wood shelf, an AI-generated "Tasks" leather UI).
 - `textures/` - the user's source photos. These are large, so they are inputs to a build step and never shipped.
 
@@ -148,7 +148,7 @@ Two lessons that apply to any new texture: periodic patterns (such as a diamond 
 ### Accessibility (decided)
 
 - Target WCAG AA. Normal text 4.5:1, large text (24px, or 18.66px bold) 3:1, icons and non-text 3:1.
-- Measure against the actual rendered pixels behind each item, and use the worst pixel as the pass mark, which is stricter than WCAG's usual practice. The audit is two steps: `audit-collect.js` (run in the page, records every text node, placeholder and icon, then hides them) and `audit_contrast.py` (measures each against a full-page screenshot).
+- Measure against the actual rendered pixels behind each item, and use the worst pixel as the pass mark, which is stricter than WCAG's usual practice. The audit is two steps: `collect.js` (run in the page, records every text node, placeholder and icon, then hides them) and `measure.py` (measures each against a full-page screenshot).
 - Current state of the prototype: 120 items measured, 3 below threshold at the worst pixel. They are the two 34px "test words" on the glass playground's deliberately arbitrary backdrop, and the host page's own header. Treat those as exempt.
 - Decisions that existed only to pass contrast: the fill shade under glass text, the deeper blue for selected rows, the dark label on the amber button, the lifted tan leather floor, the lighter wood under nav text, and the plain strip under the pad icons.
 

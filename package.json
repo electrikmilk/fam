@@ -22,7 +22,8 @@
   },
   "scripts": {
     "build": "node tools/bundle.mjs",
-    "test": "npm run build && node --test tests/"
+    "test": "npm run build && node --test tests/",
+    "audit": "npm run build && node tools/contrast-audit.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.58.2",
