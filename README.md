@@ -8,7 +8,15 @@ Textures are compact tiles to load fast.
 
 ## Showcase
 
-A single-page tour of the materials, with a glass lens that follows your cursor and knobs to tune it: https://electrikmilk.github.io/fam/
+A tour of the materials in five pages: https://electrikmilk.github.io/fam/
+
+- Home: a switcher that shows one pairing at a time, with the classes it uses.
+- Pairings: every scene that combines materials, such as wood and felt, leather and paper, metal and plastic.
+- Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows.
+- Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
+- Examples: the pages in `examples/`.
+
+The showcase's own text is set in Lato, loaded from Google Fonts. The kit itself loads no fonts.
 
 To open it locally, build the kit and open `showcase/index.html` in a browser:
 
