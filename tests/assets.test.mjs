@@ -67,3 +67,12 @@ test('credits cover every asset', async () => {
     assert.ok(credits.includes(name), `CREDITS.md does not mention ${name}`);
   }
 });
+
+// The spiral-metal photo's brightest wedge is 2.2 times its darkest. A ring-only face scores 1.0, which reads as a flat bullseye.
+const MINIMUM_REFLECTION_CONTRAST = 1.8;
+
+test('the knob face carries the spiral photo\'s reflections', () => {
+  const script = fileURLToPath(new URL('../tools/texture-pipeline/angular_contrast.py', import.meta.url));
+  const ratio = Number(execFileSync('python3', ['-I', script, assetPath('knob-face.jpg')], { encoding: 'utf8' }));
+  assert.ok(ratio >= MINIMUM_REFLECTION_CONTRAST, `the brightest wedge is only ${ratio} times the darkest`);
+});

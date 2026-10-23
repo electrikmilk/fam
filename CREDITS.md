@@ -11,7 +11,7 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `metal-tile.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | `make_tile.py 0.55 512 14` |
 | `metal-brushed.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | processed copy, recipe not recorded |
 | `metal-spiral.jpg` | `metal-spiral_fikri-rasyid-FnKKF2bATEE-unsplash.jpg` | fikri-rasyid | processed copy, recipe not recorded, scaled to 360px wide |
-| `knob-face.jpg` | `metal-spiral_fikri-rasyid-FnKKF2bATEE-unsplash.jpg` | fikri-rasyid | `make_radial_face.py ... 2762 1509 450 288` |
+| `knob-face.jpg` | `metal-spiral_fikri-rasyid-FnKKF2bATEE-unsplash.jpg` | fikri-rasyid | `make_radial_face.py ... 2762 1509 450 288 1.0 0.6` |
 | `grain-fine.jpg` | `grain_compagnons-ye8lWOjNUzI-unsplash.jpg` | compagnons | processed copy, recipe not recorded, made seamless with `make_tile.py 1.0 512 0` |
 | `cardstock-tile.jpg` | `cardstock_kiwihug-qv05FvdE26k-unsplash.jpg` | kiwihug | `make_tile.py 0.3 512 80` |
 | `legal-tile.jpg` | `lined-paper_heather-green-hKfKmfvPY44-unsplash.jpg` | heather-green | `make_legal_tile.py` |
