@@ -164,6 +164,11 @@
       </div>
     </section>
 
+    <div class="scene" id="pairings">
+      <h2 class="scene-title">Pairings</h2>
+      <p class="scene-lead">Materials are classes you combine. Each scene pairs materials, with its markup and a button that copies it.</p>
+    </div>
+
     <section class="scene" id="scene-wood-felt">
       <h2 class="scene-title">Wood and felt</h2>
       <p class="scene-lead">The look of a game table: a wooden bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
@@ -236,17 +241,31 @@
 
     <section class="scene" id="scene-cardstock-legal">
       <h2 class="scene-title">Cardstock and legal pad</h2>
-      <p class="scene-lead">A note on a card: a legal pad sheet resting on cardstock, lifted by a soft shadow.</p>
-      <div class="window fam-cardstock cardstock-card">
-        <div class="fam-legal-pad fam-round-sm fam-shadow-md pad-text">Shopping list<br>- Eggs<br>- Flour<br>- Butter</div>
-      </div>
+      <p class="scene-lead">A cardstock title bar over a legal pad sheet, as in the notes example.</p>
+      <section class="window fam-pad" aria-label="Note">
+        <div class="fam-pad-bar fam-cardstock">
+          <h3 class="fam-pad-title">Shopping list</h3>
+          <button class="fam-pad-add" type="button" aria-label="New note">+</button>
+        </div>
+        <div class="fam-pad-sheet fam-legal-pad" style="min-height: 150px; padding-bottom: 24px">
+          <p>- Eggs
+- Flour
+- Butter</p>
+        </div>
+      </section>
       <div class="code-block" role="group" aria-label="The cardstock and legal pad markup" data-label="the cardstock and legal pad markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-cardstock" style="padding: 28px"&gt;
-  &lt;div class="fam-legal-pad fam-round-sm fam-shadow-md" style="padding: 0 20px 24px 54px; font: 20px/24px var(--fam-font-hand); color: #2b2216"&gt;
-    Shopping list&lt;br&gt;- Eggs&lt;br&gt;- Flour&lt;br&gt;- Butter
+        <pre><code>&lt;section class="fam-pad" aria-label="Note"&gt;
+  &lt;div class="fam-pad-bar fam-cardstock"&gt;
+    &lt;h3 class="fam-pad-title"&gt;Shopping list&lt;/h3&gt;
+    &lt;button class="fam-pad-add" type="button" aria-label="New note"&gt;+&lt;/button&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+  &lt;div class="fam-pad-sheet fam-legal-pad" style="min-height: 150px; padding-bottom: 24px"&gt;
+    &lt;p&gt;- Eggs
+- Flour
+- Butter&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
       </div>
     </section>
 
