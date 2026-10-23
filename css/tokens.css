@@ -9,6 +9,11 @@
   --fam-font-ui: "Lucida Grande", -apple-system, "Helvetica Neue", sans-serif;
   --fam-font-hand: "Marker Felt", "Bradley Hand", "Segoe Print", cursive;
 
+  /* Controls that can sit on any surface get a two-tone focus ring: this white halo next to the control and a dark outline outside it.
+     Whatever the surface, at least one of the two tones reaches 3:1 against it. */
+  --fam-focus-halo: 0 0 0 2px #fff;
+  --fam-focus-ink: #1b1b20;
+
   --fam-radius-sm: 6px;
   --fam-radius-md: 12px;
   --fam-radius-lg: 20px;

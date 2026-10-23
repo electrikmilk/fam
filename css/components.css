@@ -30,7 +30,9 @@ select.fam-glass-input {
 select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-glass:has(.fam-glass-input:focus-visible) {
-  box-shadow: 0 0 0 3px rgba(246, 236, 210, .9), 0 8px 20px -8px rgba(0, 0, 0, .55);
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), 0 8px 20px -8px rgba(0, 0, 0, .55);
 }
 
 .fam-menu {
@@ -66,7 +68,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   overflow: hidden;
   cursor: pointer;
   background: var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
-  box-shadow: inset 0 3px 7px rgba(0, 0, 0, .75), inset 0 -1px 1px rgba(255, 255, 255, .35), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .7);
+  --fam-rest-shadow: inset 0 3px 7px rgba(0, 0, 0, .75), inset 0 -1px 1px rgba(255, 255, 255, .35), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .7);
+  box-shadow: var(--fam-rest-shadow);
 }
 
 /* The native input covers the whole track, invisible but focusable and clickable */
@@ -106,7 +109,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 }
 
 .fam-switch:has(input:checked) {
-  box-shadow: inset 0 3px 7px rgba(0, 30, 110, .5), inset 0 0 14px rgba(160, 185, 252, .85), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(20, 40, 120, .85), 0 0 12px 2px rgba(100, 140, 245, .7);
+  --fam-rest-shadow: inset 0 3px 7px rgba(0, 30, 110, .5), inset 0 0 14px rgba(160, 185, 252, .85), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(20, 40, 120, .85), 0 0 12px 2px rgba(100, 140, 245, .7);
 }
 
 .fam-switch:has(input:checked)::before { opacity: 1; }
@@ -117,8 +120,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 }
 
 .fam-switch:has(input:focus-visible) {
-  outline: 3px solid rgba(246, 236, 210, .95);
+  outline: 2px solid var(--fam-focus-ink);
   outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
 }
 
 /* ---------- Progress tubes. Set the value with --fam-value on the tube. ---------- */
@@ -196,7 +200,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     var(--fam-tex-grain-fine) 0 0 / 128px 128px,
     linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 95%, white) 0%, var(--fam-c) 55%, color-mix(in srgb, var(--fam-c) 86%, black) 100%);
   background-blend-mode: overlay, normal;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 -2px 3px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .4);
+  --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 -2px 3px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .4);
+  box-shadow: var(--fam-rest-shadow);
 }
 
 .fam-plastic::before {
@@ -207,14 +212,15 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   pointer-events: none;
 }
 
+.fam-plastic:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
+}
+
 .fam-plastic:active {
   transform: translateY(1px);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .4);
-}
-
-.fam-plastic:focus-visible {
-  outline: 3px solid rgba(246, 236, 210, .95);
-  outline-offset: 2px;
 }
 
 .fam-plastic--red { --fam-c: #a82219; }
@@ -314,7 +320,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-recessed-row input::placeholder { color: rgb(116, 98, 66); }
 
 .fam-recessed:focus-within {
-  box-shadow: inset 0 2px 5px rgba(60, 35, 10, .45), inset 0 0 0 1px rgba(80, 50, 15, .5), 0 0 0 3px rgba(255, 214, 140, .75);
+  box-shadow: inset 0 2px 5px rgba(60, 35, 10, .45), inset 0 0 0 1px rgba(80, 50, 15, .5), 0 0 0 3px #3a2008;
 }
 
 .fam-leather-button {
@@ -444,7 +450,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-search input::placeholder { color: rgb(100, 100, 108); }
 
 .fam-search:focus-within {
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .3), inset 0 0 0 1px rgba(0, 0, 0, .28), 0 1px 0 rgba(255, 255, 255, .9), 0 0 0 3px rgba(64, 110, 218, .6);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .3), inset 0 0 0 1px rgba(0, 0, 0, .28), 0 1px 0 rgba(255, 255, 255, .9), 0 0 0 3px var(--fam-blue-bottom);
 }
 
 .fam-list {
