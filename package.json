@@ -27,6 +27,10 @@
   "scripts": {
     "build": "node tools/bundle.mjs",
     "test": "npm run build && node --test --test-concurrency=4 tests/",
+    "test:fast": "npm run build && node --test --test-concurrency=4 --test-skip-pattern=\"has no contrast failures\" tests/",
+    "test:only": "npm run build && node --test",
+    "test:contrast": "npm run build && node --test --test-concurrency=4 tests/contrast.test.mjs",
+    "test:glass": "npm run build && node --test --test-concurrency=4 tests/effects.test.mjs tests/degrade.test.mjs tests/showcase-glass.test.mjs && node --test --test-concurrency=4 --test-name-pattern=\"(controls|showcase-glass) has no contrast failures.*1440px\" tests/contrast.test.mjs",
     "audit": "npm run build && node tools/contrast-audit.mjs",
     "prepack": "npm run build",
     "header": "npm run build && node tools/make-header.mjs",
