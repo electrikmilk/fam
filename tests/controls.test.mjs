@@ -79,3 +79,41 @@ test('metal buttons are made from the brushed metal texture', async () => {
     await kit.close();
   }
 });
+
+test('glossy buttons are real buttons with an aqua gradient body and a dialable gloss', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const selector of ['#glossy-button', '#glossy-silver']) {
+      assert.equal(await page.evaluate((target) => document.querySelector(target).tagName, selector), 'BUTTON');
+      assert.ok((await read(page, selector, 'backgroundImage')).includes('linear-gradient'), `${selector} has no gradient body`);
+    }
+    assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('#glossy-button')).getPropertyValue('--fam-gloss').trim()), '.28');
+    assert.notEqual(await read(page, '#glossy-button', 'backgroundImage'), await read(page, '#glossy-silver', 'backgroundImage'));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('glass buttons are frosted with a white label', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.ok((await read(page, '#glass-button', 'backdropFilter', '::before')).includes('blur'));
+    assert.equal(await read(page, '#glass-button', 'color'), 'rgb(255, 255, 255)');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('disabled glossy and glass buttons are dimmed and show no interactive cursor', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    for (const selector of ['#glossy-disabled', '#glass-button-disabled']) {
+      assert.equal(await read(kit.page, selector, 'opacity'), '0.5', `${selector} is not dimmed`);
+      assert.equal(await read(kit.page, selector, 'cursor'), 'default', `${selector} still shows an interactive cursor`);
+    }
+  } finally {
+    await kit.close();
+  }
+});

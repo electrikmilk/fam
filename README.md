@@ -171,6 +171,14 @@ Metal buttons are the same family in brushed metal, with `--round` and `--square
 <button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info">i</button>
 ```
 
+Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam-gloss-soft` and `fam-gloss-strong` dial its sheen) and the glass one is the frosted pill, so put it on a dark surface:
+
+```html
+<button class="fam-glossy-button" type="button">Save</button>
+<button class="fam-glossy-button fam-glossy-button--silver" type="button">Cancel</button>
+<button class="fam-glass fam-glass-button" type="button">Share</button>
+```
+
 Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 
 Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):

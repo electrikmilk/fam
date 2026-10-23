@@ -88,18 +88,25 @@
 /* An inner box inside padding looks even when its radius is the outer radius minus the padding */
 .fam-concentric { border-radius: calc(var(--fam-outer-radius) - var(--fam-pad)); }
 
-/* Aqua pill: dark rim, a body that gets lighter toward the bottom, and a soft sheen in the upper half whose strength is --fam-gloss */
-.fam-pill {
+/* Aqua pill: dark rim, a body that gets lighter toward the bottom, and a soft sheen in the upper half whose strength is --fam-gloss.
+   The glossy button in components.css shares these rules and only changes the colors. */
+.fam-pill,
+.fam-glossy-button {
   --fam-gloss: .28;
+  --fam-aqua-rim: #243fa0;
+  --fam-aqua-top: #3556c4;
+  --fam-aqua-mid: #5a85ea;
+  --fam-aqua-bottom: #8db0f7;
   position: relative;
   overflow: hidden;
   border-radius: var(--fam-radius-pill);
-  border: 1px solid #243fa0;
-  background: linear-gradient(to bottom, #3556c4 0%, #5a85ea 52%, #8db0f7 100%);
+  border: 1px solid var(--fam-aqua-rim);
+  background: linear-gradient(to bottom, var(--fam-aqua-top) 0%, var(--fam-aqua-mid) 52%, var(--fam-aqua-bottom) 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 3px 6px rgba(0, 0, 0, .35);
 }
 
-.fam-pill::after {
+.fam-pill::after,
+.fam-glossy-button::after {
   content: '';
   position: absolute;
   left: 4%;

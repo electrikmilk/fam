@@ -339,6 +339,78 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   pointer-events: none;
 }
 
+/* ---------- Glossy and glass buttons ---------- */
+
+/* The gradient, rim and sheen come from the aqua pill in effects.css; the lighter blue keeps the dark label above 4.5:1.
+   The sheen goes behind the label so it never washes the text. */
+.fam-glossy-button {
+  --fam-aqua-rim: #2a4aa8;
+  --fam-aqua-top: #6a98f2;
+  --fam-aqua-mid: #86acf7;
+  --fam-aqua-bottom: #bcd3fb;
+  box-sizing: border-box;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  height: 34px;
+  padding: 0 18px;
+  color: rgb(8, 20, 60);
+  font: 600 13px/1 var(--fam-font-ui);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .55);
+  cursor: pointer;
+  --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 2px 4px rgba(0, 0, 0, .4);
+  box-shadow: var(--fam-rest-shadow);
+}
+
+.fam-glossy-button::after { z-index: -1; }
+
+/* The gray gloss of the toolbar buttons in the Panther and iTunes screenshots */
+.fam-glossy-button--silver {
+  --fam-aqua-rim: #787c84;
+  --fam-aqua-top: #fcfcfd;
+  --fam-aqua-mid: #e4e6ea;
+  --fam-aqua-bottom: #c6cad1;
+  color: rgb(20, 22, 28);
+}
+
+.fam-glossy-button:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
+}
+
+.fam-glossy-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .35), 0 1px 1px rgba(0, 0, 0, .4);
+}
+
+/* A glass button is the glass pill on a button element. The glow goes behind the label like the lens layer. */
+.fam-glass-button {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  height: 34px;
+  padding: 0 20px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: 600 13px/1 var(--fam-font-ui);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  cursor: pointer;
+}
+
+.fam-glass-button::after { z-index: -1; }
+
+.fam-glass-button:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), 0 8px 20px -8px rgba(0, 0, 0, .55);
+}
+
+.fam-glass-button:active:not(:disabled) { transform: translateY(1px); }
+
 /* Face built from the spiral photo: clean rings with the photo's own bright and dark wedges baked in, so it reflects light like spun metal.
    The reflections are part of the image, so they stay put while --fam-knob-angle turns the orange indicator. */
 .fam-knob {
@@ -662,6 +734,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 /* ---------- Disabled controls: dimmed, no pointer cursor, no pressed look (disabled text is exempt from WCAG contrast) ---------- */
 
 .fam-leather-button:disabled,
+.fam-glossy-button:disabled,
+.fam-glass-button:disabled,
 .fam-switch:has(input:disabled),
 .fam-glass:has(.fam-glass-input:disabled) {
   opacity: .5;

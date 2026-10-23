@@ -30,6 +30,7 @@
       <p class="lead">Each control on its own, with its variants and its disabled look. Under each one is the markup, with a button that copies it.</p>
     <nav class="jump" aria-label="On this page">
       <a href="#scene-buttons">Plastic and metal buttons</a>
+      <a href="#scene-glossy-glass">Glossy and glass buttons</a>
       <a href="#scene-switch-knob">Switch and knob</a>
       <a href="#scene-progress">Progress tubes</a>
       <a href="#scene-glass-fields">Glass field and dropdown</a>
@@ -81,6 +82,39 @@
   &lt;button class="fam-metal-button fam-metal-button--square" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
   &lt;button class="fam-metal-button" type="button" disabled&gt;Disabled&lt;/button&gt;
   &lt;button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glossy-glass">
+      <h2 class="scene-title">Glossy and glass buttons</h2>
+      <p class="scene-lead">Glossy buttons are the aqua pill on a button, in blue and silver, and fam-gloss-soft or fam-gloss-strong dial the sheen. Glass buttons are the frosted pill on a button and read best on a dark surface.</p>
+      <div class="window fam-metal controls-stage">
+        <button class="fam-glossy-button" type="button">Save</button>
+        <button class="fam-glossy-button fam-glossy-button--silver" type="button">Cancel</button>
+        <button class="fam-glossy-button fam-gloss-strong" type="button">Strong gloss</button>
+        <button class="fam-glossy-button" type="button" disabled>Disabled</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The glossy button markup" data-label="the glossy button markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-glossy-button" type="button"&gt;Save&lt;/button&gt;
+  &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button"&gt;Cancel&lt;/button&gt;
+  &lt;button class="fam-glossy-button fam-gloss-strong" type="button"&gt;Strong gloss&lt;/button&gt;
+  &lt;button class="fam-glossy-button" type="button" disabled&gt;Disabled&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-felt controls-stage">
+        <button class="fam-glass fam-glass-button" type="button">Share</button>
+        <button class="fam-glass fam-glass-button" type="button">Send</button>
+        <button class="fam-glass fam-glass-button" type="button" disabled>Disabled</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The glass button markup" data-label="the glass button markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-glass fam-glass-button" type="button"&gt;Share&lt;/button&gt;
+  &lt;button class="fam-glass fam-glass-button" type="button"&gt;Send&lt;/button&gt;
+  &lt;button class="fam-glass fam-glass-button" type="button" disabled&gt;Disabled&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>
