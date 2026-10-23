@@ -41,6 +41,54 @@
     <div id="pill-none" class="fam-pill fam-gloss-none" style="width:150px; height:46px; margin:10px"></div>
     <div id="pill-soft" class="fam-pill fam-gloss-soft" style="width:150px; height:46px; margin:10px"></div>
     <div id="pill-strong" class="fam-pill fam-gloss-strong" style="width:150px; height:46px; margin:10px"></div>
+
+    <section id="components" class="fam-felt" style="padding:20px; margin-top:24px; width:520px">
+      <nav id="nav" class="fam-nav fam-wood" aria-label="Sample">
+        <span class="fam-nav-brand">fam-ui</span>
+        <a id="nav-current" class="fam-nav-item" href="#controls" aria-current="page">Controls</a>
+        <a id="nav-link" class="fam-nav-item" href="#progress">Progress</a>
+      </nav>
+
+      <div class="fam-glass" style="margin:16px 0"><input id="glass-input" class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+      <div class="fam-glass" style="margin:16px 0"><select id="glass-select" class="fam-glass-input" aria-label="Wood"><option>Walnut</option><option>Oak</option></select></div>
+      <ul id="menu" class="fam-menu" role="listbox" aria-label="Sample options">
+        <li role="option">Oak</li>
+        <li id="menu-selected" role="option" aria-selected="true">Walnut</li>
+      </ul>
+
+      <p>
+        <label id="switch-on" class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label>
+        <label id="switch-off" class="fam-switch"><input type="checkbox" role="switch" aria-label="Bluetooth"><span class="fam-switch-knob"></span></label>
+      </p>
+
+      <div class="fam-progress" role="progressbar" aria-label="Candy" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="--fam-value:68%; margin-bottom:14px"><div id="candy" class="fam-progress-fill fam-progress-fill--candy"></div></div>
+      <div class="fam-progress" role="progressbar" aria-label="Aqua" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100" style="--fam-value:52%; margin-bottom:14px"><div class="fam-progress-fill fam-progress-fill--aqua"></div></div>
+      <div class="fam-progress" role="progressbar" aria-label="Green" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="--fam-value:84%; margin-bottom:14px"><div class="fam-progress-fill fam-progress-fill--green"></div></div>
+
+      <p>
+        <button id="plastic-red" class="fam-plastic fam-plastic--red" type="button">Record</button>
+        <button id="plastic-green" class="fam-plastic fam-plastic--green" type="button">Play</button>
+        <button id="plastic-amber" class="fam-plastic fam-plastic--amber" type="button">Pause</button>
+        <button id="plastic-blue" class="fam-plastic fam-plastic--blue" type="button">Share</button>
+        <button id="plastic-purple" class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button>
+        <span id="knob" class="fam-knob" role="img" aria-label="Metal knob"></span>
+      </p>
+    </section>
+
+    <section id="paper-components" class="fam-paper" style="padding:20px; margin-top:24px; width:320px">
+      <label class="fam-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg><input id="search-input" placeholder="Search" aria-label="Search notes"></label>
+      <div role="listbox" aria-label="Notes" style="margin-top:12px">
+        <div id="row-plain" class="fam-list-row" role="option" tabindex="0"><b>Grocery run</b><span>Today</span></div>
+        <div id="row-selected" class="fam-list-row" role="option" tabindex="0" aria-selected="true"><b>Picnic plans</b><span>Yesterday</span></div>
+      </div>
+    </section>
+
+    <section id="tan-components" class="fam-leather" style="padding:20px; margin-top:24px; width:360px">
+      <div id="recessed" class="fam-recessed">
+        <div class="fam-recessed-row"><label for="recessed-input">Apple ID</label><input id="recessed-input" placeholder="example@me.com"></div>
+      </div>
+      <button id="leather-button" class="fam-leather-button" type="button">Sign In</button>
+    </section>
   </div>
 </body>
 </html>

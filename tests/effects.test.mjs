@@ -20,7 +20,7 @@ test('glass filter layer is rounded with a real border-radius', async () => {
   try {
     assert.equal(await style(kit.page, '#glass', '::before', 'borderRadius'), await style(kit.page, '#glass', null, 'borderRadius'));
     assert.equal(await style(kit.page, '#glass', '::before', 'borderRadius'), '27px');
-    assert.equal(await style(kit.page, '#glass', null, 'overflow'), 'visible');
+    assert.notEqual(await style(kit.page, '#glass', null, 'overflow'), 'hidden');
     assert.equal(await style(kit.page, '#glass', null, 'clipPath'), 'none');
   } finally {
     await kit.close();

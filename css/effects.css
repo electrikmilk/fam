@@ -11,6 +11,9 @@
   --fam-refract-saturate: 110%;
   position: relative;
   isolation: isolate;
+  /* The glow layer's bleed box is 2rem larger on every side. Its paint is already masked to the lens, but the box still counts as
+     scrollable overflow, so a full-width field at the viewport edge would scroll the page sideways. */
+  overflow: clip;
   border-radius: var(--fam-r);
   box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .55);
 }
