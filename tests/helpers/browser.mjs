@@ -25,8 +25,13 @@ export async function openUrl(
     if (message.type() === 'error') issues.push(`console error: ${message.text()}`);
   });
 
-  await page.goto(url, { waitUntil: 'load' });
-  await page.waitForLoadState('networkidle');
+  try {
+    await page.goto(url, { waitUntil: 'load' });
+    await page.waitForLoadState('networkidle');
+  } catch (error) {
+    await browser.close();
+    throw error;
+  }
 
   return {
     page,

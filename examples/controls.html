@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fam-ui felt controls</title>
+  <link rel="stylesheet" href="../dist/fam-ui.css">
+  <style>
+    body { margin: 0; padding: 28px 16px; background: #1b1b1f; }
+    .fam { max-width: 900px; margin: 0 auto; }
+    .fam .page-heading { margin: 34px 0 6px; font-size: 15px; font-weight: 600; color: #e9e9ec; }
+    .fam p.note { margin: 0 0 14px; font-size: 12px; color: #c9c9d0; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="fam-refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+    <feImage x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'100'%20height%3D'100'%20preserveAspectRatio%3D'none'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'x'%20x1%3D'0'%20x2%3D'1'%20y1%3D'0'%20y2%3D'0'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(255%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(215%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(160%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(96%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(40%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D'y'%20x1%3D'0'%20x2%3D'0'%20y1%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(0%2C255%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(0%2C215%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(0%2C160%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(0%2C96%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(0%2C40%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'black'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23x)'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23y)'%20style%3D'mix-blend-mode%3Ascreen'%2F%3E%3C%2Fsvg%3E"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="fam">
+  <main class="fam-screen fam-felt">
+    <nav class="fam-nav fam-wood" aria-label="Sample navigation">
+      <span class="fam-nav-brand">fam-ui</span>
+      <a class="fam-nav-item" href="#controls" aria-current="page">Controls</a>
+      <a class="fam-nav-item" href="#progress">Progress</a>
+      <a class="fam-nav-item" href="#textures">Textures</a>
+      <a class="fam-nav-item" href="#effects">Effects</a>
+    </nav>
+
+    <div class="fam-screen-body">
+      <div>
+        <div class="fam-screen-label">Rounded glassy input</div>
+        <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+
+        <div class="fam-screen-label" style="margin-top:22px">Dropdown</div>
+        <div class="fam-glass">
+          <select class="fam-glass-input" aria-label="Wood">
+            <option>Walnut</option>
+            <option>Oak</option>
+            <option>Cherry</option>
+          </select>
+        </div>
+        <ul class="fam-menu" role="listbox" aria-label="Sample options">
+          <li role="option">Oak</li>
+          <li role="option" aria-selected="true">Walnut</li>
+          <li role="option">Cherry</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="fam-screen-label">Metal switches</div>
+        <div class="fam-switch-row">
+          <label class="fam-switch"><input type="checkbox" role="switch" aria-label="On example" checked><span class="fam-switch-knob"></span></label>
+          <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Off example"><span class="fam-switch-knob"></span></label>
+          <span class="fam-switch-label">on / off</span>
+        </div>
+
+        <div class="fam-screen-label" style="margin-top:26px">Candy cane progress</div>
+        <div class="fam-progress" role="progressbar" aria-label="Candy cane progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%; margin-bottom:14px"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
+
+        <div class="fam-screen-label">Glossy progress</div>
+        <div class="fam-progress" role="progressbar" aria-label="Blue progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="52" style="--fam-value:52%; margin-bottom:14px"><div class="fam-progress-fill fam-progress-fill--aqua"></div></div>
+        <div class="fam-progress" role="progressbar" aria-label="Green progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="84" style="--fam-value:84%; margin-bottom:14px"><div class="fam-progress-fill fam-progress-fill--green"></div></div>
+      </div>
+    </div>
+  </main>
+
+  <h2 class="page-heading">One felt, any color</h2>
+  <p class="note">The felt photo is grayscale and multiplied onto one <code>--fam-tint</code> color, so changing one variable recolors the whole texture.</p>
+  <div class="fam-swatch-row">
+    <div><div class="fam-swatch fam-felt" style="--fam-tint:#1f7a3d"></div><div class="fam-swatch-caption">green</div></div>
+    <div><div class="fam-swatch fam-felt" style="--fam-tint:#1d4fa8"></div><div class="fam-swatch-caption">blue</div></div>
+    <div><div class="fam-swatch fam-felt" style="--fam-tint:#8a1f2b"></div><div class="fam-swatch-caption">burgundy</div></div>
+    <div><div class="fam-swatch fam-felt" style="--fam-tint:#6b3fa0"></div><div class="fam-swatch-caption">purple</div></div>
+    <div><div class="fam-swatch fam-felt" style="--fam-tint:#c7a23a"></div><div class="fam-swatch-caption">gold</div></div>
+  </div>
+</div>
+</body>
+</html>

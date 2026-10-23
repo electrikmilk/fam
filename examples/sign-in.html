@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fam-ui sign-in card</title>
+  <link rel="stylesheet" href="../dist/fam-ui.css">
+  <style>
+    body { margin: 0; padding: 28px 16px; background: #1b1b1f; }
+    .fam { max-width: 900px; margin: 0 auto; }
+    .fam .page-heading { margin: 34px 0 6px; font-size: 15px; font-weight: 600; color: #e9e9ec; }
+    .fam p.note { margin: 0 0 14px; font-size: 12px; color: #c9c9d0; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="fam-refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+    <feImage x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'100'%20height%3D'100'%20preserveAspectRatio%3D'none'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'x'%20x1%3D'0'%20x2%3D'1'%20y1%3D'0'%20y2%3D'0'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(255%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(215%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(160%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(96%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(40%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D'y'%20x1%3D'0'%20x2%3D'0'%20y1%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(0%2C255%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(0%2C215%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(0%2C160%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(0%2C96%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(0%2C40%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'black'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23x)'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23y)'%20style%3D'mix-blend-mode%3Ascreen'%2F%3E%3C%2Fsvg%3E"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="fam">
+  <main class="fam-signin fam-leather-frame">
+    <h1 class="fam-signin-title">Sign In</h1>
+    <div class="fam-recessed">
+      <div class="fam-recessed-row"><label for="signin-id">Apple ID</label><input id="signin-id" placeholder="example@me.com" autocomplete="username"></div>
+      <div class="fam-recessed-row"><label for="signin-password">Password</label><input id="signin-password" type="password" placeholder="Required" autocomplete="current-password"></div>
+    </div>
+    <button class="fam-leather-button" type="button">Sign In</button>
+  </main>
+</div>
+</body>
+</html>
