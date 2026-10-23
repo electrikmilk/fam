@@ -27,7 +27,7 @@ The Controls page is meant to show each control alone with its variants and its 
 - An optional button group, like the reference's grouped strip, for plastic buttons.
 - Metal buttons, alongside plastic ones.
 - The progress tubes shown on a metal surface on the Controls page.
-- Tabs, in two styles: the Snow Leopard tab strip, and tabs that suit each material.
+- Tabs, as button groups, in two styles: the Snow Leopard tab strip, and tabs that suit each material.
 - Radio buttons in four styles: plastic, metal, glossy and glass. The plastic and metal ones glow like an LED when selected.
 - Glossy and glass buttons shown on the Controls page.
 - A plastic material with grain, based on the plastic buttons and controls, so controls can sit on it.
@@ -79,8 +79,8 @@ Each item is what the owner said unless marked as my call.
 
 ### Tabs
 
-- Two styles: the Snow Leopard tab strip, and tabs that suit each material (**my call:** leather, metal and plastic).
-- **My call:** tabs are styled from `role="tablist"`, `role="tab"` and `aria-selected`. The kit does not switch panels. The showcase demo switches panels the way the existing pairings switcher does.
+- Tabs are button groups (the owner's decision after the plan was written), so a tab strip is a `fam-button-group` with `role="tablist"` whose cells are `role="tab"` buttons. The Snow Leopard strip is a glossy silver group with an aqua selected cell, and the material tabs are leather, metal and plastic groups.
+- **My call:** the selected tab is marked with `aria-selected="true"`, and the group lights a cell for `aria-selected` as well as `aria-pressed`. The kit does not switch panels. The showcase demo does, the way the existing pairings switcher does.
 
 ### Plastic material and dial
 
@@ -95,7 +95,7 @@ Each item is what the owner said unless marked as my call.
 ### Calls made after the builder check (mine)
 
 - **Group markup:** a group is a wrapper with `role="group"` and an accessible name, holding ordinary buttons. A selected cell is a button with `aria-pressed="true"`, set by the author, and the LED dot is styled from that attribute. Single-select behavior is the author's, not the kit's.
-- **Tab keyboard model:** tabs are `<button role="tab">` elements, so every tab is in the Tab order and a disabled tab uses native `disabled`. Arrow-key movement between tabs needs a few lines of script, which the showcase demo supplies and the markup block notes. The kit stays JavaScript-free.
+- **Tab keyboard model:** tab cells are `<button role="tab">` elements, so every tab is in the Tab order and a disabled tab uses native `disabled`. Arrow-key movement between tabs needs a few lines of script, which the showcase demo supplies and the markup block notes. The kit stays JavaScript-free.
 - **Plastic dial:** decorative like the existing knob. It is `role="img"` with an `aria-label` that states its value, so it has no focus ring or disabled look.
 - **Glass button contrast:** measured on the dark felt stage the existing glass fields use, because that is where the page shows them.
 - **Metal buttons:** round and square metal buttons get the same circular dish as plastic. Wide labeled pills stay plain.
