@@ -4,6 +4,18 @@
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
+## Showcase
+
+A single-page tour of the materials, with a glass lens that follows your cursor and knobs to tune it: https://electrikmilk.github.io/fam/
+
+To open it locally, build the kit and open `showcase/index.html` in a browser:
+
+```sh
+npm run build
+```
+
+`npm run site` assembles the folder that GitHub Pages publishes (`_site/`), and `.github/workflows/pages.yml` publishes it on every push to `main`.
+
 ## Use it
 
 Link the bundle and wrap your UI in `.fam` (it only sets the font and base color):
