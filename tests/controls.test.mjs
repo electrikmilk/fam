@@ -432,3 +432,71 @@ test('every plastic surface carries the fine grain', async () => {
     await kit.close();
   }
 });
+
+const shadowsOf = async (page, selector, pseudo = null) => shadowLayers(await read(page, selector, 'boxShadow', pseudo));
+const isOrange = (layer) => /rgba?\(255, (9\d|1\d\d), (\d{1,2}|1\d\d)/.test(layer);
+const isInset = (layer) => layer.endsWith('inset');
+
+test('the metal nav current item is a darker inset with a light label', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    await page.locator('#nav-metal').scrollIntoViewIfNeeded();
+    const underLabel = async (selector) => {
+      const box = await page.locator(selector).boundingBox();
+      const { mean } = statistics(await page.screenshot({ clip: { x: box.x + 6, y: box.y + box.height - 5, width: box.width - 12, height: 3 } }));
+      return (mean[0] + mean[1] + mean[2]) / 3;
+    };
+    const current = await underLabel('#nav-metal-current');
+    const plain = await underLabel('#nav-metal-plain');
+    assert.ok(current < plain - 40, `the current item (${current.toFixed(1)}) is not much darker than a plain one (${plain.toFixed(1)})`);
+    assert.equal(await read(page, '#nav-metal-current', 'color'), 'rgb(236, 234, 228)');
+    assert.equal(await read(page, '#nav-metal-plain', 'color'), 'rgb(18, 20, 26)');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a lit plastic or metal cell is inset and an unlit one is raised', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const selector of ['#group-pressed', '#group-selected', '#group-metal-lit']) {
+      for (const layer of await shadowsOf(page, selector)) assert.ok(isInset(layer), `${selector} still casts an outer shadow: ${layer}`);
+    }
+    assert.ok((await shadowsOf(page, '#group-unpressed')).some((layer) => !isInset(layer)), 'an unlit cell should be raised');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the LED glows itself and lights the surface around it', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const [name, selector] of [['dish LED', '#group-pressed'], ['LED dot', '#group-metal-lit']]) {
+      const layers = await shadowsOf(page, selector, '::after');
+      assert.ok(layers.some((layer) => isInset(layer) && layer.length > 0), `the ${name} has no glow of its own`);
+      assert.ok(layers.filter((layer) => !isInset(layer) && isOrange(layer)).length >= 1, `the ${name} does not light its surroundings`);
+    }
+    assert.ok((await shadowsOf(page, '#group-metal-lit', '::after')).filter((layer) => !isInset(layer) && isOrange(layer)).length >= 2, 'the LED dot has one halo, not a core and a halo');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a checked LED radio glows like the active switch: an outer glow, an inner glow and a glowing LED', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    for (const id of ['radio-plastic-on', 'radio-metal-on']) {
+      const dot = await shadowsOf(page, `#${id}`);
+      assert.ok(dot.some((layer) => !isInset(layer) && isOrange(layer)), `${id} has no outer glow`);
+      assert.ok(dot.some((layer) => isInset(layer) && isOrange(layer)), `${id} has no inner glow`);
+      assert.ok((await shadowsOf(page, `#${id}`, '::after')).some((layer) => !isInset(layer) && isOrange(layer)), `the LED in ${id} does not glow`);
+    }
+    assert.ok(!(await shadowsOf(page, '#radio-plastic-off')).some(isOrange), 'an unchecked radio glows');
+  } finally {
+    await kit.close();
+  }
+});
