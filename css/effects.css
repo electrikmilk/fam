@@ -14,6 +14,12 @@
   --fam-glass-saturate: 125%;
   --fam-glow-saturate: 190%;
   --fam-refract-saturate: 110%;
+  --fam-glass-shade: rgba(0, 0, 0, .42);
+  --fam-glass-rim: rgba(255, 255, 255, .55);
+  --fam-glass-underlight: rgba(0, 0, 0, .35);
+  --fam-glass-ink: #fff;
+  --fam-glass-ink-soft: rgba(255, 255, 255, .72);
+  --fam-glass-ink-shadow: 0 1px 2px rgba(0, 0, 0, .6);
   position: relative;
   isolation: isolate;
   /* The glow layer's bleed box is 2rem larger on every side. Its paint is already masked to the lens, but the box still counts as
@@ -35,12 +41,30 @@
   border-radius: inherit;
   backdrop-filter: blur(var(--fam-glass-blur)) saturate(var(--fam-glass-saturate)) brightness(110%);
   background:
-    linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)),
+    linear-gradient(var(--fam-glass-shade), var(--fam-glass-shade)),
     linear-gradient(to bottom, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 46%, rgba(255, 255, 255, 0) 54%),
     linear-gradient(rgba(255, 255, 255, .14), rgba(255, 255, 255, .32));
   background-origin: border-box;
   background-clip: padding-box, border-box, border-box;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), inset 0 -8px 12px -6px rgba(0, 0, 0, .35);
+  box-shadow: inset 0 0 0 1px var(--fam-glass-rim), inset 0 -8px 12px -6px var(--fam-glass-underlight);
+}
+
+/* Tints change the shade and the ink together, so the text keeps its contrast. Light glass needs dark ink; blue glass keeps white ink.
+   Both come after .fam-glass so they win on equal specificity. Refracting glass has no shade and ignores them. */
+.fam-glass--light {
+  --fam-glass-shade: rgba(255, 255, 255, .5);
+  --fam-glass-rim: rgba(255, 255, 255, .85);
+  --fam-glass-underlight: rgba(0, 0, 0, .18);
+  --fam-glass-ink: #14161c;
+  --fam-glass-ink-soft: rgba(20, 22, 28, .86);
+  --fam-glass-ink-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+}
+
+.fam-glass--blue {
+  --fam-glass-shade: var(--fam-glass-blue-shade);
+  --fam-glass-rim: rgba(190, 215, 255, .7);
+  --fam-glass-underlight: rgba(0, 10, 60, .45);
+  --fam-glass-ink-shadow: 0 1px 2px rgba(0, 10, 60, .7);
 }
 
 /* Ambient glow. The transparent border is the bleed: the backdrop is sampled across the whole extended box, while the mask

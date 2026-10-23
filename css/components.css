@@ -11,12 +11,12 @@
   border: 0;
   outline: 0;
   background: transparent;
-  color: #fff;
+  color: var(--fam-glass-ink);
   font: inherit;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  text-shadow: var(--fam-glass-ink-shadow);
 }
 
-.fam-glass-input::placeholder { color: rgba(255, 255, 255, .72); }
+.fam-glass-input::placeholder { color: var(--fam-glass-ink-soft); }
 
 /* The dropdown is the glass field with a plain white chevron and no separate button */
 select.fam-glass-input {
@@ -28,6 +28,10 @@ select.fam-glass-input {
 
 /* The native popup is drawn on a light surface, so its options cannot inherit the field's white text */
 select.fam-glass-input option { color: #222; text-shadow: none; }
+
+.fam-glass--light select.fam-glass-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.5 1.5 6 6l4.5-4.5' fill='none' stroke='%2314161c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
 
 .fam-glass:has(.fam-glass-input:focus-visible) {
   outline: 2px solid var(--fam-focus-ink);
@@ -405,9 +409,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   padding: 0 20px;
   border: 0;
   background: none;
-  color: #fff;
+  color: var(--fam-glass-ink);
   font: 600 13px/1 var(--fam-font-ui);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  text-shadow: var(--fam-glass-ink-shadow);
   cursor: pointer;
 }
 
@@ -531,9 +535,10 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 }
 
 .fam-radio--glass .fam-radio-dot {
+  --fam-glass-shade: rgba(0, 0, 0, .42);
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 46%, rgba(255, 255, 255, 0) 54%),
-    linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, .42));
+    linear-gradient(var(--fam-glass-shade), var(--fam-glass-shade));
   backdrop-filter: blur(6px);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 3px 6px -2px rgba(0, 0, 0, .55);
 }
@@ -542,6 +547,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-radio--glass:has(input:focus-visible) .fam-radio-dot {
   box-shadow: var(--fam-focus-halo), inset 0 0 0 1px rgba(255, 255, 255, .55), 0 3px 6px -2px rgba(0, 0, 0, .55);
 }
+
+/* The checked dot turns blue like any active glass control */
+.fam-radio--glass input:checked + .fam-radio-dot { --fam-glass-shade: var(--fam-glass-blue-shade); }
 
 .fam-radio--glass input:checked + .fam-radio-dot::after { background: #fff; box-shadow: 0 0 4px rgba(255, 255, 255, .8); }
 
