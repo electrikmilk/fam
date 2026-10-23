@@ -6,6 +6,8 @@
   --fam-r: 999px;
   --fam-bleed: 2rem;
   --fam-glow-depth: 18px;
+  --fam-glass-blur: 14px;
+  --fam-refract-blur: 1px;
   --fam-glass-saturate: 125%;
   --fam-glow-saturate: 190%;
   --fam-refract-saturate: 110%;
@@ -25,7 +27,7 @@
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  backdrop-filter: blur(14px) saturate(var(--fam-glass-saturate)) brightness(110%);
+  backdrop-filter: blur(var(--fam-glass-blur)) saturate(var(--fam-glass-saturate)) brightness(110%);
   background:
     linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)),
     linear-gradient(to bottom, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, .07) 46%, rgba(255, 255, 255, 0) 54%),
@@ -55,8 +57,8 @@
 /* Clear glass that bends the backdrop at its rim. The plain declaration comes first so an engine that rejects url() filters keeps it.
    Chromium only; the displacement filter itself is the inline snippet in snippets/refraction-filter.html. */
 .fam-glass--refract::before {
-  backdrop-filter: blur(1px) saturate(var(--fam-refract-saturate)) brightness(105%);
-  backdrop-filter: url(#fam-refract) blur(1px) saturate(var(--fam-refract-saturate)) brightness(105%);
+  backdrop-filter: blur(var(--fam-refract-blur)) saturate(var(--fam-refract-saturate)) brightness(105%);
+  backdrop-filter: url(#fam-refract) blur(var(--fam-refract-blur)) saturate(var(--fam-refract-saturate)) brightness(105%);
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, .24) 0%, rgba(255, 255, 255, .05) 46%, rgba(255, 255, 255, 0) 54%),
     linear-gradient(rgba(255, 255, 255, .06), rgba(255, 255, 255, .18));

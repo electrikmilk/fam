@@ -51,6 +51,26 @@ test('glass saturation is a variable', async () => {
   }
 });
 
+test('glass blur is a variable', async () => {
+  const kit = await openKit();
+  try {
+    assert.ok((await style(kit.page, '#glass-blurred', '::before', 'backdropFilter')).includes('blur(20px)'));
+    assert.ok((await style(kit.page, '#glass', '::before', 'backdropFilter')).includes('blur(14px)'));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('refraction blur is a variable', async () => {
+  const kit = await openKit();
+  try {
+    assert.ok((await style(kit.page, '#refract-blurred', '::before', 'backdropFilter')).includes('blur(6px)'));
+    assert.ok((await style(kit.page, '#glass-refract', '::before', 'backdropFilter')).includes('blur(1px)'));
+  } finally {
+    await kit.close();
+  }
+});
+
 test('refraction modifier uses the filter', async () => {
   const kit = await openKit();
   try {

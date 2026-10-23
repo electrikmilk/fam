@@ -80,7 +80,7 @@ Add `fam-wood-frame--glossy` for a glass sheen over a photo. Leave it off for a 
 <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
 ```
 
-Set `--fam-r` for the corner radius (default pill), `--fam-glow-depth`, `--fam-bleed`, and the saturation with `--fam-glass-saturate`, `--fam-glow-saturate` and `--fam-refract-saturate`.
+Set `--fam-r` for the corner radius (default pill), `--fam-glow-depth`, `--fam-bleed`, the lens blur with `--fam-glass-blur` (default 14px) and `--fam-refract-blur` (default 1px, for refracting glass), and the saturation with `--fam-glass-saturate`, `--fam-glow-saturate` and `--fam-refract-saturate`.
 
 Add `fam-glass--refract` for clear glass that bends what is behind its rim. It needs the filter in `snippets/refraction-filter.html` somewhere in the page, once:
 
