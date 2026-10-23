@@ -384,3 +384,48 @@ test('a selected tab is marked in forced colors', { skip: !isChromium && 'forced
     await kit.close();
   }
 });
+
+test('the plastic panel is a textured gradient', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const background = await read(kit.page, '#plastic-panel', 'backgroundImage');
+    assert.ok(background.includes('linear-gradient') && background.includes('grain-fine.jpg'), background);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the dial turns with --fam-knob-angle and is labeled', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('#dial')).getPropertyValue('--fam-knob-angle').trim()), '35deg');
+    assert.notEqual(await read(page, '#dial', 'transform', '::after'), await read(page, '#dial-low', 'transform', '::after'));
+    for (const id of ['dial', 'dial-low']) {
+      assert.equal(await page.getAttribute(`#${id}`, 'role'), 'img');
+      assert.ok((await page.getAttribute(`#${id}`, 'aria-label')).length > 0);
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
+test('every plastic surface carries the fine grain', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const surfaces = [
+      ['plastic button', '#plastic-red', null],
+      ['disabled plastic button', '#plastic-disabled', null],
+      ['plastic panel', '#plastic-panel', null],
+      ['plastic radio', '#grain-radio', null],
+      ['plastic case', '#tabs-plastic', null],
+      ['dial face', '#dial', '::before'],
+    ];
+    for (const [name, selector, pseudo] of surfaces) {
+      assert.ok((await read(page, selector, 'backgroundImage', pseudo)).includes('grain-fine.jpg'), `the ${name} has no grain`);
+    }
+  } finally {
+    await kit.close();
+  }
+});

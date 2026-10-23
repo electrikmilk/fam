@@ -33,6 +33,7 @@
       <a href="#scene-glossy-glass">Glossy and glass buttons</a>
       <a href="#scene-radios">Radio buttons</a>
       <a href="#scene-tabs">Tabs</a>
+      <a href="#scene-plastic">Plastic panel and dial</a>
       <a href="#scene-switch-knob">Switch and knob</a>
       <a href="#scene-progress">Progress tubes</a>
       <a href="#scene-glass-fields">Glass field and dropdown</a>
@@ -268,7 +269,7 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-plastic-panel fam-round-md controls-stage">
         <div class="tab-demo">
         <div class="fam-button-group fam-button-group--case" role="tablist" aria-label="Plastic tabs" data-tabs>
           <button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-0" aria-selected="false" aria-controls="plastic-panel-0">General</button>
@@ -279,6 +280,23 @@
         <div class="tab-panel" role="tabpanel" id="plastic-panel-1" aria-labelledby="plastic-tab-1">Sound panel</div>
         <div class="tab-panel" role="tabpanel" id="plastic-panel-2" aria-labelledby="plastic-tab-2">Display panel</div>
         </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The plastic tab strip markup" data-label="the plastic tab strip markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-plastic-panel fam-round-md" style="padding: 28px"&gt;
+  &lt;div class="tab-demo"&gt;
+  &lt;div class="fam-button-group fam-button-group--case" role="tablist" aria-label="Plastic tabs" data-tabs&gt;
+    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-0" aria-selected="false" aria-controls="plastic-panel-0"&gt;General&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-1" aria-selected="true" aria-controls="plastic-panel-1"&gt;Sound&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-2" aria-selected="false" aria-controls="plastic-panel-2"&gt;Display&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-0" aria-labelledby="plastic-tab-0"&gt;General panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-1" aria-labelledby="plastic-tab-1"&gt;Sound panel&lt;/div&gt;
+  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-2" aria-labelledby="plastic-tab-2"&gt;Display panel&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-metal controls-stage">
         <div class="tab-demo">
         <div class="fam-button-group" role="tablist" aria-label="Metal tabs" data-tabs>
           <button class="fam-metal-button" type="button" role="tab" id="metal-tab-0" aria-selected="true" aria-controls="metal-panel-0">One</button>
@@ -290,19 +308,9 @@
         <div class="tab-panel" role="tabpanel" id="metal-panel-2" aria-labelledby="metal-tab-2">Three panel</div>
         </div>
       </div>
-      <div class="code-block" role="group" aria-label="The plastic and metal tab strips markup" data-label="the plastic and metal tab strips markup">
+      <div class="code-block" role="group" aria-label="The metal tab strip markup" data-label="the metal tab strip markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;div class="fam-metal" style="padding: 28px"&gt;
-  &lt;div class="tab-demo"&gt;
-  &lt;div class="fam-button-group fam-button-group--case" role="tablist" aria-label="Plastic tabs" data-tabs&gt;
-    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-0" aria-selected="false" aria-controls="plastic-panel-0"&gt;General&lt;/button&gt;
-    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-1" aria-selected="true" aria-controls="plastic-panel-1"&gt;Sound&lt;/button&gt;
-    &lt;button class="fam-plastic fam-plastic--cream" type="button" role="tab" id="plastic-tab-2" aria-selected="false" aria-controls="plastic-panel-2"&gt;Display&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-0" aria-labelledby="plastic-tab-0"&gt;General panel&lt;/div&gt;
-  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-1" aria-labelledby="plastic-tab-1"&gt;Sound panel&lt;/div&gt;
-  &lt;div class="tab-panel" role="tabpanel" id="plastic-panel-2" aria-labelledby="plastic-tab-2"&gt;Display panel&lt;/div&gt;
-  &lt;/div&gt;
   &lt;div class="tab-demo"&gt;
   &lt;div class="fam-button-group" role="tablist" aria-label="Metal tabs" data-tabs&gt;
     &lt;button class="fam-metal-button" type="button" role="tab" id="metal-tab-0" aria-selected="true" aria-controls="metal-panel-0"&gt;One&lt;/button&gt;
@@ -387,6 +395,42 @@
   &lt;div class="tab-panel" role="tabpanel" id="lol-panel-1" aria-labelledby="lol-tab-1"&gt;Todo panel&lt;/div&gt;
   &lt;div class="tab-panel" role="tabpanel" id="lol-panel-2" aria-labelledby="lol-tab-2"&gt;Done panel&lt;/div&gt;
   &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-plastic">
+      <h2 class="scene-title">Plastic panel and dial</h2>
+      <p class="scene-lead">fam-plastic-panel is a cream plastic surface to put controls on. The dial is drawn in CSS: --fam-knob-angle turns its tick, and its label should say its value.</p>
+      <div class="window fam-plastic-panel fam-round-md controls-stage">
+        <span class="fam-dial" role="img" aria-label="Volume low" style="--fam-knob-angle: -100deg"></span>
+        <span class="fam-dial" role="img" aria-label="Volume medium"></span>
+        <span class="fam-dial" role="img" aria-label="Volume high" style="--fam-knob-angle: 100deg"></span>
+        <div class="fam-button-group fam-button-group--case" role="group" aria-label="Playback mode">
+          <button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"></button>
+          <button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"></button>
+          <button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 3" aria-pressed="false"></button>
+        </div>
+        <button class="fam-plastic fam-plastic--red" type="button">Record</button>
+        <button class="fam-plastic fam-plastic--blue" type="button" disabled>Disabled</button>
+        <label class="fam-radio fam-radio--plastic"><input type="radio" name="panel-mode" checked><span class="fam-radio-dot"></span>On</label>
+        <label class="fam-radio fam-radio--plastic"><input type="radio" name="panel-mode"><span class="fam-radio-dot"></span>Off</label>
+      </div>
+      <div class="code-block" role="group" aria-label="The plastic panel and dial markup" data-label="the plastic panel and dial markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-plastic-panel fam-round-md" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; padding: 28px"&gt;
+  &lt;span class="fam-dial" role="img" aria-label="Volume low" style="--fam-knob-angle: -100deg"&gt;&lt;/span&gt;
+  &lt;span class="fam-dial" role="img" aria-label="Volume medium"&gt;&lt;/span&gt;
+  &lt;span class="fam-dial" role="img" aria-label="Volume high" style="--fam-knob-angle: 100deg"&gt;&lt;/span&gt;
+  &lt;div class="fam-button-group fam-button-group--case" role="group" aria-label="Playback mode"&gt;
+    &lt;button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"&gt;&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"&gt;&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 3" aria-pressed="false"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;button class="fam-plastic fam-plastic--red" type="button"&gt;Record&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--blue" type="button" disabled&gt;Disabled&lt;/button&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="panel-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;On&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="panel-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Off&lt;/label&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>

@@ -16,6 +16,7 @@ const CONTROLS = [
   ['glass button on felt', '#glass-button', null],
   ['plastic radio on metal', '#speed-2', '.fam-radio'],
   ['glass radio on felt', '#radio-glass-input', '.fam-radio'],
+  ['plastic button on the plastic panel', '#plastic-on-panel', null],
   ['switch on metal', '#switch-on-metal input', '.fam-switch'],
   ['recessed field on leather', '#recessed-input', '.fam-recessed'],
   ['leather button on leather', '#leather-button', null],

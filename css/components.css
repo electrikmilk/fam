@@ -668,7 +668,10 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   gap: 3px;
   padding: 5px;
   border-radius: var(--fam-radius-md);
-  background: linear-gradient(to bottom, #f7f2e4, #ded6c0);
+  background:
+    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    linear-gradient(to bottom, #f7f2e4, #ded6c0);
+  background-blend-mode: soft-light, normal;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .65), 0 2px 4px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
 }
 
@@ -681,6 +684,51 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .fam-button-group > * { transition: none; }
+}
+
+/* Plastic dial drawn in CSS like the ridged knob and the cream dial in references/plastic.png: a ridged rim, a dished cream face
+   and an orange tick that --fam-knob-angle turns. It is a picture, like .fam-knob, so give it role="img" and say its value in the label. */
+.fam-dial {
+  --fam-knob-angle: 35deg;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background:
+    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    repeating-conic-gradient(rgba(0, 0, 0, .3) 0 2deg, rgba(255, 255, 255, .22) 2deg 4deg),
+    linear-gradient(to bottom, #c4bfb0, #8f8a7a);
+  background-blend-mode: soft-light, normal, normal;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3), 0 5px 9px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .6);
+}
+
+.fam-dial::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background:
+    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    radial-gradient(circle at 50% 30%, #fcf9ef, #ddd5bf 70%, #c0b79e);
+  background-blend-mode: soft-light, normal;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, .9), inset 0 -3px 5px rgba(0, 0, 0, .25), 0 1px 2px rgba(0, 0, 0, .5);
+}
+
+.fam-dial::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  width: 4px;
+  height: 16px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--fam-led);
+  box-shadow: 0 0 5px rgba(255, 106, 31, .7), 0 1px 0 rgba(255, 255, 255, .4);
+  transform-origin: 50% 23px;
+  transform: rotate(var(--fam-knob-angle));
 }
 
 /* Face built from the spiral photo: clean rings with the photo's own bright and dark wedges baked in, so it reflects light like spun metal.

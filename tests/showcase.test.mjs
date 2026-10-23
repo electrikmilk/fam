@@ -402,6 +402,8 @@ test('the controls page shows each control alone with its variants', async () =>
         glassButtons: count('.window .fam-glass-button'),
         buttonGroups: count('.window .fam-button-group'),
         radios: count('.window .fam-radio'),
+        dials: count('.window .fam-dial'),
+        plasticPanels: count('.window.fam-plastic-panel'),
         tabStrips: count('.window [role="tablist"]'),
         switches: count('.window .fam-switch'),
         disabledSwitches: count('.window .fam-switch input:disabled'),
@@ -416,9 +418,9 @@ test('the controls page shows each control alone with its variants', async () =>
         disabledControls: count('.window :disabled'),
       };
     });
-    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-tabs', 'scene-switch-knob', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-recessed']);
+    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-tabs', 'scene-plastic', 'scene-switch-knob', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-recessed']);
     assert.ok(found.plasticColors.every((total) => total >= 1), 'a plastic color is missing');
-    assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.glossyButtons >= 3 && found.glassButtons >= 2 && found.buttonGroups >= 5 && found.radios >= 12 && found.tabStrips >= 6 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
+    assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.glossyButtons >= 3 && found.glassButtons >= 2 && found.buttonGroups >= 5 && found.radios >= 12 && found.dials >= 3 && found.plasticPanels >= 2 && found.tabStrips >= 6 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
     assert.deepEqual(found.fills, [1, 1, 1]);
     assert.ok(found.selects >= 1 && found.menus >= 1 && found.searches >= 1 && found.selectedRows === 1);
     assert.ok(found.recessedRows >= 2 && found.leatherButtons >= 2);

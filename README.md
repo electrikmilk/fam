@@ -65,6 +65,7 @@ Put a material class on any box:
 - `fam-felt`: tintable felt, for screen backgrounds.
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
 - `fam-metal`: brushed metal, for plates, toolbars, navigation bars and panels.
+- `fam-plastic-panel`: cream satin plastic for controls to sit on. Use it with a `fam-round-*` class.
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-leather-bar`: tan leather with a stitched bottom edge, for navigation bars. See [Navigation](#components).
 - `fam-paper`: white textured paper, for lists and note panels.
@@ -204,6 +205,12 @@ Radio buttons are real radio inputs in a label, so arrow keys and forms work wit
 ```html
 <label class="fam-radio fam-radio--plastic"><input type="radio" name="mode" checked><span class="fam-radio-dot"></span>Record</label>
 <label class="fam-radio fam-radio--plastic"><input type="radio" name="mode"><span class="fam-radio-dot"></span>Play</label>
+```
+
+The plastic dial is drawn in CSS, so it is a picture like the knob. Give it `role="img"` and an `aria-label` that says its value; `--fam-knob-angle` turns its tick:
+
+```html
+<span class="fam-dial" role="img" aria-label="Volume" style="--fam-knob-angle:35deg"></span>
 ```
 
 Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
