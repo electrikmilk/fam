@@ -21,6 +21,16 @@ async () => {
   const parse = value => { const m = value.match(/[\d.]+/g).map(Number); return [m[0], m[1], m[2], m[3] === undefined ? 1 : m[3]]; };
   const opacityChain = el => { let o = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) o *= parseFloat(getComputedStyle(n).opacity); return o; };
   const label = el => el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : '');
+  // Text that an ancestor's overflow clips away entirely is not on screen, so it has no pixels to measure (a collapsed code block)
+  const isClippedAway = (el, rect) => {
+    for (let n = el; n && n !== document.body; n = n.parentElement) {
+      const cs = getComputedStyle(n);
+      if (cs.overflowY === 'visible' && cs.overflowX === 'visible') continue;
+      const box = n.getBoundingClientRect();
+      if (rect.top >= box.bottom || rect.bottom <= box.top || rect.left >= box.right || rect.right <= box.left) return true;
+    }
+    return false;
+  };
   const items = [];
   const push = (kind, rect, el, color, text, fontSize, fontWeight) => {
     if (rect.width < 2 || rect.height < 2) return;
@@ -38,7 +48,10 @@ async () => {
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
     const range = document.createRange(); range.selectNodeContents(node);
-    for (const rect of range.getClientRects()) push('text', rect, el, cs.color, text, parseFloat(cs.fontSize), parseInt(cs.fontWeight));
+    for (const rect of range.getClientRects()) {
+      if (isClippedAway(el, rect)) continue;
+      push('text', rect, el, cs.color, text, parseFloat(cs.fontSize), parseInt(cs.fontWeight));
+    }
   }
   for (const input of document.querySelectorAll('input[placeholder]:not(:disabled)')) {
     const cs = getComputedStyle(input); const ph = getComputedStyle(input, '::placeholder');
