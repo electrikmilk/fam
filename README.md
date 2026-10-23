@@ -2,6 +2,10 @@
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
 
+Materials tile to make textured interfaces responsive.
+
+Textures are compact tiles to load fast.
+
 ## Showcase
 
 A single-page tour of the materials, with a glass lens that follows your cursor and knobs to tune it: https://electrikmilk.github.io/fam/
@@ -87,6 +91,8 @@ Add `fam-wood-frame--glossy` for a glass sheen over a photo. Leave it off for a 
 ```
 
 ## Glass
+
+Refraction only applies to Chrome, but all browsers get a nice specular ambient glow, bleeding nearby colors into the glass.
 
 ```html
 <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
