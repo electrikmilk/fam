@@ -3,6 +3,9 @@ import test from 'node:test';
 import { fixtureUrl, isChromium, openUrl } from './helpers/browser.mjs';
 import { statistics } from './helpers/pixels.mjs';
 
+// Safari and WebKit skip links and buttons on Tab by default; Option+Tab visits every focusable control
+const TAB_KEY = process.env.FAM_BROWSER === 'webkit' ? 'Alt+Tab' : 'Tab';
+
 const read = (page, selector, property, pseudo = null) =>
   page.evaluate(([target, name, pseudoElement]) => getComputedStyle(document.querySelector(target), pseudoElement)[name], [selector, property, pseudo]);
 
@@ -273,7 +276,7 @@ test('a disabled radio is dimmed, shows no interactive cursor and is skipped by 
     await page.locator('#radio-plastic-disabled-label').scrollIntoViewIfNeeded();
     await page.evaluate(() => document.querySelector('#glossy-disabled').focus());
     for (let press = 0; press < 3; press += 1) {
-      await page.keyboard.press('Tab');
+      await page.keyboard.press(TAB_KEY);
       assert.notEqual(await page.evaluate(() => document.activeElement.id), 'radio-plastic-disabled');
     }
   } finally {
@@ -328,9 +331,9 @@ test('a disabled tab is skipped by Tab', async () => {
   try {
     const { page } = kit;
     await page.locator('#tab-silver-plain').focus();
-    await page.keyboard.press('Tab');
+    await page.keyboard.press(TAB_KEY);
     assert.equal(await page.evaluate(() => document.activeElement.id), 'tab-silver-selected');
-    await page.keyboard.press('Tab');
+    await page.keyboard.press(TAB_KEY);
     assert.equal(await page.evaluate(() => document.activeElement.id), 'tab-silver-last');
   } finally {
     await kit.close();

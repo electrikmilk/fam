@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 43 KB of CSS (11.1 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 62 KB of CSS (14.3 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -27,7 +27,7 @@ A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 - Home: a switcher that shows one pairing at a time, with the classes it uses.
 - Pairings: scenes that combine materials: wood and felt, legal pad and leather, leather and paper.
 - Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork and engraved text.
-- Controls: plastic buttons, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
+- Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
 - Examples: the pages in `examples/`.
 
