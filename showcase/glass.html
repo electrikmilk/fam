@@ -35,105 +35,21 @@
       <h1>Glass that reads on any backdrop</h1>
       <p class="lead">Frosted glass with a specular ambient glow works in every browser. Refraction bends what is behind the rim in Chromium browsers.</p>
     <nav class="jump" aria-label="On this page">
-      <a href="#scene-glass">Properties</a>
-      <a href="#glass">Try the lens</a>
+      <a href="#lens-intro">Try the lens</a>
+      <a href="#scene-glass-frosted">Frosted glass</a>
+      <a href="#scene-glass-tints">Dark, light and blue</a>
+      <a href="#scene-glass-glow">Ambient glow</a>
+      <a href="#scene-glass-materials">On materials</a>
+      <a href="#scene-glass-refraction">Refraction</a>
     </nav>
     </header>
 
-    <section class="scene" id="scene-glass">
-      <div class="window glass-lab">
-        <h2>Frosted glass</h2>
-        <p class="glass-lead">Two pieces of light glass, one rounded and one circular, each with a little blur and a rim that bends the lines behind it.</p>
-        <div class="glass-tiles glass-tiles--single">
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--plate glass-backdrop--pair">
-              <div class="fam-glass fam-glass--refract fam-glass--light glass-piece glass-piece--rounded" style="--fam-refract-blur: 3px"></div>
-              <div class="fam-glass fam-glass--refract fam-glass--light glass-piece glass-piece--circle" style="--fam-refract-blur: 3px"></div>
-            </div>
-            <figcaption>fam-glass--refract fam-glass--light</figcaption>
-          </figure>
-        </div>
-        <div class="code-block" role="group" aria-label="The frosted glass markup" data-label="the frosted glass markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 24px; --fam-refract-blur: 3px; width: 220px; height: 110px"&gt;&lt;/div&gt;
-&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 55px; --fam-refract-blur: 3px; width: 110px; height: 110px"&gt;&lt;/div&gt;</code></pre>
-      </div>
-
-        <h2>Dark, light and blue glass</h2>
-        <p class="glass-lead">Dark is the default. Add <code>fam-glass--light</code> for light glass with dark text, or <code>fam-glass--blue</code> for blue glass with white text, which suits a primary or active control.</p>
-        <div class="glass-tiles">
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--dusk">
-              <div class="fam-glass glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Dark" aria-label="Dark glass sample"></div>
-            </div>
-            <figcaption>fam-glass</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--dusk">
-              <div class="fam-glass fam-glass--light glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Light" aria-label="Light glass sample"></div>
-            </div>
-            <figcaption>fam-glass fam-glass--light</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--dusk">
-              <div class="fam-glass fam-glass--blue glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Blue" aria-label="Blue glass sample"></div>
-            </div>
-            <figcaption>fam-glass fam-glass--blue</figcaption>
-          </figure>
-        </div>
-        <div class="code-block" role="group" aria-label="The glass tint markup" data-label="the glass tint markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Dark" aria-label="Dark"&gt;&lt;/div&gt;
-&lt;div class="fam-glass fam-glass--light"&gt;&lt;input class="fam-glass-input" placeholder="Light" aria-label="Light"&gt;&lt;/div&gt;
-&lt;div class="fam-glass fam-glass--blue"&gt;&lt;input class="fam-glass-input" placeholder="Blue" aria-label="Blue"&gt;&lt;/div&gt;</code></pre>
-      </div>
-
-        <h2>Specular ambient glow <span>every browser</span></h2>
-        <p class="glass-lead">The glass picks up the colors next to its rim and bleeds them inward. <code>--fam-glow-depth</code> sets how far.</p>
-        <div class="glass-tiles">
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--ringed"><div class="fam-glass glass-pane" style="--fam-glow-depth: 0px"></div></div>
-            <figcaption>--fam-glow-depth: 0px</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--ringed"><div class="fam-glass glass-pane"></div></div>
-            <figcaption>--fam-glow-depth: 18px</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--ringed"><div class="fam-glass glass-pane" style="--fam-glow-depth: 40px"></div></div>
-            <figcaption>--fam-glow-depth: 40px</figcaption>
-          </figure>
-        </div>
-        <div class="code-block" role="group" aria-label="The glow depth markup" data-label="the glow depth markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-glass" style="--fam-glow-depth: 40px"&gt;&lt;/div&gt;</code></pre>
-      </div>
-
-        <h2>Refraction <span class="glass-warning">Chromium only</span></h2>
-        <p class="glass-lead">Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. That rounding comes from the optional <code>fam-ui/refraction</code> script. Other browsers show the same pane without the bending.</p>
-        <div class="glass-tiles">
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass glass-pane glass-pane--pill"></div></div>
-            <figcaption>fam-glass</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass fam-glass--refract glass-pane glass-pane--pill"></div></div>
-            <figcaption>fam-glass--refract</figcaption>
-          </figure>
-        </div>
-        <div class="code-block" role="group" aria-label="The refracting glass markup" data-label="the refracting glass markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;!-- Paste snippets/refraction-filter.html once in the page, then: --&gt;
-&lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;
-
-&lt;!-- Optional: bend along each glass's own radius --&gt;
-&lt;script src="snippets/refraction-round.js" defer&gt;&lt;/script&gt;</code></pre>
-      </div>
-      </div>
-    </section>
+    <div class="scene" id="lens-intro">
+      <h2 class="scene-title" id="glass-heading">Try the lens</h2>
+      <p class="scene-lead">A glass lens follows your pointer over the picture. Turn the knobs to change its blur, glow and radius, and use the switch to turn refraction on or off. The markup under the tray updates to match.</p>
+    </div>
 
     <section class="glass-band" id="glass" aria-labelledby="glass-heading">
-      <h2 class="visually-hidden" id="glass-heading">Try the glass</h2>
       <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"></div>
       <div class="tray fam-metal">
         <div class="knobwrap">
@@ -156,6 +72,144 @@
       <div class="glass-notes">
         <p class="note">Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.</p>
         <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"&gt;&lt;/div&gt;</code></p>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-frosted">
+      <h2 class="scene-title">Frosted glass</h2>
+      <p class="scene-lead">Two pieces of light glass, one rounded and one circular, each with a little blur. In Chromium browsers the rim also bends the lines behind it.</p>
+      <div class="window glass-lab">
+        <div class="glass-tiles glass-tiles--single">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--plate glass-backdrop--pair">
+              <div class="fam-glass fam-glass--refract fam-glass--light glass-piece glass-piece--rounded" style="--fam-refract-blur: 3px"></div>
+              <div class="fam-glass fam-glass--refract fam-glass--light glass-piece glass-piece--circle" style="--fam-refract-blur: 3px"></div>
+            </div>
+            <figcaption>fam-glass--refract fam-glass--light</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The frosted glass markup" data-label="the frosted glass markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;!-- Paste snippets/refraction-filter.html once in the page, then: --&gt;
+&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 24px; --fam-refract-blur: 3px; width: 220px; height: 110px"&gt;&lt;/div&gt;
+&lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 55px; --fam-refract-blur: 3px; width: 110px; height: 110px"&gt;&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-tints">
+      <h2 class="scene-title">Dark, light and blue glass</h2>
+      <p class="scene-lead">Dark is the default. Add <code>fam-glass--light</code> for light glass with dark text, or <code>fam-glass--blue</code> for blue glass with white text, which suits a primary or active control.</p>
+      <div class="window glass-lab">
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--dusk">
+              <div class="fam-glass glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Dark" aria-label="Dark glass sample"></div>
+            </div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--dusk">
+              <div class="fam-glass fam-glass--light glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Light" aria-label="Light glass sample"></div>
+            </div>
+            <figcaption>fam-glass fam-glass--light</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--dusk">
+              <div class="fam-glass fam-glass--blue glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Blue" aria-label="Blue glass sample"></div>
+            </div>
+            <figcaption>fam-glass fam-glass--blue</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The glass tint markup" data-label="the glass tint markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Dark" aria-label="Dark"&gt;&lt;/div&gt;
+&lt;div class="fam-glass fam-glass--light"&gt;&lt;input class="fam-glass-input" placeholder="Light" aria-label="Light"&gt;&lt;/div&gt;
+&lt;div class="fam-glass fam-glass--blue"&gt;&lt;input class="fam-glass-input" placeholder="Blue" aria-label="Blue"&gt;&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-glow">
+      <h2 class="scene-title">Specular ambient glow <span class="glass-note">every browser</span></h2>
+      <p class="scene-lead">The glass picks up the colors next to its rim and bleeds them inward. <code>--fam-glow-depth</code> sets how far.</p>
+      <div class="window glass-lab">
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--ringed"><div class="fam-glass glass-pane" style="--fam-glow-depth: 0px"></div></div>
+            <figcaption>--fam-glow-depth: 0px</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--ringed"><div class="fam-glass glass-pane"></div></div>
+            <figcaption>--fam-glow-depth: 18px</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--ringed"><div class="fam-glass glass-pane" style="--fam-glow-depth: 40px"></div></div>
+            <figcaption>--fam-glow-depth: 40px</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The glow depth markup" data-label="the glow depth markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-glass" style="--fam-glow-depth: 40px"&gt;&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-materials">
+      <h2 class="scene-title">Glass on materials</h2>
+      <p class="scene-lead">The same glass field on wood, leather and felt. The frosted pane takes its color from the material behind it.</p>
+      <div class="window glass-lab">
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="fam-wood glass-material"><div class="fam-glass fam-glass--light glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Wood" aria-label="Glass on wood"></div></div>
+            <figcaption>fam-wood</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="fam-leather glass-material"><div class="fam-glass fam-glass--light glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Leather" aria-label="Glass on leather"></div></div>
+            <figcaption>fam-leather</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="fam-felt glass-material"><div class="fam-glass glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Felt" aria-label="Glass on felt"></div></div>
+            <figcaption>fam-felt</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The glass on materials markup" data-label="the glass on materials markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-wood" style="padding: 28px"&gt;
+  &lt;div class="fam-glass fam-glass--light"&gt;&lt;input class="fam-glass-input" placeholder="Wood" aria-label="Glass on wood"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="fam-leather" style="padding: 28px"&gt;
+  &lt;div class="fam-glass fam-glass--light"&gt;&lt;input class="fam-glass-input" placeholder="Leather" aria-label="Glass on leather"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="fam-felt" style="padding: 28px"&gt;
+  &lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Felt" aria-label="Glass on felt"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-refraction">
+      <h2 class="scene-title">Refraction</h2>
+      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. That rounding comes from the optional <code>fam-ui/refraction</code> script. Other browsers show the same pane without the bending.</p>
+      <div class="window glass-lab">
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass glass-pane glass-pane--pill"></div></div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass fam-glass--refract glass-pane glass-pane--pill"></div></div>
+            <figcaption>fam-glass--refract</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The refracting glass markup" data-label="the refracting glass markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;!-- Paste snippets/refraction-filter.html once in the page, then: --&gt;
+&lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;
+
+&lt;!-- Optional: bend along each glass's own radius --&gt;
+&lt;script src="snippets/refraction-round.js" defer&gt;&lt;/script&gt;</code></pre>
       </div>
     </section>
   </main>

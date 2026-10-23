@@ -145,15 +145,7 @@ body {
   background: #24272d;
 }
 
-.glass-lab h2 {
-  margin: 32px 0 6px;
-  font: 700 22px/1.2 var(--site-font);
-  color: #fff;
-}
-
-.glass-lab h2:first-child { margin-top: 0; }
-
-.glass-lab h2 span {
+.scene-title .glass-note {
   margin-left: 10px;
   font-size: 16px;
   font-weight: 400;
@@ -161,15 +153,15 @@ body {
 }
 
 /* A warning badge: amber highlight with dark text, so the browser limit is not read as just another label */
-.glass-lab h2 span.glass-warning {
+.glass-warning {
   display: inline-block;
+  margin-right: 8px;
   padding: 2px 12px 2px 10px;
   border-radius: 999px;
   background: #ffd23f;
   color: #2e2200;
   font-size: 14px;
   font-weight: 700;
-  vertical-align: 3px;
 }
 
 .glass-warning::before {
@@ -177,13 +169,15 @@ body {
   margin-right: 6px;
 }
 
-.glass-lead {
-  margin: 0 0 16px;
-  font: 400 17px/1.5 var(--site-font);
-  color: #b8bcc6;
-}
+.scene-lead code { font: 14px ui-monospace, Menlo, monospace; color: #fff; }
 
-.glass-lead code { font: 12px ui-monospace, Menlo, monospace; color: #fff; }
+/* The material supplies the background, so unlike .glass-backdrop this sets no color of its own */
+.glass-material {
+  display: grid;
+  place-items: center;
+  height: 170px;
+  border-radius: 10px;
+}
 
 .glass-tiles {
   display: grid;
@@ -432,7 +426,6 @@ body {
   gap: 14px;
   min-height: 620px;
   padding: 0 16px 24px;
-  margin-top: 56px;
   overflow: hidden;
   background: #0d1116 url(images/ribbon.jpg) 50% 45% / cover;
   /* The lens replaces the system cursor over the picture; the controls below get it back */

@@ -496,7 +496,6 @@ html { scroll-behavior: smooth; }
 
 .code-block code { font: inherit; }
 
-.glass-lab .code-block { margin: 16px 0 0; }
 
 /* Each control sits alone on the surface it suits. The kit's own box rules do the layout; these only set spacing for the demo. */
 .controls-stage {
