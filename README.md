@@ -74,7 +74,7 @@ A dropdown is the same field with a `select`: `<select class="fam-glass-input">`
 
 ## Components
 
-Switch (a checkbox, so it works without JavaScript):
+Switch (a checkbox, so it works without JavaScript). The thumb is taller than the track and sticks out 4px past each end, so the switch has a 4px margin to keep neighbours clear. The thumb slides and the blue fill fades in when it toggles; both stop under `prefers-reduced-motion: reduce`:
 
 ```html
 <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi"><span class="fam-switch-knob"></span></label>

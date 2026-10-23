@@ -56,20 +56,24 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
 }
 
-/* ---------- Metal switch: a checkbox, so it toggles with no JavaScript ---------- */
+/* ---------- Metal switch: a checkbox, so it toggles with no JavaScript ----------
+   The thumb is 8px taller than the track and sticks out 4px past each end, so the track does not clip anything and the
+   margin keeps neighbours clear of the overhang. */
 
 .fam-switch {
   box-sizing: border-box;
   position: relative;
   display: inline-block;
   width: 78px;
-  height: 32px;
+  height: 28px;
+  margin: 4px;
   border-radius: var(--fam-radius-pill);
-  overflow: hidden;
   cursor: pointer;
   background: var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
-  --fam-rest-shadow: inset 0 3px 7px rgba(0, 0, 0, .75), inset 0 -1px 1px rgba(255, 255, 255, .35), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .7);
+  /* Every state lists the same five shadows in the same order, which is what lets the browser animate between them */
+  --fam-rest-shadow: inset 0 3px 7px rgba(0, 0, 0, .75), inset 0 -1px 1px rgba(255, 255, 255, .35), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .7), 0 0 12px 2px rgba(100, 140, 245, 0);
   box-shadow: var(--fam-rest-shadow);
+  transition: box-shadow .22s ease;
 }
 
 /* The native input covers the whole track, invisible but focusable and clickable */
@@ -87,25 +91,27 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   content: '';
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   opacity: 0;
-  transition: opacity .2s;
+  transition: opacity .22s ease;
   background:
     linear-gradient(rgba(255, 255, 255, .35), rgba(255, 255, 255, 0) 50%),
     linear-gradient(to bottom, rgba(64, 110, 218, .95), rgba(122, 157, 245, .92));
 }
 
 .fam-switch-knob {
+  --fam-thumb-shadow: 0 0 9px 1px rgba(150, 175, 252, 0), 0 2px 4px rgba(0, 0, 0, .65), inset 0 -2px 3px rgba(0, 0, 0, .35), inset 0 1px 1px rgba(255, 255, 255, .9), 0 0 0 1px rgba(0, 0, 0, .45);
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 28px;
-  height: 28px;
+  top: -4px;
+  left: -4px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  pointer-events: none;
   background:
     radial-gradient(circle at 50% 18%, rgba(255, 255, 255, .35) 0%, rgba(255, 255, 255, 0) 55%),
-    var(--fam-tex-metal-spiral) 50% 50% / auto 84px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .65), inset 0 -2px 3px rgba(0, 0, 0, .35), inset 0 1px 1px rgba(255, 255, 255, .9), 0 0 0 1px rgba(0, 0, 0, .45);
+    var(--fam-tex-metal-spiral) 50% 50% / auto 108px;
+  box-shadow: var(--fam-thumb-shadow);
+  transition: left .22s cubic-bezier(.4, 0, .2, 1), box-shadow .22s ease;
 }
 
 .fam-switch:has(input:checked) {
@@ -115,14 +121,21 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-switch:has(input:checked)::before { opacity: 1; }
 
 .fam-switch:has(input:checked) .fam-switch-knob {
-  left: calc(100% - 34px);
-  box-shadow: 0 0 9px 1px rgba(150, 175, 252, .85), 0 2px 4px rgba(0, 0, 0, .55), inset 0 -2px 3px rgba(0, 0, 0, .35), inset 0 1px 1px rgba(255, 255, 255, .9), 0 0 0 1px rgba(0, 40, 130, .6);
+  --fam-thumb-shadow: 0 0 9px 1px rgba(150, 175, 252, .85), 0 2px 4px rgba(0, 0, 0, .55), inset 0 -2px 3px rgba(0, 0, 0, .35), inset 0 1px 1px rgba(255, 255, 255, .9), 0 0 0 1px rgba(0, 40, 130, .6);
+  left: calc(100% - 32px);
 }
 
+/* The outline sits 6px out so it clears the 4px the thumb sticks out; outlines paint above the thumb */
 .fam-switch:has(input:focus-visible) {
   outline: 2px solid var(--fam-focus-ink);
-  outline-offset: 2px;
+  outline-offset: 6px;
   box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fam-switch,
+  .fam-switch::before,
+  .fam-switch-knob { transition: none; }
 }
 
 /* ---------- Progress tubes. Set the value with --fam-value on the tube. ---------- */
