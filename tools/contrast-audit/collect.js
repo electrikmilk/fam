@@ -33,13 +33,14 @@ async () => {
     const text = node.textContent.trim();
     const el = node.parentElement;
     if (!text || !el || ['SCRIPT', 'STYLE', 'TITLE'].includes(el.tagName)) continue;
-    if (el.closest('header, [aria-hidden="true"], svg')) continue;
+    // Disabled controls are inactive components, which WCAG 1.4.3 exempts from contrast
+    if (el.closest('header, [aria-hidden="true"], svg, :disabled')) continue;
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
     const range = document.createRange(); range.selectNodeContents(node);
     for (const rect of range.getClientRects()) push('text', rect, el, cs.color, text, parseFloat(cs.fontSize), parseInt(cs.fontWeight));
   }
-  for (const input of document.querySelectorAll('input[placeholder]')) {
+  for (const input of document.querySelectorAll('input[placeholder]:not(:disabled)')) {
     const cs = getComputedStyle(input); const ph = getComputedStyle(input, '::placeholder');
     const canvas = document.createElement('canvas').getContext('2d'); canvas.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
     const b = input.getBoundingClientRect();
