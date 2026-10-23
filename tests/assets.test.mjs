@@ -21,6 +21,7 @@ const ASSET_NAMES = [
   'leather-fill-black-tile.jpg',
   'leather-frame-tan-soft.png',
   'leather-frame-black-soft.png',
+  'wood-frame.jpg',
 ];
 
 const TILED_NAMES = [

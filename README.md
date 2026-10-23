@@ -54,6 +54,17 @@ For any other color, use `fam-stitched`: a CSS stitched border whose thread is t
 
 `fam-stitched` needs `-webkit-mask-box-image`. Where that is missing the stitches are hidden.
 
+### Wood frame
+
+`fam-wood-frame` is a moulded wood frame with a drop shadow outside and an inset shadow where the content meets the frame. Put a photo, a page or a corkboard inside it. The border is 40px; change it with `--fam-frame-width`.
+
+```html
+<figure class="fam-wood-frame"><img src="photo.jpg" alt="..."></figure>
+<div class="fam-wood-frame"><div class="fam-cork">...</div></div>
+```
+
+Add `fam-wood-frame--glossy` for a glass sheen over a photo. Leave it off for a page or a board.
+
 ## Glass
 
 ```html
