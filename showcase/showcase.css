@@ -206,7 +206,6 @@ body {
 
 .glass-backdrop--ringed .glass-pane {
   grid-area: 1 / 1;
-  --fam-glow-saturate: 320%;
 }
 
 /* A pale blue plate that darkens toward one corner, cut into cells by hairlines. The long straight lines are what the rim bends. */
@@ -225,8 +224,9 @@ body {
   height: 84px;
 }
 
+/* The radius is half the height, so the glow's corner masks wrap the end caps. An unset radius gives straight glow bands. */
 .glass-pane--pill {
-  --fam-r: initial;
+  --fam-r: 50px;
   width: 80%;
   height: 100px;
 }
