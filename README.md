@@ -1,6 +1,6 @@
 <h1 align="center"><img src="docs/header.png" alt="Fam: familiar materials for the web" width="880"></h1>
 
-Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript, no build step.
+Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript required, no build step.
 
 Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials, as it can be used as a full CSS framework, or just to add a little skeuomorphism as a backdrop to a modern flat UI.
 
@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 66 KB of CSS (15.3 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 67 KB of CSS (15.5 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -133,6 +133,14 @@ Add `fam-glass--refract` for clear glass that bends what is behind its rim. It n
 ```
 
 Refraction works in Chromium only. Other browsers show a clear glass pane with no bending. The bending strength is the `scale` attribute on `feDisplacementMap` in the snippet.
+
+The snippet's map is one fixed image stretched over the glass, so it bends the straight sides more than the corners of a rounded pane or a circle. For bending that follows the glass's own corner radius, also load the optional refraction script, the one piece of JavaScript the kit offers. It gives each `fam-glass--refract` a filter built from that element's size and radius, and rebuilds it when either changes, including a change to `--fam-r` or a `fam-round-*` class. The bending strength is the `DISPLACEMENT_SCALE` constant in the script, and the static filter stays in place as the fallback.
+
+```js
+import 'fam-ui/refraction';
+```
+
+Without a bundler, load `node_modules/fam-ui/snippets/refraction-round.js` with `<script defer>` instead. It does nothing on the server, so it is safe to import from server-rendered code.
 
 A dropdown is the same field with a `select`: `<select class="fam-glass-input">`. The open list is a plain styled `ul.fam-menu` for your own menus, with `aria-selected="true"` on the chosen item.
 
