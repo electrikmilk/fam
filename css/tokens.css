@@ -1,1 +1,43 @@
 /* fam-ui tokens */
+:root {
+  --fam-tint: #1f7a3d;
+  --fam-blue-top: #406eda;
+  --fam-blue-mid: #3866d1;
+  --fam-blue-bottom: #2f5fc8;
+  --fam-cream: #f6ecd2;
+
+  --fam-font-ui: "Lucida Grande", -apple-system, "Helvetica Neue", sans-serif;
+  --fam-font-hand: "Marker Felt", "Bradley Hand", "Segoe Print", cursive;
+
+  --fam-radius-sm: 6px;
+  --fam-radius-md: 12px;
+  --fam-radius-lg: 20px;
+  --fam-radius-pill: 999px;
+
+  --fam-shadow-sm: 0 1px 1px rgba(0, 0, 0, .2), 0 1px 3px rgba(0, 0, 0, .2);
+  --fam-shadow-md: 0 1px 1px rgba(0, 0, 0, .14), 0 3px 6px rgba(0, 0, 0, .2), 0 8px 14px -4px rgba(0, 0, 0, .22);
+  --fam-shadow-lg: 0 1px 1px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .16), 0 12px 20px -4px rgba(0, 0, 0, .24), 0 24px 40px -12px rgba(0, 0, 0, .3);
+  --fam-shadow-inset: inset 0 2px 5px rgba(0, 0, 0, .35), inset 0 -1px 0 rgba(255, 255, 255, .8), 0 1px 0 rgba(255, 255, 255, .8);
+
+  --fam-tex-felt-gray-tile: url(../assets/felt-gray-tile.jpg);
+  --fam-tex-wood-light-tile: url(../assets/wood-light-tile.jpg);
+  --fam-tex-metal-tile: url(../assets/metal-tile.jpg);
+  --fam-tex-metal-brushed: url(../assets/metal-brushed.jpg);
+  --fam-tex-metal-spiral: url(../assets/metal-spiral.jpg);
+  --fam-tex-knob-face: url(../assets/knob-face.jpg);
+  --fam-tex-grain-fine: url(../assets/grain-fine.jpg);
+  --fam-tex-cardstock-tile: url(../assets/cardstock-tile.jpg);
+  --fam-tex-legal-tile: url(../assets/legal-tile.jpg);
+  --fam-tex-paper-tile: url(../assets/paper-tile.jpg);
+  --fam-tex-leather-tile: url(../assets/leather-tile.jpg);
+  --fam-tex-leather-fill-tan-tile: url(../assets/leather-fill-tan-tile.jpg);
+  --fam-tex-leather-fill-black-tile: url(../assets/leather-fill-black-tile.jpg);
+  --fam-tex-leather-frame-tan-soft: url(../assets/leather-frame-tan-soft.png);
+  --fam-tex-leather-frame-black-soft: url(../assets/leather-frame-black-soft.png);
+}
+
+.fam {
+  font-family: var(--fam-font-ui);
+  font-size: 14px;
+  color: var(--fam-cream);
+}

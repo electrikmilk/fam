@@ -1,1 +1,60 @@
 /* fam-ui materials */
+
+/* The tile is already grayscale with contrast and brightness baked in, so multiplying it onto the tint recolors the whole texture */
+.fam-felt {
+  background-color: var(--fam-tint);
+  background-image: var(--fam-tex-felt-gray-tile);
+  background-size: 256px;
+  background-blend-mode: multiply;
+}
+
+/* Lifted slightly so small dark engraved text passes contrast */
+.fam-wood {
+  background:
+    linear-gradient(rgba(255, 238, 205, .22), rgba(255, 238, 205, .22)),
+    var(--fam-tex-wood-light-tile) 0 0 / 380px repeat;
+}
+
+.fam-metal {
+  background:
+    linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
+    var(--fam-tex-metal-tile) 0 0 / 300px repeat;
+}
+
+/* The tan wash lets a dark engraved glyph reach contrast on leather */
+.fam-leather {
+  background:
+    linear-gradient(rgba(240, 190, 130, .5), rgba(240, 190, 130, .5)),
+    var(--fam-tex-leather-tile) 0 0 / 360px repeat;
+}
+
+.fam-cardstock {
+  background: var(--fam-tex-cardstock-tile) 0 0 / 256px repeat, #562a0e;
+  background-blend-mode: multiply;
+}
+
+/* The tile repeats at 585px wide so its 27.2px rule pitch scales to exactly 24px, the pad's line height */
+.fam-legal-pad {
+  background:
+    linear-gradient(90deg, transparent 38px, #cc2a2e 38px, #cc2a2e 39px, transparent 39px, transparent 42px, #cc2a2e 42px, #cc2a2e 43px, transparent 43px),
+    #fbee9c var(--fam-tex-legal-tile) 0 0 / 585px auto repeat;
+}
+
+.fam-paper {
+  background: #f7f6f2 var(--fam-tex-paper-tile) 0 0 / 256px repeat;
+}
+
+/* 9-slice photo frame: 457px image, slice 68 device px, 34px border */
+.fam-leather-frame {
+  border: 34px solid transparent;
+  border-radius: 34px;
+  border-image: var(--fam-tex-leather-frame-tan-soft) 68 / 34px / 0 round;
+  background: var(--fam-tex-leather-fill-tan-tile) 0 0 / 168px 51.5px repeat;
+  box-shadow: 0 22px 36px -14px rgba(0, 0, 0, .65);
+}
+
+.fam-leather-frame--black {
+  border-image: var(--fam-tex-leather-frame-black-soft) 68 / 34px / 0 round;
+  background: var(--fam-tex-leather-fill-black-tile) 0 0 / 168px 51.5px repeat;
+  box-shadow: 0 26px 44px -16px rgba(0, 0, 0, .7);
+}
