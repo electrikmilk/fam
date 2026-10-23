@@ -426,6 +426,16 @@ test('the controls page shows each control alone with its variants', async () =>
   }
 });
 
+test('the progress tubes sit on metal on the controls page', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    const classes = await page.page.$eval('#scene-progress .window', (window) => [...window.classList]);
+    assert.ok(classes.includes('fam-metal') && !classes.includes('fam-felt'), classes.join(' '));
+  } finally {
+    await page.close();
+  }
+});
+
 test('the site bar fits a phone screen on every page', async () => {
   for (const pageName of PAGE_NAMES) {
     const page = await openUrl(showcasePageUrl(pageName), { viewport: { width: 375, height: 800 } });
