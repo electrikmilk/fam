@@ -117,3 +117,93 @@ test('disabled glossy and glass buttons are dimmed and show no interactive curso
     await kit.close();
   }
 });
+
+const LED = 'rgb(255, 106, 31)';
+
+test('group cells share one case', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const radii = (selector) => page.evaluate((target) => {
+      const style = getComputedStyle(document.querySelector(target));
+      return [style.borderTopLeftRadius, style.borderTopRightRadius, style.borderBottomRightRadius, style.borderBottomLeftRadius];
+    }, selector);
+    const cells = '#group-plastic > button';
+    const [first, middle, last] = [`${cells}:nth-child(1)`, `${cells}:nth-child(2)`, `${cells}:nth-child(4)`];
+    assert.notEqual((await radii(first))[0], '0px');
+    assert.deepEqual((await radii(first)).slice(1, 3), ['0px', '0px']);
+    assert.deepEqual(await radii(middle), ['0px', '0px', '0px', '0px']);
+    assert.notEqual((await radii(last))[1], '0px');
+    assert.deepEqual([(await radii(last))[0], (await radii(last))[3]], ['0px', '0px']);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a pressed or selected cell shows the LED and an unpressed one does not', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.ok((await read(page, '#group-pressed', 'backgroundImage', '::after')).includes(LED), 'the pressed cell has no LED');
+    assert.ok((await read(page, '#group-selected', 'backgroundImage', '::after')).includes(LED), 'aria-selected does not light the cell');
+    assert.ok(!(await read(page, '#group-unpressed', 'backgroundImage', '::after')).includes(LED), 'the unpressed cell is lit');
+    assert.equal(await read(page, '#group-metal-lit', 'content', '::after'), '""', 'the pressed metal cell has no LED dot');
+    assert.equal(await read(page, '#group-metal-lit', 'backgroundColor', '::after'), LED);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('lit glossy and leather cells look different from plain ones', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    assert.notEqual(await read(page, '#group-glossy-lit', 'backgroundImage'), await read(page, '#group-glossy-plain', 'backgroundImage'));
+    assert.notEqual(await read(page, '#group-leather-lit', 'boxShadow'), await read(page, '#group-leather-plain', 'boxShadow'));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a disabled pressed cell stays inset with a dim LED', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const selector = '#group-disabled-pressed';
+    assert.equal(await read(page, selector, 'opacity'), '0.7');
+    for (const layer of shadowLayers(await read(page, selector, 'boxShadow'))) assert.ok(layer.endsWith('inset'), layer);
+    assert.ok((await read(page, selector, 'backgroundImage', '::after')).includes(LED));
+  } finally {
+    await kit.close();
+  }
+});
+
+test('group cells ease their look and stop under reduced motion', async () => {
+  const moving = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.notEqual(await read(moving.page, '#group-pressed', 'transitionDuration'), '0s');
+  } finally {
+    await moving.close();
+  }
+  const still = await openUrl(fixtureUrl('kit'), { reducedMotion: 'reduce' });
+  try {
+    assert.equal(await read(still.page, '#group-pressed', 'transitionDuration'), '0s');
+  } finally {
+    await still.close();
+  }
+});
+
+test('a long group scrolls inside itself on a phone instead of overflowing', async () => {
+  const kit = await openUrl(fixtureUrl('kit'), { viewport: { width: 375, height: 800 } });
+  try {
+    const { page } = kit;
+    const group = await page.evaluate(() => {
+      const element = document.querySelector('#group-long');
+      return { right: element.getBoundingClientRect().right, scrollWidth: element.scrollWidth, clientWidth: element.clientWidth };
+    });
+    assert.ok(group.right <= 375, `the group reaches ${group.right}px`);
+    assert.ok(group.scrollWidth > group.clientWidth, 'the group does not scroll inside itself');
+  } finally {
+    await kit.close();
+  }
+});

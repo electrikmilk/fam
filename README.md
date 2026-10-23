@@ -179,6 +179,15 @@ Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam
 <button class="fam-glass fam-glass-button" type="button">Share</button>
 ```
 
+Button groups put plastic, metal, glossy or leather buttons in one case. Mark the lit button with `aria-pressed="true"` (or `aria-selected="true"` in a tab strip) and set it from your own script; a lit plastic or metal button shows an LED (`--fam-led`), a lit silver glossy button turns aqua. A long group scrolls inside itself.
+
+```html
+<div class="fam-button-group" role="group" aria-label="Playback mode">
+  <button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"></button>
+  <button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"></button>
+</div>
+```
+
 Colors are `--red`, `--green`, `--blue`, `--purple` and `--amber`. For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 
 Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):

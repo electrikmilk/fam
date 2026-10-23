@@ -109,6 +109,53 @@
       <label id="switch-on-metal" class="fam-switch"><input type="checkbox" role="switch" aria-label="On metal"><span class="fam-switch-knob"></span></label>
     </section>
 
+    <section id="groups" class="fam-metal" style="padding:20px; margin-top:24px; width:360px">
+      <div id="group-plastic" class="fam-button-group" role="group" aria-label="Transport">
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Rewind">R</button>
+        <button id="group-unpressed" class="fam-plastic fam-plastic--square" type="button" aria-label="Play" aria-pressed="false">P</button>
+        <button id="group-pressed" class="fam-plastic fam-plastic--square" type="button" aria-label="Record" aria-pressed="true">C</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Forward">F</button>
+      </div>
+      <div id="group-metal" class="fam-button-group" role="group" aria-label="Views">
+        <button class="fam-metal-button" type="button">One</button>
+        <button id="group-metal-lit" class="fam-metal-button" type="button" aria-pressed="true">Two</button>
+        <button class="fam-metal-button" type="button">Three</button>
+      </div>
+      <div id="group-glossy" class="fam-button-group" role="group" aria-label="Toolbar">
+        <button id="group-glossy-plain" class="fam-glossy-button fam-glossy-button--silver" type="button">Back</button>
+        <button id="group-glossy-lit" class="fam-glossy-button fam-glossy-button--silver" type="button" aria-pressed="true">List</button>
+        <button class="fam-glossy-button fam-glossy-button--silver" type="button">Forward</button>
+      </div>
+      <div id="group-selected-wrap" class="fam-button-group" role="tablist" aria-label="Tabs">
+        <button class="fam-plastic fam-plastic--square" type="button" role="tab" aria-selected="false">A</button>
+        <button id="group-selected" class="fam-plastic fam-plastic--square" type="button" role="tab" aria-selected="true">B</button>
+      </div>
+    </section>
+
+    <section id="groups-leather" class="fam-leather" style="padding:20px; margin-top:24px; width:360px">
+      <div class="fam-button-group" role="group" aria-label="Sort">
+        <button id="group-leather-plain" class="fam-leather-button" type="button">Name</button>
+        <button id="group-leather-lit" class="fam-leather-button" type="button" aria-pressed="true">Date</button>
+      </div>
+    </section>
+
+    <section id="groups-long" class="fam-metal" style="padding:20px; margin-top:24px; width:300px">
+      <div id="group-long" class="fam-button-group" role="group" aria-label="Long">
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 1">1</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 2">2</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 3">3</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 4">4</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 5">5</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 6">6</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 7">7</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 8">8</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 9">9</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 10">10</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 11">11</button>
+        <button class="fam-plastic fam-plastic--square" type="button" aria-label="Cell 12">12</button>
+      </div>
+    </section>
+
     <section id="glass-buttons" class="fam-felt" style="padding:20px; margin-top:24px; width:360px">
       <button id="glass-button" class="fam-glass fam-glass-button" type="button">Share</button>
     </section>
@@ -122,6 +169,7 @@
     <section id="disabled" class="fam-felt" style="padding:20px; margin-top:24px; width:360px">
       <button id="metal-button-disabled" class="fam-metal-button" type="button" disabled>Eject</button>
       <button id="glossy-disabled" class="fam-glossy-button" type="button" disabled>Save</button>
+      <div class="fam-button-group" role="group" aria-label="Locked"><button id="group-disabled-pressed" class="fam-plastic fam-plastic--square" type="button" aria-label="Locked record" aria-pressed="true" disabled>C</button></div>
       <button id="glass-button-disabled" class="fam-glass fam-glass-button" type="button" disabled>Share</button>
       <button id="plastic-disabled" class="fam-plastic fam-plastic--red" type="button" disabled>Record</button>
       <button id="plastic-round-disabled" class="fam-plastic fam-plastic--red fam-plastic--round" type="button" aria-label="Locked info" disabled>i</button>

@@ -436,6 +436,7 @@ html { scroll-behavior: smooth; }
 
 /* A scene with several demos separates each one from the code block above it */
 .code-block + .window { margin-top: 20px; }
+.code-block + .scene-lead { margin-top: 28px; }
 
 #scene-switch-knob .controls-stage { gap: 28px; }
 

@@ -411,6 +411,93 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-glass-button:active:not(:disabled) { transform: translateY(1px); }
 
+/* ---------- Button groups: one case holding plastic, metal, glossy or leather buttons ----------
+   Only the outer corners are rounded and neighbours overlap by one border, so the cells share a divider. A cell is lit by
+   aria-pressed="true", or by aria-selected="true" when the group is a tab strip. The padding keeps the cells' shadows and focus
+   rings inside the box, because a scrolling box clips whatever pokes out of it. */
+
+.fam-button-group {
+  box-sizing: border-box;
+  display: inline-flex;
+  max-width: 100%;
+  padding: 5px 5px 8px;
+  overflow-x: auto;
+  vertical-align: middle;
+}
+
+.fam-button-group > * {
+  --fam-cell-radius: var(--fam-radius-pill);
+  flex: none;
+  margin: 0;
+  border-radius: 0;
+  transition: box-shadow .15s ease;
+}
+
+.fam-button-group > .fam-plastic--square,
+.fam-button-group > .fam-metal-button--square { --fam-cell-radius: var(--fam-radius-md); }
+
+.fam-button-group > .fam-leather-button {
+  --fam-cell-radius: 10px;
+  width: auto;
+  margin-top: 0;
+}
+
+.fam-button-group > * + * { margin-left: -1px; }
+
+.fam-button-group > :first-child {
+  border-top-left-radius: var(--fam-cell-radius);
+  border-bottom-left-radius: var(--fam-cell-radius);
+}
+
+.fam-button-group > :last-child {
+  border-top-right-radius: var(--fam-cell-radius);
+  border-bottom-right-radius: var(--fam-cell-radius);
+}
+
+/* The LED sits in the dish of a round or square plastic cell */
+.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed="true"], [aria-selected="true"])::after {
+  background:
+    radial-gradient(circle, var(--fam-led) 0 2.5px, color-mix(in srgb, var(--fam-led) 40%, transparent) 3.5px, transparent 8px),
+    radial-gradient(circle at 50% 30%, rgba(0, 0, 0, .18), rgba(0, 0, 0, 0) 75%);
+}
+
+/* Labeled plastic cells and every metal cell have no dish, so the LED is a small dot above the label */
+.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed="true"], [aria-selected="true"])::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--fam-led);
+  box-shadow: 0 0 5px 1px var(--fam-led);
+  pointer-events: none;
+}
+
+.fam-button-group > .fam-glossy-button:is([aria-pressed="true"], [aria-selected="true"]) {
+  --fam-rest-shadow: inset 0 2px 5px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+/* The selected segment of a silver strip turns aqua, as in references/snow-leopard-gui-2079776605.png */
+.fam-button-group > .fam-glossy-button--silver:is([aria-pressed="true"], [aria-selected="true"]) {
+  --fam-aqua-rim: #2a4aa8;
+  --fam-aqua-top: #6a98f2;
+  --fam-aqua-mid: #86acf7;
+  --fam-aqua-bottom: #bcd3fb;
+  color: rgb(8, 20, 60);
+}
+
+.fam-button-group > .fam-leather-button:is([aria-pressed="true"], [aria-selected="true"]) {
+  background: linear-gradient(#c58f50, #b17a3b);
+  box-shadow: inset 0 2px 4px rgba(80, 40, 5, .45), 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fam-button-group > * { transition: none; }
+}
+
 /* Face built from the spiral photo: clean rings with the photo's own bright and dark wedges baked in, so it reflects light like spun metal.
    The reflections are part of the image, so they stay put while --fam-knob-angle turns the orange indicator. */
 .fam-knob {
@@ -771,6 +858,12 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
   .fam-switch { border: 1px solid CanvasText; }
   .fam-switch:has(input:checked) { background: Highlight; }
+
+  .fam-button-group > [aria-pressed="true"],
+  .fam-button-group > [aria-selected="true"] {
+    outline: 2px solid Highlight;
+    outline-offset: -4px;
+  }
 
   .fam-recessed,
   .fam-search { border: 1px solid CanvasText; }
