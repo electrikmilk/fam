@@ -227,7 +227,7 @@ body {
 
 /* A pale blue plate that darkens toward one corner, cut into cells by hairlines. The long straight lines are what the rim bends. */
 .glass-backdrop--plate {
-  --glass-cell: 60px;
+  --glass-cell: 30px;
   height: 240px;
   background:
     repeating-linear-gradient(90deg, rgba(22, 34, 64, .55) 0 1px, transparent 1px var(--glass-cell)) calc(var(--glass-cell) / 2) 0,
