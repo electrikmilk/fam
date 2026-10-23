@@ -12,8 +12,9 @@
   --fam-glass-blur: 14px;
   --fam-refract-blur: 1px;
   --fam-glass-saturate: 125%;
-  --fam-glow-saturate: 300%;
-  --fam-glow-brightness: 175%;
+  --fam-glow-blur: calc(var(--fam-glass-blur) + 11px);
+  --fam-glow-saturate: 260%;
+  --fam-glow-brightness: 150%;
   --fam-refract-saturate: 110%;
   --fam-glass-shade: rgba(0, 0, 0, .42);
   --fam-glass-rim: rgba(255, 255, 255, .28);
@@ -65,6 +66,7 @@
   --fam-glass-shade: var(--fam-glass-blue-shade);
   --fam-glass-rim: rgba(190, 215, 255, .4);
   --fam-glass-underlight: rgba(0, 10, 60, .45);
+  --fam-glass-ink-soft: rgba(255, 255, 255, .9);
   --fam-glass-ink-shadow: 0 1px 2px rgba(0, 10, 60, .7);
 }
 
@@ -81,7 +83,7 @@
   pointer-events: none;
   border: var(--fam-bleed) solid transparent;
   border-radius: calc(var(--fam-r, 999px) + var(--fam-bleed));
-  backdrop-filter: blur(25px) saturate(var(--fam-glow-saturate)) brightness(var(--fam-glow-brightness));
+  backdrop-filter: blur(var(--fam-glow-blur)) brightness(var(--fam-glow-brightness)) saturate(var(--fam-glow-saturate));
   background: linear-gradient(135deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, .04) 35%, rgba(255, 255, 255, .04) 65%, rgba(255, 255, 255, .3)) padding-box;
   mask:
     linear-gradient(to bottom, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) center top / calc(100% - 2 * var(--fam-glow-tile)) 100% no-repeat padding-box,
@@ -93,6 +95,10 @@
     radial-gradient(ellipse farthest-side at 100% 0, transparent calc(100% - var(--fam-glow-depth)), rgba(0, 0, 0, .35) calc(100% - var(--fam-glow-depth) * .3), #000 100%) left bottom / var(--fam-glow-tile) var(--fam-glow-tile) no-repeat padding-box,
     radial-gradient(ellipse farthest-side at 0 0, transparent calc(100% - var(--fam-glow-depth)), rgba(0, 0, 0, .35) calc(100% - var(--fam-glow-depth) * .3), #000 100%) right bottom / var(--fam-glow-tile) var(--fam-glow-tile) no-repeat padding-box;
 }
+
+/* The glow gathers the colors around the rim through a wide blur, 25px at the default glass blur, and grows with the glass blur so
+   turning the blur up softens the rim and the middle together. The offset is smaller for frosted glass because its default blur is wider. */
+.fam-glass--refract { --fam-glow-blur: calc(var(--fam-refract-blur) + 22px); }
 
 /* Clear glass that bends the backdrop at its rim. The plain declaration comes first so an engine that rejects url() filters keeps it.
    Chromium only; the displacement filter itself is the inline snippet in snippets/refraction-filter.html. */

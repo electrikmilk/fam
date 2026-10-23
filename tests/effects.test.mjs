@@ -44,7 +44,7 @@ test('glass recipe values', async () => {
     const lens = await style(kit.page, '#glass', '::before', 'backdropFilter');
     assert.ok(lens.includes('blur(14px)') && lens.includes('saturate(1.25)') && lens.includes('brightness(1.1)'), lens);
     const glow = await style(kit.page, '#glass', '::after', 'backdropFilter');
-    assert.ok(glow.includes('blur(25px)') && glow.includes('saturate(3)') && glow.includes('brightness(1.75)'), glow);
+    assert.ok(glow.includes('blur(25px)') && glow.includes('brightness(1.5)') && glow.includes('saturate(2.6)'), glow);
     const shade = await style(kit.page, '#glass', '::before', 'backgroundImage');
     assert.ok(shade.includes('rgba(0, 0, 0, 0.42)'), shade);
   } finally {
