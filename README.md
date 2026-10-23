@@ -121,7 +121,7 @@ Refraction only applies to Chrome, but all browsers get a nice specular ambient 
 <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
 ```
 
-Set `--fam-r` for the corner radius (default pill), or add a `fam-round-*` class, which sets it for you. A plain `border-radius` on the glass rounds the lens but not the glow, so use one of these instead. Also set `--fam-glow-depth`, `--fam-bleed`, the lens blur with `--fam-glass-blur` (default 14px) and `--fam-refract-blur` (default 1px, for refracting glass), and the saturation with `--fam-glass-saturate`, `--fam-glow-saturate` and `--fam-refract-saturate`.
+Set `--fam-r` for the corner radius (default pill), or add a `fam-round-*` class, which sets it for you. A plain `border-radius` on the glass rounds the lens but not the glow, so use one of these instead. The glow's inner fade follows the rounded corners as long as the radius fits the box (at most half of its shorter side). For a pill that is wider than tall, leave `--fam-r` unset rather than setting a larger value. Also set `--fam-glow-depth`, `--fam-bleed`, the lens blur with `--fam-glass-blur` (default 14px) and `--fam-refract-blur` (default 1px, for refracting glass), and the saturation with `--fam-glass-saturate`, `--fam-glow-saturate` and `--fam-refract-saturate`.
 
 Add `fam-glass--refract` for clear glass that bends what is behind its rim. It needs the filter in `snippets/refraction-filter.html` somewhere in the page, once:
 

@@ -3,9 +3,11 @@
 /* Frosted glass. The lens layer and the glow layer are pseudo-elements so the element's own content stays above both.
    The filter layer gets a real border-radius: clip-path and overflow:hidden do not round a backdrop-filter in Chromium. */
 .fam-glass {
-  --fam-r: 999px;
+  --fam-r: initial;
   --fam-bleed: 2rem;
   --fam-glow-depth: 18px;
+  --fam-glow-corner: min(var(--fam-r, 0px), 50%);
+  --fam-glow-tile: min(calc(var(--fam-glow-corner) * 1000), max(var(--fam-glow-corner), var(--fam-glow-depth)), 50%);
   --fam-glass-blur: 14px;
   --fam-refract-blur: 1px;
   --fam-glass-saturate: 125%;
@@ -16,7 +18,7 @@
   /* The glow layer's bleed box is 2rem larger on every side. Its paint is already masked to the lens, but the box still counts as
      scrollable overflow, so a full-width field at the viewport edge would scroll the page sideways. */
   overflow: clip;
-  border-radius: var(--fam-r);
+  border-radius: var(--fam-r, 999px);
   box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .55);
 }
 
@@ -36,22 +38,29 @@
 }
 
 /* Ambient glow. The transparent border is the bleed: the backdrop is sampled across the whole extended box, while the mask
-   (four soft edge gradients clipped to the rounded padding box) keeps a glow that is strongest at the lens edge and fades
-   inward over --fam-glow-depth. */
+   (four soft edge gradients and four radial corner gradients, clipped to the rounded padding box) keeps a glow that is strongest
+   at the lens edge and fades inward over --fam-glow-depth, following the rounded corners. A corner tile is as large as the
+   radius, or as the depth when that is larger, so its gradient meets the straight bands exactly and the bands never overlap.
+   The tiles are sized per axis, so they are circular only while the box is big enough. CSS cannot take a min across both
+   axes, so an unset --fam-r (the default pill, whose radius is always clamped) gets zero-size tiles and keeps the straight bands. */
 .fam-glass::after {
   content: '';
   position: absolute;
   inset: calc(-1 * var(--fam-bleed));
   pointer-events: none;
   border: var(--fam-bleed) solid transparent;
-  border-radius: calc(var(--fam-r) + var(--fam-bleed));
+  border-radius: calc(var(--fam-r, 999px) + var(--fam-bleed));
   backdrop-filter: blur(25px) saturate(var(--fam-glow-saturate)) brightness(135%);
   background: linear-gradient(135deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, .04) 35%, rgba(255, 255, 255, .04) 65%, rgba(255, 255, 255, .3)) padding-box;
   mask:
-    linear-gradient(to bottom, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box,
-    linear-gradient(to top, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box,
-    linear-gradient(to right, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box,
-    linear-gradient(to left, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) padding-box;
+    linear-gradient(to bottom, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) center top / calc(100% - 2 * var(--fam-glow-tile)) 100% no-repeat padding-box,
+    linear-gradient(to top, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) center bottom / calc(100% - 2 * var(--fam-glow-tile)) 100% no-repeat padding-box,
+    linear-gradient(to right, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) left center / 100% calc(100% - 2 * var(--fam-glow-tile)) no-repeat padding-box,
+    linear-gradient(to left, #000, rgba(0, 0, 0, .35) calc(var(--fam-glow-depth) * .3), transparent var(--fam-glow-depth)) right center / 100% calc(100% - 2 * var(--fam-glow-tile)) no-repeat padding-box,
+    radial-gradient(ellipse farthest-side at 100% 100%, transparent calc(100% - var(--fam-glow-depth)), rgba(0, 0, 0, .35) calc(100% - var(--fam-glow-depth) * .3), #000 100%) left top / var(--fam-glow-tile) var(--fam-glow-tile) no-repeat padding-box,
+    radial-gradient(ellipse farthest-side at 0 100%, transparent calc(100% - var(--fam-glow-depth)), rgba(0, 0, 0, .35) calc(100% - var(--fam-glow-depth) * .3), #000 100%) right top / var(--fam-glow-tile) var(--fam-glow-tile) no-repeat padding-box,
+    radial-gradient(ellipse farthest-side at 100% 0, transparent calc(100% - var(--fam-glow-depth)), rgba(0, 0, 0, .35) calc(100% - var(--fam-glow-depth) * .3), #000 100%) left bottom / var(--fam-glow-tile) var(--fam-glow-tile) no-repeat padding-box,
+    radial-gradient(ellipse farthest-side at 0 0, transparent calc(100% - var(--fam-glow-depth)), rgba(0, 0, 0, .35) calc(100% - var(--fam-glow-depth) * .3), #000 100%) right bottom / var(--fam-glow-tile) var(--fam-glow-tile) no-repeat padding-box;
 }
 
 /* Clear glass that bends the backdrop at its rim. The plain declaration comes first so an engine that rejects url() filters keeps it.
@@ -69,11 +78,12 @@
 .fam-shadow-lg { box-shadow: var(--fam-shadow-lg); }
 .fam-shadow-inset { box-shadow: var(--fam-shadow-inset); }
 
-/* They also set --fam-r so the clip of a fam-glass glow layer follows the same radius. This relies on coming after .fam-glass. */
+/* All but the pill also set --fam-r so a fam-glass glow follows the same radius. This relies on coming after .fam-glass.
+   The pill is the glass default, which leaves --fam-r unset. */
 .fam-round-sm { --fam-r: var(--fam-radius-sm); border-radius: var(--fam-radius-sm); }
 .fam-round-md { --fam-r: var(--fam-radius-md); border-radius: var(--fam-radius-md); }
 .fam-round-lg { --fam-r: var(--fam-radius-lg); border-radius: var(--fam-radius-lg); }
-.fam-round-pill { --fam-r: var(--fam-radius-pill); border-radius: var(--fam-radius-pill); }
+.fam-round-pill { border-radius: var(--fam-radius-pill); }
 
 /* An inner box inside padding looks even when its radius is the outer radius minus the padding */
 .fam-concentric { border-radius: calc(var(--fam-outer-radius) - var(--fam-pad)); }
