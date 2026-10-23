@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glass - Fam</title>
+  <meta name="description" content="Fam glass: frosted blur, a specular ambient glow that works everywhere, and refraction in Chromium.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
+  <link rel="stylesheet" href="../dist/fam-ui.css">
+  <link rel="stylesheet" href="showcase.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="fam-refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+    <feImage x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'100'%20height%3D'100'%20preserveAspectRatio%3D'none'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'x'%20x1%3D'0'%20x2%3D'1'%20y1%3D'0'%20y2%3D'0'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(255%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(215%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(160%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(96%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(40%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D'y'%20x1%3D'0'%20x2%3D'0'%20y1%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(0%2C255%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(0%2C215%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(0%2C160%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(0%2C96%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(0%2C40%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'black'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23x)'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23y)'%20style%3D'mix-blend-mode%3Ascreen'%2F%3E%3C%2Fsvg%3E"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="fam">
+  <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
+    <a class="fam-nav-brand" href="index.html">Fam</a>
+    <a class="fam-nav-item" href="index.html">Home</a>
+    <a class="fam-nav-item" href="pairings.html">Pairings</a>
+    <a class="fam-nav-item" href="materials.html">Materials</a>
+    <a class="fam-nav-item" href="glass.html" aria-current="page">Glass</a>
+    <a class="fam-nav-item" href="examples.html">Examples</a>
+  </nav>
+  <main>
+    <header class="page-head">
+      <p class="eyebrow">Glass</p>
+      <h1>Glass that reads on any backdrop</h1>
+      <p class="lead">Frosted glass with a specular ambient glow works in every browser. Refraction bends what is behind the rim in Chromium browsers.</p>
+    <nav class="jump" aria-label="On this page">
+      <a href="#scene-glass">Properties</a>
+      <a href="#glass">Try the lens</a>
+    </nav>
+    </header>
+
+    <section class="scene" id="scene-glass">
+      <div class="window glass-lab">
+        <h2>Frosted glass</h2>
+        <p class="glass-lead">Blur and a dark shade keep text readable on any backdrop.</p>
+        <div class="glass-tiles glass-tiles--single">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid glass-backdrop--dim">
+              <div class="fam-glass glass-pane"><input class="fam-glass-input" placeholder="Search" aria-label="Search the frosted sample"></div>
+            </div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+        </div>
+
+        <h2>Specular ambient glow <span>every browser</span></h2>
+        <p class="glass-lead">The glass picks up the colors next to its rim and bleeds them inward. <code>--fam-glow-depth</code> sets how far.</p>
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop"><div class="fam-glass glass-pane" style="--fam-glow-depth: 0px"></div></div>
+            <figcaption>--fam-glow-depth: 0px</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop"><div class="fam-glass glass-pane"></div></div>
+            <figcaption>--fam-glow-depth: 18px</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop"><div class="fam-glass glass-pane" style="--fam-glow-depth: 40px"></div></div>
+            <figcaption>--fam-glow-depth: 40px</figcaption>
+          </figure>
+        </div>
+
+        <h2>Refraction <span>Chromium only</span></h2>
+        <p class="glass-lead">Clear glass bends the grid behind its rim. Other browsers show the same pane without the bending.</p>
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass glass-pane"></div></div>
+            <figcaption>fam-glass</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass fam-glass--refract glass-pane"></div></div>
+            <figcaption>fam-glass--refract</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="cap"><b>glass</b> <code class="copyable">fam-glass fam-glass-input fam-glass--refract</code></p>
+    </section>
+
+    <section class="glass-band" id="glass" aria-labelledby="glass-heading">
+      <h2 class="visually-hidden" id="glass-heading">Try the glass</h2>
+      <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>
+      <div class="tray fam-metal">
+        <div class="knobwrap">
+          <div class="fam-knob" id="knob-blur" role="slider" tabindex="0" aria-label="Blur" aria-valuemin="0" aria-valuemax="30" aria-valuenow="1" aria-valuetext="1px"></div>
+          <span class="fam-engraved-metal">Blur</span>
+        </div>
+        <div class="knobwrap">
+          <div class="fam-knob" id="knob-glow" role="slider" tabindex="0" aria-label="Glow" aria-valuemin="0" aria-valuemax="40" aria-valuenow="18" aria-valuetext="18px"></div>
+          <span class="fam-engraved-metal">Glow</span>
+        </div>
+        <div class="knobwrap">
+          <div class="fam-knob" id="knob-radius" role="slider" tabindex="0" aria-label="Radius" aria-valuemin="0" aria-valuemax="90" aria-valuenow="90" aria-valuetext="90px"></div>
+          <span class="fam-engraved-metal">Radius</span>
+        </div>
+        <div class="knobwrap">
+          <label class="fam-switch"><input type="checkbox" role="switch" id="refract-switch" aria-label="Refract" checked><span class="fam-switch-knob"></span></label>
+          <span class="fam-engraved-metal">Refract</span>
+        </div>
+      </div>
+      <div class="glass-notes">
+        <p class="note">Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.</p>
+        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"&gt;&lt;/div&gt;</code></p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="credits">
+    <p>Photos on Unsplash: the ribbon by boliviainteligente and the tree by mehrab-sium. The textures are processed from Unsplash photographs and credited one by one in <a href="https://github.com/electrikmilk/fam/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+    <p><a href="https://github.com/electrikmilk/fam">fam-ui on GitHub</a></p>
+  </footer>
+</div>
+<script src="copy.js"></script>
+<script src="knob.js"></script>
+<script src="lens.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

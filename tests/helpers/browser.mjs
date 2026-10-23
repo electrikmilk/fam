@@ -31,6 +31,7 @@ if (process.env.NODE_TEST_CONTEXT) {
 
 export const fixtureUrl = (name) => pathToFileURL(fileURLToPath(new URL(`fixtures/${name}.html`, testsRoot))).href;
 export const showcaseUrl = pathToFileURL(fileURLToPath(new URL('../showcase/index.html', testsRoot))).href;
+export const showcasePageUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../showcase/${name}.html`, testsRoot))).href;
 export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../examples/${name}.html`, testsRoot))).href;
 
 export async function openUrl(

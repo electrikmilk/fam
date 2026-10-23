@@ -5,13 +5,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { closeSharedBrowser, exampleUrl, openUrl, showcaseUrl } from '../tests/helpers/browser.mjs';
+import { closeSharedBrowser, exampleUrl, openUrl, showcasePageUrl } from '../tests/helpers/browser.mjs';
 
 const execFileAsync = promisify(execFile);
-const AUDITED_PAGES = ['controls', 'notes', 'sign-in', 'showcase'];
+const SHOWCASE_PAGE_FILES = { showcase: 'index', 'showcase-pairings': 'pairings', 'showcase-materials': 'materials', 'showcase-glass': 'glass', 'showcase-examples': 'examples' };
+const AUDITED_PAGES = ['controls', 'notes', 'sign-in', ...Object.keys(SHOWCASE_PAGE_FILES)];
 
-// The showcase is not an example page, so it has its own location
-const urlFor = (pageName) => (pageName === 'showcase' ? showcaseUrl : exampleUrl(pageName));
+// The showcase pages are not example pages, so they have their own location
+const urlFor = (pageName) => (pageName in SHOWCASE_PAGE_FILES ? showcasePageUrl(SHOWCASE_PAGE_FILES[pageName]) : exampleUrl(pageName));
 const collectScript = fileURLToPath(new URL('contrast-audit/collect.js', import.meta.url));
 const measureScript = fileURLToPath(new URL('contrast-audit/measure.py', import.meta.url));
 

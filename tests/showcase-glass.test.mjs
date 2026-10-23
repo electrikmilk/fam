@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { openUrl, showcaseUrl } from './helpers/browser.mjs';
+import { openUrl, showcasePageUrl } from './helpers/browser.mjs';
+
+const glassUrl = showcasePageUrl('glass');
 
 const DEFAULT_READOUT = '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>';
 const KNOBS = {
@@ -17,7 +19,7 @@ const press = async (page, key, times = 1) => {
 };
 
 test('the glass section is complete in the HTML with JavaScript off', async () => {
-  const page = await openUrl(showcaseUrl, { javaScriptEnabled: false });
+  const page = await openUrl(glassUrl, { javaScriptEnabled: false });
   try {
     assert.ok((await page.page.getAttribute('#lens', 'class')).includes('fam-glass--refract'));
     assert.equal(await page.page.getAttribute('#lens', 'aria-hidden'), 'true');
@@ -33,7 +35,7 @@ test('the glass section is complete in the HTML with JavaScript off', async () =
 });
 
 test('knobs are sliders that fit their touch behavior', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(glassUrl);
   try {
     for (const [name, knob] of Object.entries(KNOBS)) {
       const selector = `#knob-${name}`;
@@ -53,7 +55,7 @@ test('knobs are sliders that fit their touch behavior', async () => {
 });
 
 test('the keyboard turns each knob through its range', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(glassUrl);
   try {
     const cases = [
       ['glow', '--fam-glow-depth', 'ArrowUp', 3, 21, '40'],
@@ -85,7 +87,7 @@ test('the keyboard turns each knob through its range', async () => {
 });
 
 test('dragging a knob turns it to the pointer', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(glassUrl);
   try {
     await page.page.locator('#knob-radius').scrollIntoViewIfNeeded();
     const box = await page.page.locator('#knob-radius').boundingBox();
@@ -107,7 +109,7 @@ test('dragging a knob turns it to the pointer', async () => {
 });
 
 test('the switch changes the glass mode and each mode keeps its own blur', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(glassUrl);
   try {
     await page.page.locator('#refract-switch').scrollIntoViewIfNeeded();
     await page.page.locator('.fam-switch:has(#refract-switch)').click();
@@ -135,7 +137,7 @@ test('the switch changes the glass mode and each mode keeps its own blur', async
 });
 
 test('the lens follows the pointer over the glass and not over the controls', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(glassUrl);
   try {
     await page.page.locator('#glass').scrollIntoViewIfNeeded();
     const band = await page.page.locator('#glass').boundingBox();
@@ -165,7 +167,7 @@ test('the lens follows the pointer over the glass and not over the controls', as
 });
 
 test('the knobs and the switch show keyboard focus', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(glassUrl);
   try {
     const outline = (selector) =>
       page.page.evaluate((target) => {
@@ -186,7 +188,7 @@ test('the knobs and the switch show keyboard focus', async () => {
 
 for (const width of [1440, 768, 375]) {
   test(`the controls, the note and the readout do not overlap at ${width}px wide`, async () => {
-    const page = await openUrl(showcaseUrl, { viewport: { width, height: 900 } });
+    const page = await openUrl(glassUrl, { viewport: { width, height: 900 } });
     try {
       const boxes = await page.page.evaluate(() =>
         ['#glass .tray', '#glass .note', '#glass .glass-notes .cap'].map((selector) => {

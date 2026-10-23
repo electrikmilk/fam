@@ -4,17 +4,15 @@ body {
   color: #e9e9ec;
 }
 
-/* The opening screen is the kit's stitched leather frame at full width. It stops at 78% of the screen so the top of the first scene shows
-   below it, which is what tells a visitor to scroll. */
+/* The opening screen is the same stitched leather as the site bar above it, at full width. It stops at 78% of the screen so the top of the
+   next section shows below it, which is what tells a visitor to scroll. */
 .hero {
   box-sizing: border-box;
   display: grid;
   place-items: center;
   min-height: 78vh;
   min-height: 78svh;
-  border-width: 40px;
-  border-image-width: 40px;
-  box-shadow: none;
+  padding: 0 20px 8px;
   text-align: center;
   font-family: Georgia, "Times New Roman", serif;
 }
@@ -45,7 +43,7 @@ body {
 
 .scene {
   box-sizing: border-box;
-  max-width: 960px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 48px 20px 6px;
 }
@@ -148,27 +146,23 @@ body {
 }
 
 .glass-lab h2 {
-  margin: 26px 0 6px;
-  font: 600 12px ui-monospace, Menlo, monospace;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  margin: 32px 0 6px;
+  font: 700 22px/1.2 var(--site-font);
   color: #fff;
 }
 
 .glass-lab h2:first-child { margin-top: 0; }
 
 .glass-lab h2 span {
-  margin-left: 8px;
+  margin-left: 10px;
+  font-size: 16px;
   font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
   color: #b8bcc6;
 }
 
 .glass-lead {
-  margin: 0 0 14px;
-  font-size: 14px;
-  line-height: 1.5;
+  margin: 0 0 16px;
+  font: 400 17px/1.5 var(--site-font);
   color: #b8bcc6;
 }
 
@@ -220,15 +214,13 @@ body {
 .glass-pane .fam-glass-input { width: 100%; box-sizing: border-box; }
 
 .build-panel h2 {
-  margin: 22px 0 10px;
-  font: 600 12px ui-monospace, Menlo, monospace;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  margin: 28px 0 12px;
+  font: 700 22px/1.2 var(--site-font);
   color: #fff;
 }
 
 .build-panel h2:first-child { margin-top: 0; }
-.build-panel h2 code { font: inherit; text-transform: none; }
+.build-panel h2 code { font: 600 18px ui-monospace, Menlo, monospace; }
 
 .swatches {
   display: grid;
@@ -440,7 +432,7 @@ body {
   padding: 4px 12px;
   border-radius: 999px;
   background: rgba(0, 0, 0, .85);
-  font-size: 13px;
+  font: 400 15px var(--site-font);
   color: #e9e9ec;
 }
 

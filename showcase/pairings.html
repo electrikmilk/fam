@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pairings - Fam</title>
+  <meta name="description" content="Fam pairs its materials: wood and felt, leather and paper, metal and plastic, frames and cork.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
+  <link rel="stylesheet" href="../dist/fam-ui.css">
+  <link rel="stylesheet" href="showcase.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="fam">
+  <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
+    <a class="fam-nav-brand" href="index.html">Fam</a>
+    <a class="fam-nav-item" href="index.html">Home</a>
+    <a class="fam-nav-item" href="pairings.html" aria-current="page">Pairings</a>
+    <a class="fam-nav-item" href="materials.html">Materials</a>
+    <a class="fam-nav-item" href="glass.html">Glass</a>
+    <a class="fam-nav-item" href="examples.html">Examples</a>
+  </nav>
+  <main>
+    <header class="page-head">
+      <p class="eyebrow">Pairings</p>
+      <h1>Materials that sit well together</h1>
+      <p class="lead">Each scene combines two or more materials. The classes under every scene are the ones it uses, and the button copies them.</p>
+    <nav class="jump" aria-label="On this page">
+      <a href="#scene-wood-felt">Wood and felt</a>
+      <a href="#scene-navs">Navigation bars</a>
+      <a href="#scene-legal-leather">Legal pad and leather</a>
+      <a href="#scene-leather-paper">Leather and paper</a>
+      <a href="#scene-metal">Metal and plastic</a>
+      <a href="#scene-frames">Photo frames and cork</a>
+      <a href="#scene-engraved">Engraved text</a>
+    </nav>
+    </header>
+
+    <section class="scene" id="scene-wood-felt">
+      <h2 class="scene-title">Wood and felt</h2>
+      <p class="scene-lead">A wooden navigation bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
+      <div class="window fam-felt">
+        <nav class="fam-nav fam-wood" aria-label="Sample navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Controls</span>
+          <span class="fam-nav-item">Progress</span>
+        </nav>
+        <div class="controls-row">
+          <div class="fam-glass field"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+          <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label>
+          <div class="fam-progress bar" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
+        </div>
+      </div>
+      <p class="cap"><b>wood + felt</b> <code class="copyable">fam-felt fam-nav fam-wood fam-glass fam-glass-input fam-switch fam-progress fam-progress-fill--candy</code></p>
+    </section>
+
+    <section class="scene" id="scene-navs">
+      <h2 class="scene-title">Navigation bars</h2>
+      <p class="scene-lead">Wood, metal, tan leather and black leather bars share one set of items.</p>
+      <div class="window navs-window">
+        <nav class="fam-nav fam-wood" aria-label="Wood navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-metal" aria-label="Metal navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-leather-bar" aria-label="Tan leather navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-leather-bar fam-leather-bar--black" aria-label="Black leather navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+      </div>
+      <p class="cap"><b>navigation bars</b> <code class="copyable">fam-nav fam-wood fam-metal fam-leather-bar fam-leather-bar--black</code></p>
+    </section>
+
+    <section class="scene" id="scene-legal-leather">
+      <h2 class="scene-title">Legal pad and leather</h2>
+      <p class="scene-lead">A ruled yellow pad inside a black stitched leather frame.</p>
+      <div class="window fam-leather-frame fam-leather-frame--black">
+        <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
+      </div>
+      <p class="cap"><b>legal pad + leather</b> <code class="copyable">fam-legal-pad fam-leather-frame fam-leather-frame--black</code></p>
+    </section>
+
+    <section class="scene" id="scene-leather-paper">
+      <h2 class="scene-title">Leather and paper</h2>
+      <p class="scene-lead">A list on white paper inside a tan stitched leather frame.</p>
+      <div class="window fam-leather-frame">
+        <div class="fam-paper paper-list">
+          <ul class="fam-list" aria-label="Notes">
+            <li><a class="fam-list-row" href="#scene-leather-paper"><b>Grocery run</b><span>Today</span></a></li>
+            <li><a class="fam-list-row" href="#scene-leather-paper" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
+            <li><a class="fam-list-row" href="#scene-leather-paper"><b>Book ideas</b><span>Monday</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="cap"><b>leather + paper</b> <code class="copyable">fam-leather-frame fam-paper fam-list fam-list-row</code></p>
+    </section>
+
+    <section class="scene" id="scene-metal">
+      <h2 class="scene-title">Metal and plastic</h2>
+      <p class="scene-lead">Plastic buttons, a knob and a switch on brushed metal.</p>
+      <div class="window fam-metal metal-controls">
+        <button class="fam-plastic fam-plastic--red" type="button">Record</button>
+        <button class="fam-plastic fam-plastic--green" type="button">Play</button>
+        <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
+        <span class="fam-knob" role="img" aria-label="Metal knob"></span>
+        <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Loop" checked><span class="fam-switch-knob"></span></label>
+      </div>
+      <p class="cap"><b>metal + controls</b> <code class="copyable">fam-metal fam-plastic fam-knob fam-switch</code></p>
+    </section>
+
+    <section class="scene" id="scene-frames">
+      <h2 class="scene-title">Photo frames and cork</h2>
+      <p class="scene-lead">Four ways to frame a photo, and a corkboard inside a wood frame.</p>
+      <div class="window frames-window">
+        <div class="frames-grid">
+          <figure class="fam-print-frame fam-paper"><img src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
+          <figure class="fam-print-frame fam-cardstock"><img src="images/tree.jpg" alt=""></figure>
+          <figure class="fam-wood-frame"><img src="images/tree.jpg" alt=""></figure>
+          <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="images/tree.jpg" alt=""></figure>
+        </div>
+        <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
+      </div>
+      <p class="cap"><b>photo frames + cork</b> <code class="copyable">fam-print-frame fam-paper fam-cardstock fam-wood-frame fam-wood-frame--glossy fam-cork</code></p>
+    </section>
+
+    <section class="scene" id="scene-engraved">
+      <h2 class="scene-title">Engraved text</h2>
+      <p class="scene-lead">Text pressed into metal, leather and wood.</p>
+      <div class="panels">
+        <div class="window fam-metal panel"><span class="fam-engraved-metal">SETTINGS</span></div>
+        <div class="window fam-leather panel"><span class="fam-engraved-leather">Notebook</span></div>
+        <div class="window fam-wood panel"><span class="fam-engraved-wood">LIBRARY</span></div>
+      </div>
+      <p class="cap"><b>engraved text</b> <code class="copyable">fam-engraved-metal fam-engraved-leather fam-engraved-wood fam-metal fam-leather fam-wood</code></p>
+    </section>
+  </main>
+
+  <footer id="credits">
+    <p>Photos on Unsplash: the ribbon by boliviainteligente and the tree by mehrab-sium. The textures are processed from Unsplash photographs and credited one by one in <a href="https://github.com/electrikmilk/fam/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+    <p><a href="https://github.com/electrikmilk/fam">fam-ui on GitHub</a></p>
+  </footer>
+</div>
+<script src="copy.js"></script>
+</body>
+</html>

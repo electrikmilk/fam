@@ -1,28 +1,37 @@
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
-import { openUrl, showcaseUrl } from './helpers/browser.mjs';
+import { openUrl, showcasePageUrl, showcaseUrl } from './helpers/browser.mjs';
 import { OFFENDERS_SOURCE } from './helpers/layout.mjs';
 
 const IMAGE_BUDGET_BYTES = 300 * 1024;
 const TOTAL_IMAGE_BUDGET_BYTES = 3 * 1024 * 1024;
 
-test('showcase loads cleanly within the image budget', async () => {
-  const page = await openUrl(showcaseUrl);
-  try {
-    assert.deepEqual(page.issues, []);
-    for (const name of ['ribbon.jpg', 'tree.jpg']) {
-      const { size } = await stat(new URL(`../showcase/images/${name}`, import.meta.url));
-      assert.ok(size <= IMAGE_BUDGET_BYTES, `${name} is ${size} bytes`);
+const PAGE_NAMES = ['index', 'pairings', 'materials', 'glass', 'examples'];
+const pairingsUrl = showcasePageUrl('pairings');
+const materialsUrl = showcasePageUrl('materials');
+
+for (const pageName of PAGE_NAMES) {
+  test(`${pageName} loads cleanly within the image budget`, async () => {
+    const page = await openUrl(showcasePageUrl(pageName));
+    try {
+      assert.deepEqual(page.issues, []);
+      const bytes = await page.imageBytes();
+      assert.ok(bytes <= TOTAL_IMAGE_BUDGET_BYTES, `the page loads ${bytes} bytes of images`);
+    } finally {
+      await page.close();
     }
-    const bytes = await page.imageBytes();
-    assert.ok(bytes <= TOTAL_IMAGE_BUDGET_BYTES, `the page loads ${bytes} bytes of images`);
-  } finally {
-    await page.close();
+  });
+}
+
+test('each photo is within its size budget', async () => {
+  for (const name of ['ribbon.jpg', 'tree.jpg']) {
+    const { size } = await stat(new URL(`../showcase/images/${name}`, import.meta.url));
+    assert.ok(size <= IMAGE_BUDGET_BYTES, `${name} is ${size} bytes`);
   }
 });
 
-test('opening screen is tan stitched leather with serif engraved text', async () => {
+test('opening screen is tan stitched leather, like the site bar, with serif engraved text', async () => {
   const page = await openUrl(showcaseUrl);
   try {
     const read = (selector, property) => page.page.evaluate(([target, name]) => getComputedStyle(document.querySelector(target))[name], [selector, property]);
@@ -30,7 +39,10 @@ test('opening screen is tan stitched leather with serif engraved text', async ()
     assert.equal(await page.page.textContent('#hero .tagline'), 'Familiar materials for the web');
     assert.ok((await read('#hero h1', 'fontFamily')).startsWith('Georgia'));
     assert.ok((await read('#hero .tagline', 'fontFamily')).startsWith('Georgia'));
-    assert.ok((await read('#hero', 'borderImageSource')).includes('leather-frame-tan-soft.png'));
+    assert.ok((await read('.site-nav .fam-nav-brand', 'fontFamily')).startsWith('Georgia'));
+    const heroBackground = await read('#hero', 'backgroundImage');
+    assert.ok(heroBackground.includes('leather-fill-tan-tile.jpg') && heroBackground.includes('leather-bar-edge-tan.png'), heroBackground);
+    assert.equal(await read('#hero', 'backgroundImage'), await read('.site-nav', 'backgroundImage'), 'the hero and the site bar use different leather');
   } finally {
     await page.close();
   }
@@ -50,38 +62,42 @@ test('credits name both photographers and link the credits file', async () => {
   }
 });
 
-test('page copy has no em dashes', async () => {
-  const page = await openUrl(showcaseUrl);
-  try {
-    assert.ok(!(await page.page.evaluate(() => document.body.textContent)).includes('—'));
-  } finally {
-    await page.close();
-  }
-});
+for (const pageName of PAGE_NAMES) {
+  test(`${pageName} copy has no em dashes`, async () => {
+    const page = await openUrl(showcasePageUrl(pageName));
+    try {
+      assert.ok(!(await page.page.evaluate(() => document.body.textContent)).includes('—'));
+    } finally {
+      await page.close();
+    }
+  });
+}
 
-test('showcase carries the current refraction snippet', async () => {
+test('the glass page carries the current refraction snippet', async () => {
   const [page, snippet] = await Promise.all([
-    readFile(new URL('../showcase/index.html', import.meta.url), 'utf8'),
+    readFile(new URL('../showcase/glass.html', import.meta.url), 'utf8'),
     readFile(new URL('../snippets/refraction-filter.html', import.meta.url), 'utf8'),
   ]);
-  assert.ok(page.includes(snippet.trim()), 'showcase/index.html has a stale or missing copy of snippets/refraction-filter.html');
+  assert.ok(page.includes(snippet.trim()), 'showcase/glass.html has a stale or missing copy of snippets/refraction-filter.html');
 });
 
-test('showcase has no horizontal scroll at phone width', async () => {
-  const page = await openUrl(showcaseUrl, { viewport: { width: 375, height: 800 } });
-  try {
-    const { scrollWidth, innerWidth } = await page.page.evaluate(() => ({ scrollWidth: document.scrollingElement.scrollWidth, innerWidth: window.innerWidth }));
-    assert.ok(scrollWidth <= innerWidth, `the page scrolls sideways: ${scrollWidth}px in a ${innerWidth}px viewport`);
-    assert.deepEqual(await page.page.evaluate(`(${OFFENDERS_SOURCE})()`), []);
-  } finally {
-    await page.close();
-  }
-});
+for (const pageName of PAGE_NAMES) {
+  test(`${pageName} has no horizontal scroll at phone width`, async () => {
+    const page = await openUrl(showcasePageUrl(pageName), { viewport: { width: 375, height: 800 } });
+    try {
+      const { scrollWidth, innerWidth } = await page.page.evaluate(() => ({ scrollWidth: document.scrollingElement.scrollWidth, innerWidth: window.innerWidth }));
+      assert.ok(scrollWidth <= innerWidth, `the page scrolls sideways: ${scrollWidth}px in a ${innerWidth}px viewport`);
+      assert.deepEqual(await page.page.evaluate(`(${OFFENDERS_SOURCE})()`), []);
+    } finally {
+      await page.close();
+    }
+  });
+}
 
 const SCENES = ['scene-wood-felt', 'scene-navs', 'scene-legal-leather', 'scene-leather-paper', 'scene-metal', 'scene-frames', 'scene-engraved'];
 
 test('showcase has the paired scenes in order', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(pairingsUrl);
   try {
     const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
     assert.deepEqual(ids.slice(0, SCENES.length), SCENES);
@@ -92,67 +108,76 @@ test('showcase has the paired scenes in order', async () => {
 
 // The page may only claim what the package does: every class a caption names must be defined in the real stylesheet
 test('every class in a caption exists in the kit', async () => {
-  const [css, page] = await Promise.all([readFile(new URL('../dist/fam-ui.css', import.meta.url), 'utf8'), openUrl(showcaseUrl)]);
-  try {
-    const names = await page.page.$$eval('.cap code', (codes) => [...new Set(codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []))]);
-    assert.ok(names.length >= 25, `only ${names.length} classes are named in captions`);
-    for (const name of names) assert.ok(css.includes(`.${name}`), `a caption names .${name} but the stylesheet does not define it`);
-  } finally {
-    await page.close();
-  }
-});
-
-test('captions match the markup of their scene', async () => {
-  const page = await openUrl(showcaseUrl);
-  try {
-    assert.ok((await page.page.$$('section.scene')).length >= SCENES.length, 'the scenes are missing');
-    const missing = await page.page.evaluate(() =>
-      [...document.querySelectorAll('section.scene')].flatMap((scene) =>
-        (scene.querySelector('.cap code')?.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? [])
-          .filter((name) => !scene.querySelector(`:not(.cap) .${name}, .window.${name}`))
-          .map((name) => `${scene.id}: ${name}`),
-      ),
-    );
-    assert.deepEqual(missing, []);
-  } finally {
-    await page.close();
-  }
-});
-
-test('scenes are framed windows with real content and work with JavaScript off', async () => {
-  const page = await openUrl(showcaseUrl, { javaScriptEnabled: false });
-  try {
-    const scenes = await page.page.$$eval('section.scene', (sections) =>
-      sections.map((section) => ({
-        id: section.id,
-        height: section.getBoundingClientRect().height,
-        captionVisible: section.querySelector('.cap code').getBoundingClientRect().height > 0,
-        windows: [...section.querySelectorAll('.window')].map((window) => getComputedStyle(window).boxShadow !== 'none'),
-      })),
-    );
-    assert.ok(scenes.length >= SCENES.length, 'the scenes are missing');
-    for (const scene of scenes) {
-      assert.ok(scene.height > 100, `${scene.id} is empty`);
-      assert.ok(scene.captionVisible, `${scene.id} has no visible caption`);
-      assert.ok(scene.windows.length > 0 && scene.windows.every(Boolean), `${scene.id} has an unframed window`);
+  const css = await readFile(new URL('../dist/fam-ui.css', import.meta.url), 'utf8');
+  const names = new Set();
+  for (const pageName of PAGE_NAMES) {
+    const page = await openUrl(showcasePageUrl(pageName));
+    try {
+      const found = await page.page.$$eval('.cap code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []));
+      for (const name of found) names.add(name);
+    } finally {
+      await page.close();
     }
-  } finally {
-    await page.close();
   }
+  assert.ok(names.size >= 25, `only ${names.size} classes are named in captions`);
+  for (const name of names) assert.ok(css.includes(`.${name}`), `a caption names .${name} but the stylesheet does not define it`);
 });
 
-test('build your own comes after the paired scenes', async () => {
-  const page = await openUrl(showcaseUrl);
+const SCENE_PAGE_NAMES = ['pairings', 'materials', 'glass'];
+
+for (const pageName of SCENE_PAGE_NAMES) {
+  test(`captions match the markup of their scene on ${pageName}`, async () => {
+    const page = await openUrl(showcasePageUrl(pageName));
+    try {
+      assert.ok((await page.page.$$('section.scene')).length >= 1, 'the scenes are missing');
+      const missing = await page.page.evaluate(() =>
+        [...document.querySelectorAll('section.scene')].flatMap((scene) =>
+          (scene.querySelector('.cap code')?.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? [])
+            .filter((name) => !scene.querySelector(`:not(.cap) .${name}, .window.${name}`))
+            .map((name) => `${scene.id}: ${name}`),
+        ),
+      );
+      assert.deepEqual(missing, []);
+    } finally {
+      await page.close();
+    }
+  });
+
+  test(`scenes on ${pageName} are framed windows with real content and work with JavaScript off`, async () => {
+    const page = await openUrl(showcasePageUrl(pageName), { javaScriptEnabled: false });
+    try {
+      const scenes = await page.page.$$eval('section.scene', (sections) =>
+        sections.map((section) => ({
+          id: section.id,
+          height: section.getBoundingClientRect().height,
+          captionVisible: section.querySelector('.cap code').getBoundingClientRect().height > 0,
+          windows: [...section.querySelectorAll('.window')].map((window) => getComputedStyle(window).boxShadow !== 'none'),
+        })),
+      );
+      assert.ok(scenes.length >= 1, 'the scenes are missing');
+      for (const scene of scenes) {
+        assert.ok(scene.height > 100, `${scene.id} is empty`);
+        assert.ok(scene.captionVisible, `${scene.id} has no visible caption`);
+        assert.ok(scene.windows.length > 0 && scene.windows.every(Boolean), `${scene.id} has an unframed window`);
+      }
+    } finally {
+      await page.close();
+    }
+  });
+}
+
+test('the materials page holds build your own', async () => {
+  const page = await openUrl(materialsUrl);
   try {
     const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
-    assert.equal(ids[SCENES.length], 'scene-build');
+    assert.deepEqual(ids, ['scene-build']);
   } finally {
     await page.close();
   }
 });
 
 test('build your own shows every texture, labeled with the classes it uses', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(materialsUrl);
   try {
     const squares = await page.page.$$eval('#scene-build .swatches .sq', (figures) =>
       figures.map((figure) => ({
@@ -178,7 +203,7 @@ test('build your own shows every texture, labeled with the classes it uses', asy
 });
 
 test('build your own shows felt in five colors', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(materialsUrl);
   try {
     const colors = await page.page.$$eval('#scene-build .tint', (tints) => tints.map((tint) => getComputedStyle(tint).backgroundColor));
     assert.equal(colors.length, 5);
@@ -189,7 +214,7 @@ test('build your own shows felt in five colors', async () => {
 });
 
 test('build your own shows gloss, rounding and shadow utilities', async () => {
-  const page = await openUrl(showcaseUrl);
+  const page = await openUrl(materialsUrl);
   try {
     const found = await page.page.evaluate(() => {
       const scene = document.querySelector('#scene-build');
@@ -214,7 +239,7 @@ const REJECTING_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { val
 const NO_CLIPBOARD = `Object.defineProperty(navigator, 'clipboard', { value: undefined });`;
 
 test('every caption gets a copy button that copies its classes', async () => {
-  const page = await openUrl(showcaseUrl, { initScript: RECORDING_CLIPBOARD });
+  const page = await openUrl(pairingsUrl, { initScript: RECORDING_CLIPBOARD });
   try {
     const counts = await page.page.evaluate(() => ({ codes: document.querySelectorAll('code.copyable').length, buttons: document.querySelectorAll('code.copyable + button.copy').length }));
     assert.ok(counts.codes >= 7, 'the captions are missing');
@@ -234,7 +259,7 @@ test('every caption gets a copy button that copies its classes', async () => {
 });
 
 test('a refused copy says so', async () => {
-  const page = await openUrl(showcaseUrl, { initScript: REJECTING_CLIPBOARD });
+  const page = await openUrl(pairingsUrl, { initScript: REJECTING_CLIPBOARD });
   try {
     const button = page.page.locator('#scene-wood-felt .copy');
     await button.click();
@@ -246,7 +271,7 @@ test('a refused copy says so', async () => {
 });
 
 test('no copy buttons appear without the clipboard API', async () => {
-  const page = await openUrl(showcaseUrl, { initScript: NO_CLIPBOARD });
+  const page = await openUrl(pairingsUrl, { initScript: NO_CLIPBOARD });
   try {
     assert.equal(await page.page.locator('.copy').count(), 0);
   } finally {
@@ -254,21 +279,81 @@ test('no copy buttons appear without the clipboard API', async () => {
   }
 });
 
-// The opening screen stops short of the bottom, so the top of the first scene shows and scrolling is obvious without a "Scroll" cue
+// The opening screen stops short of the bottom, so the top of the next section shows and scrolling is obvious without a "Scroll" cue
 for (const [width, height] of [[1440, 900], [768, 1024], [375, 700]]) {
   test(`the next section peeks into the first screen at ${width} by ${height}`, async () => {
     const page = await openUrl(showcaseUrl, { viewport: { width, height } });
     try {
-      const { heroBottom, windowTop, cues } = await page.page.evaluate(() => ({
+      const { heroBottom, headingTop, cues } = await page.page.evaluate(() => ({
         heroBottom: document.querySelector('#hero').getBoundingClientRect().bottom,
-        windowTop: document.querySelector('#scene-wood-felt .window').getBoundingClientRect().top,
+        headingTop: document.querySelector('#pairings h2').getBoundingClientRect().top,
         cues: document.querySelectorAll('.scroll-cue').length,
       }));
       assert.ok(heroBottom < height - 60, `the opening screen ends at ${heroBottom}px of a ${height}px viewport`);
-      assert.ok(windowTop < height - 60, `the first scene starts at ${windowTop}px, below the fold of a ${height}px viewport`);
+      assert.ok(headingTop < height - 60, `the first section starts at ${headingTop}px, below the fold of a ${height}px viewport`);
       assert.equal(cues, 0, 'the scroll cue is still on the page');
     } finally {
       await page.close();
     }
   });
 }
+
+test('the pairing panels are all visible with JavaScript off', async () => {
+  const page = await openUrl(showcaseUrl, { javaScriptEnabled: false });
+  try {
+    const panels = await page.page.$$eval('.pairing-panel', (elements) => elements.map((element) => ({ id: element.id, height: element.getBoundingClientRect().height })));
+    assert.equal(panels.length, 6);
+    for (const panel of panels) assert.ok(panel.height > 100, `${panel.id} is hidden`);
+    assert.equal(await page.page.locator('[role="tab"]').count(), 0);
+  } finally {
+    await page.close();
+  }
+});
+
+test('the pairing tabs show one panel at a time and follow the keyboard', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    const state = () =>
+      page.page.evaluate(() => ({
+        selected: [...document.querySelectorAll('[role="tab"]')].map((tab) => tab.getAttribute('aria-selected')),
+        visible: [...document.querySelectorAll('.pairing-panel')].filter((panel) => !panel.hidden).map((panel) => panel.id),
+        tabbable: [...document.querySelectorAll('[role="tab"]')].filter((tab) => tab.tabIndex === 0).length,
+      }));
+    let current = await state();
+    assert.equal(current.selected.length, 6);
+    assert.deepEqual(current.visible, ['pairing-wood-felt']);
+    assert.equal(current.tabbable, 1);
+    assert.equal(await page.page.getAttribute('[role="tab"]', 'aria-controls'), 'pairing-wood-felt');
+
+    await page.page.focus('[role="tab"]');
+    await page.page.keyboard.press('ArrowRight');
+    current = await state();
+    assert.deepEqual(current.visible, ['pairing-leather-paper']);
+    await page.page.keyboard.press('End');
+    assert.deepEqual((await state()).visible, ['pairing-glass']);
+    await page.page.keyboard.press('ArrowRight');
+    assert.deepEqual((await state()).visible, ['pairing-wood-felt'], 'the last tab does not wrap to the first');
+    await page.page.keyboard.press('ArrowLeft');
+    assert.deepEqual((await state()).visible, ['pairing-glass'], 'the first tab does not wrap to the last');
+
+    await page.page.locator('[role="tab"]', { hasText: 'Metal and plastic' }).click();
+    assert.deepEqual((await state()).visible, ['pairing-metal-plastic']);
+  } finally {
+    await page.close();
+  }
+});
+
+test('the site text is set in Lato', async () => {
+  const page = await openUrl(showcaseUrl);
+  try {
+    await page.page.evaluate(() => document.fonts.ready);
+    const result = await page.page.evaluate(() => ({
+      heading: getComputedStyle(document.querySelector('#pairings h2')).fontFamily,
+      loaded: document.fonts.check('700 16px Lato'),
+    }));
+    assert.ok(result.heading.includes('Lato'), result.heading);
+    assert.ok(result.loaded, 'Lato did not load from Google Fonts');
+  } finally {
+    await page.close();
+  }
+});

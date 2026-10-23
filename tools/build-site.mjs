@@ -3,10 +3,10 @@ import { realpathSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-// Assembles the folder GitHub Pages publishes. It keeps the repository's own layout (showcase/, dist/, assets/) so the page's
+// Assembles the folder GitHub Pages publishes. It keeps the repository's own layout (showcase/, examples/, dist/, assets/) so the pages'
 // relative links to ../dist/fam-ui.css and ../assets/ work unchanged, and adds a root page that sends visitors to the showcase.
 const packageRoot = new URL('../', import.meta.url);
-const COPIED_FOLDERS = ['showcase', 'dist', 'assets'];
+const COPIED_FOLDERS = ['showcase', 'examples', 'dist', 'assets'];
 
 const REDIRECT_PAGE = `<!doctype html>
 <html lang="en">

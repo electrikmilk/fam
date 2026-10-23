@@ -1,0 +1,280 @@
+/* Chrome shared by every showcase page: the type scale, the top bar, page headings, cards and the footer.
+   Lato is for the site's own words only. Anything inside a .window keeps the kit's font, because that is what the kit looks like. */
+:root {
+  --site-font: "Lato", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --site-width: 1040px;
+  --site-accent: #f0b45a;
+  --site-ink: #fff;
+  --site-muted: #c9ccd4;
+  --site-card: #24272d;
+}
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* A sticky bar must not hide the heading an in-page link scrolls to */
+[id] { scroll-margin-top: 80px; }
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  height: 64px;
+  font-family: var(--site-font);
+}
+
+.site-nav .fam-nav-brand {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+/* Below 481px the kit's own phone sizes apply, so all five labels fit a 375px screen without scrolling the bar */
+@media (min-width: 481px) {
+  .site-nav { padding: 0 20px; }
+
+  .site-nav .fam-nav-brand {
+    margin-right: 22px;
+    font-size: 26px;
+  }
+
+  .site-nav .fam-nav-item { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+  .site-nav .fam-nav-brand { font-size: 20px; }
+}
+
+.page-head,
+.section {
+  box-sizing: border-box;
+  max-width: var(--site-width);
+  margin: 0 auto;
+  padding: 72px 20px 0;
+  font-family: var(--site-font);
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--site-accent);
+}
+
+.page-head h1 {
+  margin: 0;
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--site-ink);
+}
+
+.section h2 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--site-ink);
+}
+
+.lead {
+  max-width: 680px;
+  margin: 18px 0 0;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--site-muted);
+}
+
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.jump a,
+.pairing-tabs button {
+  padding: 9px 18px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: transparent;
+  font: 700 16px/1.2 var(--site-font);
+  text-decoration: none;
+  color: #e9e9ec;
+  cursor: pointer;
+}
+
+.jump a:hover,
+.pairing-tabs button:hover { background: rgba(255, 255, 255, .1); }
+
+.jump a:focus-visible,
+.pairing-tabs button:focus-visible,
+.card:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.scene-title {
+  margin: 0 0 8px;
+  font: 900 clamp(28px, 4vw, 40px)/1.15 var(--site-font);
+  color: var(--site-ink);
+}
+
+.scene-lead {
+  margin: 0 0 22px;
+  font: 400 18px/1.5 var(--site-font);
+  color: var(--site-muted);
+}
+
+/* The pairing switcher on the home page. JavaScript turns the panels into tabs; without it every panel shows under its own heading. */
+.pairing-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 32px 0 26px;
+}
+
+.pairing-tabs button[aria-selected="true"] {
+  border-color: #f4efe3;
+  background: #f4efe3;
+  color: #1d1f24;
+}
+
+.pairing-panel { margin-top: 40px; }
+.pairing-tabs + .pairing-panel { margin-top: 0; }
+
+.pairing-title {
+  margin: 0 0 6px;
+  font: 900 30px/1.2 var(--site-font);
+  color: var(--site-ink);
+}
+
+.pairing-lead {
+  margin: 0 0 20px;
+  font: 400 18px/1.5 var(--site-font);
+  color: var(--site-muted);
+}
+
+.is-tabs .pairing-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 18px;
+  background: var(--site-card);
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease, border-color .15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, .35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card:hover { transform: none; }
+}
+
+.card-swatch {
+  display: grid;
+  place-items: center;
+  height: 130px;
+}
+
+.card-body { padding: 20px 22px 24px; }
+
+.card h3 {
+  margin: 0 0 8px;
+  font: 900 24px/1.2 var(--site-font);
+  color: var(--site-ink);
+}
+
+.card p {
+  margin: 0;
+  font: 400 16px/1.5 var(--site-font);
+  color: var(--site-muted);
+}
+
+.card-more {
+  display: inline-block;
+  margin-top: 14px;
+  font: 700 15px/1 var(--site-font);
+  color: var(--site-accent);
+}
+
+#credits {
+  max-width: var(--site-width);
+  margin-top: 40px;
+  font-family: var(--site-font);
+  font-size: 15px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+#credits a { color: #a9c2ff; }
+
+@media (max-width: 600px) {
+  .page-head,
+  .section { padding-top: 48px; }
+  .lead { font-size: 18px; }
+}
+
+.home-frames {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-items: start;
+}
+
+.home-frames .cork-board { height: 100%; min-height: 200px; }
+
+.home-glass {
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 32px;
+  height: 260px;
+}
+
+.home-glass .glass-pane { width: 280px; max-width: 100%; }
+
+.home-glass .glass-pane--round {
+  --fam-r: 999px;
+  width: 120px;
+  height: 120px;
+}
+
+.home-card-glass { background: conic-gradient(#ff2d6f, #ffb400, #3ddc84, #1fb6ff, #8a3dff, #ff2d6f); }
+
+@media (max-width: 600px) {
+  .home-glass { gap: 18px; }
+  .home-glass .glass-pane { width: 100%; }
+  .home-glass .glass-pane--round { width: 90px; height: 90px; }
+}
+
+/* The sticky bar takes 64px of a phone screen, so the hero gives some back and the next heading still shows above the fold */
+@media (max-width: 600px) {
+  .hero {
+    min-height: 68vh;
+    min-height: 68svh;
+  }
+}

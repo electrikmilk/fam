@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, readdir } from 'node:fs/promises';
+import { access, mkdtemp, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -34,17 +34,40 @@ test('the site root redirects to the showcase', async () => {
 });
 
 test('the site holds only what the page needs', async () => {
-  assert.deepEqual((await readdir(await assembledSite())).sort(), ['assets', 'dist', 'index.html', 'showcase']);
+  assert.deepEqual((await readdir(await assembledSite())).sort(), ['assets', 'dist', 'examples', 'index.html', 'showcase']);
 });
 
 // The site is served under /fam/, so a URL that starts with a slash would point at the wrong place
 test('the page, its stylesheet and its scripts use only relative URLs', async () => {
-  const files = ['index.html', 'showcase.css', 'copy.js', 'knob.js', 'lens.js', 'main.js'];
+  const files = ['index.html', 'pairings.html', 'materials.html', 'glass.html', 'examples.html', 'showcase.css', 'site.css', 'copy.js', 'knob.js', 'lens.js', 'main.js', 'site.js'];
   for (const name of files) {
     const text = await repoFile(`showcase/${name}`);
     assert.ok(!/(?:src|href|action)=["']\/(?!\/)/.test(text), `${name} has an attribute URL that starts with a slash`);
     assert.ok(!/url\(\s*["']?\//.test(text), `${name} has a CSS url() that starts with a slash`);
     assert.ok(!/fetch\(\s*["']\//.test(text), `${name} fetches a path that starts with a slash`);
+  }
+});
+
+const SHOWCASE_PAGES = ['index', 'pairings', 'materials', 'glass', 'examples'];
+const SITE_NAV_LABELS = ['Home', 'Pairings', 'Materials', 'Glass', 'Examples'];
+
+test('every page carries the same site bar with its own page marked current', async () => {
+  for (const [position, name] of SHOWCASE_PAGES.entries()) {
+    const html = await repoFile(`showcase/${name}.html`);
+    const items = [...html.matchAll(/<a class="fam-nav-item" href="([^"]+)"( aria-current="page")?>([^<]+)<\/a>/g)];
+    assert.deepEqual(items.map((item) => item[3]), SITE_NAV_LABELS, `${name}.html has a different site bar`);
+    assert.deepEqual(items.filter((item) => item[2]).map((item) => item[3]), [SITE_NAV_LABELS[position]], `${name}.html marks the wrong page current`);
+  }
+});
+
+test('every link between pages in the assembled site reaches a file', async () => {
+  const directory = await assembledSite();
+  for (const name of SHOWCASE_PAGES) {
+    const html = await readFile(join(directory, 'showcase', `${name}.html`), 'utf8');
+    const targets = [...html.matchAll(/(?:href|src)="([^"#:]+)(?:#[^"]*)?"/g)].map((match) => match[1]);
+    for (const target of targets) {
+      await access(join(directory, 'showcase', target)).catch(() => assert.fail(`${name}.html links to ${target}, which the assembled site does not contain`));
+    }
   }
 });
 

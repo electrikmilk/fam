@@ -5,240 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fam Showcase</title>
   <meta name="description" content="Fam: Familiar materials for the web. Plain CSS for skeuomorphic interfaces in metal, glass, leather, wood, felt, paper, cardstock, cork and plastic.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
   <link rel="stylesheet" href="../dist/fam-ui.css">
   <link rel="stylesheet" href="showcase.css">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="fam-refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
-    <feImage x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'100'%20height%3D'100'%20preserveAspectRatio%3D'none'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'x'%20x1%3D'0'%20x2%3D'1'%20y1%3D'0'%20y2%3D'0'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(255%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(215%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(160%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(96%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(40%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D'y'%20x1%3D'0'%20x2%3D'0'%20y1%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(0%2C255%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(0%2C215%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(0%2C160%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(0%2C96%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(0%2C40%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'black'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23x)'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23y)'%20style%3D'mix-blend-mode%3Ascreen'%2F%3E%3C%2Fsvg%3E"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
-
 <div class="fam">
+  <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
+    <a class="fam-nav-brand" href="index.html">Fam</a>
+    <a class="fam-nav-item" href="index.html" aria-current="page">Home</a>
+    <a class="fam-nav-item" href="pairings.html">Pairings</a>
+    <a class="fam-nav-item" href="materials.html">Materials</a>
+    <a class="fam-nav-item" href="glass.html">Glass</a>
+    <a class="fam-nav-item" href="examples.html">Examples</a>
+  </nav>
   <main>
-    <section class="hero fam-leather-frame" id="hero">
+    <section class="hero fam-leather-bar" id="hero">
       <div>
         <h1 class="fam-engraved-leather">Fam</h1>
         <p class="tagline fam-engraved-leather">Familiar materials for the web</p>
       </div>
     </section>
 
-    <section class="scene" id="scene-wood-felt">
-      <div class="window fam-felt">
-        <nav class="fam-nav fam-wood" aria-label="Sample navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Controls</span>
-          <span class="fam-nav-item">Progress</span>
-        </nav>
-        <div class="controls-row">
-          <div class="fam-glass field"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
-          <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label>
-          <div class="fam-progress bar" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
-        </div>
-      </div>
-      <p class="cap"><b>wood + felt</b> <code class="copyable">fam-felt fam-nav fam-wood fam-glass fam-glass-input fam-switch fam-progress fam-progress-fill--candy</code></p>
-    </section>
-
-    <section class="scene" id="scene-navs">
-      <div class="window navs-window">
-        <nav class="fam-nav fam-wood" aria-label="Wood navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-        <nav class="fam-nav fam-metal" aria-label="Metal navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-        <nav class="fam-nav fam-leather-bar" aria-label="Tan leather navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-        <nav class="fam-nav fam-leather-bar fam-leather-bar--black" aria-label="Black leather navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Home</span>
-          <span class="fam-nav-item">Library</span>
-          <span class="fam-nav-item">About</span>
-        </nav>
-      </div>
-      <p class="cap"><b>navigation bars</b> <code class="copyable">fam-nav fam-wood fam-metal fam-leather-bar fam-leather-bar--black</code></p>
-    </section>
-
-    <section class="scene" id="scene-legal-leather">
-      <div class="window fam-leather-frame fam-leather-frame--black">
-        <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
-      </div>
-      <p class="cap"><b>legal pad + leather</b> <code class="copyable">fam-legal-pad fam-leather-frame fam-leather-frame--black</code></p>
-    </section>
-
-    <section class="scene" id="scene-leather-paper">
-      <div class="window fam-leather-frame">
-        <div class="fam-paper paper-list">
-          <ul class="fam-list" aria-label="Notes">
-            <li><a class="fam-list-row" href="#scene-leather-paper"><b>Grocery run</b><span>Today</span></a></li>
-            <li><a class="fam-list-row" href="#scene-leather-paper" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
-            <li><a class="fam-list-row" href="#scene-leather-paper"><b>Book ideas</b><span>Monday</span></a></li>
-          </ul>
-        </div>
-      </div>
-      <p class="cap"><b>leather + paper</b> <code class="copyable">fam-leather-frame fam-paper fam-list fam-list-row</code></p>
-    </section>
-
-    <section class="scene" id="scene-metal">
-      <div class="window fam-metal metal-controls">
-        <button class="fam-plastic fam-plastic--red" type="button">Record</button>
-        <button class="fam-plastic fam-plastic--green" type="button">Play</button>
-        <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
-        <span class="fam-knob" role="img" aria-label="Metal knob"></span>
-        <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Loop" checked><span class="fam-switch-knob"></span></label>
-      </div>
-      <p class="cap"><b>metal + controls</b> <code class="copyable">fam-metal fam-plastic fam-knob fam-switch</code></p>
-    </section>
-
-    <section class="scene" id="scene-frames">
-      <div class="window frames-window">
-        <div class="frames-grid">
-          <figure class="fam-print-frame fam-paper"><img src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
-          <figure class="fam-print-frame fam-cardstock"><img src="images/tree.jpg" alt=""></figure>
-          <figure class="fam-wood-frame"><img src="images/tree.jpg" alt=""></figure>
-          <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="images/tree.jpg" alt=""></figure>
-        </div>
-        <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
-      </div>
-      <p class="cap"><b>photo frames + cork</b> <code class="copyable">fam-print-frame fam-paper fam-cardstock fam-wood-frame fam-wood-frame--glossy fam-cork</code></p>
-    </section>
-
-    <section class="scene" id="scene-engraved">
-      <div class="panels">
-        <div class="window fam-metal panel"><span class="fam-engraved-metal">SETTINGS</span></div>
-        <div class="window fam-leather panel"><span class="fam-engraved-leather">Notebook</span></div>
-        <div class="window fam-wood panel"><span class="fam-engraved-wood">LIBRARY</span></div>
-      </div>
-      <p class="cap"><b>engraved text</b> <code class="copyable">fam-engraved-metal fam-engraved-leather fam-engraved-wood fam-metal fam-leather fam-wood</code></p>
-    </section>
-
-    <section class="scene" id="scene-build">
-      <div class="window build-panel">
-        <h2>Textures: one class each</h2>
-        <div class="swatches">
-            <figure class="sq"><span class="swatch fam-felt"></span><figcaption>fam-felt</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-wood"></span><figcaption>fam-wood</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-metal"></span><figcaption>fam-metal</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-leather"></span><figcaption>fam-leather</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-paper"></span><figcaption>fam-paper</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-cork"></span><figcaption>fam-cork</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-cardstock"></span><figcaption>fam-cardstock</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-cardstock" style="--fam-cardstock-tint:#562a0e"></span><figcaption>--fam-cardstock-tint</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-legal-pad"></span><figcaption>fam-legal-pad</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-leather-frame fam-leather-frame--black"></span><figcaption>fam-leather-frame</figcaption></figure>
-        </div>
-
-        <h2>Felt in any color: <code>--fam-tint</code></h2>
-        <div class="tints">
-            <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#1f7a3d"></span><figcaption>green</figcaption></figure>
-            <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#1d4fa8"></span><figcaption>blue</figcaption></figure>
-            <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#8a1f2b"></span><figcaption>burgundy</figcaption></figure>
-            <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#6b3fa0"></span><figcaption>purple</figcaption></figure>
-            <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#c7a23a"></span><figcaption>gold</figcaption></figure>
-        </div>
-
-        <div class="stage">
-          <h2>Gloss</h2>
-          <div class="row">
-            <div class="gl"><div class="fam-pill fam-gloss-none"></div><span>fam-gloss-none</span></div>
-            <div class="gl"><div class="fam-pill fam-gloss-soft"></div><span>fam-gloss-soft</span></div>
-            <div class="gl"><div class="fam-pill fam-gloss-strong"></div><span>fam-gloss-strong</span></div>
-          </div>
-          <h2>Rounding</h2>
-          <div class="row">
-            <div class="chip fam-round-sm">round-sm</div><div class="chip fam-round-md">round-md</div><div class="chip fam-round-lg">round-lg</div><div class="chip fam-round-pill">round-pill</div>
-          </div>
-          <h2>Shadows</h2>
-          <div class="row">
-            <div class="elev fam-shadow-sm">shadow-sm</div><div class="elev fam-shadow-md">shadow-md</div><div class="elev fam-shadow-lg">shadow-lg</div><div class="elev fam-shadow-inset">shadow-inset</div>
+    <section class="section" id="pairings" aria-labelledby="pairings-heading">
+      <h2 id="pairings-heading">Pick a pairing</h2>
+      <p class="lead">Materials are classes you combine. Choose a pairing to see it, and the classes it uses.</p>
+      <div data-pairings>
+      <div class="pairing-panel" id="pairing-wood-felt" data-title="Wood and felt">
+        <h3 class="pairing-title">Wood and felt</h3>
+        <p class="pairing-lead">A wooden navigation bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
+        <div class="window fam-felt">
+          <nav class="fam-nav fam-wood" aria-label="Sample navigation">
+            <span class="fam-nav-brand">fam</span>
+            <span class="fam-nav-item" aria-current="page">Controls</span>
+            <span class="fam-nav-item">Progress</span>
+          </nav>
+          <div class="controls-row">
+            <div class="fam-glass field"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+            <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label>
+            <div class="fam-progress bar" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
           </div>
         </div>
+        <p class="cap"><b>wood and felt</b> <code class="copyable">fam-felt fam-nav fam-wood fam-glass fam-glass-input fam-switch fam-progress fam-progress-fill--candy</code></p>
       </div>
-      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-metal fam-leather fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
+
+      <div class="pairing-panel" id="pairing-leather-paper" data-title="Leather and paper">
+        <h3 class="pairing-title">Leather and paper</h3>
+        <p class="pairing-lead">A list on white paper inside a tan stitched leather frame.</p>
+        <div class="window fam-leather-frame">
+          <div class="fam-paper paper-list">
+            <ul class="fam-list" aria-label="Notes">
+              <li><a class="fam-list-row" href="#pairing-leather-paper"><b>Grocery run</b><span>Today</span></a></li>
+              <li><a class="fam-list-row" href="#pairing-leather-paper" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
+              <li><a class="fam-list-row" href="#pairing-leather-paper"><b>Book ideas</b><span>Monday</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="cap"><b>leather and paper</b> <code class="copyable">fam-leather-frame fam-paper fam-list fam-list-row</code></p>
+      </div>
+
+      <div class="pairing-panel" id="pairing-metal-plastic" data-title="Metal and plastic">
+        <h3 class="pairing-title">Metal and plastic</h3>
+        <p class="pairing-lead">Plastic buttons, a knob and a switch on brushed metal.</p>
+        <div class="window fam-metal metal-controls">
+          <button class="fam-plastic fam-plastic--red" type="button">Record</button>
+          <button class="fam-plastic fam-plastic--green" type="button">Play</button>
+          <button class="fam-plastic fam-plastic--amber" type="button">Pause</button>
+          <span class="fam-knob" role="img" aria-label="Metal knob"></span>
+          <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Loop" checked><span class="fam-switch-knob"></span></label>
+        </div>
+        <p class="cap"><b>metal and plastic</b> <code class="copyable">fam-metal fam-plastic fam-knob fam-switch</code></p>
+      </div>
+
+      <div class="pairing-panel" id="pairing-legal-leather" data-title="Legal pad and leather">
+        <h3 class="pairing-title">Legal pad and leather</h3>
+        <p class="pairing-lead">A ruled yellow pad inside a black stitched leather frame.</p>
+        <div class="window fam-leather-frame fam-leather-frame--black">
+          <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
+        </div>
+        <p class="cap"><b>legal pad and leather</b> <code class="copyable">fam-legal-pad fam-leather-frame fam-leather-frame--black</code></p>
+      </div>
+
+      <div class="pairing-panel" id="pairing-frames-cork" data-title="Photo frames and cork">
+        <h3 class="pairing-title">Photo frames and cork</h3>
+        <p class="pairing-lead">A glossy wood frame beside a corkboard inside a wood frame.</p>
+        <div class="window frames-window home-frames">
+          <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
+          <div class="fam-wood-frame"><div class="fam-cork cork-board"></div></div>
+        </div>
+        <p class="cap"><b>photo frames and cork</b> <code class="copyable">fam-wood-frame fam-wood-frame--glossy fam-cork</code></p>
+      </div>
+
+      <div class="pairing-panel" id="pairing-glass" data-title="Glass">
+        <h3 class="pairing-title">Glass</h3>
+        <p class="pairing-lead">Frosted glass over color. The rim picks up the colors beside it in every browser.</p>
+        <div class="window glass-lab">
+          <div class="glass-backdrop home-glass">
+            <div class="fam-glass glass-pane"></div>
+            <div class="fam-glass glass-pane glass-pane--round" style="--fam-glow-depth: 30px"></div>
+          </div>
+        </div>
+        <p class="cap"><b>glass</b> <code class="copyable">fam-glass</code></p>
+      </div>
+      </div>
     </section>
 
-    <section class="scene" id="scene-glass">
-      <div class="window glass-lab">
-        <h2>Frosted glass</h2>
-        <p class="glass-lead">Blur and a dark shade keep text readable on any backdrop.</p>
-        <div class="glass-tiles glass-tiles--single">
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--grid glass-backdrop--dim">
-              <div class="fam-glass glass-pane"><input class="fam-glass-input" placeholder="Search" aria-label="Search the frosted sample"></div>
-            </div>
-            <figcaption>fam-glass</figcaption>
-          </figure>
-        </div>
-
-        <h2>Specular ambient glow <span>every browser</span></h2>
-        <p class="glass-lead">The glass picks up the colors next to its rim and bleeds them inward. <code>--fam-glow-depth</code> sets how far.</p>
-        <div class="glass-tiles">
-          <figure class="glass-tile">
-            <div class="glass-backdrop"><div class="fam-glass glass-pane" style="--fam-glow-depth: 0px"></div></div>
-            <figcaption>--fam-glow-depth: 0px</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop"><div class="fam-glass glass-pane"></div></div>
-            <figcaption>--fam-glow-depth: 18px</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop"><div class="fam-glass glass-pane" style="--fam-glow-depth: 40px"></div></div>
-            <figcaption>--fam-glow-depth: 40px</figcaption>
-          </figure>
-        </div>
-
-        <h2>Refraction <span>Chromium only</span></h2>
-        <p class="glass-lead">Clear glass bends the grid behind its rim. Other browsers show the same pane without the bending.</p>
-        <div class="glass-tiles">
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass glass-pane"></div></div>
-            <figcaption>fam-glass</figcaption>
-          </figure>
-          <figure class="glass-tile">
-            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass fam-glass--refract glass-pane"></div></div>
-            <figcaption>fam-glass--refract</figcaption>
-          </figure>
-        </div>
-      </div>
-      <p class="cap"><b>glass</b> <code class="copyable">fam-glass fam-glass-input fam-glass--refract</code></p>
-    </section>
-
-    <section class="glass-band" id="glass" aria-labelledby="glass-heading">
-      <h2 class="visually-hidden" id="glass-heading">Try the glass</h2>
-      <div class="fam-glass fam-glass--refract" id="lens" aria-hidden="true" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"></div>
-      <div class="tray fam-metal">
-        <div class="knobwrap">
-          <div class="fam-knob" id="knob-blur" role="slider" tabindex="0" aria-label="Blur" aria-valuemin="0" aria-valuemax="30" aria-valuenow="1" aria-valuetext="1px"></div>
-          <span class="fam-engraved-metal">Blur</span>
-        </div>
-        <div class="knobwrap">
-          <div class="fam-knob" id="knob-glow" role="slider" tabindex="0" aria-label="Glow" aria-valuemin="0" aria-valuemax="40" aria-valuenow="18" aria-valuetext="18px"></div>
-          <span class="fam-engraved-metal">Glow</span>
-        </div>
-        <div class="knobwrap">
-          <div class="fam-knob" id="knob-radius" role="slider" tabindex="0" aria-label="Radius" aria-valuemin="0" aria-valuemax="90" aria-valuenow="90" aria-valuetext="90px"></div>
-          <span class="fam-engraved-metal">Radius</span>
-        </div>
-        <div class="knobwrap">
-          <label class="fam-switch"><input type="checkbox" role="switch" id="refract-switch" aria-label="Refract" checked><span class="fam-switch-knob"></span></label>
-          <span class="fam-engraved-metal">Refract</span>
-        </div>
-      </div>
-      <div class="glass-notes">
-        <p class="note">Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.</p>
-        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 1px"&gt;&lt;/div&gt;</code></p>
+    <section class="section" id="explore" aria-labelledby="explore-heading">
+      <h2 id="explore-heading">Keep exploring</h2>
+      <div class="cards">
+        <a class="card" href="pairings.html">
+          <div class="card-swatch fam-wood"></div>
+          <div class="card-body">
+            <h3>Pairings</h3>
+            <p>Seven scenes that combine wood, felt, leather, paper, metal, plastic and cork.</p>
+            <span class="card-more">Open pairings</span>
+          </div>
+        </a>
+        <a class="card" href="materials.html">
+          <div class="card-swatch fam-leather"></div>
+          <div class="card-body">
+            <h3>Materials</h3>
+            <p>Every texture with the class that makes it, plus tints, gloss, rounding and shadows.</p>
+            <span class="card-more">Open materials</span>
+          </div>
+        </a>
+        <a class="card" href="glass.html">
+          <div class="card-swatch home-card-glass"></div>
+          <div class="card-body">
+            <h3>Glass</h3>
+            <p>Frosted blur, the ambient glow and refraction, with a lens you can tune.</p>
+            <span class="card-more">Open glass</span>
+          </div>
+        </a>
+        <a class="card" href="examples.html">
+          <div class="card-swatch fam-paper"></div>
+          <div class="card-body">
+            <h3>Examples</h3>
+            <p>Full pages: a notes app, a sign-in card, felt controls and photo frames.</p>
+            <span class="card-more">Open examples</span>
+          </div>
+        </a>
       </div>
     </section>
   </main>
@@ -249,8 +158,6 @@
   </footer>
 </div>
 <script src="copy.js"></script>
-<script src="knob.js"></script>
-<script src="lens.js"></script>
-<script src="main.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
