@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 72 KB of CSS (16.5 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 73 KB of CSS (16.6 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -193,7 +193,7 @@ Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam
 
 Glass is dark by default. Add `fam-glass--light` for light glass with dark text, or `fam-glass--blue` for blue glass with white text, which suits the primary or active control. The tints work on any frosted `fam-glass` (buttons, fields and plain panes), and on `fam-glass--refract`, which has no shade, they only change the text color and the rim. `fam-glass--refract fam-glass--light` gives clear glass with dark text for pale backdrops. Each one sets the shade and the text color together, so the text keeps its contrast.
 
-Button groups put plastic, metal or glossy buttons in one case. Mark the lit button with `aria-pressed="true"` (or `aria-selected="true"` in a tab strip) and set it from your own script; a lit plastic or metal button shows an LED (`--fam-led`), a lit silver glossy button turns aqua. A long group scrolls inside itself. Leather buttons only group inside `fam-button-group--leather`: `fam-button-group fam-button-group--leather` with `fam-leather-button` cells is a pill of the leather navigation bar's leather, with the lit item cut as the same dark pocket.
+Button groups put plastic, metal or glossy buttons in one case. Mark the lit button with `aria-pressed="true"` (or `aria-selected="true"` in a tab strip) and set it from your own script; a lit plastic or metal button shows an LED (`--fam-led`), a lit silver glossy button turns aqua. A group of plastic or metal buttons sits in a well cut into the surface under it (the material darkened, an inset edge and 6px of padding); `fam-button-group--case` is a raised case instead. A long group scrolls inside itself. Leather buttons only group inside `fam-button-group--leather`: `fam-button-group fam-button-group--leather` with `fam-leather-button` cells is a pill of the leather navigation bar's leather, with the lit item cut as the same dark pocket.
 
 ```html
 <div class="fam-button-group" role="group" aria-label="Playback mode">

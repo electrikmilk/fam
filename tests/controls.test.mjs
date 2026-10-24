@@ -185,6 +185,24 @@ test('a pressed or selected cell shows the LED and an unpressed one does not', a
   }
 });
 
+test('a group of plastic or metal cells sits in a recessed well', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const groupOf = (cell) => page.evaluate((selector) => {
+      const style = getComputedStyle(document.querySelector(selector).closest('.fam-button-group'));
+      return { padding: style.paddingLeft, shadow: style.boxShadow };
+    }, cell);
+    for (const cell of ['#group-pressed', '#group-metal-lit']) {
+      const group = await groupOf(cell);
+      assert.equal(group.padding, '6px', `${cell} has no padding around its cells`);
+      assert.ok(group.shadow.includes('inset'), `${cell} is not recessed`);
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
 test('lit glossy and leather cells look different from plain ones', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
