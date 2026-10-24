@@ -173,15 +173,35 @@ test('a pressed or selected cell shows the LED and an unpressed one does not', a
   try {
     const { page } = kit;
     assert.ok((await read(page, '#group-pressed', 'backgroundImage', '::after')).includes(LIT_LENS), 'the pressed cell has no LED');
-    assert.ok((await read(page, '#group-selected', 'backgroundImage', '::after')).includes(LIT_LENS), 'aria-selected does not light the cell');
-    const unpressed = await read(page, '#group-unpressed', 'backgroundImage', '::after');
-    assert.ok(!unpressed.includes(LIT_LENS), 'the unpressed cell is lit');
-    assert.ok(unpressed.includes('led-lens-unlit'), 'the unpressed cell does not show the dark lens');
+    assert.equal(await read(page, '#group-pressed', 'opacity', '::after'), '1', 'the pressed cell is not lit');
+    assert.equal(await read(page, '#group-selected', 'opacity', '::after'), '1', 'aria-selected does not light the cell');
+    assert.equal(await read(page, '#group-unpressed', 'opacity', '::after'), '0', 'the unpressed cell is lit');
+    for (const cell of ['#group-unpressed', '#group-pressed', '#group-metal-lit']) {
+      assert.ok((await read(page, cell, 'backgroundImage', '::before')).includes('led-lens-unlit'), `${cell} does not keep the dark lens under the lit one`);
+    }
     assert.equal(await read(page, '#group-metal-lit', 'content', '::after'), '""', 'the pressed metal cell has no LED dot');
     assert.ok((await read(page, '#group-metal-lit', 'backgroundImage', '::after')).includes(LIT_LENS), 'the LED dot has no lens');
     assert.equal(await read(page, '#group-metal-lit', 'backgroundColor', '::after'), LED);
   } finally {
     await kit.close();
+  }
+});
+
+test('a lit cell fades in quickly and out slowly, and does neither under reduced motion', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.equal(await read(kit.page, '#group-unpressed', 'transitionDuration', '::after'), '0.5s');
+    assert.equal(await read(kit.page, '#group-pressed', 'transitionDuration', '::after'), '0.12s');
+  } finally {
+    await kit.close();
+  }
+  const still = await openUrl(fixtureUrl('kit'), { reducedMotion: 'reduce' });
+  try {
+    for (const cell of ['#group-unpressed', '#group-pressed', '#group-metal-lit']) {
+      assert.equal(await read(still.page, cell, 'transitionProperty', '::after'), 'none', `${cell} still fades`);
+    }
+  } finally {
+    await still.close();
   }
 });
 

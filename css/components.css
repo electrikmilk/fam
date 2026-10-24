@@ -816,18 +816,28 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   border-bottom-right-radius: var(--fam-cell-radius);
 }
 
-/* The LED sits in the dish of a round or square plastic cell */
-.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed="true"], [aria-selected="true"])::after {
-  background: var(--fam-led-lit-face);
-  background-blend-mode: normal, multiply, normal;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25), 0 0 6px 1px #ffb273, 0 0 10px 2px rgba(255, 106, 31, .5);
-}
-
-/* A cell that can be lit but is not shows the dark lens in its dish */
-.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed="false"], [aria-selected="false"])::after {
+/* A cell that can be lit holds two lenses: the unlit one is its ::before and the lit one its ::after, which fades in over it. In the dish of a
+   round or square plastic cell they replace the cell's faint sheen. */
+.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed], [aria-selected])::before {
+  inset: 5px;
+  z-index: -1;
+  border-radius: 50%;
   background: var(--fam-led-unlit-face);
   background-blend-mode: normal, multiply, normal;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -1px 2px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .35);
+}
+
+.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed], [aria-selected])::after {
+  background: var(--fam-led-lit-face);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25), 0 0 6px 1px #ffb273, 0 0 10px 2px rgba(255, 106, 31, .5);
+  opacity: 0;
+  transition: opacity .5s ease-out;
+}
+
+.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed="true"], [aria-selected="true"])::after {
+  opacity: 1;
+  transition-duration: .12s;
 }
 
 /* A lit plastic or metal cell is pressed in: no outer shadow, only the inset one, like the pocket of the current nav item */
@@ -835,20 +845,36 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   --fam-rest-shadow: inset 0 3px 5px rgba(0, 0, 0, .55), inset 0 -1px 0 rgba(255, 255, 255, .2);
 }
 
-/* Labeled plastic cells and every metal cell have no dish, so the LED is a small dot above the label */
-.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed="true"], [aria-selected="true"])::after {
+/* Labeled plastic cells and every metal cell have no dish, so the two lenses are small dots above the label */
+.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed], [aria-selected])::before,
+.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed], [aria-selected])::after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 50%;
+  inset: 2px auto auto 50%;
   width: 5px;
   height: 5px;
   margin-left: -2.5px;
   border-radius: 50%;
+  pointer-events: none;
+}
+
+.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed], [aria-selected])::before {
+  background: var(--fam-led-unlit-face);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .45), 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed], [aria-selected])::after {
   background: var(--fam-led-lit-face);
   background-blend-mode: normal, multiply, normal;
   box-shadow: 0 0 4px 1px #ffb273, 0 0 9px 3px rgba(255, 106, 31, .7);
-  pointer-events: none;
+  opacity: 0;
+  transition: opacity .5s ease-out;
+}
+
+.fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed="true"], [aria-selected="true"])::after {
+  opacity: 1;
+  transition-duration: .12s;
 }
 
 .fam-button-group > .fam-glossy-button:is([aria-pressed="true"], [aria-selected="true"]) {
@@ -915,6 +941,11 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .fam-button-group > * { transition: none; }
+
+  .fam-button-group > :is(.fam-plastic, .fam-metal-button):is([aria-pressed], [aria-selected])::after,
+  .fam-button-group > :is(.fam-plastic, .fam-metal-button):is([aria-pressed="true"], [aria-selected="true"])::after,
+  .fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed], [aria-selected])::after,
+  .fam-button-group > :is(.fam-plastic:not(.fam-plastic--round, .fam-plastic--square), .fam-metal-button):is([aria-pressed="true"], [aria-selected="true"])::after { transition: none; }
 }
 
 /* Plastic dial drawn in CSS like the ridged knob and the cream dial in references/plastic.png: a ridged rim, a dished cream face
