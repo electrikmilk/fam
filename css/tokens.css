@@ -46,6 +46,8 @@
   --fam-tex-leather-bar-edge-tan: url(../assets/leather-bar-edge-tan.png);
   --fam-tex-leather-bar-edge-black: url(../assets/leather-bar-edge-black.png);
   --fam-tex-wood-frame: url(../assets/wood-frame.jpg);
+  --fam-tex-led-lens-lit: url(../assets/led-lens-lit.png);
+  --fam-tex-led-lens-unlit: url(../assets/led-lens-unlit.png);
 }
 
 .fam {

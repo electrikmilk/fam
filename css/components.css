@@ -567,6 +567,100 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   .fam-radio .fam-radio-dot { transition: none; }
 }
 
+/* ---------- LEDs: standalone indicator lamps for the plastic panel and the metal ----------
+   The lens is a grayscale photo of a ringed panel lamp multiplied onto --fam-led-color, so one pair of images serves every color.
+   The lit lens is the bright tinted glass with a glow; the unlit one is the same color as dark glass. The label is engraved by default
+   and printed with fam-led-label--printed. The lens is decorative, so the state is carried by the text of fam-visually-hidden. */
+
+.fam-led {
+  --fam-led-color: var(--fam-led);
+  --fam-led-size: 28px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 12px;
+  vertical-align: top;
+}
+
+.fam-led--green { --fam-led-color: #2fd24a; }
+.fam-led--red { --fam-led-color: #ff2a2a; }
+.fam-led--blue { --fam-led-color: #3a8bff; }
+.fam-led--large { --fam-led-size: 44px; }
+
+.fam-led-lens {
+  box-sizing: border-box;
+  position: relative;
+  width: var(--fam-led-size);
+  height: var(--fam-led-size);
+  padding: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #3a3a3e, #0d0d10 80%);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .7), 0 1px 0 rgba(255, 255, 255, .75), 0 0 0 1px rgba(0, 0, 0, .35);
+}
+
+.fam-led-lens::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 38%),
+    var(--fam-tex-led-lens-unlit) center / 100% 100% no-repeat,
+    color-mix(in srgb, var(--fam-led-color) 42%, #000);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -2px 4px rgba(0, 0, 0, .5);
+}
+
+.fam-led--lit .fam-led-lens::before {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255, 246, 220, .85), rgba(255, 246, 220, 0) 42%),
+    var(--fam-tex-led-lens-lit) center / 100% 100% no-repeat,
+    var(--fam-led-color);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .25),
+    0 0 5px 1px color-mix(in srgb, var(--fam-led-color) 80%, #fff),
+    0 0 14px 4px color-mix(in srgb, var(--fam-led-color) 65%, transparent);
+}
+
+/* 19px bold counts as large text (3:1), which is what the darkest brushed streaks allow behind a dark glyph, so the size is part of the class */
+.fam-led-label {
+  font: 700 19px/1.1 var(--fam-font-ui);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: rgb(18, 20, 26);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .9), 0 -1px 0 rgba(0, 0, 0, .2);
+}
+
+.fam-led-label--printed { text-shadow: none; }
+
+.fam-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (forced-colors: active) {
+  .fam-led-lens {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .fam-led-lens::before {
+    background: Canvas;
+    box-shadow: none;
+  }
+
+  .fam-led--lit .fam-led-lens::before { background: Highlight; }
+}
+
 /* ---------- Button groups: one case holding plastic, metal, glossy or leather buttons ----------
    Only the outer corners are rounded and neighbours overlap by one border, so the cells share a divider. A cell is lit by
    aria-pressed="true", or by aria-selected="true" when the group is a tab strip. The padding keeps the cells' shadows and focus

@@ -31,6 +31,16 @@ test('selected and current states differ from the rest in forced colors', option
   }
 });
 
+test('a lit LED differs from an unlit one in forced colors', options, async () => {
+  const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
+  try {
+    const lensColor = (selector) => kit.page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::before').backgroundColor, selector);
+    assert.notEqual(await lensColor('#led-lit'), await lensColor('#led-unlit'), 'lit and unlit LEDs look the same');
+  } finally {
+    await kit.close();
+  }
+});
+
 test('focus draws a real outline on glass, recessed and search fields in forced colors', options, async () => {
   const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
   try {
