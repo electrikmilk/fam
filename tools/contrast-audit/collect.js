@@ -21,12 +21,13 @@ async () => {
   const parse = value => { const m = value.match(/[\d.]+/g).map(Number); return [m[0], m[1], m[2], m[3] === undefined ? 1 : m[3]]; };
   const opacityChain = el => { let o = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) o *= parseFloat(getComputedStyle(n).opacity); return o; };
   const label = el => el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : '');
-  // Text that an ancestor's overflow clips away entirely is not on screen, so it has no pixels to measure (a collapsed code block)
+  // Text that an ancestor's overflow clips away entirely is not on screen, so it has no pixels to measure (a collapsed code block, a visually hidden label)
   const isClippedAway = (el, rect) => {
     for (let n = el; n && n !== document.body; n = n.parentElement) {
       const cs = getComputedStyle(n);
       if (cs.overflowY === 'visible' && cs.overflowX === 'visible') continue;
       const box = n.getBoundingClientRect();
+      if (box.width < 2 || box.height < 2) return true;
       if (rect.top >= box.bottom || rect.bottom <= box.top || rect.left >= box.right || rect.right <= box.left) return true;
     }
     return false;
