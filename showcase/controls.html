@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Controls - Fam</title>
-  <meta name="description" content="Fam controls shown alone: plastic, metal, glossy and glass buttons and groups, radio buttons, tabs, a plastic panel and dial, the metal switch and knob, progress tubes, glass fields, a search pill, list rows, recessed fields and the leather button.">
+  <meta name="description" content="Fam controls shown alone: plastic, metal, glossy and glass buttons and groups, radio buttons, tabs, a plastic panel and dial, LEDs, the metal switch and knob, progress tubes, glass fields, a search pill, list rows, recessed fields and the leather button.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
@@ -34,6 +34,7 @@
       <a href="#scene-tabs">Tabs</a>
       <a href="#scene-switch-knob">Switch and knob</a>
       <a href="#scene-plastic">Plastic panel and dial</a>
+      <a href="#scene-leds">LEDs</a>
       <a href="#scene-progress">Progress tubes</a>
       <a href="#scene-glass-fields">Glass field and dropdown</a>
       <a href="#scene-search-list">Search pill and list rows</a>
@@ -469,6 +470,57 @@
   &lt;button class="fam-plastic fam-plastic--blue" type="button" disabled&gt;Disabled&lt;/button&gt;
   &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="panel-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;On&lt;/label&gt;
   &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="panel-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Off&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-leds">
+      <h3 class="scene-title">LEDs</h3>
+      <p class="scene-lead">Standalone indicator lamps for the plastic panel and the metal. Add fam-led--lit to light one, and fam-led--green, --red or --blue to change its color (amber is the default). fam-led--large makes it bigger. The label is engraved unless it has fam-led-label--printed, and the lens is a photo of a real lamp tinted by CSS. The lens is decorative, so say the state in fam-visually-hidden text.</p>
+      <div class="window fam-plastic-panel fam-round-md controls-stage">
+        <span class="fam-led fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Power</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Standby</span><span class="fam-visually-hidden">, off</span></span>
+        <span class="fam-led fam-led--green fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Ready</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led fam-led--green"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Idle</span><span class="fam-visually-hidden">, off</span></span>
+        <span class="fam-led fam-led--red fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Fault</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led fam-led--red"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Alarm</span><span class="fam-visually-hidden">, off</span></span>
+        <span class="fam-led fam-led--blue fam-led--large fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Link</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led fam-led--blue fam-led--large"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Sync</span><span class="fam-visually-hidden">, off</span></span>
+      </div>
+      <div class="code-block" role="group" aria-label="The LEDs on a plastic panel markup" data-label="the leds on a plastic panel markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-plastic-panel fam-round-md" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
+  &lt;span class="fam-led fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Power&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Standby&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--green fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Ready&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--green"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Idle&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--red fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Fault&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--red"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Alarm&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--blue fam-led--large fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Link&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--blue fam-led--large"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Sync&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <div class="window fam-metal controls-stage">
+        <span class="fam-led fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Power</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Standby</span><span class="fam-visually-hidden">, off</span></span>
+        <span class="fam-led fam-led--green fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Ready</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led fam-led--green"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Idle</span><span class="fam-visually-hidden">, off</span></span>
+        <span class="fam-led fam-led--red fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Fault</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led fam-led--red"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Alarm</span><span class="fam-visually-hidden">, off</span></span>
+        <span class="fam-led fam-led--blue fam-led--large fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Link</span><span class="fam-visually-hidden">, on</span></span>
+        <span class="fam-led fam-led--blue fam-led--large"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Sync</span><span class="fam-visually-hidden">, off</span></span>
+      </div>
+      <div class="code-block" role="group" aria-label="The LEDs on metal markup" data-label="the leds on metal markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
+  &lt;span class="fam-led fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Power&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Standby&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--green fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Ready&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--green"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Idle&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--red fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Fault&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--red"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Alarm&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--blue fam-led--large fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Link&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="fam-led fam-led--blue fam-led--large"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Sync&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>

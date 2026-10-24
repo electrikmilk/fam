@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 67 KB of CSS (15.5 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 70 KB of CSS (16.2 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -26,7 +26,7 @@ A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 
 - Home: a switcher that shows one pairing at a time, with the classes it uses.
 - Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, metal on metal, legal pad and leather, cardstock and legal pad, leather and paper.
-- Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
+- Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, LEDs, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
 - Examples: the pages in `examples/`.
 
@@ -224,6 +224,16 @@ The plastic dial is drawn in CSS, so it is a picture like the knob. Give it `rol
 
 ```html
 <span class="fam-dial" role="img" aria-label="Volume" style="--fam-knob-angle:35deg"></span>
+```
+
+An LED is a standalone indicator lamp for the plastic panel and the metal. The lens is a photo of a real ringed lamp, tinted by CSS, so one pair of images gives every color: amber (`--fam-led`) by default, or `fam-led--green`, `--red` or `--blue`. Add `fam-led--lit` to light it and `fam-led--large` to make it bigger. The label is engraved unless it has `fam-led-label--printed`, which is flat ink. The lens is decorative, so put the state in `fam-visually-hidden` text, because a color alone does not tell everyone whether it is on. In forced colors a lit LED fills with the system highlight and an unlit one stays empty.
+
+```html
+<span class="fam-led fam-led--green fam-led--lit">
+  <span class="fam-led-lens" aria-hidden="true"></span>
+  <span class="fam-led-label">Ready</span>
+  <span class="fam-visually-hidden">, on</span>
+</span>
 ```
 
 Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
