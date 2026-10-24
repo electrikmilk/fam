@@ -25,8 +25,8 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `leather-bar-edge-tan.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-tan-soft.png OUT 68 50` |
 | `leather-bar-edge-black.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-black-soft.png OUT 68 50` |
 | `wood-frame.jpg` | `wood-frame_se-tsuchiya--EkbLo1LdEM-unsplash.png` | se-tsuchiya | `make_wood_frame.py ... 556 28` |
-| `led-lens-lit.png` | `tao-yuan-R4Hv6RnF05Q-unsplash.jpg` | tao-yuan | `make_led_lens.py ... 278 260 124 128 3 0.5` |
-| `led-lens-unlit.png` | `tao-yuan-R4Hv6RnF05Q-unsplash.jpg` | tao-yuan | `make_led_lens.py ... 790 255 120 128 3 0.6` |
+| `led-lens-lit.png` | `tao-yuan-R4Hv6RnF05Q-unsplash.jpg` | tao-yuan | `make_led_lens.py ... 278 258 128 128 3 0.5` |
+| `led-lens-unlit.png` | `tao-yuan-R4Hv6RnF05Q-unsplash.jpg` | tao-yuan | `make_led_lens.py ... 809 261 120 128 3 0.6` |
 
 The scripts are in `tools/texture-pipeline/` and the source photos are in `textures/`.
 
