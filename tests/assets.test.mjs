@@ -24,6 +24,8 @@ const ASSET_NAMES = [
   'leather-bar-edge-tan.png',
   'leather-bar-edge-black.png',
   'wood-frame.jpg',
+  'led-lens-lit.png',
+  'led-lens-unlit.png',
 ];
 
 const TILED_NAMES = [
