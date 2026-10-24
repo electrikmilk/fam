@@ -579,11 +579,12 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
    The lens is a grayscale photo of a ringed panel lamp multiplied onto --fam-led-color, so one pair of images serves every color.
    The lit lens is the bright tinted glass with a glow; the unlit one is the same color as dark glass. The label is engraved by default
    and printed with fam-led-label--printed. The lens is decorative, so the state is carried by the text of fam-visually-hidden.
-   The lit and unlit faces are custom properties because the plastic and metal radios paint the same lens in their dish. */
+   The lit and unlit faces are custom properties because the plastic and metal radios and the button groups paint the same lens. */
 
 .fam-led,
 .fam-radio--plastic,
-.fam-radio--metal {
+.fam-radio--metal,
+.fam-button-group > :is(.fam-plastic, .fam-metal-button) {
   --fam-led-color: var(--fam-led);
   --fam-led-unlit-face:
     radial-gradient(circle at 34% 28%, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 38%),
@@ -725,10 +726,16 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 /* The LED sits in the dish of a round or square plastic cell */
 .fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed="true"], [aria-selected="true"])::after {
-  background:
-    radial-gradient(circle, #fff1de 0 1px, var(--fam-led) 2.6px, color-mix(in srgb, var(--fam-led) 45%, transparent) 4.5px, transparent 9px),
-    radial-gradient(circle at 50% 30%, rgba(0, 0, 0, .18), rgba(0, 0, 0, 0) 75%);
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .5), inset 0 0 8px 1px rgba(255, 106, 31, .65), 0 0 10px 2px rgba(255, 106, 31, .45);
+  background: var(--fam-led-lit-face);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25), 0 0 6px 1px #ffb273, 0 0 10px 2px rgba(255, 106, 31, .5);
+}
+
+/* A cell that can be lit but is not shows the dark lens in its dish */
+.fam-button-group > :is(.fam-plastic--round, .fam-plastic--square):is([aria-pressed="false"], [aria-selected="false"])::after {
+  background: var(--fam-led-unlit-face);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -1px 2px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .35);
 }
 
 /* A lit plastic or metal cell is pressed in: no outer shadow, only the inset one, like the pocket of the current nav item */
@@ -742,12 +749,13 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   position: absolute;
   top: 3px;
   left: 50%;
-  width: 5px;
-  height: 5px;
-  margin-left: -2.5px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff1de 0 .8px, transparent 2.2px), var(--fam-led);
-  box-shadow: inset 0 0 2px 0 #ffb273, 0 0 4px 1px #ffb273, 0 0 9px 3px rgba(255, 106, 31, .7);
+  background: var(--fam-led-lit-face);
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: 0 0 4px 1px #ffb273, 0 0 9px 3px rgba(255, 106, 31, .7);
   pointer-events: none;
 }
 

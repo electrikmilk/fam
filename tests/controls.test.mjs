@@ -146,6 +146,7 @@ test('disabled glossy and glass buttons are dimmed and show no interactive curso
 });
 
 const LED = 'rgb(255, 106, 31)';
+const LIT_LENS = 'led-lens-lit';
 
 test('group cells share one case', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
@@ -171,10 +172,13 @@ test('a pressed or selected cell shows the LED and an unpressed one does not', a
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const { page } = kit;
-    assert.ok((await read(page, '#group-pressed', 'backgroundImage', '::after')).includes(LED), 'the pressed cell has no LED');
-    assert.ok((await read(page, '#group-selected', 'backgroundImage', '::after')).includes(LED), 'aria-selected does not light the cell');
-    assert.ok(!(await read(page, '#group-unpressed', 'backgroundImage', '::after')).includes(LED), 'the unpressed cell is lit');
+    assert.ok((await read(page, '#group-pressed', 'backgroundImage', '::after')).includes(LIT_LENS), 'the pressed cell has no LED');
+    assert.ok((await read(page, '#group-selected', 'backgroundImage', '::after')).includes(LIT_LENS), 'aria-selected does not light the cell');
+    const unpressed = await read(page, '#group-unpressed', 'backgroundImage', '::after');
+    assert.ok(!unpressed.includes(LIT_LENS), 'the unpressed cell is lit');
+    assert.ok(unpressed.includes('led-lens-unlit'), 'the unpressed cell does not show the dark lens');
     assert.equal(await read(page, '#group-metal-lit', 'content', '::after'), '""', 'the pressed metal cell has no LED dot');
+    assert.ok((await read(page, '#group-metal-lit', 'backgroundImage', '::after')).includes(LIT_LENS), 'the LED dot has no lens');
     assert.equal(await read(page, '#group-metal-lit', 'backgroundColor', '::after'), LED);
   } finally {
     await kit.close();
@@ -199,7 +203,7 @@ test('a disabled pressed cell stays inset with a dim LED', async () => {
     const selector = '#group-disabled-pressed';
     assert.equal(await read(page, selector, 'opacity'), '0.7');
     for (const layer of shadowLayers(await read(page, selector, 'boxShadow'))) assert.ok(layer.endsWith('inset'), layer);
-    assert.ok((await read(page, selector, 'backgroundImage', '::after')).includes(LED));
+    assert.ok((await read(page, selector, 'backgroundImage', '::after')).includes(LIT_LENS));
   } finally {
     await kit.close();
   }
@@ -500,7 +504,7 @@ test('the LED glows itself and lights the surface around it', async () => {
     const { page } = kit;
     for (const [name, selector] of [['dish LED', '#group-pressed'], ['LED dot', '#group-metal-lit']]) {
       const layers = await shadowsOf(page, selector, '::after');
-      assert.ok(layers.some((layer) => isInset(layer) && layer.length > 0), `the ${name} has no glow of its own`);
+      assert.ok((await read(page, selector, 'backgroundImage', '::after')).includes(LIT_LENS), `the ${name} is not the glowing lens`);
       assert.ok(layers.filter((layer) => !isInset(layer) && isOrange(layer)).length >= 1, `the ${name} does not light its surroundings`);
     }
     assert.ok((await shadowsOf(page, '#group-metal-lit', '::after')).filter((layer) => !isInset(layer) && isOrange(layer)).length >= 2, 'the LED dot has one halo, not a core and a halo');
