@@ -330,25 +330,44 @@ test('a disabled radio is dimmed, shows no interactive cursor and is skipped by 
   }
 });
 
-const ledLensShadow = (page, selector) => page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::before').boxShadow, selector);
+const litLensOpacity = (page, selector) => page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::after').opacity, selector);
+const waitForLitLensOpacity = (page, selector, opacity) => page.waitForFunction(([target, expected]) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::after').opacity === expected, [selector, opacity]);
 
 test('an LED toggle lights while checked and a disabled one stays as it is', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const { page } = kit;
-    const unlit = await ledLensShadow(page, '#led-toggle');
+    assert.equal(await litLensOpacity(page, '#led-toggle'), '0');
     await page.locator('#led-toggle').scrollIntoViewIfNeeded();
     await page.locator('#led-toggle').click();
     assert.equal(await page.isChecked('#led-toggle input'), true);
-    assert.notEqual(await ledLensShadow(page, '#led-toggle'), unlit, 'the LED did not light');
+    await waitForLitLensOpacity(page, '#led-toggle', '1');
     await page.keyboard.press('Space');
     assert.equal(await page.isChecked('#led-toggle input'), false, 'Space did not toggle the focused LED');
-    assert.equal(await ledLensShadow(page, '#led-toggle'), unlit, 'the LED did not go dark');
+    await waitForLitLensOpacity(page, '#led-toggle', '0');
     assert.equal(await read(page, '#led-toggle-disabled', 'opacity'), '0.7');
     await page.locator('#led-toggle-disabled input').click({ force: true });
     assert.equal(await page.isChecked('#led-toggle-disabled input'), false);
   } finally {
     await kit.close();
+  }
+});
+
+test('a lit LED fades in quickly and out slowly, and does neither under reduced motion', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const duration = (selector) => read(kit.page, `${selector} .fam-led-lens`, 'transitionDuration', '::after');
+    assert.equal(await duration('#led-unlit'), '0.5s');
+    assert.equal(await duration('#led-lit'), '0.12s');
+  } finally {
+    await kit.close();
+  }
+  const still = await openUrl(fixtureUrl('kit'), { reducedMotion: 'reduce' });
+  try {
+    assert.equal(await read(still.page, '#led-lit .fam-led-lens', 'transitionProperty', '::after'), 'none');
+    assert.equal(await read(still.page, '#led-unlit .fam-led-lens', 'transitionProperty', '::after'), 'none');
+  } finally {
+    await still.close();
   }
 });
 

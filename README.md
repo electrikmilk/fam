@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 73 KB of CSS (16.6 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 74 KB of CSS (16.8 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -236,7 +236,7 @@ An LED is a standalone indicator lamp for the plastic panel and the metal. The l
 </span>
 ```
 
-A toggle LED is a label that wraps a checkbox, driven like the switch: it is lit while checked, so it needs no JavaScript and works in forms. Give the input `role="switch"`; the label text is its name, so it needs no hidden state text. A disabled one sinks into its case like a disabled button.
+A toggle LED is a label that wraps a checkbox, driven like the switch: it is lit while checked, so it needs no JavaScript and works in forms. Give the input `role="switch"`; the label text is its name, so it needs no hidden state text. A disabled one sinks into its case like a disabled button. A lit LED comes on in about a tenth of a second and fades out over half a second, like a cooling lamp; the checked plastic and metal radios do the same, and `prefers-reduced-motion` turns both fades off.
 
 ```html
 <label class="fam-led fam-led--green">

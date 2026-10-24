@@ -34,10 +34,14 @@ test('selected and current states differ from the rest in forced colors', option
 test('a lit LED differs from an unlit one in forced colors', options, async () => {
   const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
   try {
-    const lensColor = (selector) => kit.page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::before').backgroundColor, selector);
-    assert.notEqual(await lensColor('#led-lit'), await lensColor('#led-unlit'), 'lit and unlit LEDs look the same');
+    const litLens = (selector) => kit.page.evaluate((target) => {
+      const style = getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::after');
+      return `${style.opacity} ${style.backgroundColor}`;
+    }, selector);
+    assert.notEqual(await litLens('#led-lit'), await litLens('#led-unlit'), 'lit and unlit LEDs look the same');
     await kit.page.locator('#led-toggle').click();
-    assert.notEqual(await lensColor('#led-toggle'), await lensColor('#led-unlit'), 'a checked LED toggle looks unlit');
+    await kit.page.waitForFunction(() => getComputedStyle(document.querySelector('#led-toggle .fam-led-lens'), '::after').opacity === '1');
+    assert.equal(await litLens('#led-toggle'), await litLens('#led-lit'), 'a checked LED toggle looks unlit');
   } finally {
     await kit.close();
   }
