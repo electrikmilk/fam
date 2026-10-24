@@ -295,7 +295,7 @@ test('a disabled radio is dimmed, shows no interactive cursor and is skipped by 
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const { page } = kit;
-    assert.equal(await read(page, '#radio-plastic-disabled-label', 'opacity'), '0.5');
+    assert.equal(await read(page, '#radio-plastic-disabled-label', 'opacity'), '0.7', 'a disabled plastic radio fades as much as a disabled plastic button');
     assert.equal(await read(page, '#radio-plastic-disabled-label', 'cursor'), 'default');
     await page.locator('#radio-plastic-disabled-label').scrollIntoViewIfNeeded();
     await page.evaluate(() => document.querySelector('#glossy-disabled').focus());
