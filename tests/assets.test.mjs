@@ -12,6 +12,7 @@ const ASSET_NAMES = [
   'metal-spiral.jpg',
   'knob-face.jpg',
   'grain-fine.jpg',
+  'grain-plastic.jpg',
   'cardstock-tile.jpg',
   'legal-tile.jpg',
   'paper-tile.jpg',
@@ -40,6 +41,7 @@ const TILED_NAMES = [
   'leather-fill-tan-tile.jpg',
   'leather-fill-black-tile.jpg',
   'grain-fine.jpg',
+  'grain-plastic.jpg',
 ];
 
 // File name to byte ceiling, for files that stay over the budget after lossless optimization.

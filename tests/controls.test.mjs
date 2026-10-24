@@ -499,7 +499,7 @@ test('the plastic panel is a textured gradient', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const background = await read(kit.page, '#plastic-panel', 'backgroundImage');
-    assert.ok(background.includes('linear-gradient') && background.includes('grain-fine.jpg'), background);
+    assert.ok(background.includes('linear-gradient') && background.includes('grain-plastic.jpg'), background);
   } finally {
     await kit.close();
   }
@@ -520,20 +520,21 @@ test('the dial turns with --fam-knob-angle and is labeled', async () => {
   }
 });
 
-test('every plastic surface carries the fine grain', async () => {
+test('every plastic surface carries a grain, and the cream ones the stronger one', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const { page } = kit;
     const surfaces = [
-      ['plastic button', '#plastic-red', null],
-      ['disabled plastic button', '#plastic-disabled', null],
-      ['plastic panel', '#plastic-panel', null],
-      ['plastic radio', '#grain-radio', null],
-      ['plastic case', '#tabs-plastic', null],
-      ['dial face', '#dial', '::before'],
+      ['plastic button', '#plastic-red', null, 'grain-fine.jpg'],
+      ['disabled plastic button', '#plastic-disabled', null, 'grain-fine.jpg'],
+      ['plastic panel', '#plastic-panel', null, 'grain-plastic.jpg'],
+      ['cream plastic button', '#tab-plastic-plain', null, 'grain-plastic.jpg'],
+      ['plastic radio', '#grain-radio', null, 'grain-plastic.jpg'],
+      ['plastic case', '#tabs-plastic', null, 'grain-plastic.jpg'],
+      ['dial face', '#dial', '::before', 'grain-plastic.jpg'],
     ];
-    for (const [name, selector, pseudo] of surfaces) {
-      assert.ok((await read(page, selector, 'backgroundImage', pseudo)).includes('grain-fine.jpg'), `the ${name} has no grain`);
+    for (const [name, selector, pseudo, grain] of surfaces) {
+      assert.ok((await read(page, selector, 'backgroundImage', pseudo)).includes(grain), `the ${name} does not carry ${grain}`);
     }
   } finally {
     await kit.close();

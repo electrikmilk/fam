@@ -200,6 +200,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
    isolation keeps the dish (z-index -1) above the face and below the label. */
 .fam-plastic {
   --fam-c: #264eae;
+  --fam-grain: var(--fam-tex-grain-fine);
   box-sizing: border-box;
   position: relative;
   isolation: isolate;
@@ -216,7 +217,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   cursor: pointer;
   border: 1px solid color-mix(in srgb, var(--fam-c) 40%, black);
   background:
-    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    var(--fam-grain) 0 0 / 128px 128px,
     linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 88%, white) 0%, color-mix(in srgb, var(--fam-c) 97%, white) 38%, var(--fam-c) 62%, color-mix(in srgb, var(--fam-c) 80%, black) 100%);
   background-blend-mode: soft-light, normal;
   --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), inset 0 -2px 3px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .4);
@@ -249,7 +250,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 /* The cream plastic of the case and the buttons in references/plastic.png; a pale face needs a dark label */
 .fam-plastic--cream {
-  --fam-c: #ebe5d2;
+  --fam-c: #e1dac4;
+  --fam-grain: var(--fam-tex-grain-plastic);
   color: #2a2518;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
 }
@@ -268,7 +270,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   color: rgba(255, 255, 255, .5);
   text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
   background:
-    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
+    var(--fam-grain) 0 0 / 128px 128px,
     linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 55%, black) 0%, color-mix(in srgb, var(--fam-c) 48%, black) 100%);
   background-blend-mode: soft-light, normal;
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18);
@@ -486,8 +488,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-radio--plastic .fam-radio-dot {
   background:
-    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
-    linear-gradient(to bottom, #fbf7ea, #e2dac3 60%, #cfc6ad);
+    var(--fam-tex-grain-plastic) 0 0 / 128px 128px,
+    linear-gradient(to bottom, #f4efdd, #dcd3b8 60%, #c8bea2);
   background-blend-mode: soft-light, normal;
 }
 
@@ -926,8 +928,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   padding: 5px;
   border-radius: var(--fam-radius-md);
   background:
-    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
-    linear-gradient(to bottom, #f7f2e4, #ded6c0);
+    var(--fam-tex-grain-plastic) 0 0 / 128px 128px,
+    linear-gradient(to bottom, #f1ebd9, #d8cfb5);
   background-blend-mode: soft-light, normal;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .65), 0 2px 4px rgba(0, 0, 0, .4), inset 0 1px 0 rgba(255, 255, 255, .9);
 }
@@ -972,8 +974,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   inset: 9px;
   border-radius: 50%;
   background:
-    var(--fam-tex-grain-fine) 0 0 / 128px 128px,
-    radial-gradient(circle at 50% 30%, #fcf9ef, #ddd5bf 70%, #c0b79e);
+    var(--fam-tex-grain-plastic) 0 0 / 128px 128px,
+    radial-gradient(circle at 50% 30%, #f6f1e0, #d6cdb2 70%, #b9af94);
   background-blend-mode: soft-light, normal;
   box-shadow: inset 0 2px 3px rgba(255, 255, 255, .9), inset 0 -3px 5px rgba(0, 0, 0, .25), 0 1px 2px rgba(0, 0, 0, .5);
 }
