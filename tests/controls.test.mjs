@@ -11,6 +11,17 @@ const read = (page, selector, property, pseudo = null) =>
 
 const shadowLayers = (value) => value.split(/,\s(?=rgba?\()/);
 
+// The collar a plastic button sits in belongs to the surface, so a button's own shadows are the layers before it
+async function ownShadowLayers(page, selector) {
+  const { shadow, ring } = await page.evaluate((target) => {
+    const style = getComputedStyle(document.querySelector(target));
+    return { shadow: style.boxShadow, ring: style.getPropertyValue('--fam-ring').trim() };
+  }, selector);
+  const ringLayerCount = ring === '' ? 0 : ring.split(/,(?![^(]*\))/).length;
+  const layers = shadowLayers(shadow);
+  return layers.slice(0, layers.length - ringLayerCount);
+}
+
 async function faceBrightness(page, selector) {
   await page.locator(selector).scrollIntoViewIfNeeded();
   const box = await page.locator(selector).boundingBox();
@@ -34,7 +45,7 @@ for (const family of BUTTON_FAMILIES) {
       const { page } = kit;
       for (const selector of family.disabled) {
         assert.equal(await read(page, selector, 'opacity'), '0.7', `${selector} is not a little faded`);
-        for (const layer of shadowLayers(await read(page, selector, 'boxShadow'))) {
+        for (const layer of await ownShadowLayers(page, selector)) {
           assert.ok(layer.endsWith('inset'), `${selector} still casts an outer shadow: ${layer}`);
         }
         assert.ok(labelAlpha(await read(page, selector, 'color')) < labelAlpha(await read(page, family.enabled, 'color')), `${selector} label is not muted`);
@@ -205,6 +216,26 @@ test('a lit cell fades in quickly and out slowly, and does neither under reduced
   }
 });
 
+test('a plastic button sits in a collar that group cells do not have, and pressing it deepens the seam', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const seam = (selector) => page.evaluate((target) => getComputedStyle(document.querySelector(target)).getPropertyValue('--fam-ring-gap').trim(), selector);
+    const alpha = (color) => Number(color.match(/[\d.]+/g)[3]);
+    assert.ok((await read(page, '#plastic-red', 'boxShadow')).split(/,\s(?=rgba?\()/).length > 4, 'a plastic button has no collar');
+    assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('#group-unpressed')).getPropertyValue('--fam-ring').trim()), '0 0 0 0 transparent', 'a group cell has a collar');
+    const resting = alpha(await seam('#plastic-red'));
+    await page.locator('#plastic-red').scrollIntoViewIfNeeded();
+    const box = await page.locator('#plastic-red').boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    assert.ok(alpha(await seam('#plastic-red')) > resting, 'the seam does not deepen when the button is pressed');
+    await page.mouse.up();
+  } finally {
+    await kit.close();
+  }
+});
+
 test('a group of plastic or metal cells sits in a recessed well', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
@@ -240,7 +271,7 @@ test('a disabled pressed cell stays inset with a dim LED', async () => {
     const { page } = kit;
     const selector = '#group-disabled-pressed';
     assert.equal(await read(page, selector, 'opacity'), '0.7');
-    for (const layer of shadowLayers(await read(page, selector, 'boxShadow'))) assert.ok(layer.endsWith('inset'), layer);
+    for (const layer of await ownShadowLayers(page, selector)) assert.ok(layer.endsWith('inset'), layer);
     assert.ok((await read(page, selector, 'backgroundImage', '::after')).includes(LIT_LENS));
   } finally {
     await kit.close();
@@ -570,9 +601,9 @@ test('a lit plastic or metal cell is inset and an unlit one is raised', async ()
   try {
     const { page } = kit;
     for (const selector of ['#group-pressed', '#group-selected', '#group-metal-lit']) {
-      for (const layer of await shadowsOf(page, selector)) assert.ok(isInset(layer), `${selector} still casts an outer shadow: ${layer}`);
+      for (const layer of await ownShadowLayers(page, selector)) assert.ok(isInset(layer), `${selector} still casts an outer shadow: ${layer}`);
     }
-    assert.ok((await shadowsOf(page, '#group-unpressed')).some((layer) => !isInset(layer)), 'an unlit cell should be raised');
+    assert.ok((await ownShadowLayers(page, '#group-unpressed')).some((layer) => !isInset(layer)), 'an unlit cell should be raised');
   } finally {
     await kit.close();
   }

@@ -221,7 +221,15 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 88%, white) 0%, color-mix(in srgb, var(--fam-c) 97%, white) 38%, var(--fam-c) 62%, color-mix(in srgb, var(--fam-c) 80%, black) 100%);
   background-blend-mode: soft-light, normal;
   --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), inset 0 -2px 3px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .4);
-  box-shadow: var(--fam-rest-shadow);
+  /* The collar the button is set in, as in references/plastic.png: a dark gap where the button meets it, the light collar, a shaded edge
+     below it and the shadow it casts. Cells of a group sit in a well instead. */
+  --fam-ring-gap: rgba(0, 0, 0, .22);
+  --fam-ring:
+    0 0 0 2px var(--fam-ring-gap),
+    0 0 0 5px rgba(255, 255, 255, .3),
+    0 1px 0 6px rgba(0, 0, 0, .1),
+    0 3px 6px 4px rgba(0, 0, 0, .08);
+  box-shadow: var(--fam-rest-shadow), var(--fam-ring);
 }
 
 .fam-plastic::before {
@@ -235,12 +243,13 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-plastic:focus-visible {
   outline: 2px solid var(--fam-focus-ink);
   outline-offset: 2px;
-  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow), var(--fam-ring);
 }
 
+/* Pressed, the button sinks into its collar: the face goes inset and the gap darkens, and the collar stays where it is */
 .fam-plastic:active:not(:disabled) {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .4);
+  --fam-ring-gap: rgba(0, 0, 0, .42);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, .5), inset 0 -1px 0 rgba(255, 255, 255, .18), var(--fam-ring);
 }
 
 .fam-plastic--red { --fam-c: #a82219; }
@@ -273,7 +282,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     var(--fam-grain) 0 0 / 128px 128px,
     linear-gradient(to bottom, color-mix(in srgb, var(--fam-c) 55%, black) 0%, color-mix(in srgb, var(--fam-c) 48%, black) 100%);
   background-blend-mode: soft-light, normal;
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18), var(--fam-ring);
 }
 
 /* Brushed metal button: the metal photo under a soft top light, with the same case, dish and disabled look as the plastic ones */
@@ -785,6 +794,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-button-group:not(.fam-button-group--case):has(> :is(.fam-plastic--square, .fam-metal-button--square)) {
   border-radius: calc(var(--fam-radius-md) + 6px);
 }
+
+.fam-button-group > .fam-plastic { --fam-ring: 0 0 0 0 transparent; }
 
 .fam-button-group > * {
   --fam-cell-radius: var(--fam-radius-pill);

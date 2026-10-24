@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 76 KB of CSS (17.0 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 77 KB of CSS (17.3 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -202,7 +202,7 @@ Button groups put plastic, metal or glossy buttons in one case. Mark the lit but
 </div>
 ```
 
-Colors are `--red`, `--green`, `--blue`, `--purple`, `--amber` and `--cream` (the pale plastic of the case in the reference, with a dark label). For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
+A plastic button sits in a faint collar, as in the reference: a dark seam where it meets the surface, a translucent light ring and a soft shadow, all painted outside the button like a shadow, so leave about 6px around it. Pressing it sinks the face and darkens the seam while the collar stays put. Cells of a button group have no collar, because the group's well holds them. Colors are `--red`, `--green`, `--blue`, `--purple`, `--amber` and `--cream` (the pale plastic of the case in the reference, with a dark label). For any other color set `--fam-c` on a `fam-plastic`; check that the label reaches 4.5:1.
 
 Tabs are button groups. Give the group `role="tablist"` and each button `role="tab"` with `aria-selected`; the lit tab is styled the same way a pressed button is. Use silver glossy buttons for the Snow Leopard strip, `fam-button-group--case` with `fam-plastic--cream` buttons for a padded plastic case, metal buttons, `fam-button-group--leather` with `fam-leather-button` for the leather navigation's leather, and `fam-wood fam-button-group fam-button-group--wood` with `fam-nav-item` buttons for its wood. The kit does not switch panels or move between tabs with the arrow keys; `showcase/tabs.js` is a small script that does.
 
