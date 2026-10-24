@@ -523,6 +523,30 @@
   &lt;span class="fam-led fam-led--blue fam-led--large"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Sync&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
 &lt;/div&gt;</code></pre>
       </div>
+      <p class="scene-lead">An LED that wraps a checkbox is a toggle, driven the same way as the switch: it is lit while checked, so it works without JavaScript and in forms. Give the input role="switch" and the label is its name. A disabled one sinks into its case like a disabled button.</p>
+      <div class="window fam-metal controls-stage">
+        <label class="fam-led"><input type="checkbox" role="switch" checked><span class="fam-led-lens"></span><span class="fam-led-label">Power</span></label>
+        <label class="fam-led"><input type="checkbox" role="switch"><span class="fam-led-lens"></span><span class="fam-led-label">Standby</span></label>
+        <label class="fam-led fam-led--green"><input type="checkbox" role="switch" checked><span class="fam-led-lens"></span><span class="fam-led-label fam-led-label--printed">Ready</span></label>
+        <label class="fam-led fam-led--red"><input type="checkbox" role="switch"><span class="fam-led-lens"></span><span class="fam-led-label fam-led-label--printed">Fault</span></label>
+        <label class="fam-led fam-led--blue fam-led--large"><input type="checkbox" role="switch" checked><span class="fam-led-lens"></span><span class="fam-led-label">Link</span></label>
+        <label class="fam-led fam-led--blue fam-led--large"><input type="checkbox" role="switch"><span class="fam-led-lens"></span><span class="fam-led-label fam-led-label--printed">Sync</span></label>
+        <label class="fam-led fam-led--green"><input type="checkbox" role="switch" disabled><span class="fam-led-lens"></span><span class="fam-led-label">Locked</span></label>
+        <label class="fam-led fam-led--red"><input type="checkbox" role="switch" checked disabled><span class="fam-led-lens"></span><span class="fam-led-label">Locked</span></label>
+      </div>
+      <div class="code-block" role="group" aria-label="The toggle LEDs markup" data-label="the toggle LEDs markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
+  &lt;label class="fam-led"&gt;&lt;input type="checkbox" role="switch" checked&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Power&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led"&gt;&lt;input type="checkbox" role="switch"&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Standby&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led fam-led--green"&gt;&lt;input type="checkbox" role="switch" checked&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Ready&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led fam-led--red"&gt;&lt;input type="checkbox" role="switch"&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Fault&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led fam-led--blue fam-led--large"&gt;&lt;input type="checkbox" role="switch" checked&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Link&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led fam-led--blue fam-led--large"&gt;&lt;input type="checkbox" role="switch"&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Sync&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led fam-led--green"&gt;&lt;input type="checkbox" role="switch" disabled&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Locked&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="fam-led fam-led--red"&gt;&lt;input type="checkbox" role="switch" checked disabled&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Locked&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
     </section>
 
     <section class="scene" id="scene-progress">

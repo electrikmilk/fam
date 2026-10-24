@@ -36,6 +36,8 @@ test('a lit LED differs from an unlit one in forced colors', options, async () =
   try {
     const lensColor = (selector) => kit.page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::before').backgroundColor, selector);
     assert.notEqual(await lensColor('#led-lit'), await lensColor('#led-unlit'), 'lit and unlit LEDs look the same');
+    await kit.page.locator('#led-toggle').click();
+    assert.notEqual(await lensColor('#led-toggle'), await lensColor('#led-unlit'), 'a checked LED toggle looks unlit');
   } finally {
     await kit.close();
   }

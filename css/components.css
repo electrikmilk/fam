@@ -579,7 +579,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
    The lens is a grayscale photo of a ringed panel lamp multiplied onto --fam-led-color, so one pair of images serves every color.
    The lit lens is the bright tinted glass with a glow; the unlit one is the same color as dark glass. The label is engraved by default
    and printed with fam-led-label--printed. The lens is decorative, so the state is carried by the text of fam-visually-hidden.
-   The lit and unlit faces are custom properties because the plastic and metal radios and the button groups paint the same lens. */
+   The lit and unlit faces are custom properties because the plastic and metal radios and the button groups paint the same lens.
+   A fam-led label that wraps a checkbox is a toggle, lit while checked, like fam-switch. */
 
 .fam-led,
 .fam-radio--plastic,
@@ -598,12 +599,34 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
 .fam-led {
   --fam-led-size: 28px;
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin: 6px 12px;
+  margin: 2px 6px;
+  padding: 4px 6px;
+  border-radius: var(--fam-radius-sm);
   vertical-align: top;
+}
+
+.fam-led:has(input) { cursor: pointer; }
+
+/* The native checkbox covers the whole LED, invisible but focusable and clickable */
+.fam-led input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.fam-led:has(input:focus-visible) {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo);
 }
 
 .fam-led--green { --fam-led-color: #2fd24a; }
@@ -633,7 +656,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), inset 0 -2px 4px rgba(0, 0, 0, .5);
 }
 
-.fam-led--lit .fam-led-lens::before {
+.fam-led--lit .fam-led-lens::before,
+.fam-led:has(input:checked) .fam-led-lens::before {
   background: var(--fam-led-lit-face);
   background-blend-mode: normal, multiply, normal;
   box-shadow:
@@ -643,6 +667,18 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 }
 
 /* 19px bold counts as large text (3:1), which is what the darkest brushed streaks allow behind a dark glyph, so the size is part of the class */
+.fam-led:has(input:active:not(:disabled)) .fam-led-lens { transform: translateY(1px); }
+
+/* Sunk into its case like a disabled plastic or metal button: no glow, a darker lens and the same fade */
+.fam-led:has(input:disabled) {
+  opacity: .7;
+  cursor: default;
+}
+
+.fam-led:has(input:disabled) .fam-led-lens::before {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18), inset 0 0 0 var(--fam-led-size) rgba(0, 0, 0, .35);
+}
+
 .fam-led-label {
   font: 700 19px/1.1 var(--fam-font-ui);
   letter-spacing: .5px;
@@ -675,7 +711,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     box-shadow: none;
   }
 
-  .fam-led--lit .fam-led-lens::before { background: Highlight; }
+  .fam-led--lit .fam-led-lens::before,
+  .fam-led:has(input:checked) .fam-led-lens::before { background: Highlight; }
 }
 
 /* ---------- Button groups: one case holding plastic, metal, glossy or leather buttons ----------

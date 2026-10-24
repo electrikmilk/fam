@@ -312,6 +312,28 @@ test('a disabled radio is dimmed, shows no interactive cursor and is skipped by 
   }
 });
 
+const ledLensShadow = (page, selector) => page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::before').boxShadow, selector);
+
+test('an LED toggle lights while checked and a disabled one stays as it is', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const unlit = await ledLensShadow(page, '#led-toggle');
+    await page.locator('#led-toggle').scrollIntoViewIfNeeded();
+    await page.locator('#led-toggle').click();
+    assert.equal(await page.isChecked('#led-toggle input'), true);
+    assert.notEqual(await ledLensShadow(page, '#led-toggle'), unlit, 'the LED did not light');
+    await page.keyboard.press('Space');
+    assert.equal(await page.isChecked('#led-toggle input'), false, 'Space did not toggle the focused LED');
+    assert.equal(await ledLensShadow(page, '#led-toggle'), unlit, 'the LED did not go dark');
+    assert.equal(await read(page, '#led-toggle-disabled', 'opacity'), '0.7');
+    await page.locator('#led-toggle-disabled input').click({ force: true });
+    assert.equal(await page.isChecked('#led-toggle-disabled input'), false);
+  } finally {
+    await kit.close();
+  }
+});
+
 test('the radio glow does not animate under reduced motion', async () => {
   const moving = await openUrl(fixtureUrl('kit'));
   try {
