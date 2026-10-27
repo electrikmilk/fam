@@ -131,6 +131,36 @@
 .fam-cast-md { box-shadow: var(--fam-cast-md); }
 .fam-cast-lg { box-shadow: var(--fam-cast-lg); }
 
+/* An element resting on its surface: a thin flat ellipse just under the bottom edge. It uses ::after, so an element that already uses it
+   (the pill, the glass, the frames, round plastic) takes the class on a wrapper instead. The ellipse has no negative z-index, because that would
+   hide it behind the background of whatever surface the element sits on. It starts at the bottom edge on purpose, so painting above the
+   element never covers its face. */
+.fam-grounded {
+  --fam-grounded-width: 88%;
+  --fam-grounded-height: 8px;
+  --fam-grounded-ink: rgb(0 0 0);
+}
+
+/* Zero specificity, so an element positioned by its own class or inline style keeps that position */
+:where(.fam-grounded) { position: relative; }
+
+.fam-grounded::after {
+  content: '';
+  position: absolute;
+  top: calc(100% - 1px);
+  left: calc((100% - var(--fam-grounded-width)) / 2);
+  width: var(--fam-grounded-width);
+  height: var(--fam-grounded-height);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    color-mix(in srgb, var(--fam-grounded-ink) 60%, transparent) 0%,
+    color-mix(in srgb, var(--fam-grounded-ink) 30%, transparent) 45%,
+    transparent 72%
+  );
+}
+
 /* All but the pill also set --fam-r so a fam-glass glow follows the same radius. This relies on coming after .fam-glass.
    The pill is the glass default, which leaves --fam-r unset. */
 .fam-round-sm { --fam-r: var(--fam-radius-sm); border-radius: var(--fam-radius-sm); }

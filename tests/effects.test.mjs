@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { fixtureUrl, openUrl } from './helpers/browser.mjs';
+import { statistics } from './helpers/pixels.mjs';
 import { parseBoxShadow, reachOf, totalAlphaOf } from './helpers/shadows.mjs';
 
 const snippetUrl = new URL('../snippets/refraction-filter.html', import.meta.url);
@@ -175,6 +176,98 @@ test('a plastic button inside a cast wrapper keeps its own shadow', async () => 
     const withCast = await style(kit.page, '#cast-inner', null, 'boxShadow');
     await kit.page.evaluate(() => document.querySelector('#cast-wrapper').classList.remove('fam-cast-md'));
     assert.equal(await style(kit.page, '#cast-inner', null, 'boxShadow'), withCast);
+  } finally {
+    await kit.close();
+  }
+});
+
+const pageBox = (page, selector) =>
+  page.evaluate((target) => {
+    const rect = document.querySelector(target).getBoundingClientRect();
+    return { left: rect.left + window.scrollX, right: rect.right + window.scrollX, top: rect.top + window.scrollY, bottom: rect.bottom + window.scrollY };
+  }, selector);
+
+async function brightnessOf(page, clip) {
+  const { mean } = statistics(await page.screenshot({ clip, fullPage: true }));
+  return (mean[0] + mean[1] + mean[2]) / 3;
+}
+
+// A 20x4 strip centered under an element's bottom edge, and the same strip in the clear gap to its right,
+// which starts 10px out so it stays clear of the next element's ellipse
+async function stripsUnder(page, selector) {
+  const box = await pageBox(page, selector);
+  const centerX = (box.left + box.right) / 2;
+  return {
+    under: await brightnessOf(page, { x: centerX - 10, y: box.bottom + 2, width: 20, height: 4 }),
+    clear: await brightnessOf(page, { x: box.right + 10, y: box.bottom + 2, width: 20, height: 4 }),
+  };
+}
+
+test('the grounded ellipse is out of the way', async () => {
+  const kit = await openKit();
+  try {
+    const ellipse = await kit.page.evaluate(() => {
+      const element = document.querySelector('#grounded');
+      const { pointerEvents, position, zIndex, top, width } = getComputedStyle(element, '::after');
+      return { pointerEvents, position, zIndex, top: parseFloat(top), width: parseFloat(width), elementHeight: element.offsetHeight, elementWidth: element.offsetWidth };
+    });
+    assert.equal(ellipse.pointerEvents, 'none');
+    assert.equal(ellipse.position, 'absolute');
+    assert.equal(ellipse.zIndex, 'auto', 'a negative z-index would hide the ellipse behind the surface the element sits on');
+    assert.ok(ellipse.top >= ellipse.elementHeight - 1, `the ellipse starts at ${ellipse.top}px in a ${ellipse.elementHeight}px element`);
+    assert.ok(ellipse.width < ellipse.elementWidth, 'the ellipse is narrower than the element');
+
+    const layout = await kit.page.evaluate(() => {
+      const element = document.querySelector('#grounded');
+      const after = document.querySelector('#grounded-stack').getBoundingClientRect().left;
+      element.classList.remove('fam-grounded');
+      const rectWithout = element.getBoundingClientRect().toJSON();
+      const afterWithout = document.querySelector('#grounded-stack').getBoundingClientRect().left;
+      element.classList.add('fam-grounded');
+      return { sameNeighbor: after === afterWithout, rectWithout, rectWith: element.getBoundingClientRect().toJSON() };
+    });
+    assert.ok(layout.sameNeighbor, 'the ellipse takes no layout space');
+    assert.deepEqual(layout.rectWith, layout.rectWithout);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the grounded ellipse shows below the element and leaves its face alone', async () => {
+  const kit = await openKit();
+  try {
+    const { under, clear } = await stripsUnder(kit.page, '#grounded');
+    assert.ok(clear - under >= 25, `under the element is ${under}, the clear backdrop ${clear}`);
+
+    const box = await pageBox(kit.page, '#grounded-stack');
+    const face = { x: (box.left + box.right) / 2 - 10, y: (box.top + box.bottom) / 2 - 5, width: 20, height: 10 };
+    const withEllipse = await brightnessOf(kit.page, face);
+    await kit.page.evaluate(() => document.querySelector('#grounded-stack').classList.remove('fam-grounded'));
+    const without = await brightnessOf(kit.page, face);
+    assert.ok(Math.abs(withEllipse - without) < 3, `the face changed from ${without} to ${withEllipse}`);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('fam-grounded keeps an existing position', async () => {
+  const kit = await openKit();
+  try {
+    assert.equal(await style(kit.page, '#grounded-absolute', null, 'position'), 'absolute');
+    assert.equal(await style(kit.page, '#grounded', null, 'position'), 'relative');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('fam-grounded on a wrapper shows the ellipse around a pill', async () => {
+  const kit = await openKit();
+  try {
+    // The pill casts a shadow of its own, so the strip is compared with and without the class
+    const { under: withEllipse } = await stripsUnder(kit.page, '#grounded-wrapper');
+    await kit.page.evaluate(() => document.querySelector('#grounded-wrapper').classList.remove('fam-grounded'));
+    const { under: without } = await stripsUnder(kit.page, '#grounded-wrapper');
+    assert.ok(without - withEllipse >= 15, `under the wrapper is ${withEllipse} with the class and ${without} without`);
   } finally {
     await kit.close();
   }

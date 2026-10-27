@@ -69,7 +69,7 @@ Cast, new. Each size is longer and darker than the one before:
 
 The owner asked for each size to be longer and darker than the one before, and approved these values in the mockup `cast-sizes-v3.html`. They share their first layers' offsets and blurs and differ in alpha and in how far they reach. The builder may still tune them if the shadows look wrong on a material.
 
-Resting ellipse, as a pseudo-element behind the element: about 88% of its width, about 8px tall, sitting about 5px below the bottom edge, filled with `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.6) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,0) 72%)`, `z-index: -1`, and `pointer-events: none`.
+Resting ellipse, as a pseudo-element under the element: about 88% of its width, about 8px tall, starting at the element's bottom edge, filled with `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.6) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,0) 72%)`, and `pointer-events: none`. It has no negative `z-index`: that hides it behind the background of the surface the element sits on, unless the surface makes its own stacking context. Starting at the bottom edge means painting above the element never covers its face.
 
 ## Constraints
 
