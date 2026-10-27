@@ -23,10 +23,10 @@ Beyond the look:
 ## Two ways to use it
 
 - **As a UI framework.** Use the buttons, switches, tabs, fields, lists, navigation and glass. Every control is built from the materials, so a whole interface can be Fam.
-- **As texture for a flat UI.** Keep your own minimalist components and put a material behind them: felt, wood, paper, leather or any other. You add one class, and only the tile you use is downloaded.
+- **As texture for a flat UI.** Keep your own minimalist components and put a material behind them: cork, wood, felt, leather or any other. You add one class, and only the tile you use is downloaded.
 
 ```html
-<div class="fam-felt" style="--fam-tint:#3a5a40; padding:32px">
+<div class="fam-cork" style="padding:32px">
   <!-- your own flat components -->
   <div class="card">...</div>
 </div>
