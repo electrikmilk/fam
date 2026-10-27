@@ -60,12 +60,14 @@ The mockup the owner saw used slightly longer values for `md` and `lg`. These ar
 | `md`  | 18px        | 19px       | .56               | .56              |
 | `lg`  | 52px        | 48px       | .82               | .61              |
 
-Cast, new. All three share the first five layers and differ in how far they reach:
+Cast, new. All three share the first four layers and differ in how far they reach:
 
 - Shared: `0 1px 1px rgba(0,0,0,.38), 0 2px 2px rgba(0,0,0,.26), 0 4px 4px -1px rgba(0,0,0,.22), 0 8px 8px -2px rgba(0,0,0,.2)`
-- `sm` adds `0 14px 14px -4px rgba(0,0,0,.16)`
-- `md` adds `0 16px 16px -4px rgba(0,0,0,.18), 0 30px 28px -8px rgba(0,0,0,.16)`
-- `lg` adds `0 16px 16px -4px rgba(0,0,0,.18), 0 32px 32px -8px rgba(0,0,0,.16), 0 56px 48px -16px rgba(0,0,0,.14)`
+- `sm` adds `0 16px 16px -4px rgba(0,0,0,.18), 0 30px 28px -8px rgba(0,0,0,.16)`
+- `md` adds `0 16px 16px -4px rgba(0,0,0,.18), 0 32px 32px -8px rgba(0,0,0,.16), 0 56px 48px -16px rgba(0,0,0,.14)`
+- `lg` adds `0 16px 16px -4px rgba(0,0,0,.2), 0 32px 32px -8px rgba(0,0,0,.18), 0 60px 52px -14px rgba(0,0,0,.18), 0 84px 64px -22px rgba(0,0,0,.14)`
+
+The owner looked at the mockup with a shorter `sm`, then asked to shift each size up one step: the mockup's `md` is now `sm` and its `lg` is now `md`. The mockup's `sm` is dropped. The new `lg` is a little harsher and longer than the old `lg`. Its values are my pick, and the builder may tune them.
 
 Resting ellipse, as a pseudo-element behind the element: about 88% of its width, about 8px tall, sitting about 5px below the bottom edge, filled with `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.6) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,0) 72%)`, `z-index: -1`, and `pointer-events: none`.
 
