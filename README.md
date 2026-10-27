@@ -310,7 +310,7 @@ Zebra table, a table in a scrolling box with a sticky header, like the lists in 
 </div>
 ```
 
-The box draws every stripe once, in a gradient that scrolls with its content, and the rows are transparent. The empty stripes below the last row are therefore the same gradient as the real ones and line up with them. The stripes and column dividers are a see-through tint of one ink, so the paper or cardstock behind the table shows through. The header is an opaque band, because rows scrolling under a see-through header would show through it.
+The box draws every stripe once, in a gradient that scrolls with its content, and the rows are transparent. The empty stripes below the last row are therefore the same gradient as the real ones and line up with them. The stripes and the lines between the header cells are a see-through tint of one ink, so the paper or cardstock behind the table shows through. The header is an opaque band, because rows scrolling under a see-through header would show through it.
 
 - `--fam-row-height`: the height of every row, the header and the empty stripes (default `24px`).
 - `--fam-table-rows`: how many rows tall the box is, not counting the header (default `8`).

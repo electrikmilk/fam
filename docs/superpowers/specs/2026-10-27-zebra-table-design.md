@@ -7,16 +7,16 @@ Adds a tabular list with zebra rows to the kit (`css/components.css`), shown on 
 
 ## Intent and why
 
-The owner is rounding out the UI controls. The kit has `fam-list` and `fam-list-row` for a single-column list of links, but nothing for tabular details such as a file list or a process list, like the lists in Mac OS X Snow Leopard's Finder and Activity Monitor (`references/snow-leopard-leak-2495228360.png` and `references/mac-os-x^2009^10.6-snow-leopard-finder-cover-flow-2208504789.png`): a header row, column dividers, alternating row stripes, and stripes that carry on below the last row so the box always looks full.
+The owner is rounding out the UI controls. The kit has `fam-list` and `fam-list-row` for a single-column list of links, but nothing for tabular details such as a file list or a process list, like the lists in Mac OS X Snow Leopard's Finder and Activity Monitor (`references/snow-leopard-leak-2495228360.png` and `references/mac-os-x^2009^10.6-snow-leopard-finder-cover-flow-2208504789.png`): a header row, header dividers, alternating row stripes, and stripes that carry on below the last row so the box always looks full.
 
 In this kit the table usually sits on paper or cardstock, and the owner wants it to work on many materials without being complicated.
 
 ## Goals
 
-- A table in a fixed-height box that scrolls, with a sticky header row, column dividers and zebra rows.
+- A table in a fixed-height box that scrolls, with a sticky header row, dividers between the header cells (and no lines down the body columns) and zebra rows.
 - Empty placeholder stripes that fill the box below the last row, drawn with a repeating background gradient, not extra elements.
 - The row height is a variable, `--fam-row-height`, and the stripe color and strength are variables. Changing the row height keeps the real rows and the placeholder stripes lined up.
-- The stripes, header band and column dividers are a see-through tint of one "ink" color over whatever material is behind the table, so the grain of paper, cardstock or any other material shows through. Dark ink is the default, for light materials. One modifier switches to light ink for dark materials such as brown cardstock. That is the only switch needed to use the table on another material.
+- The stripes, header band and header dividers are a see-through tint of one "ink" color over whatever material is behind the table, so the grain of paper, cardstock or any other material shows through. Dark ink is the default, for light materials. One modifier switches to light ink for dark materials such as brown cardstock. That is the only switch needed to use the table on another material.
 - Optional row selection. A selected row uses the blue of `fam-list-row`. The kit styles the selected state only. Arrow-key and click behavior come from a small script in `showcase/`, following `tabs.js`.
 - Meets the kit's accessibility standards (see Accessibility).
 - Shown on the Controls page, with markup examples, and documented in `README.md`.
@@ -42,6 +42,7 @@ In this kit the table usually sits on paper or cardstock, and the owner wants it
 - Semantics follow the correction below: a real `<table>` for a read-only table, and `role="grid"` with a selected row for the selectable one. It is not a `listbox`.
 - Selection is optional. The interactivity is a showcase-only script, like `tabs.js`.
 - Row height and possibly color are variables.
+- Lines separate the header cells only, as in the Snow Leopard lists, not the body columns (added after the first build).
 
 ## Accessibility
 
