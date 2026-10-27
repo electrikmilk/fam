@@ -385,6 +385,29 @@ test('a disabled radio is dimmed, shows no interactive cursor and is skipped by 
 const litLensOpacity = (page, selector) => page.evaluate((target) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::after').opacity, selector);
 const waitForLitLensOpacity = (page, selector, opacity) => page.waitForFunction(([target, expected]) => getComputedStyle(document.querySelector(`${target} .fam-led-lens`), '::after').opacity === expected, [selector, opacity]);
 
+test('an LED lens sits in a darkened gutter with room before its label', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const lens = await page.evaluate(() => {
+      const rect = document.querySelector('#led-well .fam-led-lens').getBoundingClientRect();
+      const label = document.querySelector('#led-well .fam-led-label').getBoundingClientRect();
+      return { left: rect.left + window.scrollX, top: rect.top + window.scrollY, size: rect.width, bottom: rect.bottom + window.scrollY, labelTop: label.top + window.scrollY };
+    });
+    const brightnessAt = async (x) => {
+      const { mean } = statistics(await page.screenshot({ clip: { x, y: lens.top + lens.size / 2 - 5, width: 2, height: 10 }, fullPage: true }));
+      return (mean[0] + mean[1] + mean[2]) / 3;
+    };
+    const gutter = await brightnessAt(lens.left - 3);
+    const panel = await brightnessAt(lens.left - 16);
+    assert.ok(panel - gutter >= 12, `the gutter (${gutter.toFixed(1)}) is not darker than the panel (${panel.toFixed(1)})`);
+    assert.ok(panel - (await brightnessAt(lens.left - 8)) < 4, 'the gutter is no more than a few pixels wide');
+    assert.ok(lens.labelTop - lens.bottom >= 8, `the label is ${lens.labelTop - lens.bottom}px under the lens, so the gutter's lip would touch it`);
+  } finally {
+    await kit.close();
+  }
+});
+
 test('an LED toggle lights while checked and a disabled one stays as it is', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {

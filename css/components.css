@@ -675,7 +675,16 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   padding: 3px;
   border-radius: 50%;
   background: radial-gradient(circle at 50% 35%, #3a3a3e, #0d0d10 80%);
-  box-shadow: inset 0 2px 3px rgba(0, 0, 0, .7), 0 1px 0 rgba(255, 255, 255, .75), 0 0 0 1px rgba(0, 0, 0, .35);
+  /* The bezel sits in a round well cut into the panel, like the one around a button group's cells: the lens casts a shadow into a darkened
+     gutter, the well's edge is darker along the top, and a light lip catches the light along the bottom. The gutter reaches 5px out,
+     which is why the label needs the 8px gap under the lens. */
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, .7),
+    0 2px 3px rgba(0, 0, 0, .45),
+    0 0 0 1px rgba(0, 0, 0, .35),
+    0 0 0 3px rgba(0, 0, 0, .16),
+    0 -1px 0 4px rgba(0, 0, 0, .35),
+    0 1px 0 4px rgba(255, 255, 255, .6);
 }
 
 .fam-led-lens::before {
