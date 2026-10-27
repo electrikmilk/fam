@@ -250,6 +250,24 @@ test('the grounded ellipse shows below the element and leaves its face alone', a
   }
 });
 
+test('the README wrapper example is as big as the button it wraps', async () => {
+  const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  const example = /<span class="fam-cast-md[\s\S]*?<\/button><\/span>/.exec(readme)?.[0];
+  assert.ok(example, 'the README has a cast wrapper example');
+  const kit = await openKit();
+  try {
+    const sizes = await kit.page.evaluate((markup) => {
+      document.body.insertAdjacentHTML('afterbegin', markup);
+      const wrapper = document.body.firstElementChild;
+      const button = wrapper.querySelector('button');
+      return { wrapper: [wrapper.offsetWidth, wrapper.offsetHeight], button: [button.offsetWidth, button.offsetHeight] };
+    }, example);
+    assert.deepEqual(sizes.wrapper, sizes.button, 'an inline wrapper sizes to the text line, so its shadow would not match the button');
+  } finally {
+    await kit.close();
+  }
+});
+
 test('resting shadows get larger and darker with level', async () => {
   const kit = await openKit();
   try {
