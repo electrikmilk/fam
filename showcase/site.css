@@ -366,6 +366,26 @@ html { scroll-behavior: smooth; }
 .pillar-shape--wide { width: 128px; height: 64px; }
 .pillar-shape--tall { width: 64px; height: 100px; }
 
+.ways-framework { gap: 16px; }
+
+.ways-flat-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #fff;
+  color: #1b1b20;
+  font: 700 14px/1 var(--site-font);
+}
+
+.ways-flat-button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: #1b1b20;
+  color: #fff;
+  text-align: center;
+}
+
 .pillar h3,
 .tile-lab h3 {
   margin: 0 0 8px;

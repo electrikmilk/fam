@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fam Showcase</title>
-  <meta name="description" content="Fam: Familiar materials for the web. Plain CSS for skeuomorphic interfaces in metal, glass, leather, wood, felt, paper, cardstock, cork and plastic.">
+  <meta name="description" content="Fam: Familiar materials for the web. Plain CSS for skeuomorphic interfaces in metal, glass, leather, wood, felt, paper, cardstock, cork and plastic. Use it as a UI framework, or add a material behind a flat UI.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
@@ -73,6 +73,41 @@
           <h3>Built to ship</h3>
           <p>Contrast is measured on the rendered pixels against WCAG AA. Every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. It is one stylesheet with <code>fam-</code> classes.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section" id="ways" aria-labelledby="ways-heading">
+      <h2 id="ways-heading">Use all of it, or just a little</h2>
+      <p class="lead">Fam is a full UI framework when you want one, and a layer of texture when you do not. The materials are plain classes, so they sit under a minimalist, flat UI as easily as under Fam's own controls.</p>
+
+      <div class="pillars">
+        <article class="pillar">
+          <div class="pillar-visual fam-metal ways-framework" aria-hidden="true">
+            <span class="fam-plastic fam-plastic--green">Play</span>
+            <span class="fam-plastic fam-plastic--red">Stop</span>
+            <span class="fam-knob"></span>
+          </div>
+          <h3>As a UI framework</h3>
+          <p>Use the buttons, switches, tabs, fields, lists, navigation and glass. Every control is built from the materials and works with the keyboard, so a whole interface can be Fam.</p>
+        </article>
+        <article class="pillar">
+          <div class="pillar-visual fam-felt ways-flat" style="--fam-tint: #3a5a40" aria-hidden="true">
+            <span class="ways-flat-card">
+              <span class="ways-flat-title">Flat card</span>
+              <span class="ways-flat-button">Continue</span>
+            </span>
+          </div>
+          <h3>As texture for a flat UI</h3>
+          <p>Keep your own minimalist components and put a material behind them, such as felt, wood, paper or leather. You add one class and pay only for the tile you use.</p>
+        </article>
+      </div>
+
+      <div class="code-block" role="group" aria-label="Texture behind a flat UI markup" data-label="the texture behind a flat UI markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-felt" style="--fam-tint: #3a5a40; padding: 32px"&gt;
+  &lt;!-- your own flat components --&gt;
+  &lt;div class="card"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
       </div>
     </section>
 
