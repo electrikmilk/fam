@@ -376,7 +376,6 @@ body {
 }
 
 .elev.fam-shadow-inset { background: #e3e7ee; }
-
 @media (max-width: 600px) {
   .swatches { grid-template-columns: repeat(2, 1fr); }
 }

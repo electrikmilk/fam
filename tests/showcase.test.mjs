@@ -223,12 +223,14 @@ test('build your own shows gloss, rounding and shadow utilities', async () => {
       return {
         gloss: has(['fam-gloss-none', 'fam-gloss-soft', 'fam-gloss-strong']),
         rounding: has(['fam-round-sm', 'fam-round-md', 'fam-round-lg', 'fam-round-pill']),
-        shadows: ['sm', 'md', 'lg', 'inset'].map((size) => getComputedStyle(scene.querySelector(`.fam-shadow-${size}`)).boxShadow),
+        shadows: ['shadow-sm', 'shadow-md', 'shadow-lg', 'shadow-inset', 'cast-sm', 'cast-md', 'cast-lg'].map((name) => getComputedStyle(scene.querySelector(`.fam-${name}`)).boxShadow),
+        grounded: has(['fam-grounded-sm', 'fam-grounded-md', 'fam-grounded-lg']),
       };
     });
     assert.ok(found.gloss.every(Boolean) && found.rounding.every(Boolean));
     assert.ok(found.shadows.every((shadow) => shadow !== 'none'));
-    assert.equal(new Set(found.shadows).size, 4);
+    assert.equal(new Set(found.shadows).size, 7);
+    assert.ok(found.grounded.every(Boolean), 'the scene shows all three resting levels');
   } finally {
     await page.close();
   }

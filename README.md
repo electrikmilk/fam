@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 81 KB of CSS (18.2 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 85 KB of CSS (19.1 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -326,7 +326,10 @@ Small dark text on natural light cardstock cannot reach 4.5:1 at its worst pixel
 
 ## Effects
 
-- Shadows: `fam-shadow-sm`, `fam-shadow-md`, `fam-shadow-lg`, `fam-shadow-inset`.
+- Shadows: `fam-shadow-sm`, `fam-shadow-md`, `fam-shadow-lg`, `fam-shadow-inset`. The light is straight above, so every shadow falls straight down and grows with elevation. The three outer ones are stacks of layers that double in offset and blur, so a shadow is crisp at the edge and fades as it falls. They stay soft and casual.
+- Cast shadows: `fam-cast-sm`, `fam-cast-md`, `fam-cast-lg`, the harsher and longer shadows of a raised plastic knob. Each size is longer and darker than the one before (they reach about 50px, 88px and 126px below the element). They need room below the element, and an ancestor with `overflow: hidden` clips them. The values are `--fam-cast-sm`, `--fam-cast-md` and `--fam-cast-lg`.
+- Resting shadow: `fam-grounded-sm`, `fam-grounded-md`, `fam-grounded-lg` put a thin flat ellipse under the bottom edge, so the element looks set down on its surface. Each level is wider, taller and darker than the one before, and `lg` sits 2px below the edge, as if raised a little. The ellipse is set by `--fam-grounded-width`, `--fam-grounded-height`, `--fam-grounded-strength` (how dark the middle is), `--fam-grounded-gap` and `--fam-grounded-ink`. Leave about 8px clear below the element (14px for `lg`). The ellipse is painted above following non-positioned content, never above the element itself.
+- A shadow class replaces the element's `box-shadow`. For an element that has shading of its own, such as a plastic or metal button, the pill or the switch, put the cast class on a wrapper with the same radius, for example `<span class="fam-cast-md fam-round-pill"><button class="fam-plastic fam-plastic--round" type="button" aria-label="Info">i</button></span>`. `fam-grounded-*` uses the element's `::after`, so put it on a wrapper for any element that already uses `::after`: `fam-pill`, `fam-glossy-button`, `fam-glass`, `fam-wood-frame`, `fam-print-frame`, `fam-stitched` and round or square `fam-plastic`.
 - Rounding: `fam-round-sm` (6px), `fam-round-md` (12px), `fam-round-lg` (20px), `fam-round-pill`. For a box inside padding, set `--fam-outer-radius` and `--fam-pad` on the outer box and use `fam-concentric` on the inner one, so the gap stays even.
 - Aqua pill with a gloss you can dial: `fam-pill` with `fam-gloss-none`, `fam-gloss-soft` or `fam-gloss-strong`.
 - Engraved text: `fam-engraved-metal`, `fam-engraved-wood`, `fam-engraved-leather`, on the matching material.
