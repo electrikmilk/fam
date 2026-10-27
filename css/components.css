@@ -1363,6 +1363,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   --fam-table-text-default: #1d1d21;
   --fam-table-head-text-default: #2e2415;
   --fam-table-header-default: #e4dccb;
+  --fam-table-focus-default: #1b1b20;
   --fam-table-row: var(--fam-row-height, 24px);
   --fam-table-ink-color: var(--fam-table-ink, var(--fam-table-ink-default));
   box-sizing: content-box;
@@ -1379,12 +1380,14 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   box-shadow: var(--fam-table-edge);
 }
 
-/* For dark materials such as brown cardstock, leather or wood: a light ink, light text and a dark header */
+/* For dark materials such as brown cardstock: a light ink, light text, a dark header and a light focus ring. Most of the kit's leather and wood
+   are washed light so that dark text reads on them, so those take the dark ink. */
 .fam-table-box--light-ink {
   --fam-table-ink-default: rgb(255, 235, 200);
   --fam-table-text-default: #f6ecd8;
   --fam-table-head-text-default: #f6ecd8;
   --fam-table-header-default: #3a2412;
+  --fam-table-focus-default: #fff;
 }
 
 .fam-table-box:focus-visible {
@@ -1413,31 +1416,43 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   white-space: nowrap;
 }
 
-.fam-table th + th,
-.fam-table td + td { border-left: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 22%, transparent); }
+.fam-table :is(th, td) + :is(th, td) { border-left: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 22%, transparent); }
 
-.fam-table th {
+/* A caption would sit inside the scroll box above the header and push every row off its stripe, so it is read by screen readers only */
+.fam-table > caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.fam-table th { font-weight: 400; }
+
+.fam-table thead th {
   position: sticky;
   top: 0;
   z-index: 1;
-  font-weight: 400;
   color: var(--fam-table-head-text-default);
   background: var(--fam-table-header, var(--fam-table-header-default));
   border-bottom: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 45%, transparent);
 }
 
 /* A selectable table is role="grid" and marks its chosen row with aria-selected="true", in the blue of a selected list row */
-.fam-table tr[aria-selected="true"] td {
+.fam-table tr[aria-selected="true"] > * {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 30, 110, .8);
   background: linear-gradient(to bottom, var(--fam-blue-top), var(--fam-blue-bottom));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
 }
 
-.fam-table tr[aria-selected="true"] td + td { border-left-color: rgba(255, 255, 255, .28); }
+.fam-table tr[aria-selected="true"] > * + * { border-left-color: rgba(255, 255, 255, .28); }
 
 .fam-table tbody tr:focus-visible {
-  outline: 2px solid #1b1b20;
+  outline: 2px solid var(--fam-table-focus-default);
   outline-offset: -2px;
 }
 
@@ -1488,11 +1503,10 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   .fam-nav-item[aria-current="page"] { text-decoration: underline; }
 
   .fam-table-box { border: 1px solid CanvasText; }
-  .fam-table th { border-bottom: 1px solid CanvasText; }
-  .fam-table th + th,
-  .fam-table td + td { border-left-color: CanvasText; }
+  .fam-table thead th { border-bottom: 1px solid CanvasText; }
+  .fam-table :is(th, td) + :is(th, td) { border-left-color: CanvasText; }
 
-  .fam-table tr[aria-selected="true"] td {
+  .fam-table tr[aria-selected="true"] > * {
     background: Highlight;
     color: HighlightText;
     text-shadow: none;

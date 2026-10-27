@@ -181,3 +181,49 @@ test('the selected row and the box stay visible in forced colors', { skip: !isCh
     await kit.close();
   }
 });
+
+test('a row header is a plain cell, not a second sticky header', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const style = (selector, property) => kit.page.evaluate(([target, name]) => getComputedStyle(document.querySelector(target))[name], [selector, property]);
+    assert.equal(await style('#zebra-rowheads thead th', 'position'), 'sticky');
+    assert.equal(await style('#zebra-rowheads tbody th', 'position'), 'static', 'a row header sticks to the top of the box');
+    assert.equal(await style('#zebra-rowheads tbody th', 'backgroundColor'), 'rgba(0, 0, 0, 0)', 'a row header is painted like the header band');
+    assert.equal(await style('#zebra-rowheads tbody td', 'borderLeftStyle'), 'solid', 'no divider after a row header');
+    assert.match(await style('#zebra-rowheads-selected th', 'backgroundImage'), /gradient/, 'a selected row leaves its row header unselected');
+    assert.equal(await style('#zebra-rowheads-selected th', 'color'), 'rgb(255, 255, 255)');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a caption does not shift the stripes away from the rows', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { headerTop, contentTop } = await kit.page.evaluate(() => {
+      const box = document.querySelector('#zebra-caption');
+      return { headerTop: box.querySelector('th').getBoundingClientRect().top, contentTop: box.getBoundingClientRect().top + box.clientTop };
+    });
+    assert.equal(headerTop, contentTop, 'the caption pushes the header down');
+    const brightness = [];
+    for (let row = 1; row <= 3; row += 1) brightness.push(await rowBrightness(kit.page, '#zebra-caption', row, 24));
+    assertAlternating(brightness, 'a table with a caption');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the focus ring on a row is light on a light ink table and dark on a dark ink one', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const { page } = kit;
+    const ringColor = async (selector) => {
+      await page.locator(selector).focus();
+      return page.evaluate((target) => getComputedStyle(document.querySelector(target)).outlineColor, selector);
+    };
+    assert.ok(meanChannel(await ringColor('#zebra-light-grid-plain')) > 200, 'the ring on brown cardstock is not light');
+    assert.ok(meanChannel(await ringColor('#zebra-grid-plain')) < 80, 'the ring on paper is not dark');
+  } finally {
+    await kit.close();
+  }
+});
