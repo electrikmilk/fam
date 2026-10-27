@@ -189,7 +189,7 @@ test('a row header is a plain cell, not a second sticky header', async () => {
     assert.equal(await style('#zebra-rowheads thead th', 'position'), 'sticky');
     assert.equal(await style('#zebra-rowheads tbody th', 'position'), 'static', 'a row header sticks to the top of the box');
     assert.equal(await style('#zebra-rowheads tbody th', 'backgroundColor'), 'rgba(0, 0, 0, 0)', 'a row header is painted like the header band');
-    assert.equal(await style('#zebra-rowheads tbody td', 'borderLeftStyle'), 'solid', 'no divider after a row header');
+    assert.equal(await style('#zebra-rowheads tbody td', 'borderLeftStyle'), 'none', 'a line separates a row header from its cell');
     assert.match(await style('#zebra-rowheads-selected th', 'backgroundImage'), /gradient/, 'a selected row leaves its row header unselected');
     assert.equal(await style('#zebra-rowheads-selected th', 'color'), 'rgb(255, 255, 255)');
   } finally {
@@ -223,6 +223,19 @@ test('the focus ring on a row is light on a light ink table and dark on a dark i
     };
     assert.ok(meanChannel(await ringColor('#zebra-light-grid-plain')) > 200, 'the ring on brown cardstock is not light');
     assert.ok(meanChannel(await ringColor('#zebra-grid-plain')) < 80, 'the ring on paper is not dark');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('only the header cells have dividers between them, not the body columns', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const style = (selector, property) => kit.page.evaluate(([target, name]) => getComputedStyle(document.querySelector(target))[name], [selector, property]);
+    for (const box of ['#zebra-box', '#zebra-light', '#zebra-rowheads']) {
+      assert.equal(await style(`${box} thead th + th`, 'borderLeftStyle'), 'solid', `${box} has no divider between its header cells`);
+      assert.equal(await style(`${box} tbody tr:first-child > * + *`, 'borderLeftStyle'), 'none', `${box} has a line down its body columns`);
+    }
   } finally {
     await kit.close();
   }

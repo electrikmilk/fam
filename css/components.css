@@ -1416,7 +1416,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   white-space: nowrap;
 }
 
-.fam-table :is(th, td) + :is(th, td) { border-left: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 22%, transparent); }
+/* Only the header cells are divided, as in Snow Leopard's lists; the body columns have no lines */
+.fam-table thead th + th { border-left: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 22%, transparent); }
 
 /* A caption would sit inside the scroll box above the header and push every row off its stripe, so it is read by screen readers only */
 .fam-table > caption {
@@ -1448,8 +1449,6 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   background: linear-gradient(to bottom, var(--fam-blue-top), var(--fam-blue-bottom));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
 }
-
-.fam-table tr[aria-selected="true"] > * + * { border-left-color: rgba(255, 255, 255, .28); }
 
 .fam-table tbody tr:focus-visible {
   outline: 2px solid var(--fam-table-focus-default);
@@ -1504,7 +1503,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 
   .fam-table-box { border: 1px solid CanvasText; }
   .fam-table thead th { border-bottom: 1px solid CanvasText; }
-  .fam-table :is(th, td) + :is(th, td) { border-left-color: CanvasText; }
+  .fam-table thead th + th { border-left-color: CanvasText; }
 
   .fam-table tr[aria-selected="true"] > * {
     background: Highlight;
