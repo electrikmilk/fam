@@ -10,7 +10,7 @@ const MINIMUM_MEASURED = {
   components: 15,
   showcase: 30,
   'showcase-materials': 15,
-  'showcase-controls': 400,
+  'showcase-controls': 450,
   'showcase-glass': 15,
   'showcase-examples': 10,
 };

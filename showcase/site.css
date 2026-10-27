@@ -612,6 +612,7 @@ html { scroll-behavior: smooth; }
   align-items: start;
 }
 #scene-search-list .controls-stage { display: block; padding: 20px; }
+#scene-zebra-tables .controls-stage { display: block; padding: 20px; }
 #scene-recessed .controls-stage { display: block; padding: 22px; }
 #scene-recessed .fam-leather-button { margin-top: 14px; margin-right: 12px; }
 

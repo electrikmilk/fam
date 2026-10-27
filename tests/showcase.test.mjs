@@ -439,12 +439,16 @@ test('the controls page shows each control alone with its variants', async () =>
         menus: count('.window .fam-menu'),
         searches: count('.window .fam-search'),
         selectedRows: count('.window .fam-list-row[aria-current="true"]'),
+        zebraBoxes: count('.window .fam-table-box'),
+        lightInkBoxes: count('.window .fam-table-box--light-ink'),
+        zebraGrids: count('.window .fam-table[role="grid"]'),
         recessedRows: count('.window .fam-recessed-row'),
         leatherButtons: count('.window .fam-leather-button'),
         disabledControls: count('.window :disabled'),
       };
     });
-    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-tabs', 'scene-switch-knob', 'scene-plastic', 'scene-leds', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-recessed', 'scene-focus']);
+    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-tabs', 'scene-switch-knob', 'scene-plastic', 'scene-leds', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-zebra-tables', 'scene-recessed', 'scene-focus']);
+    assert.ok(found.zebraBoxes >= 3 && found.lightInkBoxes >= 1 && found.zebraGrids >= 1, 'the zebra tables scene is missing a table, the light ink one or the selectable one');
     assert.ok(found.plasticColors.every((total) => total >= 1), 'a plastic color is missing');
     assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.glossyButtons >= 3 && found.glassButtons >= 2 && found.buttonGroups >= 5 && found.radios >= 12 && found.dials >= 3 && found.plasticPanels >= 2 && found.tabStrips >= 6 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
     assert.ok(found.litLeds >= 2 && found.unlitLeds >= 2 && found.engravedLabels >= 2 && found.printedLabels >= 2, 'the LEDs scene is missing a state or a label style');
