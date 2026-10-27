@@ -53,7 +53,7 @@ Elevation, replacing the current tokens:
 - `md`: `0 1px 1px rgba(0,0,0,.14), 0 2px 2px rgba(0,0,0,.1), 0 4px 4px -1px rgba(0,0,0,.1), 0 8px 8px -3px rgba(0,0,0,.12), 0 12px 12px -5px rgba(0,0,0,.1)`
 - `lg`: `0 1px 1px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.09), 0 4px 4px -1px rgba(0,0,0,.09), 0 8px 8px -2px rgba(0,0,0,.09), 0 16px 16px -4px rgba(0,0,0,.1), 0 28px 28px -8px rgba(0,0,0,.12)`
 
-The mockup the owner saw used slightly longer values for `md` and `lg`. These are tuned so the guardrail below holds. "Reach" is the offset plus the blur minus the spread of the farthest layer, and "total alpha" is the sum of the layers' alphas.
+The mockup the owner saw used slightly longer values for `md` and `lg`. These are tuned so the guardrail below holds. "Reach" is the largest offset plus blur plus spread of any layer (a negative spread shortens it), and "total alpha" is the sum of the layers' alphas.
 
 | Token | Reach today | Reach here | Total alpha today | Total alpha here |
 |-------|-------------|------------|-------------------|------------------|
