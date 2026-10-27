@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 81 KB of CSS (18.1 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 81 KB of CSS (18.2 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -316,9 +316,9 @@ The box draws every stripe once, in a gradient that scrolls with its content, an
 - `--fam-table-rows`: how many rows tall the box is, not counting the header (default `8`).
 - `--fam-table-ink` and `--fam-table-stripe`: the ink color (default a dark brown) and the opacity of the stripes (default `.09`).
 - `--fam-table-header`: the color of the header band.
-- `fam-table-box--light-ink`: a light ink with light text and a dark header, for dark materials such as brown cardstock (`--fam-cardstock-tint: #562a0e`).
+- `fam-table-box--light-ink`: a light ink with light text, a dark header and a light focus ring, for dark materials such as brown cardstock (`--fam-cardstock-tint: #562a0e`). Contrast has been measured on paper and on brown cardstock only, so check it on any other material, including the kit's leather and wood, which are washed light.
 
-Rows are one line high, which keeps the stripes aligned, so text that does not fit is cut short with an ellipsis. Give long text another way to be read, such as a wider column or a `title`. Set column widths with `<col>`; a table wider than its box scrolls sideways and the header stays at the top. Name the table with `aria-label` or a `<caption>`. A read-only box has `tabindex="0"` and `role="region"` so a keyboard user can scroll it.
+Rows are one line high, which keeps the stripes aligned, so text that does not fit is cut short with an ellipsis. Give long text another way to be read, such as a wider column or a `title`. Set column widths with `<col>`; a table wider than its box scrolls sideways and the header stays at the top. Name the table with `aria-label` or a `<caption>`; the kit hides a caption visually, because it would sit inside the box and push every row off its stripe. A `<th scope="row">` in a body row is an ordinary cell, not a second header. A read-only box has `tabindex="0"` and `role="region"` so a keyboard user can scroll it.
 
 For a selectable table, give the table `role="grid"` and every body row `aria-selected` (`"true"` on the chosen row), and style nothing else: the kit draws the selected row in the blue of a selected list row, and in forced colors in the system `Highlight` colors. The arrow-key behavior is yours to drive with whatever JavaScript you prefer, following the ARIA grid pattern. Make the rows the focus stops (`tabindex="-1"`, and `0` on the selected one) and leave `tabindex` off the box. `showcase/table-grid.js` is a small model of it. The box keeps a focused row clear of the sticky header on its own.
 
