@@ -1,4 +1,12 @@
 /* fam-ui tokens */
+
+/* Set by the fam-shadow and fam-cast classes and read by the plastic and metal buttons. It must not inherit, or a button inside an elevated
+   card would be elevated too. */
+@property --fam-elevation {
+  syntax: '*';
+  inherits: false;
+}
+
 :root {
   --fam-tint: #1f7a3d;
   --fam-blue-top: #406eda;

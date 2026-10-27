@@ -17,8 +17,9 @@ async function ownShadowLayers(page, selector) {
     const style = getComputedStyle(document.querySelector(target));
     return { shadow: style.boxShadow, ring: style.getPropertyValue('--fam-ring').trim() };
   }, selector);
-  const ringLayerCount = ring === '' ? 0 : ring.split(/,(?![^(]*\))/).length;
-  const layers = shadowLayers(shadow);
+  // A group cell's collar is the empty layer, and so is what a button adds after its collar when no elevation class is set; neither casts anything
+  const ringLayerCount = ring === '' || ring === '0 0 0 0 transparent' ? 0 : ring.split(/,(?![^(]*\))/).length;
+  const layers = shadowLayers(shadow).filter((layer) => layer !== 'rgba(0, 0, 0, 0) 0px 0px 0px 0px');
   return layers.slice(0, layers.length - ringLayerCount);
 }
 

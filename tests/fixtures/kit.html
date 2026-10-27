@@ -55,7 +55,19 @@
     <div id="cast-lg" class="fam-cast-lg" style="width:60px; height:40px; margin:10px"></div>
     <span id="cast-wrapper" class="fam-cast-md fam-round-pill" style="display:inline-block; margin:10px"><button id="cast-inner" class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info">i</button></span>
 
-    <div id="grounded-backdrop" style="position:relative; display:flex; gap:40px; align-items:flex-start; width:420px; height:100px; padding:20px 20px 40px; background:#ececec">
+    <div style="padding:30px">
+      <button id="plastic-elevated" class="fam-plastic fam-plastic--red fam-shadow-md" type="button">Record</button>
+      <button id="plastic-cast" class="fam-plastic fam-plastic--green fam-cast-md" type="button">Play</button>
+      <button id="plastic-elevated-disabled" class="fam-plastic fam-plastic--red fam-shadow-md" type="button" disabled>Locked</button>
+      <button id="metal-elevated" class="fam-metal-button fam-shadow-md" type="button">Eject</button>
+      <div class="fam-shadow-md" style="display:inline-block; padding:16px"><button id="plastic-in-card" class="fam-plastic fam-plastic--blue" type="button">Inside</button></div>
+      <span id="knob-elevated" class="fam-knob fam-shadow-md" role="img" aria-label="Metal knob, raised"></span>
+      <span id="dial-elevated" class="fam-dial fam-shadow-md" role="img" aria-label="Volume 5, raised"></span>
+      <label id="switch-elevated" class="fam-switch fam-shadow-md"><input type="checkbox" role="switch" aria-label="Raised"><span class="fam-switch-knob"></span></label>
+      <div class="fam-shadow-md" style="display:inline-block; padding:16px"><label id="switch-in-card" class="fam-switch"><input type="checkbox" role="switch" aria-label="In a card"><span class="fam-switch-knob"></span></label></div>
+    </div>
+
+    <div id="grounded-backdrop"style="position:relative; display:flex; gap:40px; align-items:flex-start; width:420px; height:100px; padding:20px 20px 40px; background:#ececec">
       <div id="grounded" class="fam-grounded-md" style="width:44px; height:44px; border-radius:50%; background:#2f5fc8"></div>
       <div id="grounded-stack" class="fam-grounded-md" style="width:44px; height:44px; border-radius:50%; background:#2f5fc8; opacity:.99"></div>
       <span id="grounded-wrapper" class="fam-grounded-md" style="display:inline-block"><span class="fam-pill" style="display:block; width:80px; height:30px"></span></span>

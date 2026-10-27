@@ -120,16 +120,16 @@
   }
 }
 
-.fam-shadow-sm { box-shadow: var(--fam-shadow-sm); }
-.fam-shadow-md { box-shadow: var(--fam-shadow-md); }
-.fam-shadow-lg { box-shadow: var(--fam-shadow-lg); }
+/* The elevation and cast classes also name their shadow in --fam-elevation. A plastic or metal button adds it to the shadows it already draws
+   (components.css), because its own box-shadow would otherwise win over the class. */
+.fam-shadow-sm { --fam-elevation: var(--fam-shadow-sm); box-shadow: var(--fam-elevation); }
+.fam-shadow-md { --fam-elevation: var(--fam-shadow-md); box-shadow: var(--fam-elevation); }
+.fam-shadow-lg { --fam-elevation: var(--fam-shadow-lg); box-shadow: var(--fam-elevation); }
 .fam-shadow-inset { box-shadow: var(--fam-shadow-inset); }
 
-/* Like the fam-shadow classes, these replace the element's box-shadow, so a component that carries its own shading (plastic, metal, the pill)
-   takes the class on a wrapper with the same radius instead. */
-.fam-cast-sm { box-shadow: var(--fam-cast-sm); }
-.fam-cast-md { box-shadow: var(--fam-cast-md); }
-.fam-cast-lg { box-shadow: var(--fam-cast-lg); }
+.fam-cast-sm { --fam-elevation: var(--fam-cast-sm); box-shadow: var(--fam-elevation); }
+.fam-cast-md { --fam-elevation: var(--fam-cast-md); box-shadow: var(--fam-elevation); }
+.fam-cast-lg { --fam-elevation: var(--fam-cast-lg); box-shadow: var(--fam-elevation); }
 
 /* An element resting on its surface: a thin flat ellipse just under the bottom edge. It uses ::after, so an element that already uses it
    (the pill, the glass, the frames, round plastic) takes the class on a wrapper instead. The ellipse has no negative z-index, because that would

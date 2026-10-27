@@ -77,6 +77,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   /* Every state lists the same five shadows in the same order, which is what lets the browser animate between them */
   --fam-rest-shadow: inset 0 3px 7px rgba(0, 0, 0, .75), inset 0 -1px 1px rgba(255, 255, 255, .35), 0 1px 0 rgba(255, 255, 255, .25), 0 0 0 1px rgba(0, 0, 0, .7), 0 0 12px 2px rgba(100, 140, 245, 0);
   box-shadow: var(--fam-rest-shadow);
+  /* The track is sunken, so a fam-shadow or fam-cast class on the switch lifts the thumb instead. --fam-elevation does not inherit, so the
+     label hands it down in a variable that does. */
+  --fam-thumb-elevation: var(--fam-elevation, 0 0 0 0 transparent);
   transition: box-shadow .22s ease;
 }
 
@@ -114,7 +117,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   background:
     radial-gradient(circle at 50% 18%, rgba(255, 255, 255, .35) 0%, rgba(255, 255, 255, 0) 55%),
     var(--fam-tex-metal-spiral) 50% 50% / auto 108px;
-  box-shadow: var(--fam-thumb-shadow);
+  box-shadow: var(--fam-thumb-shadow), var(--fam-thumb-elevation);
   transition: left .22s cubic-bezier(.4, 0, .2, 1), box-shadow .22s ease;
 }
 
@@ -229,7 +232,9 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     0 0 0 5px rgba(255, 255, 255, .3),
     0 1px 0 6px rgba(0, 0, 0, .1),
     0 3px 6px 4px rgba(0, 0, 0, .08);
-  box-shadow: var(--fam-rest-shadow), var(--fam-ring);
+  /* --fam-elevation comes from a fam-shadow or fam-cast class. It goes last so the collar sits over it, and only the resting and focused
+     states carry it: a pressed or disabled button has sunk into its case. */
+  box-shadow: var(--fam-rest-shadow), var(--fam-ring), var(--fam-elevation, 0 0 0 0 transparent);
 }
 
 .fam-plastic::before {
@@ -243,7 +248,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-plastic:focus-visible {
   outline: 2px solid var(--fam-focus-ink);
   outline-offset: 2px;
-  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow), var(--fam-ring);
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow), var(--fam-ring), var(--fam-elevation, 0 0 0 0 transparent);
 }
 
 /* Pressed, the button sinks into its collar: the face goes inset and the gap darkens, and the collar stays where it is */
@@ -306,13 +311,13 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     linear-gradient(to bottom, rgba(255, 255, 255, .72) 0%, rgba(255, 255, 255, .58) 50%, rgba(255, 255, 255, .4) 100%),
     var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
   --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .45);
-  box-shadow: var(--fam-rest-shadow);
+  box-shadow: var(--fam-rest-shadow), var(--fam-elevation, 0 0 0 0 transparent);
 }
 
 .fam-metal-button:focus-visible {
   outline: 2px solid var(--fam-focus-ink);
   outline-offset: 2px;
-  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow);
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow), var(--fam-elevation, 0 0 0 0 transparent);
 }
 
 .fam-metal-button:active:not(:disabled) {
@@ -976,7 +981,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
     repeating-conic-gradient(rgba(0, 0, 0, .3) 0 2deg, rgba(255, 255, 255, .22) 2deg 4deg),
     linear-gradient(to bottom, #c4bfb0, #8f8a7a);
   background-blend-mode: soft-light, normal, normal;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3), 0 5px 9px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .6);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3), 0 5px 9px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .6), var(--fam-elevation, 0 0 0 0 transparent);
 }
 
 .fam-dial::before {
@@ -1019,7 +1024,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   background:
     radial-gradient(circle at 50% 14%, rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 55%),
     var(--fam-tex-knob-face) 0 0 / 100% 100%;
-  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .8), 0 5px 9px rgba(0, 0, 0, .55), 0 0 0 1px rgba(0, 0, 0, .6);
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .8), 0 5px 9px rgba(0, 0, 0, .55), 0 0 0 1px rgba(0, 0, 0, .6), var(--fam-elevation, 0 0 0 0 transparent);
 }
 
 .fam-knob::before {

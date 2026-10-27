@@ -250,6 +250,66 @@ test('the grounded ellipse shows below the element and leaves its face alone', a
   }
 });
 
+// Reach of the md elevation; a plastic button's collar reaches 13px and a metal button's own shadow 5px, so anything past this is the class
+const MD_REACH = 19;
+const reachOfElement = async (page, selector) => reachOf(parseBoxShadow(await style(page, selector, null, 'boxShadow')));
+
+test('an elevation class reaches plastic and metal buttons', async () => {
+  const kit = await openKit();
+  try {
+    assert.ok((await reachOfElement(kit.page, '#plastic-elevated')) >= MD_REACH, 'plastic with fam-shadow-md');
+    assert.ok((await reachOfElement(kit.page, '#metal-elevated')) >= MD_REACH, 'metal with fam-shadow-md');
+    assert.ok((await reachOfElement(kit.page, '#plastic-cast')) >= CAST_SIZES.md.reach, 'plastic with fam-cast-md');
+    assert.ok((await reachOfElement(kit.page, '#plastic-purple')) < MD_REACH, 'a plastic button without the class');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('an elevation class reaches knobs, dials and switch thumbs but not the sunken switch track', async () => {
+  const kit = await openKit();
+  try {
+    assert.ok((await reachOfElement(kit.page, '#knob-elevated')) >= MD_REACH, 'metal knob');
+    assert.ok((await reachOfElement(kit.page, '#dial-elevated')) >= MD_REACH, 'plastic dial');
+    assert.ok((await reachOfElement(kit.page, '#switch-elevated .fam-switch-knob')) >= MD_REACH, 'switch thumb');
+    assert.ok((await reachOfElement(kit.page, '#switch-elevated')) < MD_REACH, 'the track stays sunken');
+    assert.ok((await reachOfElement(kit.page, '#knob')) < MD_REACH, 'a knob without the class');
+    assert.ok((await reachOfElement(kit.page, '#switch-in-card .fam-switch-knob')) < MD_REACH, 'a thumb inside an elevated box');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a button inside an elevated box does not inherit its elevation', async () => {
+  const kit = await openKit();
+  try {
+    assert.ok((await reachOfElement(kit.page, '#plastic-in-card')) < MD_REACH);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a pressed, disabled or focused elevated button behaves like the plain one', async () => {
+  const kit = await openKit();
+  try {
+    assert.ok((await reachOfElement(kit.page, '#plastic-elevated-disabled')) < MD_REACH, 'disabled sinks into its case');
+
+    for (const selector of ['#plastic-elevated', '#metal-elevated']) {
+      await kit.page.hover(selector);
+      await kit.page.mouse.down();
+      assert.ok((await reachOfElement(kit.page, selector)) < MD_REACH, `${selector} pressed sinks`);
+      await kit.page.mouse.up();
+    }
+
+    await kit.page.keyboard.press('Shift');
+    await kit.page.focus('#plastic-elevated');
+    assert.ok(await kit.page.evaluate(() => document.querySelector('#plastic-elevated').matches(':focus-visible')), 'the test focuses the button visibly');
+    assert.ok((await reachOfElement(kit.page, '#plastic-elevated')) >= MD_REACH, 'focused keeps its elevation');
+  } finally {
+    await kit.close();
+  }
+});
+
 test('the README wrapper example is as big as the button it wraps', async () => {
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const example = /<span class="fam-cast-md[\s\S]*?<\/button><\/span>/.exec(readme)?.[0];

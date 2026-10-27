@@ -42,6 +42,7 @@ Seeing the mockups, the owner picked one technique: **contact-hardening**. A sta
 - The resting shadow is the true flat ellipse made with a pseudo-element (mockup B in `elevation-cast-resting.html`), not the crescent.
 - The plastic reference is the example for the cast shadows.
 - The three cast sizes get progressively longer and darker (mockup `cast-sizes-v3.html`).
+- The elevation and cast classes lift plastic and metal buttons, the dial, the knob and the thumb of a switch (asked for after the first build, and the owner chose wiring them into the components over wrapping them). The class names its shadow in `--fam-elevation`, declared with `@property` so it does not inherit, and these controls add it to the shadows they draw. Pressed and disabled buttons lose it, and the switch track stays sunken. Other components that draw their own shadow still take the class on a wrapper.
 
 ## The recipes
 
