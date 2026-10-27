@@ -1352,6 +1352,65 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-list-row[aria-current="true"]:focus-visible,
 .fam-list-row[aria-selected="true"]:focus-visible { outline-color: #fff; }
 
+/* ---------- Zebra table ----------
+   The box draws every stripe once, in a gradient that scrolls with its content, and the rows are transparent. The real rows and the
+   empty stripes below them are therefore the same gradient and cannot drift apart, as long as every row is one row high. The stripes
+   and dividers are a see-through tint of one ink, so the material behind the box shows through. The sticky header is opaque instead,
+   because rows scrolling under a see-through header would show through it. */
+
+.fam-table-box {
+  --fam-table-ink-default: rgb(60, 40, 10);
+  --fam-table-text-default: #1d1d21;
+  --fam-table-head-text-default: #2e2415;
+  --fam-table-header-default: #e4dccb;
+  --fam-table-row: var(--fam-row-height, 24px);
+  --fam-table-ink-color: var(--fam-table-ink, var(--fam-table-ink-default));
+  box-sizing: content-box;
+  height: calc(var(--fam-table-row) * (var(--fam-table-rows, 8) + 1));
+  overflow: auto;
+  scroll-padding-top: var(--fam-table-row);
+  border-radius: 4px;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 var(--fam-table-row), color-mix(in srgb, var(--fam-table-ink-color) calc(var(--fam-table-stripe, .09) * 100%), transparent) var(--fam-table-row) calc(var(--fam-table-row) * 2));
+  background-size: 100% calc(var(--fam-table-row) * 2);
+  background-position: 0 var(--fam-table-row);
+  background-repeat: repeat-y;
+  background-attachment: local;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fam-table-ink-color) 40%, transparent), inset 0 2px 4px rgba(0, 0, 0, .18), 0 1px 0 rgba(255, 255, 255, .7);
+}
+
+.fam-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font: 12px/1 var(--fam-font-ui);
+  color: var(--fam-table-text-default);
+}
+
+.fam-table th,
+.fam-table td {
+  box-sizing: border-box;
+  height: var(--fam-table-row);
+  padding: 0 8px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fam-table th + th,
+.fam-table td + td { border-left: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 22%, transparent); }
+
+.fam-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-weight: 400;
+  color: var(--fam-table-head-text-default);
+  background: var(--fam-table-header, var(--fam-table-header-default));
+  border-bottom: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 45%, transparent);
+}
+
 /* ---------- Disabled controls: dimmed, no pointer cursor, no pressed look (disabled text is exempt from WCAG contrast) ---------- */
 
 .fam-leather-button:disabled,
