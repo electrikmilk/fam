@@ -23,6 +23,8 @@ const CONTROLS = [
   ['search pill on paper', '#search-input', '.fam-search'],
   ['nav link on wood', '#nav-link', null],
   ['list row on paper', '#row-plain', null],
+  ['zebra box on paper', '#zebra-box', null],
+  ['zebra grid row on paper', '#zebra-grid-plain', null],
 ];
 
 // WCAG 1.4.11: a focus indicator needs 3:1 against the pixels next to it. A two-tone ring (light and dark) meets that on any

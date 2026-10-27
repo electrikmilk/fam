@@ -1375,7 +1375,22 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   background-position: 0 var(--fam-table-row);
   background-repeat: repeat-y;
   background-attachment: local;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fam-table-ink-color) 40%, transparent), inset 0 2px 4px rgba(0, 0, 0, .18), 0 1px 0 rgba(255, 255, 255, .7);
+  --fam-table-edge: inset 0 0 0 1px color-mix(in srgb, var(--fam-table-ink-color) 40%, transparent), inset 0 2px 4px rgba(0, 0, 0, .18), 0 1px 0 rgba(255, 255, 255, .7);
+  box-shadow: var(--fam-table-edge);
+}
+
+/* For dark materials such as brown cardstock, leather or wood: a light ink, light text and a dark header */
+.fam-table-box--light-ink {
+  --fam-table-ink-default: rgb(255, 235, 200);
+  --fam-table-text-default: #f6ecd8;
+  --fam-table-head-text-default: #f6ecd8;
+  --fam-table-header-default: #3a2412;
+}
+
+.fam-table-box:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), var(--fam-table-edge);
 }
 
 .fam-table {
@@ -1410,6 +1425,23 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   background: var(--fam-table-header, var(--fam-table-header-default));
   border-bottom: 1px solid color-mix(in srgb, var(--fam-table-ink-color) 45%, transparent);
 }
+
+/* A selectable table is role="grid" and marks its chosen row with aria-selected="true", in the blue of a selected list row */
+.fam-table tr[aria-selected="true"] td {
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 30, 110, .8);
+  background: linear-gradient(to bottom, var(--fam-blue-top), var(--fam-blue-bottom));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+.fam-table tr[aria-selected="true"] td + td { border-left-color: rgba(255, 255, 255, .28); }
+
+.fam-table tbody tr:focus-visible {
+  outline: 2px solid #1b1b20;
+  outline-offset: -2px;
+}
+
+.fam-table tr[aria-selected="true"]:focus-visible { outline-color: #fff; }
 
 /* ---------- Disabled controls: dimmed, no pointer cursor, no pressed look (disabled text is exempt from WCAG contrast) ---------- */
 
@@ -1454,6 +1486,17 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   .fam-list-row[aria-selected="true"] span { color: HighlightText; }
 
   .fam-nav-item[aria-current="page"] { text-decoration: underline; }
+
+  .fam-table-box { border: 1px solid CanvasText; }
+  .fam-table th { border-bottom: 1px solid CanvasText; }
+  .fam-table th + th,
+  .fam-table td + td { border-left-color: CanvasText; }
+
+  .fam-table tr[aria-selected="true"] td {
+    background: Highlight;
+    color: HighlightText;
+    text-shadow: none;
+  }
 
   .fam-switch { border: 1px solid CanvasText; }
   .fam-switch:has(input:checked) { background: Highlight; }

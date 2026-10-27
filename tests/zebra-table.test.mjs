@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { fixtureUrl, openUrl } from './helpers/browser.mjs';
+import { fixtureUrl, isChromium, openUrl } from './helpers/browser.mjs';
 import { statistics } from './helpers/pixels.mjs';
 
 const read = (page, selector, expression) => page.evaluate(([target, source]) => new Function('element', `return ${source}`)(document.querySelector(target)), [selector, expression]);
@@ -125,6 +125,58 @@ test('a wide table scrolls inside its box on a phone', async () => {
     });
     assert.equal(scrollLeft, 100);
     assert.equal(headerTop, contentTop);
+  } finally {
+    await kit.close();
+  }
+});
+
+const meanChannel = (color) => color.match(/\d+/g).slice(0, 3).reduce((sum, channel) => sum + Number(channel), 0) / 3;
+
+test('light ink gives light text and a dark header, and dark ink the reverse', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const colors = (selector) => kit.page.evaluate((target) => getComputedStyle(document.querySelector(target)).color, selector);
+    const background = (selector) => kit.page.evaluate((target) => getComputedStyle(document.querySelector(target)).backgroundColor, selector);
+    assert.ok(meanChannel(await colors('#zebra-light td')) > 200, 'light ink text is not light');
+    assert.ok(meanChannel(await background('#zebra-light th')) < 80, 'light ink header is not dark');
+    assert.ok(meanChannel(await colors('#zebra-box td')) < 80, 'dark ink text is not dark');
+    assert.ok(meanChannel(await background('#zebra-box th')) > 200, 'dark ink header is not light');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('light ink stripes are a light tint, so they lighten the material instead of darkening it', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const brightness = [];
+    for (let row = 1; row <= 4; row += 1) brightness.push(await rowBrightness(kit.page, '#zebra-light', row, 24));
+    assert.ok(brightness[1] > brightness[0] + 4, `the striped row is not lighter (${brightness.join(', ')})`);
+    assert.ok(brightness[3] > brightness[2] + 4, `the second striped row is not lighter (${brightness.join(', ')})`);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a selected row is blue and an unselected one is not', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const image = (selector) => kit.page.evaluate((target) => getComputedStyle(document.querySelector(target)).backgroundImage, selector);
+    assert.match(await image('#zebra-grid-selected td'), /gradient/);
+    assert.equal(await image('#zebra-grid-plain td'), 'none');
+    assert.equal(await kit.page.evaluate(() => getComputedStyle(document.querySelector('#zebra-grid-selected td')).color), 'rgb(255, 255, 255)');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the selected row and the box stay visible in forced colors', { skip: !isChromium && 'forced-colors emulation is only reliable in Chromium' }, async () => {
+  const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
+  try {
+    const style = (selector, property) => kit.page.evaluate(([target, name]) => getComputedStyle(document.querySelector(target))[name], [selector, property]);
+    assert.notEqual(await style('#zebra-grid-selected td', 'backgroundColor'), await style('#zebra-grid-plain td', 'backgroundColor'), 'the selected row looks like the rest');
+    assert.notEqual(await style('#zebra-box', 'borderTopStyle'), 'none', 'the box has no border');
+    assert.notEqual(await style('#zebra-box th', 'borderBottomStyle'), 'none', 'the header has no rule');
   } finally {
     await kit.close();
   }
