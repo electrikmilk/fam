@@ -1,7 +1,7 @@
 # Realistic shadows design
 
 Date: 2026-10-27
-Status: draft for the builder check, then approval and planning
+Status: approved by the owner on 2026-10-27 (a builder check has been run and its findings folded in); next is the implementation plan
 
 Makes the kit's elevation shadows more natural, adds opt-in cast shadows like the knob in `references/plastic copy.png`, and adds a "resting on a surface" shadow like the icon in `references/Screenshot 2026-10-27 at 16.34.29.png`. The changes are in `css/tokens.css` and `css/effects.css`, shown on the Materials page of the showcase (`showcase/materials.html`) and documented in `README.md`.
 
@@ -41,6 +41,7 @@ Seeing the mockups, the owner picked one technique: **contact-hardening**. A sta
 - Contact-hardening is the technique (mockup B, `.superpowers/brainstorm/41246-1793138868/content/cast-shadow-options.html`).
 - The resting shadow is the true flat ellipse made with a pseudo-element (mockup B in `elevation-cast-resting.html`), not the crescent.
 - The plastic reference is the example for the cast shadows.
+- The three cast sizes get progressively longer and darker (mockup `cast-sizes-v3.html`).
 
 ## The recipes
 
@@ -60,14 +61,13 @@ The mockup the owner saw used slightly longer values for `md` and `lg`. These ar
 | `md`  | 18px        | 19px       | .56               | .56              |
 | `lg`  | 52px        | 48px       | .82               | .61              |
 
-Cast, new. All three share the first four layers and differ in how far they reach:
+Cast, new. Each size is longer and darker than the one before:
 
-- Shared: `0 1px 1px rgba(0,0,0,.38), 0 2px 2px rgba(0,0,0,.26), 0 4px 4px -1px rgba(0,0,0,.22), 0 8px 8px -2px rgba(0,0,0,.2)`
-- `sm` adds `0 16px 16px -4px rgba(0,0,0,.18), 0 30px 28px -8px rgba(0,0,0,.16)`
-- `md` adds `0 16px 16px -4px rgba(0,0,0,.18), 0 32px 32px -8px rgba(0,0,0,.16), 0 56px 48px -16px rgba(0,0,0,.14)`
-- `lg` adds `0 16px 16px -4px rgba(0,0,0,.2), 0 32px 32px -8px rgba(0,0,0,.18), 0 60px 52px -14px rgba(0,0,0,.18), 0 84px 64px -22px rgba(0,0,0,.14)`
+- `sm`: `0 1px 1px rgba(0,0,0,.38), 0 2px 2px rgba(0,0,0,.26), 0 4px 4px -1px rgba(0,0,0,.22), 0 8px 8px -2px rgba(0,0,0,.2), 0 16px 16px -4px rgba(0,0,0,.18), 0 30px 28px -8px rgba(0,0,0,.16)`
+- `md`, about 20% darker than `sm`: `0 1px 1px rgba(0,0,0,.46), 0 2px 2px rgba(0,0,0,.31), 0 4px 4px -1px rgba(0,0,0,.26), 0 8px 8px -2px rgba(0,0,0,.24), 0 16px 16px -4px rgba(0,0,0,.22), 0 32px 32px -8px rgba(0,0,0,.19), 0 56px 48px -16px rgba(0,0,0,.17)`
+- `lg`, about 45% darker than `sm`: `0 1px 1px rgba(0,0,0,.55), 0 2px 2px rgba(0,0,0,.38), 0 4px 4px -1px rgba(0,0,0,.32), 0 8px 8px -2px rgba(0,0,0,.29), 0 16px 16px -4px rgba(0,0,0,.29), 0 32px 32px -8px rgba(0,0,0,.26), 0 60px 52px -14px rgba(0,0,0,.26), 0 84px 64px -22px rgba(0,0,0,.2)`
 
-The owner looked at the mockup with a shorter `sm`, then asked to shift each size up one step: the mockup's `md` is now `sm` and its `lg` is now `md`. The mockup's `sm` is dropped. The new `lg` is a little harsher and longer than the old `lg`. Its values are my pick, and the builder may tune them.
+The owner asked for each size to be longer and darker than the one before, and approved these values in the mockup `cast-sizes-v3.html`. They share their first layers' offsets and blurs and differ in alpha and in how far they reach. The builder may still tune them if the shadows look wrong on a material.
 
 Resting ellipse, as a pseudo-element behind the element: about 88% of its width, about 8px tall, sitting about 5px below the bottom edge, filled with `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.6) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,0) 72%)`, `z-index: -1`, and `pointer-events: none`.
 
