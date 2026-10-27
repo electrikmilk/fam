@@ -515,3 +515,78 @@ test('the site bar fits a phone screen on every page', async () => {
     }
   }
 });
+
+const ZEBRA_ROWS = '#scene-zebra-tables table[role="grid"] tbody tr';
+
+const selectedRowIndexes = (page) => page.evaluate((selector) => [...document.querySelectorAll(selector)].flatMap((row, index) => (row.getAttribute('aria-selected') === 'true' ? [index] : [])), ZEBRA_ROWS);
+const focusedRowIndex = (page) => page.evaluate((selector) => [...document.querySelectorAll(selector)].indexOf(document.activeElement), ZEBRA_ROWS);
+
+test('clicking a zebra row selects only that row', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    await page.page.locator(ZEBRA_ROWS).nth(4).click();
+    assert.deepEqual(await selectedRowIndexes(page.page), [4]);
+    await page.page.locator(ZEBRA_ROWS).nth(1).click();
+    assert.deepEqual(await selectedRowIndexes(page.page), [1]);
+  } finally {
+    await page.close();
+  }
+});
+
+test('arrow keys move the zebra selection and Home and End jump', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    const rowCount = await page.page.locator(ZEBRA_ROWS).count();
+    await page.page.locator(ZEBRA_ROWS).nth(2).focus();
+    await page.page.keyboard.press('ArrowDown');
+    assert.deepEqual(await selectedRowIndexes(page.page), [3]);
+    assert.equal(await focusedRowIndex(page.page), 3, 'focus did not follow the selection');
+    await page.page.keyboard.press('ArrowUp');
+    await page.page.keyboard.press('ArrowUp');
+    await page.page.keyboard.press('ArrowUp');
+    assert.deepEqual(await selectedRowIndexes(page.page), [0], 'the selection wrapped or moved past the first row');
+    await page.page.keyboard.press('End');
+    assert.deepEqual(await selectedRowIndexes(page.page), [rowCount - 1]);
+    await page.page.keyboard.press('ArrowDown');
+    assert.deepEqual(await selectedRowIndexes(page.page), [rowCount - 1], 'the selection wrapped past the last row');
+    await page.page.keyboard.press('Home');
+    assert.deepEqual(await selectedRowIndexes(page.page), [0]);
+  } finally {
+    await page.close();
+  }
+});
+
+test('only the selected zebra row is in the Tab order', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    const tabbable = () => page.page.evaluate((selector) => [...document.querySelectorAll(selector)].flatMap((row, index) => (row.tabIndex === 0 ? [index] : [])), ZEBRA_ROWS);
+    assert.deepEqual(await tabbable(), await selectedRowIndexes(page.page));
+    await page.page.locator(ZEBRA_ROWS).nth(5).click();
+    assert.deepEqual(await tabbable(), [5]);
+  } finally {
+    await page.close();
+  }
+});
+
+test('a zebra row reached with the keyboard is not hidden under the sticky header', async () => {
+  const page = await openUrl(showcasePageUrl('controls'));
+  try {
+    const clearance = () => page.page.evaluate(() => {
+      const grid = document.querySelector('#scene-zebra-tables table[role="grid"]');
+      return document.activeElement.getBoundingClientRect().top - grid.querySelector('th').getBoundingClientRect().bottom;
+    });
+    const lastIndex = (await page.page.locator(ZEBRA_ROWS).count()) - 1;
+    await page.page.locator(ZEBRA_ROWS).nth(2).focus();
+    await page.page.keyboard.press('End');
+    for (let step = 0; step < 9; step += 1) {
+      await page.page.keyboard.press('ArrowUp');
+      assert.equal(await focusedRowIndex(page.page), lastIndex - step - 1, 'focus did not move up a row');
+      assert.ok(await clearance() >= -0.5, `a row is under the header after ${step + 1} presses up`);
+    }
+    await page.page.keyboard.press('End');
+    await page.page.keyboard.press('Home');
+    assert.ok(await clearance() >= -0.5, 'the first row is under the header');
+  } finally {
+    await page.close();
+  }
+});
