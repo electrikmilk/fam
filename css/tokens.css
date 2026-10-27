@@ -29,6 +29,11 @@
   --fam-shadow-lg: 0 1px 1px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .09), 0 4px 4px -1px rgba(0, 0, 0, .09), 0 8px 8px -2px rgba(0, 0, 0, .09), 0 16px 16px -4px rgba(0, 0, 0, .1), 0 28px 28px -8px rgba(0, 0, 0, .12);
   --fam-shadow-inset: inset 0 2px 5px rgba(0, 0, 0, .35), inset 0 -1px 0 rgba(255, 255, 255, .8), 0 1px 0 rgba(255, 255, 255, .8);
 
+  /* Harsher and longer than the elevation shadows, like the knob in the plastic reference: each size is longer and darker than the one before */
+  --fam-cast-sm: 0 1px 1px rgba(0, 0, 0, .38), 0 2px 2px rgba(0, 0, 0, .26), 0 4px 4px -1px rgba(0, 0, 0, .22), 0 8px 8px -2px rgba(0, 0, 0, .2), 0 16px 16px -4px rgba(0, 0, 0, .18), 0 30px 28px -8px rgba(0, 0, 0, .16);
+  --fam-cast-md: 0 1px 1px rgba(0, 0, 0, .46), 0 2px 2px rgba(0, 0, 0, .31), 0 4px 4px -1px rgba(0, 0, 0, .26), 0 8px 8px -2px rgba(0, 0, 0, .24), 0 16px 16px -4px rgba(0, 0, 0, .22), 0 32px 32px -8px rgba(0, 0, 0, .19), 0 56px 48px -16px rgba(0, 0, 0, .17);
+  --fam-cast-lg: 0 1px 1px rgba(0, 0, 0, .55), 0 2px 2px rgba(0, 0, 0, .38), 0 4px 4px -1px rgba(0, 0, 0, .32), 0 8px 8px -2px rgba(0, 0, 0, .29), 0 16px 16px -4px rgba(0, 0, 0, .29), 0 32px 32px -8px rgba(0, 0, 0, .26), 0 60px 52px -14px rgba(0, 0, 0, .26), 0 84px 64px -22px rgba(0, 0, 0, .2);
+
   --fam-tex-felt-gray-tile: url(../assets/felt-gray-tile.jpg);
   --fam-tex-wood-light-tile: url(../assets/wood-light-tile.jpg);
   --fam-tex-metal-tile: url(../assets/metal-tile.jpg);

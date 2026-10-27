@@ -149,6 +149,37 @@ test('elevation shadows are no longer or darker than the originals', async () =>
   }
 });
 
+const CAST_SIZES = { sm: { reach: 50, alpha: 1.4 }, md: { reach: 88, alpha: 1.85 }, lg: { reach: 126, alpha: 2.55 } };
+
+test('cast shadows get longer and darker with size', async () => {
+  const kit = await openKit();
+  try {
+    const measured = [];
+    for (const [size, expected] of Object.entries(CAST_SIZES)) {
+      const layers = parseBoxShadow(await style(kit.page, `#cast-${size}`, null, 'boxShadow'));
+      assert.equal(reachOf(layers), expected.reach, `cast-${size} reach`);
+      assert.ok(Math.abs(totalAlphaOf(layers) - expected.alpha) < 0.005, `cast-${size} total alpha is ${totalAlphaOf(layers)}`);
+      measured.push({ reach: reachOf(layers), alpha: totalAlphaOf(layers) });
+    }
+    assert.ok(measured[0].reach < measured[1].reach && measured[1].reach < measured[2].reach, 'reach grows with size');
+    assert.ok(measured[0].alpha < measured[1].alpha && measured[1].alpha < measured[2].alpha, 'total alpha grows with size');
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a plastic button inside a cast wrapper keeps its own shadow', async () => {
+  const kit = await openKit();
+  try {
+    assert.notEqual(await style(kit.page, '#cast-wrapper', null, 'boxShadow'), 'none');
+    const withCast = await style(kit.page, '#cast-inner', null, 'boxShadow');
+    await kit.page.evaluate(() => document.querySelector('#cast-wrapper').classList.remove('fam-cast-md'));
+    assert.equal(await style(kit.page, '#cast-inner', null, 'boxShadow'), withCast);
+  } finally {
+    await kit.close();
+  }
+});
+
 test('gloss strength is a variable on the pill', async () => {
   const kit = await openKit();
   try {

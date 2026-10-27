@@ -125,6 +125,12 @@
 .fam-shadow-lg { box-shadow: var(--fam-shadow-lg); }
 .fam-shadow-inset { box-shadow: var(--fam-shadow-inset); }
 
+/* Like the fam-shadow classes, these replace the element's box-shadow, so a component that carries its own shading (plastic, metal, the pill)
+   takes the class on a wrapper with the same radius instead. */
+.fam-cast-sm { box-shadow: var(--fam-cast-sm); }
+.fam-cast-md { box-shadow: var(--fam-cast-md); }
+.fam-cast-lg { box-shadow: var(--fam-cast-lg); }
+
 /* All but the pill also set --fam-r so a fam-glass glow follows the same radius. This relies on coming after .fam-glass.
    The pill is the glass default, which leaves --fam-r unset. */
 .fam-round-sm { --fam-r: var(--fam-radius-sm); border-radius: var(--fam-radius-sm); }
