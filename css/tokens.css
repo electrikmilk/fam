@@ -22,9 +22,11 @@
   --fam-radius-lg: 20px;
   --fam-radius-pill: 999px;
 
-  --fam-shadow-sm: 0 1px 1px rgba(0, 0, 0, .2), 0 1px 3px rgba(0, 0, 0, .2);
-  --fam-shadow-md: 0 1px 1px rgba(0, 0, 0, .14), 0 3px 6px rgba(0, 0, 0, .2), 0 8px 14px -4px rgba(0, 0, 0, .22);
-  --fam-shadow-lg: 0 1px 1px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .16), 0 12px 20px -4px rgba(0, 0, 0, .24), 0 24px 40px -12px rgba(0, 0, 0, .3);
+  /* The light is straight above, so every shadow falls straight down. Each layer doubles the offset and blur of the one before: dark and crisp
+     at the edge, soft and faint farther out, like a real shadow. */
+  --fam-shadow-sm: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .12), 0 3px 3px -1px rgba(0, 0, 0, .06);
+  --fam-shadow-md: 0 1px 1px rgba(0, 0, 0, .14), 0 2px 2px rgba(0, 0, 0, .1), 0 4px 4px -1px rgba(0, 0, 0, .1), 0 8px 8px -3px rgba(0, 0, 0, .12), 0 12px 12px -5px rgba(0, 0, 0, .1);
+  --fam-shadow-lg: 0 1px 1px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .09), 0 4px 4px -1px rgba(0, 0, 0, .09), 0 8px 8px -2px rgba(0, 0, 0, .09), 0 16px 16px -4px rgba(0, 0, 0, .1), 0 28px 28px -8px rgba(0, 0, 0, .12);
   --fam-shadow-inset: inset 0 2px 5px rgba(0, 0, 0, .35), inset 0 -1px 0 rgba(255, 255, 255, .8), 0 1px 0 rgba(255, 255, 255, .8);
 
   --fam-tex-felt-gray-tile: url(../assets/felt-gray-tile.jpg);

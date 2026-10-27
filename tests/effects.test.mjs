@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { fixtureUrl, openUrl } from './helpers/browser.mjs';
+import { parseBoxShadow, reachOf, totalAlphaOf } from './helpers/shadows.mjs';
 
 const snippetUrl = new URL('../snippets/refraction-filter.html', import.meta.url);
 
@@ -125,6 +126,24 @@ test('shadow utilities differ', async () => {
     const shadows = await Promise.all(['sm', 'md', 'lg', 'inset'].map((size) => style(kit.page, `#shadow-${size}`, null, 'boxShadow')));
     assert.ok(shadows.every((shadow) => shadow !== 'none'));
     assert.equal(new Set(shadows).size, 4);
+  } finally {
+    await kit.close();
+  }
+});
+
+// Reach and total alpha of the elevation shadows before they became contact-hardening: the new ones must stay casual
+const ORIGINAL_ELEVATION = { sm: { reach: 4, alpha: 0.4 }, md: { reach: 18, alpha: 0.56 }, lg: { reach: 52, alpha: 0.82 } };
+const ELEVATION_LAYER_COUNTS = { sm: 3, md: 5, lg: 6 };
+
+test('elevation shadows are no longer or darker than the originals', async () => {
+  const kit = await openKit();
+  try {
+    for (const size of ['sm', 'md', 'lg']) {
+      const layers = parseBoxShadow(await style(kit.page, `#shadow-${size}`, null, 'boxShadow'));
+      assert.equal(layers.length, ELEVATION_LAYER_COUNTS[size], `shadow-${size} layer count`);
+      assert.ok(reachOf(layers) <= ORIGINAL_ELEVATION[size].reach + 2, `shadow-${size} reaches ${reachOf(layers)}px`);
+      assert.ok(totalAlphaOf(layers) <= ORIGINAL_ELEVATION[size].alpha + 0.005, `shadow-${size} total alpha is ${totalAlphaOf(layers)}`);
+    }
   } finally {
     await kit.close();
   }
