@@ -2,7 +2,7 @@
 
 Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript required, no build step.
 
-Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials, as it can be used as a full CSS framework, or just to add a little skeuomorphism as a backdrop to a modern flat UI.
+Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials. Use it as a full UI framework, or just add a texture or material behind a minimalist, flat UI of your own. See [Two ways to use it](#two-ways-to-use-it).
 
 Skeuomorphism exists to make an interface feel familiar. A recessed field invites typing, a raised button invites a press and a switch looks like a switch. Fam builds those cues from real photographs of materials, processed into seamless tiles and credited in [CREDITS.md](CREDITS.md), not from gradients that imitate them.
 
@@ -20,11 +20,23 @@ Beyond the look:
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
 - **Quick to recolor.** One variable tints felt (`--fam-tint`) and cardstock (`--fam-cardstock-tint`).
 
+## Two ways to use it
+
+- **As a UI framework.** Use the buttons, switches, tabs, fields, lists, navigation and glass. Every control is built from the materials, so a whole interface can be Fam.
+- **As texture for a flat UI.** Keep your own minimalist components and put a material behind them: felt, wood, paper, leather or any other. You add one class, and only the tile you use is downloaded.
+
+```html
+<div class="fam-felt" style="--fam-tint:#3a5a40; padding:32px">
+  <!-- your own flat components -->
+  <div class="card">...</div>
+</div>
+```
+
 ## Showcase
 
 A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 
-- Home: a switcher that shows one pairing at a time, with the classes it uses.
+- Home: the two ways to use Fam (as a framework, or as texture behind a flat UI) and a switcher that shows one pairing at a time, with the classes it uses.
 - Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, metal on metal, legal pad and leather, cardstock and legal pad, leather and paper.
 - Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, LEDs, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
