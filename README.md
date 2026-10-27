@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 77 KB of CSS (17.3 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 81 KB of CSS (18.1 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -38,7 +38,7 @@ A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 
 - Home: the two ways to use Fam (as a framework, or as texture behind a flat UI) and a switcher that shows one pairing at a time, with the classes it uses.
 - Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, metal on metal, legal pad and leather, cardstock and legal pad, leather and paper.
-- Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, LEDs, the switch and knob, progress tubes, glass fields, the search pill, list rows, recessed fields and the leather button, each alone with its disabled look.
+- Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, LEDs, the switch and knob, progress tubes, glass fields, the search pill, list rows, zebra tables, recessed fields and the leather button, each alone with its disabled look.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
 - Examples: the pages in `examples/`.
 
@@ -292,6 +292,37 @@ Recessed fields, search pill, leather button, list rows:
 Rows are real links (or buttons) in a plain list, so they work with the keyboard as they are. Mark the current row with `aria-current="true"`. `fam-menu` is only the look of an open menu: if you build a real custom menu, give it listbox semantics and the arrow-key behavior that goes with them.
 
 Selected rows and menu items use the blue family `--fam-blue-top` to `--fam-blue-bottom`.
+
+Zebra table, a table in a scrolling box with a sticky header, like the lists in Snow Leopard's Finder:
+
+```html
+<div class="fam-paper" style="padding: 20px">
+  <div class="fam-table-box" role="region" aria-label="Files" tabindex="0" style="--fam-table-rows: 6">
+    <table class="fam-table" aria-label="Files">
+      <colgroup><col style="width:60%"><col style="width:40%"></colgroup>
+      <thead><tr><th scope="col">Name</th><th scope="col">Size</th></tr></thead>
+      <tbody>
+        <tr><td>Receipt-01.png</td><td>2.6 MB</td></tr>
+        <tr><td>Notes.txt</td><td>4 KB</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+```
+
+The box draws every stripe once, in a gradient that scrolls with its content, and the rows are transparent. The empty stripes below the last row are therefore the same gradient as the real ones and line up with them. The stripes and column dividers are a see-through tint of one ink, so the paper or cardstock behind the table shows through. The header is an opaque band, because rows scrolling under a see-through header would show through it.
+
+- `--fam-row-height`: the height of every row, the header and the empty stripes (default `24px`).
+- `--fam-table-rows`: how many rows tall the box is, not counting the header (default `8`).
+- `--fam-table-ink` and `--fam-table-stripe`: the ink color (default a dark brown) and the opacity of the stripes (default `.09`).
+- `--fam-table-header`: the color of the header band.
+- `fam-table-box--light-ink`: a light ink with light text and a dark header, for dark materials such as brown cardstock (`--fam-cardstock-tint: #562a0e`).
+
+Rows are one line high, which keeps the stripes aligned, so text that does not fit is cut short with an ellipsis. Give long text another way to be read, such as a wider column or a `title`. Set column widths with `<col>`; a table wider than its box scrolls sideways and the header stays at the top. Name the table with `aria-label` or a `<caption>`. A read-only box has `tabindex="0"` and `role="region"` so a keyboard user can scroll it.
+
+For a selectable table, give the table `role="grid"` and every body row `aria-selected` (`"true"` on the chosen row), and style nothing else: the kit draws the selected row in the blue of a selected list row, and in forced colors in the system `Highlight` colors. The arrow-key behavior is yours to drive with whatever JavaScript you prefer, following the ARIA grid pattern. Make the rows the focus stops (`tabindex="-1"`, and `0` on the selected one) and leave `tabindex` off the box. `showcase/table-grid.js` is a small model of it. The box keeps a focused row clear of the sticky header on its own.
+
+Small dark text on natural light cardstock cannot reach 4.5:1 at its worst pixel, because the cardstock's fibers are dark flecks. Put the table with dark ink on paper, and use light ink on brown cardstock.
 
 ## Effects
 
