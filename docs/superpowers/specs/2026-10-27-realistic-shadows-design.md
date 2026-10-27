@@ -16,7 +16,7 @@ Seeing the mockups, the owner picked one technique: **contact-hardening**. A sta
 - One light for the whole kit: straight above, so every shadow falls straight down. Shadow size scales with elevation.
 - Replace the values of `--fam-shadow-sm`, `--fam-shadow-md` and `--fam-shadow-lg` with gentler contact-hardening stacks. They remain the soft, casual default. The names stay, so `fam-shadow-sm/md/lg` and any consumer override keep working.
 - New cast shadow classes in three lengths, `fam-cast-sm`, `fam-cast-md` and `fam-cast-lg`, with matching tokens, for the harsher, longer, plastic-reference look. These are opt-in.
-- A new class for the resting shadow: a thin flat ellipse under the element's bottom edge, as if it sits on the surface. It is made with a pseudo-element, the shape the owner chose over a crescent made from an ordinary shadow.
+- New classes for the resting shadow in three levels, `fam-grounded-sm`, `fam-grounded-md` and `fam-grounded-lg`, each wider, taller and darker than the one before (the owner asked for levels after the first build): a thin flat ellipse under the element's bottom edge, as if it sits on the surface. It is made with a pseudo-element, the shape the owner chose over a crescent made from an ordinary shadow.
 - The showcase shows the new shadows next to the existing ones on the Materials page, with the markup to copy. `README.md` documents them.
 - Shadows look right on the kit's materials, including dark ones such as felt and brown cardstock, not only on light surfaces.
 
@@ -71,6 +71,8 @@ The owner asked for each size to be longer and darker than the one before, and a
 
 Resting ellipse, as a pseudo-element under the element: about 88% of its width, about 8px tall, starting at the element's bottom edge, filled with `radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.6) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,0) 72%)`, and `pointer-events: none`. It has no negative `z-index`: that hides it behind the background of the surface the element sits on, unless the surface makes its own stacking context. Starting at the bottom edge means painting above the element never covers its face.
 
+Resting levels (width, height, strength of the middle, and how far below the edge it starts): `sm` is 80%, 6px, 50% and flush with the edge; `md` is 88%, 8px, 60% and flush, which is the mockup the owner chose; `lg` is 96%, 12px, 70% and 2px below the edge, as if raised a little. These values are my pick, and the builder may tune them.
+
 ## Constraints
 
 - Plain CSS in the existing layers. Class names start with `fam-` and variables with `--fam-`. The bundle is rebuilt with `npm run build`.
@@ -80,9 +82,9 @@ Resting ellipse, as a pseudo-element under the element: about 88% of its width, 
 
 ## Calls I made (the owner can change these)
 
-- **Names.** Tokens `--fam-cast-sm`, `--fam-cast-md` and `--fam-cast-lg` and classes `fam-cast-sm`, `fam-cast-md` and `fam-cast-lg`. The resting class is `fam-grounded`, with variables for the ellipse size and color. I avoided "rest" because of `--fam-rest-shadow`. The builder may rename them to fit the kit better.
+- **Names.** Tokens `--fam-cast-sm`, `--fam-cast-md` and `--fam-cast-lg` and classes `fam-cast-sm`, `fam-cast-md` and `fam-cast-lg`. The resting classes are `fam-grounded-sm`, `fam-grounded-md` and `fam-grounded-lg`, with variables for the ellipse size and color. I avoided "rest" because of `--fam-rest-shadow`. The builder may rename them to fit the kit better.
 - **Where the new classes live.** Beside the existing `fam-shadow-*` rules in `css/effects.css`, and the tokens beside the existing ones in `css/tokens.css`.
-- **Wrapper for incompatible elements.** For an element whose `::after` is taken, `fam-grounded` goes on a wrapping element instead. The ellipse sizes to whatever box carries the class.
+- **Wrapper for incompatible elements.** For an element whose `::after` is taken, `fam-grounded-*` goes on a wrapping element instead. The ellipse sizes to whatever box carries the class.
 - **Showcase.** The elevation chips scene on the Materials page (`showcase/materials.html`) gains cast and grounded examples, each with a copyable class, in the style of the existing chips. No new page.
 - **Tests.** `tests/showcase.test.mjs` checks the computed shadows of `sm`, `md`, `lg` and `inset` in the showcase, and `tests/fixtures/kit.html` has them too. Extend both with the cast classes and the grounded one. Add one browser test that checks the grounded ellipse is behind the element, is below its bottom edge, and does not catch pointer events. Rebuild and refresh any README size claims that `tests/claims.test.mjs` checks.
 - **Dark materials.** Black shadows on dark materials such as felt are weaker than on light ones. I am not adding a separate dark version. If the shadows look weak on felt or brown cardstock, the builder may raise the alphas of the cast shadows (not the elevation ones, which are held by the guardrail), then says what changed and shows the owner the result. The builder does not stop work to ask, and does not add a dark variant.

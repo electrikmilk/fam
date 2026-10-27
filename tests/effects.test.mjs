@@ -220,10 +220,10 @@ test('the grounded ellipse is out of the way', async () => {
     const layout = await kit.page.evaluate(() => {
       const element = document.querySelector('#grounded');
       const after = document.querySelector('#grounded-stack').getBoundingClientRect().left;
-      element.classList.remove('fam-grounded');
+      element.classList.remove('fam-grounded-md');
       const rectWithout = element.getBoundingClientRect().toJSON();
       const afterWithout = document.querySelector('#grounded-stack').getBoundingClientRect().left;
-      element.classList.add('fam-grounded');
+      element.classList.add('fam-grounded-md');
       return { sameNeighbor: after === afterWithout, rectWithout, rectWith: element.getBoundingClientRect().toJSON() };
     });
     assert.ok(layout.sameNeighbor, 'the ellipse takes no layout space');
@@ -242,9 +242,28 @@ test('the grounded ellipse shows below the element and leaves its face alone', a
     const box = await pageBox(kit.page, '#grounded-stack');
     const face = { x: (box.left + box.right) / 2 - 10, y: (box.top + box.bottom) / 2 - 5, width: 20, height: 10 };
     const withEllipse = await brightnessOf(kit.page, face);
-    await kit.page.evaluate(() => document.querySelector('#grounded-stack').classList.remove('fam-grounded'));
+    await kit.page.evaluate(() => document.querySelector('#grounded-stack').classList.remove('fam-grounded-md'));
     const without = await brightnessOf(kit.page, face);
     assert.ok(Math.abs(withEllipse - without) < 3, `the face changed from ${without} to ${withEllipse}`);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('resting shadows get larger and darker with level', async () => {
+  const kit = await openKit();
+  try {
+    const heights = [];
+    const darkness = [];
+    for (const level of ['sm', 'level-md', 'lg']) {
+      const selector = `#grounded-${level}`;
+      heights.push(await kit.page.evaluate((target) => parseFloat(getComputedStyle(document.querySelector(target), '::after').height), selector));
+      const box = await pageBox(kit.page, selector);
+      const strip = { x: (box.left + box.right) / 2 - 10, y: box.bottom + 1, width: 20, height: 10 };
+      darkness.push(255 - (await brightnessOf(kit.page, strip)));
+    }
+    assert.deepEqual(heights, [6, 8, 12]);
+    assert.ok(darkness[0] < darkness[1] && darkness[1] < darkness[2], `the strips under sm, md and lg darken by ${darkness.join(', ')}`);
   } finally {
     await kit.close();
   }
@@ -265,7 +284,7 @@ test('fam-grounded on a wrapper shows the ellipse around a pill', async () => {
   try {
     // The pill casts a shadow of its own, so the strip is compared with and without the class
     const { under: withEllipse } = await stripsUnder(kit.page, '#grounded-wrapper');
-    await kit.page.evaluate(() => document.querySelector('#grounded-wrapper').classList.remove('fam-grounded'));
+    await kit.page.evaluate(() => document.querySelector('#grounded-wrapper').classList.remove('fam-grounded-md'));
     const { under: without } = await stripsUnder(kit.page, '#grounded-wrapper');
     assert.ok(without - withEllipse >= 15, `under the wrapper is ${withEllipse} with the class and ${without} without`);
   } finally {

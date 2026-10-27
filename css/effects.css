@@ -135,19 +135,17 @@
    (the pill, the glass, the frames, round plastic) takes the class on a wrapper instead. The ellipse has no negative z-index, because that would
    hide it behind the background of whatever surface the element sits on. It starts at the bottom edge on purpose, so painting above the
    element never covers its face. */
-.fam-grounded {
-  --fam-grounded-width: 88%;
-  --fam-grounded-height: 8px;
-  --fam-grounded-ink: rgb(0 0 0);
-}
+.fam-grounded-sm { --fam-grounded-width: 80%; --fam-grounded-height: 6px; --fam-grounded-strength: 50%; --fam-grounded-gap: 0px; }
+.fam-grounded-md { --fam-grounded-width: 88%; --fam-grounded-height: 8px; --fam-grounded-strength: 60%; --fam-grounded-gap: 0px; }
+.fam-grounded-lg { --fam-grounded-width: 96%; --fam-grounded-height: 12px; --fam-grounded-strength: 70%; --fam-grounded-gap: 2px; }
 
 /* Zero specificity, so an element positioned by its own class or inline style keeps that position */
-:where(.fam-grounded) { position: relative; }
+:where(.fam-grounded-sm, .fam-grounded-md, .fam-grounded-lg) { position: relative; }
 
-.fam-grounded::after {
+:is(.fam-grounded-sm, .fam-grounded-md, .fam-grounded-lg)::after {
   content: '';
   position: absolute;
-  top: calc(100% - 1px);
+  top: calc(100% - 1px + var(--fam-grounded-gap));
   left: calc((100% - var(--fam-grounded-width)) / 2);
   width: var(--fam-grounded-width);
   height: var(--fam-grounded-height);
@@ -155,8 +153,8 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse at 50% 50%,
-    color-mix(in srgb, var(--fam-grounded-ink) 60%, transparent) 0%,
-    color-mix(in srgb, var(--fam-grounded-ink) 30%, transparent) 45%,
+    color-mix(in srgb, var(--fam-grounded-ink, rgb(0 0 0)) var(--fam-grounded-strength), transparent) 0%,
+    color-mix(in srgb, var(--fam-grounded-ink, rgb(0 0 0)) calc(var(--fam-grounded-strength) / 2), transparent) 45%,
     transparent 72%
   );
 }
