@@ -88,6 +88,19 @@
   background: var(--fam-tex-cardboard-tile) 0 0 / 256px repeat;
 }
 
+/* The tile holds 12 rules, so a 324px repeat spaces them 27px apart, a notebook's line height. The margin is a line CSS draws, because a tile
+   repeats sideways and could not hold a single vertical one; its pink is the margin line in the photo. */
+.fam-lined-paper {
+  background:
+    linear-gradient(90deg, transparent 44px, #e4708f 44px, #e4708f 45px, transparent 45px),
+    var(--fam-tex-lined-paper-tile) 0 0 / 324px repeat;
+}
+
+/* The tile holds 12 squares across and down, so a 288px repeat makes them 24px */
+.fam-grid-paper {
+  background: var(--fam-tex-grid-paper-tile) 0 0 / 288px repeat;
+}
+
 .fam-paper-bag {
   background: var(--fam-tex-paper-bag-tile) 0 0 / 256px repeat;
 }

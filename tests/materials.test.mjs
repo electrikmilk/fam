@@ -58,7 +58,7 @@ test('materials load their textures', async () => {
     assert.deepEqual(kit.issues, []);
     const styles = await kit.page.evaluate(() =>
       Object.fromEntries(
-        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'denim', 'cardboard', 'cardstock', 'legal-pad', 'paper', 'paper-bag', 'cork', 'frame-tan', 'felt-green'].map((id) => [
+        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'denim', 'cardboard', 'cardstock', 'legal-pad', 'paper', 'paper-bag', 'lined-paper', 'grid-paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
           id,
           getComputedStyle(document.getElementById(id)).backgroundImage,
         ]),
@@ -79,6 +79,8 @@ test('materials load their textures', async () => {
     assert.ok(barImages[0].includes('leather-bar-edge-tan.png') && barImages[0].includes('leather-fill-tan-tile.jpg'), barImages[0]);
     assert.ok(barImages[1].includes('leather-bar-edge-black.png') && barImages[1].includes('leather-fill-black-tile.jpg'), barImages[1]);
     assert.ok(barImages[2].includes('leather-bar-edge-brown.png') && barImages[2].includes('leather-fill-brown-tile.jpg'), barImages[2]);
+    const linedBackground = await kit.page.evaluate(() => getComputedStyle(document.getElementById('lined-paper')).backgroundImage);
+    assert.ok(linedBackground.includes('linear-gradient(') && linedBackground.includes('lined-paper-tile.jpg'), `lined paper has no red margin line over its rules: ${linedBackground}`);
     const pebbledImages = await kit.page.evaluate(() =>
       ['pebbled-tan', 'pebbled-black', 'pebbled-brown'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
     );

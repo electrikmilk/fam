@@ -22,6 +22,8 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `legal-tile.jpg` | `lined-paper_heather-green-hKfKmfvPY44-unsplash.jpg` | heather-green | `make_legal_tile.py` |
 | `paper-tile.jpg` | `paper_olga-thelavart-vS3idIiYxX0-unsplash.jpg` | olga-thelavart | `make_tile.py 0.3 512 80` |
 | `cardboard-tile.jpg` | `cardboard_kiwihug-bPaRBSuvRPA-unsplash.jpg` | kiwihug | `make_tile.py 0.2 512 60` |
+| `lined-paper-tile.jpg` | `lined-paper_heather-green-hKfKmfvPY44-unsplash.jpg` | heather-green | `make_ruled_tile.py ... 1000 1563 2618 2618 300 648 648`, twelve rules from one rule to the rule twelve below it |
+| `grid-paper-tile.jpg` | `juliette-jardin-JAkL58H0Xs0-unsplash.jpg` | juliette-jardin | `make_ruled_tile.py ... 2044 965 1998 2055 300 576 576`, twelve squares across and down, from a flat patch of the crumpled sheet |
 | `paper-bag-tile.jpg` | `paper-bag_heather-green-xr_ra5j9wPI-unsplash.jpg` | heather-green | `make_tile.py 0.3 512 60`, from the center so the photo's fold shadow is left out |
 | `cork-tile.jpg` | `corkboard_josephine-barham-KsAo8ouBn8A-unsplash.jpg` | josephine-barham | `make_tile.py 0.3 512 60` |
 | `leather-tile.jpg` | `leather_felipe-santana-xJkTCbtuqAY-unsplash.jpg` | felipe-santana | `make_tile.py 0.55 512 70` |
