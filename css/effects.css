@@ -169,6 +169,32 @@
   );
 }
 
+/* A flipped copy of the element fades out below it, like a glossy floor. -webkit-box-reflect works in Chromium and Safari; Firefox does
+   not support it and draws no reflection, which only loses the decoration. The reflection takes no layout space, so leave room under the element. */
+.fam-reflect { -webkit-box-reflect: below 2px linear-gradient(transparent 40%, rgba(255, 255, 255, .5)); }
+
+/* A shiny floor along the bottom of a box, with a bright top edge, for dark surfaces. It is half the box tall; set --fam-shelf-height and the
+   same padding-bottom to make the things standing in the box rest on its top edge. It uses ::before behind the content, so a box that
+   already uses ::before takes the class on a wrapper. Zero specificity on position keeps a box positioned by its own class or inline style. */
+:where(.fam-shelf) { position: relative; }
+
+.fam-shelf { isolation: isolate; }
+
+.fam-shelf::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--fam-shelf-height, 50%);
+  border-top: 1px solid rgba(255, 255, 255, .35);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  background: linear-gradient(rgba(255, 255, 255, .16), rgba(255, 255, 255, .03) 40%, rgba(0, 0, 0, .35));
+  pointer-events: none;
+}
+
 /* All but the pill also set --fam-r so a fam-glass glow follows the same radius. This relies on coming after .fam-glass.
    The pill is the glass default, which leaves --fam-r unset. */
 .fam-round-sm { --fam-r: var(--fam-radius-sm); border-radius: var(--fam-radius-sm); }
