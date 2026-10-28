@@ -81,6 +81,7 @@ Put a material class on any box:
 - `fam-metal-sandblasted`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`.
 - `fam-plastic-panel`: cream satin plastic for controls to sit on. Use it with a `fam-round-*` class.
 - `fam-leather`: tan leather, for panels and fields.
+- `fam-leather-pebbled`: the leather frame's pebbled leather with no stitched edge, in tan; add `fam-leather-pebbled--black` for black.
 - `fam-leather-bar`: tan leather with a stitched bottom edge, for navigation bars. See [Navigation](#components).
 - `fam-paper`: white textured paper, for lists and note panels.
 - `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
@@ -272,7 +273,7 @@ A toggle LED is a label that wraps a checkbox, driven like the switch: it is lit
 </label>
 ```
 
-Navigation (use with `fam-wood`, `fam-metal`, `fam-metal-sandblasted` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
+Navigation (use with `fam-wood`, `fam-metal`, `fam-metal-sandblasted`, `fam-leather-bar` or `fam-leather-pebbled`; mark the current page with `aria-current="page"`):
 
 ```html
 <nav class="fam-nav fam-wood" aria-label="Main">

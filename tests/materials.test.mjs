@@ -58,7 +58,7 @@ test('materials load their textures', async () => {
     assert.deepEqual(kit.issues, []);
     const styles = await kit.page.evaluate(() =>
       Object.fromEntries(
-        ['wood', 'metal', 'metal-sandblasted', 'leather', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
+        ['wood', 'metal', 'metal-sandblasted', 'leather', 'pebbled-tan', 'pebbled-black', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
           id,
           getComputedStyle(document.getElementById(id)).backgroundImage,
         ]),
@@ -76,6 +76,11 @@ test('materials load their textures', async () => {
     );
     assert.ok(barImages[0].includes('leather-bar-edge-tan.png') && barImages[0].includes('leather-fill-tan-tile.jpg'), barImages[0]);
     assert.ok(barImages[1].includes('leather-bar-edge-black.png') && barImages[1].includes('leather-fill-black-tile.jpg'), barImages[1]);
+    const pebbledImages = await kit.page.evaluate(() =>
+      ['pebbled-tan', 'pebbled-black'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
+    );
+    assert.ok(pebbledImages[0].includes('leather-fill-tan-tile.jpg') && !pebbledImages[0].includes('bar-edge'), pebbledImages[0]);
+    assert.ok(pebbledImages[1].includes('leather-fill-black-tile.jpg') && !pebbledImages[1].includes('bar-edge'), pebbledImages[1]);
   } finally {
     await kit.close();
   }

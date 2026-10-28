@@ -95,6 +95,15 @@
     var(--fam-tex-leather-fill-black-tile) 0 0 / 168px 51.5px repeat;
 }
 
+/* The frame's leather on its own, with no stitched edge */
+.fam-leather-pebbled {
+  background: var(--fam-tex-leather-fill-tan-tile) 0 0 / 168px 51.5px repeat;
+}
+
+.fam-leather-pebbled--black {
+  background: var(--fam-tex-leather-fill-black-tile) 0 0 / 168px 51.5px repeat;
+}
+
 /* 9-slice wood frame: 402px square image, 51 device px slices, drawn at half size so a 26px border stays sharp on 2x screens.
    The ::after overlay sits over the content, so it can put the inset shadow where the content meets the frame and, for --glossy, a sheen over the image. */
 .fam-wood-frame {
