@@ -17,7 +17,7 @@
 - Tiles never stretch and a material you do not use is never downloaded. Tile files should stay between 13 KB and 85 KB; a tile that needs more goes over, and `CREDITS.md` says why.
 - The paneled wood tile must show no bolt or nail. If a planks crop cannot tile without a visible seam or repeat, drop paneled wood, tell the owner, and ship no substitute.
 - Class names: `fam-metal`, `fam-metal-button--sandblasted`, `fam-leather-pebbled` (modifiers `--black`, `--brown`), `fam-leather-frame--brown`, `fam-leather-bar--brown`, `fam-wood-paneled`, `fam-linen`, `fam-cardboard`, `fam-denim`, `fam-paper-bag`. Asset names: `<material>-tile.jpg`.
-- Linen and denim take their own tint variable, like `--fam-cardstock-tint`: `--fam-linen-tint` (default gray) and `--fam-denim-tint` (default indigo). One shared `--fam-tint` cannot have two defaults. Cardboard and paper bag keep their photo colors.
+- Linen and denim take their own tint variable, like `--fam-cardstock-tint`: `--fam-linen-tint` (default dark gray) and `--fam-denim-tint` (default indigo). One shared `--fam-tint` cannot have two defaults. Cardboard and paper bag keep their photo colors.
 - Source photos are already in `textures/`. Credit each in `CREDITS.md` with the photographer (the name inside the file name) and the exact command that made the asset.
 - Commit messages are imperative, one commit per material, and end with `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`. Do not `git add` the untracked `references/` or `textures/` photos unrelated to the task.
 - Files end with a newline. Comments say why, never what. Follow the surrounding CSS style.
@@ -117,7 +117,7 @@ The black frame and fill are neutral gray (fill mean is about 45,45,45), the tan
 - Produces: `fam-linen` reading `--fam-linen-tint`
 
 - [ ] **Step 1:** Checklist step 1 with id `linen`, plus a test `linen takes its tint` setting `--fam-linen-tint:#000` and then `#fff` on `#linen` and asserting `backgroundColor` is `rgb(0, 0, 0)` and `rgb(255, 255, 255)`. Expect FAIL.
-- [ ] **Step 2:** Checklist steps 2 and 3. Class shape follows `.fam-felt`: `background-color: var(--fam-linen-tint, #cfcfcf)`, the tile, `background-blend-mode: multiply`. The default tint is gray.
+- [ ] **Step 2:** Checklist steps 2 and 3. Class shape follows `.fam-felt`: `background-color: var(--fam-linen-tint, #666666)`, the tile, `background-blend-mode: multiply`. The default tint is dark gray.
 - [ ] **Step 3:** Checklist steps 4 to 8, with a light nav on the default tint. Add a tinted row (three tints) under the "Felt in any color" heading's pattern only if it fits the page. Commit message: `Add linen that takes a tint`.
 
 ### Task 6: Cardboard
