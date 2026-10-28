@@ -450,11 +450,11 @@ body {
 .tray {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px 34px;
+  gap: 18px 22px;
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 18px 26px;
   border-radius: 16px;
