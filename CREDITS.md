@@ -23,7 +23,7 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `paper-tile.jpg` | `paper_olga-thelavart-vS3idIiYxX0-unsplash.jpg` | olga-thelavart | `make_tile.py 0.3 512 80` |
 | `cardboard-tile.jpg` | not in the repository | kiwihug | `make_tile.py 0.2 512 60` |
 | `lined-paper-tile.jpg` | `lined-paper_heather-green-hKfKmfvPY44-unsplash.jpg` | heather-green | `make_ruled_tile.py ... 1000 1563 2618 2618 300 648 648`, twelve rules from one rule to the rule twelve below it |
-| `grid-paper-tile.jpg` | not in the repository | juliette-jardin | `make_ruled_tile.py ... 2044 965 1998 2055 300 576 576`, twelve squares across and down, from a flat patch of the crumpled sheet |
+| `grid-paper-tile.jpg` | not in the repository | juliette-jardin | `make_grid_tile.py ... 2044 965 166.5 171.25 12 2 48`, twelve squares across and down, with the crumpled sheet's grid straightened |
 | `blackboard-tile.jpg` | not in the repository | noita-digital | `make_tile.py 0.35 512 70` |
 | `chalkboard-tile.jpg` | not in the repository | aleyna-catak | `make_tile.py 0.45 512 70`, from the center so the ledge and chalk at the bottom of the photo are left out |
 | `paper-bag-tile.jpg` | not in the repository | heather-green | `make_tile.py 0.3 512 60`, from the center so the photo's fold shadow is left out |
@@ -47,3 +47,5 @@ The scripts are in `tools/texture-pipeline/` and the source photos that are in t
 `examples/tree.jpg` is the photo on the frames example page, by mehrab-sium (Unsplash), resized.
 
 `showcase/images/ribbon.jpg` is the photo by boliviainteligente (Unsplash), resized. `showcase/images/tree.jpg` is the same tree photo as `examples/tree.jpg`.
+
+`examples/snow-leopard.jpg` and `showcase/images/snow-leopard.jpg` are the landscape photo on the frames example and Materials pages. [Snow leopard in snow 2](https://commons.wikimedia.org/wiki/File:Snow_leopard_in_snow_2.jpg) by [Nicolas Goulet](https://www.flickr.com/photos/nicolasgoulet/5361403415/) is licensed under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (modified). The photo was edited and resized.

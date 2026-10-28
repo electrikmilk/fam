@@ -111,6 +111,15 @@ test('credits cite only source photos that are committed', async () => {
   assert.deepEqual(untracked, [], 'CREDITS.md cites source photos that are not in the repository');
 });
 
+// 0.04 of a 24px cell is about a pixel. The photographed sheet this tile came from was not flat, and cut straight from it the lines strayed by 0.08 and more.
+const MAXIMUM_GRID_WANDER = 0.04;
+
+test('the grid paper lines are evenly spaced', () => {
+  const script = fileURLToPath(new URL('../tools/texture-pipeline/grid_regularity.py', import.meta.url));
+  const wander = Number(execFileSync('python3', ['-I', script, assetPath('grid-paper-tile.jpg'), '12'], { encoding: 'utf8' }));
+  assert.ok(wander <= MAXIMUM_GRID_WANDER, `the grid lines stray ${wander} of a cell from even spacing`);
+});
+
 // Horizontal planks differ row to row, so the rows spread far more than the columns; the vertical source photo scores well under 1
 const MINIMUM_PLANK_DIRECTION_RATIO = 3;
 
