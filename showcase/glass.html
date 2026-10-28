@@ -53,7 +53,7 @@
 
     <div class="scene" id="lens-intro">
       <h2 class="scene-title" id="glass-heading">Try the lens</h2>
-      <p class="scene-lead">A glass lens follows your pointer over the picture. Turn the knobs to change its blur, glow and radius, and use the switch to turn refraction on or off. The markup under the tray updates to match.</p>
+      <p class="scene-lead">A glass lens follows your pointer over the picture. Turn the knobs to change its blur, glow, radius, bend and fringe, and use the switch to turn refraction on or off. The markup under the tray updates to match.</p>
     </div>
 
     <section class="glass-band" id="glass" aria-labelledby="glass-heading">
@@ -72,13 +72,21 @@
           <span class="fam-engraved-metal">Radius</span>
         </div>
         <div class="knobwrap">
+          <div class="fam-knob fam-cast-lg" id="knob-bend" role="slider" tabindex="0" aria-label="Bend" aria-valuemin="0" aria-valuemax="30" aria-valuenow="10" aria-valuetext="1" data-divisor="10" data-unit="" style="--fam-knob-angle: -45deg"></div>
+          <span class="fam-engraved-metal">Bend</span>
+        </div>
+        <div class="knobwrap">
+          <div class="fam-knob fam-cast-lg" id="knob-fringe" role="slider" tabindex="0" aria-label="Fringe" aria-valuemin="0" aria-valuemax="50" aria-valuenow="10" aria-valuetext="0.1" data-divisor="100" data-unit="" style="--fam-knob-angle: -81deg"></div>
+          <span class="fam-engraved-metal">Fringe</span>
+        </div>
+        <div class="knobwrap">
           <label class="fam-switch"><input type="checkbox" role="switch" id="refract-switch" aria-label="Refract" checked><span class="fam-switch-knob"></span></label>
           <span class="fam-engraved-metal">Refract</span>
         </div>
       </div>
       <div class="glass-notes">
         <p class="note">Refraction shows in Chromium browsers. Elsewhere the lens is clear glass.</p>
-        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"&gt;&lt;/div&gt;</code></p>
+        <p class="cap"><b>glass</b> <code class="copyable" id="readout" data-label="the glass lens markup">&lt;div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px; --fam-refract-amount: 1; --fam-refract-dispersion: 0.1"&gt;&lt;/div&gt;</code></p>
       </div>
     </section>
 

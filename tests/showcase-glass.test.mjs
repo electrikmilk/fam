@@ -4,11 +4,17 @@ import { openUrl, showcasePageUrl } from './helpers/browser.mjs';
 
 const glassUrl = showcasePageUrl('glass');
 
-const DEFAULT_READOUT = '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px"></div>';
+const DEFAULT_READOUT =
+  '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px; --fam-refract-amount: 1; --fam-refract-dispersion: 0.1"></div>';
 const KNOBS = {
   blur: { min: 0, max: 30, initial: '3' },
   glow: { min: 0, max: 40, initial: '18' },
   radius: { min: 0, max: 90, initial: '90' },
+};
+// These turn in whole steps that stand for a fraction: a step is 1 / divisor of the CSS value, and the CSS value has no unit
+const FRACTION_KNOBS = {
+  bend: { min: 0, max: 30, initial: '10', initialText: '1', variable: '--fam-refract-amount', divisor: 10 },
+  fringe: { min: 0, max: 50, initial: '10', initialText: '0.1', variable: '--fam-refract-dispersion', divisor: 100 },
 };
 
 // The tick sweeps from -135deg at the minimum to 135deg at the maximum
@@ -218,3 +224,60 @@ for (const width of [1440, 768, 375]) {
     }
   });
 }
+
+test('the bend and fringe knobs are drawn at their defaults with JavaScript off', async () => {
+  const page = await openUrl(glassUrl, { javaScriptEnabled: false });
+  try {
+    for (const [name, knob] of Object.entries(FRACTION_KNOBS)) {
+      const selector = `#knob-${name}`;
+      assert.equal(await attribute(page.page, selector, 'role'), 'slider');
+      assert.ok(await attribute(page.page, selector, 'aria-label'));
+      assert.equal(await attribute(page.page, selector, 'aria-valuemin'), String(knob.min));
+      assert.equal(await attribute(page.page, selector, 'aria-valuemax'), String(knob.max));
+      assert.equal(await attribute(page.page, selector, 'aria-valuenow'), knob.initial);
+      assert.equal(await attribute(page.page, selector, 'aria-valuetext'), knob.initialText);
+      assert.equal(await knobAngle(page.page, selector), angleFor(knob), `${name} knob is drawn at its value`);
+    }
+  } finally {
+    await page.close();
+  }
+});
+
+test('the bend and fringe knobs set their variable as a plain number and show it in the readout', async () => {
+  const page = await openUrl(glassUrl);
+  try {
+    for (const [name, knob] of Object.entries(FRACTION_KNOBS)) {
+      const selector = `#knob-${name}`;
+      await page.page.focus(selector);
+      await press(page.page, 'ArrowUp', 5);
+      const expected = String((Number(knob.initial) + 5) / knob.divisor);
+      assert.equal(await attribute(page.page, selector, 'aria-valuenow'), String(Number(knob.initial) + 5), `${name} after five steps`);
+      assert.equal(await attribute(page.page, selector, 'aria-valuetext'), expected);
+      assert.equal(await lensVariable(page.page, knob.variable), expected);
+      assert.ok((await readout(page.page)).includes(`${knob.variable}: ${expected}`), await readout(page.page));
+      await press(page.page, 'End');
+      assert.equal(await attribute(page.page, selector, 'aria-valuenow'), String(knob.max));
+      assert.equal(await lensVariable(page.page, knob.variable), String(knob.max / knob.divisor));
+      await press(page.page, 'Home');
+      assert.equal(await attribute(page.page, selector, 'aria-valuetext'), '0');
+      assert.equal(await lensVariable(page.page, knob.variable), '0');
+    }
+  } finally {
+    await page.close();
+  }
+});
+
+test('frosted glass leaves bend and fringe out of the markup and gets them back when refraction returns', async () => {
+  const page = await openUrl(glassUrl);
+  try {
+    await page.page.locator('#refract-switch').scrollIntoViewIfNeeded();
+    await page.page.focus('#knob-bend');
+    await press(page.page, 'ArrowUp', 5);
+    await page.page.locator('.fam-switch:has(#refract-switch)').click();
+    assert.equal(await readout(page.page), '<div class="fam-glass" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-glass-blur: 14px"></div>');
+    await page.page.locator('.fam-switch:has(#refract-switch)').click();
+    assert.ok((await readout(page.page)).endsWith('--fam-refract-amount: 1.5; --fam-refract-dispersion: 0.1"></div>'), await readout(page.page));
+  } finally {
+    await page.close();
+  }
+});
