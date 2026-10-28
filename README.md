@@ -88,6 +88,7 @@ Put a material class on any box:
 - `fam-leather-bar`: tan leather with a stitched bottom edge, for navigation bars. See [Navigation](#components).
 - `fam-paper`: white textured paper, for lists and note panels.
 - `fam-cardboard`: linerboard with faint ridges, for panels.
+- `fam-paper-bag`: golden kraft paper, for panels.
 - `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
 - `fam-cardstock`: natural light cardstock. Set `--fam-cardstock-tint` to multiply the texture onto a color; `#562a0e` gives brown cardstock for title bars, where white text reads well.
 - `fam-legal-pad`: yellow ruled paper with a red double margin. Its rules are 24px apart, so give text a 24px line height to sit on them.
