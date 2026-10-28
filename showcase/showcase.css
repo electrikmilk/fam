@@ -318,6 +318,12 @@ body {
   gap: 14px;
 }
 
+.tint-label {
+  margin: 16px 0 8px;
+  font: 12px ui-monospace, Menlo, monospace;
+  color: #b8bcc6;
+}
+
 .tint {
   display: block;
   width: 64px;
@@ -334,6 +340,7 @@ body {
   background: linear-gradient(#dfe3e9, #c4cad3);
 }
 
+.build-panel > .stage:first-child { margin-top: 0; }
 .stage h2 { color: #1b2a40; }
 .stage h2:first-child { margin-top: 0; }
 

@@ -36,9 +36,9 @@ Beyond the look:
 
 A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 
-- Home: the two ways to use Fam (as a framework, or as texture behind a flat UI) and a switcher that shows one pairing at a time, with the classes it uses.
-- Materials: every texture, the felt, linen, denim and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, metal on metal, legal pad and leather, cardstock and legal pad, leather and paper.
-- Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, LEDs, the switch and knob, progress tubes, glass fields, the search pill, list rows, zebra tables, recessed fields and the leather button, each alone with its disabled look.
+- Home: the two ways to use Fam (as a framework, or as texture behind a flat UI) and a switcher that shows one pairing at a time, with the classes it uses: wood and felt, leather and paper, metal and plastic, the plastic panel, legal pad and leather, photo frames and cork, and glass.
+- Materials: every texture, the felt, linen, denim and cardstock tints, the gloss, rounding and shadow effects, plus navigation bars, photo frames with cork and engraved text.
+- Controls: documentation for each kind of control, with its classes and every variant, including its disabled look: buttons (plastic, metal, brushed metal, wood, leather, glossy and glass, and button groups), radio buttons, tabs, knobs and dials, switches and toggle LEDs, LEDs, progress tubes, fields (glass, search pill and recessed), and lists and tables.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
 - Examples: the pages in `examples/`.
 
@@ -80,8 +80,8 @@ Put a material class on any box:
 - `fam-denim`: denim twill that takes a tint. Set `--fam-denim-tint` (indigo by default).
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
 - `fam-wood-paneled`: dark horizontal planks, for navigation bars and panels. Its text is light.
-- `fam-metal-brushed`: brushed metal, for plates, toolbars, navigation bars and panels.
-- `fam-metal`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`. `fam-metal` used to be the brushed metal, so switch an old use of it to `fam-metal-brushed`.
+- `fam-metal`: fine sandblasted metal, for plates, toolbars, navigation bars and panels. Its buttons are `fam-metal-button`.
+- `fam-metal-brushed`: brushed metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--brushed`. `fam-metal` used to be the brushed metal, so switch an old use of it to `fam-metal-brushed`.
 - `fam-plastic-panel`: cream satin plastic for controls to sit on. Use it with a `fam-round-*` class.
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-leather-pebbled`: the leather frame's pebbled leather with no stitched edge, in tan; add `fam-leather-pebbled--black` for black or `fam-leather-pebbled--brown` for dark brown.
@@ -210,12 +210,20 @@ Plastic buttons and the knob:
 
 Round and square buttons have a round dish. A disabled button sinks into its case with a darker face and a muted label.
 
-Metal buttons are the same family in brushed metal, with `--round` and `--square` for icons. Add `fam-metal-button--sandblasted` for the sandblasted metal of `fam-metal`:
+Metal buttons are the same family in the metal of `fam-metal`, with `--round` and `--square` for icons. Add `fam-metal-button--brushed` for the brushed metal of `fam-metal-brushed`:
 
 ```html
 <button class="fam-metal-button" type="button">Eject</button>
 <button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info">i</button>
-<button class="fam-metal-button fam-metal-button--sandblasted" type="button">Eject</button>
+<button class="fam-metal-button fam-metal-button--brushed" type="button">Eject</button>
+```
+
+Wooden buttons are the same family in the wood of the navigation bar, with `--round` and `--square` for icons. Add `fam-wood-button--paneled` for the dark planks of `fam-wood-paneled`, which have light ink:
+
+```html
+<button class="fam-wood-button" type="button">Open</button>
+<button class="fam-wood-button fam-wood-button--round" type="button" aria-label="Info">i</button>
+<button class="fam-wood-button fam-wood-button--paneled" type="button">Open</button>
 ```
 
 Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam-gloss-soft` and `fam-gloss-strong` dial its sheen) and the glass one is the frosted pill, so put it on a dark surface:
@@ -359,7 +367,7 @@ Small dark text on natural light cardstock cannot reach 4.5:1 at its worst pixel
 - On a plain element a shadow class sets its `box-shadow`. A `fam-shadow-sm/md/lg` or `fam-cast-sm/md/lg` class also lifts plastic and metal buttons, the dial, the knob and the thumb of a switch, whose track stays sunken: the class names its shadow in `--fam-elevation` and these controls add it to the shadows they draw. A pressed or disabled button has sunk into its case and loses the lift. `--fam-elevation` does not inherit, so a button inside an elevated card is not lifted too. On any other element that draws its own shadow, such as the pill, the glossy button, the frames and the templates, the class has no effect, so put it on a wrapper with the same radius, for example `<span class="fam-cast-md fam-round-pill" style="display: inline-block"><button class="fam-pill" type="button">Save</button></span>`. Make the wrapper `inline-block` or a block: an inline one is only as tall as a line of text, so its shadow would not match the element. `fam-grounded-*` draws its ellipse with the element's `::after` and shows nothing on an element that clips its overflow (`overflow: hidden` or `auto`) or has no `::after` (`<img>`, `<input>`), so put it on a wrapper for any element that does either. That covers most of the kit: every `fam-plastic`, `fam-metal-button`, `fam-pill`, `fam-glossy-button`, `fam-glass`, `fam-wood-frame`, `fam-print-frame`, `fam-stitched`, `fam-dial`, `fam-knob`, the cells of a `fam-button-group`, `fam-recessed`, `fam-menu`, `fam-progress` and the templates.
 - Rounding: `fam-round-sm` (6px), `fam-round-md` (12px), `fam-round-lg` (20px), `fam-round-pill`. For a box inside padding, set `--fam-outer-radius` and `--fam-pad` on the outer box and use `fam-concentric` on the inner one, so the gap stays even.
 - Aqua pill with a gloss you can dial: `fam-pill` with `fam-gloss-none`, `fam-gloss-soft` or `fam-gloss-strong`.
-- Engraved text: `fam-engraved-metal` (on brushed or sandblasted metal), `fam-engraved-wood`, `fam-engraved-leather`, on the matching material. `fam-engraved-leather-dark` is light text for black and brown leather, and `fam-engraved-wood-paneled` is light text for paneled wood.
+- Engraved text: `fam-engraved-metal` (on metal or brushed metal), `fam-engraved-wood`, `fam-engraved-leather`, on the matching material. `fam-engraved-leather-dark` is light text for black and brown leather, and `fam-engraved-wood-paneled` is light text for paneled wood.
 
 ## Templates
 

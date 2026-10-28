@@ -93,8 +93,6 @@ for (const pageName of PAGE_NAMES) {
   });
 }
 
-const SCENES = ['scene-wood-felt', 'scene-metal-metal', 'scene-legal-leather', 'scene-cardstock-legal', 'scene-leather-paper'];
-
 // The page may only claim what the package does: every class a caption names must be defined in the real stylesheet
 test('every class in a caption exists in the kit', async () => {
   const css = await readFile(new URL('../dist/fam-ui.css', import.meta.url), 'utf8');
@@ -102,7 +100,7 @@ test('every class in a caption exists in the kit', async () => {
   for (const pageName of PAGE_NAMES) {
     const page = await openUrl(showcasePageUrl(pageName));
     try {
-      const found = await page.page.$$eval('.cap code, .code-block code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []));
+      const found = await page.page.$$eval('.cap code, .code-block code, .ref-table code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []));
       for (const name of found) names.add(name);
     } finally {
       await page.close();
@@ -167,11 +165,11 @@ for (const pageName of SCENE_PAGE_NAMES) {
   });
 }
 
-test('the materials page holds the textures, then the bars, frames and engraved text, then the paired scenes', async () => {
+test('the materials page holds the textures, then the effects, bars, frames and engraved text', async () => {
   const page = await openUrl(materialsUrl);
   try {
     const ids = await page.page.$$eval('section.scene', (sections) => sections.map((section) => section.id));
-    assert.deepEqual(ids, ['scene-build', 'scene-navs', 'scene-frames', 'scene-engraved', ...SCENES]);
+    assert.deepEqual(ids, ['scene-build', 'scene-effects', 'scene-navs', 'scene-frames', 'scene-engraved']);
   } finally {
     await page.close();
   }
@@ -229,22 +227,24 @@ test('build your own shows every texture, labeled with the classes it uses', asy
   }
 });
 
-test('build your own shows felt in five colors', async () => {
+test('build your own shows felt, linen, denim and cardstock in five colors each', async () => {
   const page = await openUrl(materialsUrl);
   try {
-    const colors = await page.page.$$eval('#scene-build .tint', (tints) => tints.map((tint) => getComputedStyle(tint).backgroundColor));
-    assert.equal(colors.length, 5);
-    assert.equal(new Set(colors).size, 5);
+    for (const material of ['felt', 'linen', 'denim', 'cardstock']) {
+      const colors = await page.page.$$eval(`#scene-build .tint.fam-${material}`, (tints) => tints.map((tint) => getComputedStyle(tint).backgroundColor));
+      assert.equal(colors.length, 5, `${material} has ${colors.length} tints`);
+      assert.equal(new Set(colors).size, 5, `${material} tints are not five different colors`);
+    }
   } finally {
     await page.close();
   }
 });
 
-test('build your own shows gloss, rounding and shadow utilities', async () => {
+test('the effects section shows gloss, rounding and shadow utilities', async () => {
   const page = await openUrl(materialsUrl);
   try {
     const found = await page.page.evaluate(() => {
-      const scene = document.querySelector('#scene-build');
+      const scene = document.querySelector('#scene-effects');
       const has = (names) => names.map((name) => Boolean(scene.querySelector(`.${name}`)));
       return {
         gloss: has(['fam-gloss-none', 'fam-gloss-soft', 'fam-gloss-strong']),
@@ -276,19 +276,19 @@ test('every code block gets a copy button in its header that copies its markup',
       captions: document.querySelectorAll('code.copyable').length,
       captionButtons: document.querySelectorAll('code.copyable + button.copy').length,
     }));
-    assert.ok(counts.blocks >= SCENES.length, 'the code blocks are missing');
+    assert.ok(counts.blocks >= 3, 'the code blocks are missing');
     assert.equal(counts.headerButtons, counts.blocks);
     assert.equal(counts.captionButtons, counts.captions);
 
-    const first = page.page.locator('#scene-wood-felt .copy');
-    assert.ok((await first.getAttribute('aria-label')).includes('wood and felt'), 'the button does not say what it copies');
+    const first = page.page.locator('#scene-frames .copy');
+    assert.ok((await first.getAttribute('aria-label')).includes('photo frame and cork'), 'the button does not say what it copies');
     await first.click();
-    const expected = await page.page.textContent('#scene-wood-felt .code-block code');
-    assert.ok(expected.startsWith('<div class="fam-felt">'), 'the block does not hold the demo markup');
+    const expected = await page.page.textContent('#scene-frames .code-block code');
+    assert.ok(expected.startsWith('<figure class="fam-print-frame fam-paper">'), 'the block does not hold the demo markup');
     assert.deepEqual(await page.page.evaluate(() => window.__copied), [expected]);
     assert.equal(await first.textContent(), 'Copied');
     assert.ok((await page.page.textContent('[role="status"]')).includes('Copied'));
-    await page.page.waitForFunction(() => document.querySelector('#scene-wood-felt .copy').textContent === 'Copy', null, { timeout: 4000 });
+    await page.page.waitForFunction(() => document.querySelector('#scene-frames .copy').textContent === 'Copy', null, { timeout: 4000 });
   } finally {
     await page.close();
   }
@@ -330,9 +330,9 @@ test('code blocks show in full with JavaScript off', async () => {
 test('a refused copy says so', async () => {
   const page = await openUrl(materialsUrl, { initScript: REJECTING_CLIPBOARD });
   try {
-    const button = page.page.locator('#scene-wood-felt .copy');
+    const button = page.page.locator('#scene-frames .copy');
     await button.click();
-    await page.page.waitForFunction(() => document.querySelector('#scene-wood-felt .copy').textContent === 'Copy failed');
+    await page.page.waitForFunction(() => document.querySelector('#scene-frames .copy').textContent === 'Copy failed');
     assert.ok((await page.page.textContent('[role="status"]')).includes('Copy failed'));
   } finally {
     await page.close();
@@ -371,7 +371,7 @@ test('the pairing panels are all visible with JavaScript off', async () => {
   const page = await openUrl(showcaseUrl, { javaScriptEnabled: false });
   try {
     const panels = await page.page.$$eval('.pairing-panel', (elements) => elements.map((element) => ({ id: element.id, height: element.getBoundingClientRect().height })));
-    assert.equal(panels.length, 6);
+    assert.equal(panels.length, 7);
     for (const panel of panels) assert.ok(panel.height > 100, `${panel.id} is hidden`);
     assert.equal(await page.page.locator('[role="tab"]').count(), 0);
   } finally {
@@ -389,7 +389,7 @@ test('the pairing tabs show one panel at a time and follow the keyboard', async 
         tabbable: [...document.querySelectorAll('[role="tab"]')].filter((tab) => tab.tabIndex === 0).length,
       }));
     let current = await state();
-    assert.equal(current.selected.length, 6);
+    assert.equal(current.selected.length, 7);
     assert.deepEqual(current.visible, ['pairing-wood-felt']);
     assert.equal(current.tabbable, 1);
     assert.equal(await page.page.getAttribute('[role="tab"]', 'aria-controls'), 'pairing-wood-felt');
@@ -407,6 +407,9 @@ test('the pairing tabs show one panel at a time and follow the keyboard', async 
 
     await page.page.locator('[role="tab"]', { hasText: 'Metal and plastic' }).click();
     assert.deepEqual((await state()).visible, ['pairing-metal-plastic']);
+
+    await page.page.locator('[role="tab"]', { hasText: 'Plastic panel' }).click();
+    assert.deepEqual((await state()).visible, ['pairing-plastic-panel']);
   } finally {
     await page.close();
   }
@@ -431,7 +434,7 @@ test('the home page pairings show the markup that builds them', async () => {
   const page = await openUrl(showcaseUrl);
   try {
     assert.deepEqual(await page.page.evaluate(`(${MISMATCHES_SOURCE})('.pairing-panel')`), []);
-    assert.equal(await page.page.locator('.pairing-panel .code-block').count(), 5);
+    assert.equal(await page.page.locator('.pairing-panel .code-block').count(), 6);
   } finally {
     await page.close();
   }
@@ -448,7 +451,9 @@ test('the controls page shows each control alone with its variants', async () =>
         roundButtons: count('.window .fam-plastic--round'),
         squareButtons: count('.window .fam-plastic--square'),
         metalButtons: count('.window .fam-metal-button'),
-        sandblastedButtons: count('.window .fam-metal-button--sandblasted'),
+        brushedButtons: count('.window .fam-metal-button--brushed'),
+        woodButtons: count('.window .fam-wood-button:not(.fam-wood-button--paneled)'),
+        paneledWoodButtons: count('.window .fam-wood-button--paneled'),
         glossyButtons: count('.window .fam-glossy-button'),
         glassButtons: count('.window .fam-glass-button'),
         buttonGroups: count('.window .fam-button-group'),
@@ -476,7 +481,7 @@ test('the controls page shows each control alone with its variants', async () =>
         disabledControls: count('.window :disabled'),
       };
     });
-    assert.deepEqual(found.sections, ['scene-buttons', 'scene-glossy-glass', 'scene-radios', 'scene-tabs', 'scene-switch-knob', 'scene-plastic', 'scene-leds', 'scene-progress', 'scene-glass-fields', 'scene-search-list', 'scene-zebra-tables', 'scene-recessed', 'scene-focus']);
+    assert.deepEqual(found.sections, ['scene-buttons', 'scene-radios', 'scene-tabs', 'scene-knobs', 'scene-switches', 'scene-leds', 'scene-progress', 'scene-fields', 'scene-lists', 'scene-focus']);
     assert.ok(found.zebraBoxes >= 3 && found.lightInkBoxes >= 1 && found.zebraGrids >= 1, 'the zebra tables scene is missing a table, the light ink one or the selectable one');
     assert.ok(found.plasticColors.every((total) => total >= 1), 'a plastic color is missing');
     assert.ok(found.roundButtons >= 1 && found.squareButtons >= 1 && found.metalButtons >= 3 && found.glossyButtons >= 3 && found.glassButtons >= 2 && found.buttonGroups >= 5 && found.radios >= 12 && found.dials >= 3 && found.plasticPanels >= 2 && found.tabStrips >= 6 && found.knobs >= 3 && found.switches >= 3 && found.disabledSwitches >= 1);
@@ -484,7 +489,8 @@ test('the controls page shows each control alone with its variants', async () =>
     assert.deepEqual(found.fills, [1, 1, 1]);
     assert.ok(found.selects >= 1 && found.menus >= 1 && found.searches >= 1 && found.selectedRows === 1);
     assert.ok(found.recessedRows >= 2 && found.leatherButtons >= 2);
-    assert.ok(found.sandblastedButtons >= 3, 'the sandblasted metal buttons are missing');
+    assert.ok(found.brushedButtons >= 3, 'the brushed metal buttons are missing');
+    assert.ok(found.woodButtons >= 4 && found.paneledWoodButtons >= 4, 'the wooden buttons are missing');
     assert.ok(found.disabledControls >= 6, 'the disabled looks are missing');
   } finally {
     await page.close();
@@ -546,7 +552,7 @@ test('the site bar fits a phone screen on every page', async () => {
   }
 });
 
-const ZEBRA_ROWS = '#scene-zebra-tables table[role="grid"] tbody tr';
+const ZEBRA_ROWS = '#scene-lists table[role="grid"] tbody tr';
 
 const selectedRowIndexes = (page) => page.evaluate((selector) => [...document.querySelectorAll(selector)].flatMap((row, index) => (row.getAttribute('aria-selected') === 'true' ? [index] : [])), ZEBRA_ROWS);
 const focusedRowIndex = (page) => page.evaluate((selector) => [...document.querySelectorAll(selector)].indexOf(document.activeElement), ZEBRA_ROWS);
@@ -602,7 +608,7 @@ test('a zebra row reached with the keyboard is not hidden under the sticky heade
   const page = await openUrl(showcasePageUrl('controls'));
   try {
     const clearance = () => page.page.evaluate(() => {
-      const grid = document.querySelector('#scene-zebra-tables table[role="grid"]');
+      const grid = document.querySelector('#scene-lists table[role="grid"]');
       return document.activeElement.getBoundingClientRect().top - grid.querySelector('th').getBoundingClientRect().bottom;
     });
     const lastIndex = (await page.page.locator(ZEBRA_ROWS).count()) - 1;

@@ -551,15 +551,51 @@ html { scroll-behavior: smooth; }
   padding: 28px;
 }
 
-/* A heading that groups the scenes below it, so it reads as a rule with a label rather than as another scene title */
-.group-title {
-  margin: 0;
+/* The heading of one variant inside a control's section, so it reads as a rule with a label rather than as another section title */
+.variant-title {
+  margin: 44px 0 14px;
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, .14);
   font: 900 14px/1.2 var(--site-font);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--site-accent);
+}
+
+/* The classes a control takes, listed above its examples like an API reference */
+.ref-table {
+  width: 100%;
+  margin: 0 0 8px;
+  border-collapse: collapse;
+  font: 400 16px/1.5 var(--site-font);
+  color: var(--site-muted);
+}
+
+.ref-table th {
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, .22);
+  text-align: left;
+  font: 900 12px/1.2 var(--site-font);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--site-accent);
+}
+
+.ref-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  vertical-align: top;
+}
+
+.ref-table td:first-child { width: 34%; }
+.ref-table code { font: 14px ui-monospace, Menlo, monospace; color: #fff; overflow-wrap: anywhere; }
+
+@media (max-width: 700px) {
+  .ref-table thead { display: none; }
+  .ref-table, .ref-table tbody, .ref-table tr, .ref-table td { display: block; width: 100%; box-sizing: border-box; }
+  .ref-table tr { padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, .1); }
+  .ref-table td { padding: 2px 14px; border: 0; }
+  .ref-table td:first-child { width: 100%; }
 }
 
 /* Each cell is a different surface, so the focus ring is seen against metal, felt and wood */
@@ -574,6 +610,9 @@ html { scroll-behavior: smooth; }
   min-height: 130px;
   padding: 28px;
 }
+
+/* A stage whose content is not a row of controls, such as a field, a list or a table */
+.controls-stage--block { display: block; padding: 20px; }
 
 /* A scene with several demos separates each one from the code block above it */
 .code-block + .window { margin-top: 20px; }
@@ -593,9 +632,7 @@ html { scroll-behavior: smooth; }
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3);
 }
 
-#scene-switch-knob .controls-stage { gap: 28px; }
-
-#scene-leds .controls-stage {
+.controls-stage--leds {
   gap: 8px 16px;
   align-items: flex-start;
 }
@@ -611,10 +648,6 @@ html { scroll-behavior: smooth; }
   gap: 18px;
   align-items: start;
 }
-#scene-search-list .controls-stage { display: block; padding: 20px; }
-#scene-zebra-tables .controls-stage { display: block; padding: 20px; }
-#scene-recessed .controls-stage { display: block; padding: 22px; }
-#scene-recessed .fam-leather-button { margin-top: 14px; margin-right: 12px; }
 
 /* Six items do not fit a phone, and the brand already links home */
 @media (max-width: 480px) {

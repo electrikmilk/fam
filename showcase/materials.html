@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Materials - Fam</title>
-  <meta name="description" content="Every Fam texture, the felt and cardstock tints, gloss, rounding and shadows, and materials paired in scenes.">
+  <meta name="description" content="Every Fam texture, the felt, linen, denim and cardstock tints, the gloss, rounding and shadow effects, navigation bars, photo frames and engraved text.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
@@ -26,17 +26,13 @@
     <header class="page-head">
       <p class="eyebrow">Materials</p>
       <h1>One class for every texture</h1>
-      <p class="lead">Each material is a single class on any box. Felt, linen, denim and cardstock take a tint, and gloss, rounding and shadows are classes too. Below the textures are the navigation bars, photo frames and engraved text made from them, then scenes that pair materials, each with its markup and a button that copies it.</p>
+      <p class="lead">Each material is a single class on any box. Felt, linen, denim and cardstock take a tint. Below the textures are the effects (gloss, rounding and shadows), the navigation bars, photo frames and engraved text made from them, each with its markup and a button that copies it.</p>
     <nav class="jump" aria-label="On this page">
       <a href="#scene-build">Textures</a>
+      <a href="#scene-effects">Effects</a>
       <a href="#scene-navs">Navigation bars</a>
       <a href="#scene-frames">Photo frames and cork</a>
       <a href="#scene-engraved">Engraved text</a>
-      <a href="#scene-wood-felt">Wood and felt</a>
-      <a href="#scene-metal-metal">Metal on metal</a>
-      <a href="#scene-legal-leather">Legal pad and leather</a>
-      <a href="#scene-cardstock-legal">Cardstock and legal pad</a>
-      <a href="#scene-leather-paper">Leather and paper</a>
     </nav>
     </header>
 
@@ -71,7 +67,8 @@
             <figure class="sq"><span class="swatch fam-leather-frame fam-leather-frame--brown"></span><figcaption>fam-leather-frame--brown</figcaption></figure>
         </div>
 
-        <h2>Felt in any color: <code>--fam-tint</code></h2>
+        <h2>Tinted materials in any color</h2>
+        <p class="tint-label"><code>--fam-tint</code> on <code>fam-felt</code></p>
         <div class="tints">
             <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#1f7a3d"></span><figcaption>green</figcaption></figure>
             <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#1d4fa8"></span><figcaption>blue</figcaption></figure>
@@ -79,7 +76,38 @@
             <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#6b3fa0"></span><figcaption>purple</figcaption></figure>
             <figure class="sq tint-sq"><span class="tint fam-felt" style="--fam-tint:#c7a23a"></span><figcaption>gold</figcaption></figure>
         </div>
+        <p class="tint-label"><code>--fam-linen-tint</code> on <code>fam-linen</code></p>
+        <div class="tints">
+            <figure class="sq tint-sq"><span class="tint fam-linen" style="--fam-linen-tint:#1f7a3d"></span><figcaption>green</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-linen" style="--fam-linen-tint:#1d4fa8"></span><figcaption>blue</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-linen" style="--fam-linen-tint:#8a1f2b"></span><figcaption>burgundy</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-linen" style="--fam-linen-tint:#6b3fa0"></span><figcaption>purple</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-linen" style="--fam-linen-tint:#c7a23a"></span><figcaption>gold</figcaption></figure>
+        </div>
+        <p class="tint-label"><code>--fam-denim-tint</code> on <code>fam-denim</code></p>
+        <div class="tints">
+            <figure class="sq tint-sq"><span class="tint fam-denim" style="--fam-denim-tint:#1f7a3d"></span><figcaption>green</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-denim" style="--fam-denim-tint:#1d4fa8"></span><figcaption>blue</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-denim" style="--fam-denim-tint:#8a1f2b"></span><figcaption>burgundy</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-denim" style="--fam-denim-tint:#6b3fa0"></span><figcaption>purple</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-denim" style="--fam-denim-tint:#c7a23a"></span><figcaption>gold</figcaption></figure>
+        </div>
+        <p class="tint-label"><code>--fam-cardstock-tint</code> on <code>fam-cardstock</code></p>
+        <div class="tints">
+            <figure class="sq tint-sq"><span class="tint fam-cardstock" style="--fam-cardstock-tint:#1f7a3d"></span><figcaption>green</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-cardstock" style="--fam-cardstock-tint:#1d4fa8"></span><figcaption>blue</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-cardstock" style="--fam-cardstock-tint:#8a1f2b"></span><figcaption>burgundy</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-cardstock" style="--fam-cardstock-tint:#6b3fa0"></span><figcaption>purple</figcaption></figure>
+            <figure class="sq tint-sq"><span class="tint fam-cardstock" style="--fam-cardstock-tint:#c7a23a"></span><figcaption>gold</figcaption></figure>
+        </div>
+      </div>
+      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-linen fam-denim fam-wood fam-wood-paneled fam-metal-brushed fam-metal fam-leather fam-leather-pebbled fam-paper fam-paper-bag fam-lined-paper fam-grid-paper fam-blackboard fam-chalkboard fam-cork fam-cardboard fam-cardstock fam-legal-pad fam-leather-frame</code></p>
+    </section>
 
+    <section class="scene" id="scene-effects">
+      <h2 class="scene-title">Effects</h2>
+      <p class="scene-lead">Gloss, rounding and shadows are classes you add to any box, whatever its texture.</p>
+      <div class="window build-panel">
         <div class="stage">
           <h2>Gloss</h2>
           <div class="row">
@@ -105,13 +133,13 @@
           </div>
         </div>
       </div>
-      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-linen fam-denim fam-wood fam-wood-paneled fam-metal-brushed fam-metal fam-leather fam-leather-pebbled fam-paper fam-paper-bag fam-lined-paper fam-grid-paper fam-blackboard fam-chalkboard fam-cork fam-cardboard fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
+      <p class="cap"><b>combine effects</b> <code class="copyable">fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
       <p class="cap"><b>cast and grounded shadows</b> <code class="copyable">fam-cast-md</code> <code class="copyable">fam-grounded-md</code> Put either on an inline-block or block wrapper with the same radius when the element has shading of its own or clips its overflow, such as a button or the pill.</p>
     </section>
 
     <section class="scene" id="scene-navs">
       <h2 class="scene-title">Navigation bars</h2>
-      <p class="scene-lead">Wood, paneled wood, paper, cardstock, brushed metal, sandblasted metal and stitched tan, black and brown leather bars share one set of items.</p>
+      <p class="scene-lead">Wood, paneled wood, paper, cardstock, metal, brushed metal and stitched tan, black and brown leather bars share one set of items.</p>
       <div class="window navs-window">
         <nav class="fam-nav fam-wood" aria-label="Wood navigation">
           <span class="fam-nav-brand">fam</span>
@@ -143,7 +171,7 @@
           <span class="fam-nav-item">Library</span>
           <span class="fam-nav-item">About</span>
         </nav>
-        <nav class="fam-nav fam-metal" aria-label="Sandblasted metal navigation">
+        <nav class="fam-nav fam-metal" aria-label="Metal navigation">
           <span class="fam-nav-brand">fam</span>
           <span class="fam-nav-item" aria-current="page">Home</span>
           <span class="fam-nav-item">Library</span>
@@ -209,7 +237,7 @@
 
     <section class="scene" id="scene-engraved">
       <h2 class="scene-title">Engraved text</h2>
-      <p class="scene-lead">Text pressed into brushed and sandblasted metal, leather, dark leather, wood and paneled wood.</p>
+      <p class="scene-lead">Text pressed into metal and brushed metal, leather, dark leather, wood and paneled wood.</p>
       <div class="panels">
         <div class="window fam-metal-brushed panel"><span class="fam-engraved-metal">SETTINGS</span></div>
         <div class="window fam-metal panel"><span class="fam-engraved-metal">OPTIONS</span></div>
@@ -230,137 +258,6 @@
 &lt;div class="fam-leather-pebbled fam-leather-pebbled--brown" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather-dark"&gt;Diary&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-wood" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood"&gt;LIBRARY&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-wood-paneled" style="display: grid; place-items: center; height: 110px; background-position: 0 -39px"&gt;&lt;span class="fam-engraved-wood-paneled"&gt;PLANKS&lt;/span&gt;&lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <div class="scene" id="pairings">
-      <h2 class="scene-title">Pairings</h2>
-      <p class="scene-lead">Materials are classes you combine. Each scene pairs materials, with its markup and a button that copies it.</p>
-    </div>
-
-    <section class="scene" id="scene-wood-felt">
-      <h2 class="scene-title">Wood and felt</h2>
-      <p class="scene-lead">The look of a game table: a wooden bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
-      <div class="window fam-felt">
-        <nav class="fam-nav fam-wood" aria-label="Sample navigation">
-          <span class="fam-nav-brand">fam</span>
-          <span class="fam-nav-item" aria-current="page">Controls</span>
-          <span class="fam-nav-item">Progress</span>
-        </nav>
-        <div class="controls-row">
-          <div class="fam-glass field"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
-          <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label>
-          <div class="fam-progress bar" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value:68%"><div class="fam-progress-fill fam-progress-fill--candy"></div></div>
-        </div>
-      </div>
-      <div class="code-block" role="group" aria-label="The wood and felt markup" data-label="the wood and felt markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-felt"&gt;
-  &lt;nav class="fam-nav fam-wood" aria-label="Sample navigation"&gt;
-    &lt;span class="fam-nav-brand"&gt;fam&lt;/span&gt;
-    &lt;span class="fam-nav-item" aria-current="page"&gt;Controls&lt;/span&gt;
-    &lt;span class="fam-nav-item"&gt;Progress&lt;/span&gt;
-  &lt;/nav&gt;
-  &lt;div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: center; padding: 24px 26px"&gt;
-    &lt;div class="fam-glass" style="width: 220px"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;
-    &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Wi-Fi" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
-    &lt;div class="fam-progress" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="flex: 1 1 160px; --fam-value: 68%"&gt;
-      &lt;div class="fam-progress-fill fam-progress-fill--candy"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-metal-metal">
-      <h2 class="scene-title">Metal on metal</h2>
-      <p class="scene-lead">A hardware panel: metal buttons on a brushed metal plate, with its label engraved into the plate.</p>
-      <div class="window fam-metal-brushed metal-controls">
-        <span class="fam-engraved-metal">Deck</span>
-        <button class="fam-metal-button fam-shadow-md" type="button">Play</button>
-        <button class="fam-metal-button fam-shadow-md" type="button">Stop</button>
-        <button class="fam-metal-button fam-metal-button--round fam-shadow-md" type="button" aria-label="Eject">E</button>
-      </div>
-      <div class="code-block" role="group" aria-label="The metal on metal markup" data-label="the metal on metal markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
-  &lt;span class="fam-engraved-metal"&gt;Deck&lt;/span&gt;
-  &lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Play&lt;/button&gt;
-  &lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Stop&lt;/button&gt;
-  &lt;button class="fam-metal-button fam-metal-button--round fam-shadow-md" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-legal-leather">
-      <h2 class="scene-title">Legal pad and leather</h2>
-      <p class="scene-lead">A leather-bound notepad: a ruled yellow legal pad inside a black stitched leather frame.</p>
-      <div class="window fam-leather-frame fam-leather-frame--black">
-        <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
-      </div>
-      <div class="code-block" role="group" aria-label="The legal pad and leather markup" data-label="the legal pad and leather markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-leather-frame fam-leather-frame--black"&gt;
-  &lt;div class="fam-legal-pad" style="padding: 0 20px 24px 54px; font: 20px/24px var(--fam-font-hand); color: #2b2216"&gt;
-    Picnic plans&lt;br&gt;- Bring the blue blanket&lt;br&gt;- Sandwiches and lemonade
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-cardstock-legal">
-      <h2 class="scene-title">Cardstock and legal pad</h2>
-      <p class="scene-lead">A cardstock title bar over a legal pad sheet, as in the notes example.</p>
-      <section class="window fam-pad" aria-label="Note">
-        <div class="fam-pad-bar fam-cardstock">
-          <h3 class="fam-pad-title">Shopping list</h3>
-          <button class="fam-pad-add" type="button" aria-label="New note">+</button>
-        </div>
-        <div class="fam-pad-sheet fam-legal-pad" style="min-height: 150px; padding-bottom: 24px">
-          <p>- Eggs
-- Flour
-- Butter</p>
-        </div>
-      </section>
-      <div class="code-block" role="group" aria-label="The cardstock and legal pad markup" data-label="the cardstock and legal pad markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;section class="fam-pad" aria-label="Note"&gt;
-  &lt;div class="fam-pad-bar fam-cardstock"&gt;
-    &lt;h3 class="fam-pad-title"&gt;Shopping list&lt;/h3&gt;
-    &lt;button class="fam-pad-add" type="button" aria-label="New note"&gt;+&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="fam-pad-sheet fam-legal-pad" style="min-height: 150px; padding-bottom: 24px"&gt;
-    &lt;p&gt;- Eggs
-- Flour
-- Butter&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="scene" id="scene-leather-paper">
-      <h2 class="scene-title">Leather and paper</h2>
-      <p class="scene-lead">A document list: white paper inside a tan stitched leather frame, like papers in a portfolio.</p>
-      <div class="window fam-leather-frame">
-        <div class="fam-paper paper-list">
-          <ul class="fam-list" aria-label="Notes">
-            <li><a class="fam-list-row" href="#scene-leather-paper"><b>Grocery run</b><span>Today</span></a></li>
-            <li><a class="fam-list-row" href="#scene-leather-paper" aria-current="true"><b>Picnic plans</b><span>Yesterday</span></a></li>
-            <li><a class="fam-list-row" href="#scene-leather-paper"><b>Book ideas</b><span>Monday</span></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="code-block" role="group" aria-label="The leather and paper markup" data-label="the leather and paper markup">
-        <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-leather-frame"&gt;
-  &lt;div class="fam-paper" style="padding: 14px"&gt;
-    &lt;ul class="fam-list" aria-label="Notes"&gt;
-      &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Grocery run&lt;/b&gt;&lt;span&gt;Today&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class="fam-list-row" href="#" aria-current="true"&gt;&lt;b&gt;Picnic plans&lt;/b&gt;&lt;span&gt;Yesterday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class="fam-list-row" href="#"&gt;&lt;b&gt;Book ideas&lt;/b&gt;&lt;span&gt;Monday&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
       </div>
     </section>
   </main>

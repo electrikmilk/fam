@@ -165,7 +165,7 @@
       <div data-pairings>
       <div class="pairing-panel" id="pairing-wood-felt" data-title="Wood and felt">
         <h3 class="pairing-title">Wood and felt</h3>
-        <p class="pairing-lead">The look of a game table: a wooden bar over a felt screen, with a glass search field, a switch and a candy progress bar. <a href="materials.html#scene-wood-felt">See it on the Materials page</a></p>
+        <p class="pairing-lead">The look of a game table: a wooden bar over a felt screen, with a glass search field, a switch and a candy progress bar.</p>
         <div class="window fam-felt">
           <nav class="fam-nav fam-wood" aria-label="Sample navigation">
             <span class="fam-nav-brand">fam</span>
@@ -199,7 +199,7 @@
 
       <div class="pairing-panel" id="pairing-leather-paper" data-title="Leather and paper">
         <h3 class="pairing-title">Leather and paper</h3>
-        <p class="pairing-lead">A document list: white paper inside a tan stitched leather frame, like papers in a portfolio. <a href="materials.html#scene-leather-paper">See it on the Materials page</a></p>
+        <p class="pairing-lead">A document list: white paper inside a tan stitched leather frame, like papers in a portfolio.</p>
         <div class="window fam-leather-frame">
           <div class="fam-paper paper-list">
             <ul class="fam-list" aria-label="Notes">
@@ -245,9 +245,45 @@
       </div>
       </div>
 
+      <div class="pairing-panel" id="pairing-plastic-panel" data-title="Plastic panel">
+        <h3 class="pairing-title">Plastic panel</h3>
+        <p class="pairing-lead">fam-plastic-panel is a cream plastic surface to put controls on: dials, a case of buttons, plastic buttons and radio LEDs. The dial is drawn in CSS: --fam-knob-angle turns its tick, and its label should say its value. <a href="controls.html#scene-knobs">See the dials on the Controls page</a></p>
+        <div class="window fam-plastic-panel fam-round-md controls-stage">
+          <span class="fam-dial fam-cast-lg" role="img" aria-label="Volume low" style="--fam-knob-angle: -100deg"></span>
+          <span class="fam-dial fam-cast-lg" role="img" aria-label="Volume medium"></span>
+          <span class="fam-dial fam-cast-lg" role="img" aria-label="Volume high" style="--fam-knob-angle: 100deg"></span>
+          <div class="fam-button-group fam-button-group--case" role="group" aria-label="Playback mode">
+            <button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"></button>
+            <button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"></button>
+            <button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 3" aria-pressed="false"></button>
+          </div>
+          <button class="fam-plastic fam-plastic--red fam-shadow-md" type="button">Record</button>
+          <button class="fam-plastic fam-plastic--blue" type="button" disabled>Disabled</button>
+          <label class="fam-radio fam-radio--plastic"><input type="radio" name="panel-mode" checked><span class="fam-radio-dot"></span>On</label>
+          <label class="fam-radio fam-radio--plastic"><input type="radio" name="panel-mode"><span class="fam-radio-dot"></span>Off</label>
+        </div>
+      <div class="code-block" role="group" aria-label="The plastic panel and dial markup" data-label="the plastic panel and dial markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-plastic-panel fam-round-md" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; padding: 28px"&gt;
+  &lt;span class="fam-dial fam-cast-lg" role="img" aria-label="Volume low" style="--fam-knob-angle: -100deg"&gt;&lt;/span&gt;
+  &lt;span class="fam-dial fam-cast-lg" role="img" aria-label="Volume medium"&gt;&lt;/span&gt;
+  &lt;span class="fam-dial fam-cast-lg" role="img" aria-label="Volume high" style="--fam-knob-angle: 100deg"&gt;&lt;/span&gt;
+  &lt;div class="fam-button-group fam-button-group--case" role="group" aria-label="Playback mode"&gt;
+    &lt;button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"&gt;&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"&gt;&lt;/button&gt;
+    &lt;button class="fam-plastic fam-plastic--cream fam-plastic--square" type="button" aria-label="Mode 3" aria-pressed="false"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;button class="fam-plastic fam-plastic--red fam-shadow-md" type="button"&gt;Record&lt;/button&gt;
+  &lt;button class="fam-plastic fam-plastic--blue" type="button" disabled&gt;Disabled&lt;/button&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="panel-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;On&lt;/label&gt;
+  &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="panel-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Off&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      </div>
+
       <div class="pairing-panel" id="pairing-legal-leather" data-title="Legal pad and leather">
         <h3 class="pairing-title">Legal pad and leather</h3>
-        <p class="pairing-lead">A leather-bound notepad: a ruled yellow legal pad inside a black stitched leather frame. <a href="materials.html#scene-legal-leather">See it on the Materials page</a></p>
+        <p class="pairing-lead">A leather-bound notepad: a ruled yellow legal pad inside a black stitched leather frame.</p>
         <div class="window fam-leather-frame fam-leather-frame--black">
           <div class="fam-legal-pad pad-text">Picnic plans<br>- Bring the blue blanket<br>- Sandwiches and lemonade<br>- Call Dana about the park</div>
         </div>
@@ -296,7 +332,7 @@
           <div class="card-swatch fam-leather"></div>
           <div class="card-body">
             <h3>Materials</h3>
-            <p>Every texture with the class that makes it, plus tints, gloss, rounding, shadows, navigation bars, photo frames, engraved text and scenes that pair materials.</p>
+            <p>Every texture with the class that makes it, plus tints, gloss, rounding, shadows, navigation bars, photo frames and engraved text.</p>
             <span class="card-more">Open materials</span>
           </div>
         </a>
@@ -304,7 +340,7 @@
           <div class="card-swatch fam-metal-brushed"></div>
           <div class="card-body">
             <h3>Controls</h3>
-            <p>Buttons, switches, progress tubes, fields and lists, each alone with its disabled look.</p>
+            <p>Each kind of control documented with its classes: buttons, radios, tabs, knobs, switches, LEDs, progress tubes, fields, lists and tables.</p>
             <span class="card-more">Open controls</span>
           </div>
         </a>
