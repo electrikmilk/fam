@@ -101,6 +101,16 @@ test('credits cover every asset', async () => {
   }
 });
 
+test('credits cite only source photos that are committed', async () => {
+  const credits = await readFile(new URL('../CREDITS.md', import.meta.url), 'utf8');
+  const cited = [...credits.matchAll(/`([^`\s]*-unsplash\.(?:jpg|png))`/g)].map((match) => match[1]);
+  assert.ok(cited.length > 0, 'CREDITS.md cites no source photos');
+  const repositoryRoot = fileURLToPath(new URL('../', import.meta.url));
+  const tracked = new Set(execFileSync('git', ['ls-files', '-z'], { cwd: repositoryRoot, encoding: 'utf8' }).split('\0').map((path) => path.split('/').pop()));
+  const untracked = cited.filter((name) => !tracked.has(name));
+  assert.deepEqual(untracked, [], 'CREDITS.md cites source photos that are not in the repository');
+});
+
 // Horizontal planks differ row to row, so the rows spread far more than the columns; the vertical source photo scores well under 1
 const MINIMUM_PLANK_DIRECTION_RATIO = 3;
 
