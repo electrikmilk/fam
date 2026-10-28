@@ -24,7 +24,7 @@ for (const pageName of PAGE_NAMES) {
 }
 
 test('each photo is within its size budget', async () => {
-  for (const name of ['ribbon.jpg', 'tree.jpg']) {
+  for (const name of ['ribbon.jpg', 'tree.jpg', 'snow-leopard.jpg']) {
     const { size } = await stat(new URL(`../showcase/images/${name}`, import.meta.url));
     assert.ok(size <= IMAGE_BUDGET_BYTES, `${name} is ${size} bytes`);
   }

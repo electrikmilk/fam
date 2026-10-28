@@ -118,8 +118,11 @@ body {
   align-items: start;
 }
 
+.frames-grid--wide { grid-template-columns: repeat(2, 1fr); }
 .frames-grid figure { margin: 0; }
 .frames-grid img { display: block; width: 100%; }
+.photo-credit { margin: 0; font-size: 13px; color: #a9a9b0; }
+.photo-credit a { color: inherit; }
 .cork-board { height: 150px; }
 
 .panels {
@@ -136,6 +139,7 @@ body {
 
 @media (max-width: 600px) {
   .frames-grid { grid-template-columns: repeat(2, 1fr); }
+  .frames-grid--wide { grid-template-columns: 1fr; }
   .panels { grid-template-columns: 1fr; }
 }
 
