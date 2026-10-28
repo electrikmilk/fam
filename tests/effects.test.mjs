@@ -117,6 +117,7 @@ test('engraved text colors', async () => {
   try {
     assert.equal(await style(kit.page, '#engraved-metal', null, 'color'), 'rgb(18, 20, 26)');
     assert.equal(await style(kit.page, '#engraved-wood', null, 'color'), 'rgb(66, 38, 14)');
+    assert.equal(await style(kit.page, '#engraved-wood-paneled', null, 'color'), 'rgb(236, 227, 207)');
     assert.equal(await style(kit.page, '#engraved-leather', null, 'color'), 'rgb(55, 28, 10)');
     assert.equal(await style(kit.page, '#engraved-leather-dark', null, 'color'), 'rgb(236, 227, 207)');
   } finally {

@@ -46,6 +46,7 @@
         <div class="swatches">
             <figure class="sq"><span class="swatch fam-felt"></span><figcaption>fam-felt</figcaption></figure>
             <figure class="sq"><span class="swatch fam-wood"></span><figcaption>fam-wood</figcaption></figure>
+            <figure class="sq"><span class="swatch fam-wood-paneled"></span><figcaption>fam-wood-paneled</figcaption></figure>
             <figure class="sq"><span class="swatch fam-metal"></span><figcaption>fam-metal</figcaption></figure>
             <figure class="sq"><span class="swatch fam-metal-sandblasted"></span><figcaption>fam-metal-sandblasted</figcaption></figure>
             <figure class="sq"><span class="swatch fam-leather"></span><figcaption>fam-leather</figcaption></figure>
@@ -94,15 +95,21 @@
           </div>
         </div>
       </div>
-      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-metal fam-metal-sandblasted fam-leather fam-leather-pebbled fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
+      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-wood-paneled fam-metal fam-metal-sandblasted fam-leather fam-leather-pebbled fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
       <p class="cap"><b>cast and grounded shadows</b> <code class="copyable">fam-cast-md</code> <code class="copyable">fam-grounded-md</code> Put either on an inline-block or block wrapper with the same radius when the element has shading of its own or clips its overflow, such as a button or the pill.</p>
     </section>
 
     <section class="scene" id="scene-navs">
       <h2 class="scene-title">Navigation bars</h2>
-      <p class="scene-lead">Wood, brushed metal, sandblasted metal, tan, black and brown leather bars and tan, black and brown pebbled leather bars share one set of items.</p>
+      <p class="scene-lead">Wood, paneled wood, brushed metal, sandblasted metal, tan, black and brown leather bars and tan, black and brown pebbled leather bars share one set of items.</p>
       <div class="window navs-window">
         <nav class="fam-nav fam-wood" aria-label="Wood navigation">
+          <span class="fam-nav-brand">fam</span>
+          <span class="fam-nav-item" aria-current="page">Home</span>
+          <span class="fam-nav-item">Library</span>
+          <span class="fam-nav-item">About</span>
+        </nav>
+        <nav class="fam-nav fam-wood-paneled" aria-label="Paneled wood navigation">
           <span class="fam-nav-brand">fam</span>
           <span class="fam-nav-item" aria-current="page">Home</span>
           <span class="fam-nav-item">Library</span>
@@ -165,7 +172,7 @@
   &lt;span class="fam-nav-item"&gt;Library&lt;/span&gt;
   &lt;span class="fam-nav-item"&gt;About&lt;/span&gt;
 &lt;/nav&gt;
-&lt;!-- Swap fam-wood for fam-metal, fam-metal-sandblasted, fam-leather-bar, fam-leather-bar fam-leather-bar--black, fam-leather-bar fam-leather-bar--brown, fam-leather-pebbled, fam-leather-pebbled fam-leather-pebbled--black or fam-leather-pebbled fam-leather-pebbled--brown --&gt;</code></pre>
+&lt;!-- Swap fam-wood for fam-wood-paneled, fam-metal, fam-metal-sandblasted, fam-leather-bar, fam-leather-bar fam-leather-bar--black, fam-leather-bar fam-leather-bar--brown, fam-leather-pebbled, fam-leather-pebbled fam-leather-pebbled--black or fam-leather-pebbled fam-leather-pebbled--brown --&gt;</code></pre>
       </div>
     </section>
 
@@ -193,7 +200,7 @@
 
     <section class="scene" id="scene-engraved">
       <h2 class="scene-title">Engraved text</h2>
-      <p class="scene-lead">Text pressed into brushed and sandblasted metal, leather, dark leather and wood.</p>
+      <p class="scene-lead">Text pressed into brushed and sandblasted metal, leather, dark leather, wood and paneled wood.</p>
       <div class="panels">
         <div class="window fam-metal panel"><span class="fam-engraved-metal">SETTINGS</span></div>
         <div class="window fam-metal-sandblasted panel"><span class="fam-engraved-metal">OPTIONS</span></div>
@@ -202,6 +209,7 @@
         <div class="window fam-leather-pebbled fam-leather-pebbled--black panel"><span class="fam-engraved-leather-dark">Ledger</span></div>
         <div class="window fam-leather-pebbled fam-leather-pebbled--brown panel"><span class="fam-engraved-leather-dark">Diary</span></div>
         <div class="window fam-wood panel"><span class="fam-engraved-wood">LIBRARY</span></div>
+        <div class="window fam-wood-paneled panel"><span class="fam-engraved-wood-paneled">PLANKS</span></div>
       </div>
       <div class="code-block" role="group" aria-label="The engraved text markup" data-label="the engraved text markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
@@ -211,7 +219,8 @@
 &lt;div class="fam-leather-pebbled" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather"&gt;Journal&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-leather-pebbled fam-leather-pebbled--black" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather-dark"&gt;Ledger&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-leather-pebbled fam-leather-pebbled--brown" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather-dark"&gt;Diary&lt;/span&gt;&lt;/div&gt;
-&lt;div class="fam-wood" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood"&gt;LIBRARY&lt;/span&gt;&lt;/div&gt;</code></pre>
+&lt;div class="fam-wood" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood"&gt;LIBRARY&lt;/span&gt;&lt;/div&gt;
+&lt;div class="fam-wood-paneled" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-wood-paneled"&gt;PLANKS&lt;/span&gt;&lt;/div&gt;</code></pre>
       </div>
     </section>
 

@@ -8,6 +8,7 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 |---|---|---|---|
 | `felt-gray-tile.jpg` | `felt_lele-wan-ZHD1jN0QXwM-unsplash.jpg` | lele-wan | `make_tile.py 0.5 512 60`, then `to_tint_tile.py` |
 | `wood-light-tile.jpg` | `wood_smithsonian-e0pPip5TQRE-unsplash.jpg` | smithsonian | `make_tile.py 0.5 512 60 90` |
+| `wood-paneled-tile.jpg` | `wood-planks_ekaterina-novitskaya-KugwNl9jX1Q-unsplash.jpg` | ekaterina-novitskaya | `make_paneled_tile.py ... 654 1596 800 512`, six whole planks cut clear of the bolts |
 | `metal-tile.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | `make_tile.py 0.55 512 14` |
 | `metal-sandblasted-tile.jpg` | `metal_katie-harp-TnQE5X48FMA-unsplash.jpg` | katie-harp | `make_tile.py 0.9 512 40` |
 | `metal-brushed.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | processed copy, recipe not recorded |

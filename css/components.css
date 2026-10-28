@@ -1236,7 +1236,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 .fam-nav:is(.fam-metal, .fam-metal-sandblasted) .fam-nav-item:focus-visible { outline-color: rgb(18, 20, 26); }
 
 /* Leather bar: tan keeps the frame's own tone, so its text is black.
-   Black leather flips to light text with a dark lip. Both bars cut the active item as a dark pocket with light text. */
+   Black and brown leather and the dark paneled wood flip to light text with a dark lip. All of them cut the active item as a dark pocket with light text. */
 .fam-nav:is(.fam-leather-bar, .fam-leather-pebbled) {
   box-shadow: inset 0 1px 0 rgba(255, 244, 220, .75), 0 3px 7px rgba(50, 25, 5, .5);
 }
@@ -1255,22 +1255,22 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
 }
 
-.fam-nav:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown) {
+.fam-nav:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown, .fam-wood-paneled) {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 4px 9px rgba(0, 0, 0, .6);
 }
 
-:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown) .fam-nav-brand,
-:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown) .fam-nav-item {
+:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown, .fam-wood-paneled) .fam-nav-brand,
+:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown, .fam-wood-paneled) .fam-nav-item {
   color: #ece3cf;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
 }
 
-:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown) .fam-nav-item[aria-current="page"] {
+:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown, .fam-wood-paneled) .fam-nav-item[aria-current="page"] {
   background: linear-gradient(rgba(0, 0, 0, .55), rgba(0, 0, 0, .25));
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, .85), 0 1px 0 rgba(255, 255, 255, .18);
 }
 
-:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown) .fam-nav-item:focus-visible { outline-color: #ece3cf; }
+:is(.fam-leather-bar--black, .fam-leather-pebbled--black, .fam-leather-bar--brown, .fam-leather-pebbled--brown, .fam-wood-paneled) .fam-nav-item:focus-visible { outline-color: #ece3cf; }
 
 /* Four short labels and the brand are about 380px wide at full size, which does not fit a 375px phone with the page gutters */
 @media (max-width: 480px) {
