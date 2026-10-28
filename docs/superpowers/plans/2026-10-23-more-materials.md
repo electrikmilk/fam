@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add sandblasted metal, pebbled and brown leather, paneled wood, linen, cardboard (two variants), denim and paper bag to the kit, each with a navigation bar, plus engraved text where it suits and sandblasted metal buttons.
+**Goal:** Add sandblasted metal, pebbled and brown leather, paneled wood, linen, cardboard, denim and paper bag to the kit, each with a navigation bar, plus engraved text where it suits and sandblasted metal buttons.
 
 **Architecture:** Each material is a seamless tile cut from a photo in `textures/` by a script in `tools/texture-pipeline/`, exposed as a `--fam-tex-*` token in `css/tokens.css`, a class in `css/materials.css`, and a `.fam-nav.<class>` rule in `css/components.css`. The showcase Materials page (`showcase/materials.html`) shows each one, and the existing Playwright tests and contrast audit are the gate. One commit per material.
 
@@ -16,7 +16,7 @@
 - No new JavaScript. New work meets WCAG AA contrast on rendered pixels at 1440px and 375px, shows a focus ring, and keeps the forced-colors and reduced-motion rules that `.fam-nav` already carries.
 - Tiles never stretch and a material you do not use is never downloaded. Tile files should stay between 13 KB and 85 KB; a tile that needs more goes over, and `CREDITS.md` says why.
 - The paneled wood tile must show no bolt or nail. If a planks crop cannot tile without a visible seam or repeat, drop paneled wood, tell the owner, and ship no substitute.
-- Class names: `fam-metal`, `fam-metal-button--sandblasted`, `fam-leather-pebbled` (modifiers `--black`, `--brown`), `fam-leather-frame--brown`, `fam-leather-bar--brown`, `fam-wood-paneled`, `fam-linen`, `fam-cardboard` (modifier `--chipboard`), `fam-denim`, `fam-paper-bag`. Asset names: `<material>-tile.jpg`.
+- Class names: `fam-metal`, `fam-metal-button--sandblasted`, `fam-leather-pebbled` (modifiers `--black`, `--brown`), `fam-leather-frame--brown`, `fam-leather-bar--brown`, `fam-wood-paneled`, `fam-linen`, `fam-cardboard`, `fam-denim`, `fam-paper-bag`. Asset names: `<material>-tile.jpg`.
 - Linen and denim take their own tint variable, like `--fam-cardstock-tint`: `--fam-linen-tint` (default gray) and `--fam-denim-tint` (default indigo). One shared `--fam-tint` cannot have two defaults. Cardboard and paper bag keep their photo colors.
 - Source photos are already in `textures/`. Credit each in `CREDITS.md` with the photographer (the name inside the file name) and the exact command that made the asset.
 - Commit messages are imperative, one commit per material, and end with `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`. Do not `git add` the untracked `references/` or `textures/` photos unrelated to the task.
@@ -123,15 +123,15 @@ The black frame and fill are neutral gray (fill mean is about 45,45,45), the tan
 ### Task 6: Cardboard
 
 **Files:**
-- Create: `assets/cardboard-tile.jpg` from `textures/cardboard_kiwihug-bPaRBSuvRPA-unsplash.jpg` (ridged linerboard) and `assets/chipboard-tile.jpg` from `textures/cardboard2_heather-green-lWn2RU57iKU-unsplash.jpg` (flecked)
+- Create: `assets/cardboard-tile.jpg` from `textures/cardboard_kiwihug-bPaRBSuvRPA-unsplash.jpg` (ridged linerboard)
 - Modify: files named in the checklist
 
 **Interfaces:**
-- Produces: `fam-cardboard`, `fam-cardboard--chipboard`
+- Produces: `fam-cardboard`
 
-- [ ] **Step 1:** Checklist step 1 with ids `cardboard` and `cardboard-chipboard`. Expect FAIL.
-- [ ] **Step 2:** Cut both tiles. Keep ridges running one direction. If one photo does not make a good tile, ship only the other and tell the owner.
-- [ ] **Step 3:** Checklist steps 3 to 8. Brown mid-tone surfaces: choose ink by contrast audit result. Commit message: `Add cardboard in two variants`.
+- [ ] **Step 1:** Checklist step 1 with id `cardboard`. Expect FAIL.
+- [ ] **Step 2:** Cut the tile. Keep ridges running one direction.
+- [ ] **Step 3:** Checklist steps 3 to 8. Cardboard gets no navigation bar. Commit message: `Add cardboard`.
 
 ### Task 7: Denim
 

@@ -15,7 +15,7 @@ The owner wants more materials to choose from. Each new material gets the same r
 - **Metal**: rename the current metal to brushed metal, class `fam-metal-brushed`, and add a second metal as plain `fam-metal` from `textures/metal_katie-harp-TnQE5X48FMA-unsplash.jpg` (fine sandblasted gray).
 - **Paneled wood**: a wood for navigation bars and as a material, if it can be made to work. Candidate photo: `textures/wood-planks_ekaterina-novitskaya-KugwNl9jX1Q-unsplash.jpg`.
 - **Linen**: a new texture that can be tinted, from whichever linen photo works better. Candidates: `linen_logan-voss-sFGj4Lj1un8` (clear weave) and `linen_smithsonian-NlrtBD3Iw7I` (flat yellow).
-- **Cardboard**: two variants, whichever works better. Candidates: `cardboard_kiwihug-bPaRBSuvRPA` (linerboard ridges) and `cardboard2_heather-green-lWn2RU57iKU` (flecked chipboard).
+- **Cardboard**: one cardboard, `cardboard_kiwihug-bPaRBSuvRPA` (linerboard ridges). The owner dropped the flecked chipboard variant.
 - **Denim**: `denim_mike-hindle-Js5Qi_X1qzo` (dark gray twill).
 - **Paper bag**: `paper-bag_heather-green-xr_ra5j9wPI` (golden kraft).
 
@@ -49,10 +49,8 @@ All photos are already in `textures/` and are Unsplash photos, credited the same
 
 - **Names**: `fam-metal-button` stays the brushed button and sandblasted buttons are `fam-metal-button--sandblasted`; the owner named only the surfaces, so the button names are my call. Paneled wood is `fam-wood-paneled`. Names for the leathers, linen, cardboard, denim and paper bag follow the same `fam-<material>` pattern, and the builder picks them.
 - **Leathers**: keep the current `fam-leather` (all three leathers exist, which the owner allowed). Add one plain material from the regular leather frame's fill (the pebbled leather) and one dark brown alternate. The alternate is probably not the `leather-bound` photo alone, because that photo is bright orange with a smooth grain and one vertical stitch line, which cannot repeat as a tile. The frame's own photo (`leather-stitched_olga-kovalski`) is already dark brown before the tan and black processing, so a dark brown stitched frame and bar edge may be cheap to cut with the existing pipeline. The builder checks this and picks the better source, and `leather-bound` is used only if it works.
-- **Cardboard**: both variants are kept, one class with a modifier.
 - **Tinting**: linen and denim become grayscale tiles tinted by `--fam-tint` with `multiply`, like the felt, with a default tint of gray for linen and an indigo for denim. Cardboard and paper bag keep their photo colors, like paper and cork.
 - **Wood-planks tile**: cropped so no bolt or nail shows in it, and so it tiles cleanly. If it cannot be made to tile without a visible seam or repeat, paneled wood is dropped and the owner is told. No substitute is shipped.
-- **Cardboard**: the owner wrote "two variants, whichever works better". I read that as two variants and keep both. If only one of the two photos makes a good tile, ship that one and say so.
 - **Alternate leather stitching**: stitching is not required. If a dark brown stitched frame and bar edge do not cut well, a plain dark brown leather is acceptable, and the owner is told it is not stitched.
 - **Contrast**: the same rendered-pixel contrast audit the kit already runs (`tools/contrast-audit.mjs`, `tests/contrast.test.mjs`), at the default tint, for navigation bar text and for engraved text. A custom tint on linen or denim is the user's responsibility, as it is for the felt.
 - **Tile size**: 13 KB to 85 KB describes the current tiles and is a guideline. A tile that needs more to avoid a visible seam can go over, and the reason is recorded in `CREDITS.md`.
