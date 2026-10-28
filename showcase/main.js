@@ -1,5 +1,5 @@
 // Wires the knobs and the Refract switch to the lens and keeps the copyable markup in step with them.
-// The bend and fringe knobs turn in tenths and hundredths, so their values are read back through the knob's scaledValue.
+// The bend, fringe and shine knobs turn in tenths and hundredths, so their values are read back through the knob's scaledValue.
 (function () {
   var lens = document.getElementById('lens');
   var readout = document.getElementById('readout');
@@ -30,11 +30,12 @@
     lens.style.setProperty('--fam-glow-depth', glow + 'px');
     lens.style.removeProperty(refract.checked ? '--fam-glass-blur' : '--fam-refract-blur');
     lens.style.setProperty(blurVariable(), activeBlur() + 'px');
+    lens.style.setProperty('--fam-glass-specular', String(shineKnob.scaledValue));
     lens.style.setProperty('--fam-refract-amount', String(bendKnob.scaledValue));
     lens.style.setProperty('--fam-refract-dispersion', String(fringeKnob.scaledValue));
 
     var classes = refract.checked ? 'fam-glass fam-glass--refract' : 'fam-glass';
-    readout.textContent = '<div class="' + classes + '" style="--fam-r: ' + radius + 'px; --fam-glow-depth: ' + glow + 'px; ' + blurVariable() + ': ' + activeBlur() + 'px' + refractionDeclarations() + '"></div>';
+    readout.textContent = '<div class="' + classes + '" style="--fam-r: ' + radius + 'px; --fam-glow-depth: ' + glow + 'px; ' + blurVariable() + ': ' + activeBlur() + 'px; --fam-glass-specular: ' + shineKnob.scaledValue + refractionDeclarations() + '"></div>';
   }
 
   var blurKnob = window.FamShowcase.createKnob(document.getElementById('knob-blur'), function (value) {
@@ -51,6 +52,7 @@
   });
   var bendKnob = window.FamShowcase.createKnob(document.getElementById('knob-bend'), render);
   var fringeKnob = window.FamShowcase.createKnob(document.getElementById('knob-fringe'), render);
+  var shineKnob = window.FamShowcase.createKnob(document.getElementById('knob-shine'), render);
 
   refract.addEventListener('change', function () {
     blurKnob.setValue(activeBlur());

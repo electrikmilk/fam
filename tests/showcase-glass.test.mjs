@@ -5,7 +5,7 @@ import { openUrl, showcasePageUrl } from './helpers/browser.mjs';
 const glassUrl = showcasePageUrl('glass');
 
 const DEFAULT_READOUT =
-  '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px; --fam-refract-amount: 1; --fam-refract-dispersion: 0.1"></div>';
+  '<div class="fam-glass fam-glass--refract" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-refract-blur: 3px; --fam-glass-specular: 1; --fam-refract-amount: 1; --fam-refract-dispersion: 0.1"></div>';
 const KNOBS = {
   blur: { min: 0, max: 30, initial: '3' },
   glow: { min: 0, max: 40, initial: '18' },
@@ -15,6 +15,7 @@ const KNOBS = {
 const FRACTION_KNOBS = {
   bend: { min: 0, max: 30, initial: '10', initialText: '1', variable: '--fam-refract-amount', divisor: 10 },
   fringe: { min: 0, max: 50, initial: '10', initialText: '0.1', variable: '--fam-refract-dispersion', divisor: 100 },
+  shine: { min: 0, max: 20, initial: '10', initialText: '1', variable: '--fam-glass-specular', divisor: 10 },
 };
 
 // The tick sweeps from -135deg at the minimum to 135deg at the maximum
@@ -131,7 +132,7 @@ test('the switch changes the glass mode and each mode keeps its own blur', async
     assert.equal(await page.page.isChecked('#refract-switch'), false);
     assert.ok(!(await attribute(page.page, '#lens', 'class')).includes('fam-glass--refract'));
     assert.equal(await attribute(page.page, '#knob-blur', 'aria-valuenow'), '14');
-    assert.equal(await readout(page.page), '<div class="fam-glass" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-glass-blur: 14px"></div>');
+    assert.equal(await readout(page.page), '<div class="fam-glass" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-glass-blur: 14px; --fam-glass-specular: 1"></div>');
     assert.equal(await lensVariable(page.page, '--fam-glass-blur'), '14px');
     assert.equal(await lensVariable(page.page, '--fam-refract-blur'), '');
 
@@ -225,7 +226,7 @@ for (const width of [1440, 768, 375]) {
   });
 }
 
-test('the bend and fringe knobs are drawn at their defaults with JavaScript off', async () => {
+test('the bend, fringe and shine knobs are drawn at their defaults with JavaScript off', async () => {
   const page = await openUrl(glassUrl, { javaScriptEnabled: false });
   try {
     for (const [name, knob] of Object.entries(FRACTION_KNOBS)) {
@@ -243,7 +244,7 @@ test('the bend and fringe knobs are drawn at their defaults with JavaScript off'
   }
 });
 
-test('the bend and fringe knobs set their variable as a plain number and show it in the readout', async () => {
+test('the bend, fringe and shine knobs set their variable as a plain number and show it in the readout', async () => {
   const page = await openUrl(glassUrl);
   try {
     for (const [name, knob] of Object.entries(FRACTION_KNOBS)) {
@@ -274,7 +275,7 @@ test('frosted glass leaves bend and fringe out of the markup and gets them back 
     await page.page.focus('#knob-bend');
     await press(page.page, 'ArrowUp', 5);
     await page.page.locator('.fam-switch:has(#refract-switch)').click();
-    assert.equal(await readout(page.page), '<div class="fam-glass" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-glass-blur: 14px"></div>');
+    assert.equal(await readout(page.page), '<div class="fam-glass" style="--fam-r: 90px; --fam-glow-depth: 18px; --fam-glass-blur: 14px; --fam-glass-specular: 1"></div>');
     await page.page.locator('.fam-switch:has(#refract-switch)').click();
     assert.ok((await readout(page.page)).endsWith('--fam-refract-amount: 1.5; --fam-refract-dispersion: 0.1"></div>'), await readout(page.page));
   } finally {
