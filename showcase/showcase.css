@@ -454,20 +454,25 @@ body {
   margin: 0 auto;
   padding: 18px 26px;
   border-radius: 16px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -3px 8px rgba(0, 0, 0, .35), 0 0 0 1px rgba(0, 0, 0, .55), 0 14px 30px -10px rgba(0, 0, 0, .7);
+  /* The last inset layer is a pale veil over the metal. The knobs' large cast shadows fall on the engraved labels below them,
+     and without the veil (and the black label ink below) the darkest metal under a label is under 3:1. */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), inset 0 -3px 8px rgba(0, 0, 0, .35), 0 0 0 1px rgba(0, 0, 0, .55), 0 14px 30px -10px rgba(0, 0, 0, .7), inset 0 0 0 999px rgba(255, 255, 255, .2);
   cursor: default;
 }
 
-/* The knob's drop shadow reaches about 14px below it, so the label sits below that instead of in it */
+/* The knob's large cast shadow reaches well below it and is darkest next to the knob, so the label keeps 20px clear of the knob */
 .knobwrap {
   display: grid;
-  gap: 14px;
+  gap: 20px;
   justify-items: center;
   align-content: start;
   /* The control row is as tall as a knob, so the shorter switch centers in it and its label lines up with the knob labels */
   grid-template-rows: 72px auto;
   align-items: center;
 }
+
+/* The shared engraved ink is fitted to the bare metal. Under a knob's cast shadow, and on the second row of a wrapped tray, black is what keeps 3:1 */
+.knobwrap .fam-engraved-metal { color: #000; }
 
 .glass-band .fam-knob {
   cursor: grab;
