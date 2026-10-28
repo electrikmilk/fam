@@ -12,6 +12,9 @@
     .fam .page-heading:first-child { margin-top: 0; }
     .frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; align-items: start; }
     .frames figure { margin: 0; }
+    .frames-wide { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .photo-credit { margin: 16px 0 0; font-size: 12px; color: #a9a9b0; }
+    .photo-credit a { color: inherit; }
     .board { height: 280px; }
   </style>
 </head>
@@ -25,6 +28,13 @@
       <figure class="fam-wood-frame"><img src="tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
       <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="tree.jpg" alt="A lone tree on a green hill under a cloudy sky"></figure>
     </div>
+
+    <h2 class="page-heading">Landscape photo</h2>
+    <div class="frames frames-wide">
+      <figure class="fam-print-frame fam-paper"><img src="snow-leopard.jpg" alt="A snow leopard with snow on its fur, looking toward the camera"></figure>
+      <figure class="fam-wood-frame fam-wood-frame--glossy"><img src="snow-leopard.jpg" alt="A snow leopard with snow on its fur, looking toward the camera"></figure>
+    </div>
+    <p class="photo-credit"><a href="https://commons.wikimedia.org/wiki/File:Snow_leopard_in_snow_2.jpg">Snow leopard in snow 2</a> by <a href="https://www.flickr.com/photos/nicolasgoulet/5361403415/">Nicolas Goulet</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a> (modified).</p>
 
     <h2 class="page-heading">Corkboard in a wood frame</h2>
     <div class="fam-wood-frame">
