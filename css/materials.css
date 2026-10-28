@@ -75,6 +75,15 @@
   background: #f7f6f2 var(--fam-tex-paper-tile) 0 0 / 256px repeat;
 }
 
+/* Linerboard with faint ridges; --chipboard is the flecked, fibrous kind */
+.fam-cardboard {
+  background: var(--fam-tex-cardboard-tile) 0 0 / 256px repeat;
+}
+
+.fam-cardboard--chipboard {
+  background: var(--fam-tex-chipboard-tile) 0 0 / 256px repeat;
+}
+
 .fam-cork {
   background: #b9763c var(--fam-tex-cork-tile) 0 0 / 256px repeat;
 }
