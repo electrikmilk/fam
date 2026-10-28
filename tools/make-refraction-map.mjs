@@ -31,12 +31,36 @@ export function buildDisplacementMapSvg() {
   );
 }
 
+// The same defaults as --fam-refract-amount and --fam-refract-dispersion in css/effects.css, and the same base scale as
+// snippets/refraction-round.js. The static filter cannot read CSS variables, so it always bends by these.
+const DISPLACEMENT_SCALE = 0.2;
+const DEFAULT_AMOUNT = 1;
+const DEFAULT_DISPERSION = 0.1;
+
+// Red bends furthest and blue least, which fringes the rim like a prism does
+const CHANNEL_PASSES = [
+  { channel: 'red', dispersionSign: 1, keep: '1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0' },
+  { channel: 'green', dispersionSign: 0, keep: '0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0' },
+  { channel: 'blue', dispersionSign: -1, keep: '0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0' },
+];
+
+function channelScale({ dispersionSign }) {
+  return Number((DISPLACEMENT_SCALE * DEFAULT_AMOUNT * (1 + dispersionSign * DEFAULT_DISPERSION)).toFixed(4));
+}
+
+function channelPassMarkup(pass) {
+  return `    <feDisplacementMap in="SourceGraphic" in2="map" scale="${channelScale(pass)}" xChannelSelector="R" yChannelSelector="G" result="${pass.channel}-bent"/>
+    <feColorMatrix in="${pass.channel}-bent" type="matrix" values="${pass.keep}" result="${pass.channel}"/>`;
+}
+
 export function buildSnippet() {
   const href = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(buildDisplacementMapSvg())}`;
   return `<svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="fam-refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
     <feImage x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" href="${href}"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G"/>
+${CHANNEL_PASSES.map(channelPassMarkup).join('\n')}
+    <feBlend in="red" in2="green" mode="screen" result="red-green"/>
+    <feBlend in="red-green" in2="blue" mode="screen"/>
   </filter>
 </svg>
 `;
