@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Materials - Fam</title>
-  <meta name="description" content="Every Fam texture, the felt, linen, denim and cardstock tints, the gloss, rounding and shadow effects, navigation bars, photo frames and engraved text.">
+  <meta name="description" content="Every Fam texture, the felt, linen, denim and cardstock tints, the gloss, rounding, shadow and reflection effects, navigation bars, photo frames and engraved text.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap">
@@ -26,7 +26,7 @@
     <header class="page-head">
       <p class="eyebrow">Materials</p>
       <h1>One class for every texture</h1>
-      <p class="lead">Each material is a single class on any box. Felt, linen, denim and cardstock take a tint. Below the textures are the effects (gloss, rounding and shadows), the navigation bars, photo frames and engraved text made from them, each with its markup and a button that copies it.</p>
+      <p class="lead">Each material is a single class on any box. Felt, linen, denim and cardstock take a tint. Below the textures are the effects (gloss, rounding, shadows and reflections), the navigation bars, photo frames and engraved text made from them, each with its markup and a button that copies it.</p>
     <nav class="jump" aria-label="On this page">
       <a href="#scene-build">Textures</a>
       <a href="#scene-effects">Effects</a>
@@ -106,7 +106,7 @@
 
     <section class="scene" id="scene-effects">
       <h2 class="scene-title">Effects</h2>
-      <p class="scene-lead">Gloss, rounding and shadows are classes you add to any box, whatever its texture.</p>
+      <p class="scene-lead">Gloss, rounding, shadows and reflections are classes you add to any box, whatever its texture.</p>
       <div class="window build-panel">
         <div class="stage">
           <h2>Gloss</h2>
@@ -132,8 +132,39 @@
             <div class="elev fam-grounded-sm">grounded-sm</div><div class="elev fam-grounded-md">grounded-md</div><div class="elev fam-grounded-lg">grounded-lg</div>
           </div>
         </div>
+        <h2>Reflections</h2>
+        <div class="reflect-stage">
+            <div class="reflect-row" style="--reflect-room: 80px">
+              <button class="fam-plastic fam-plastic--red fam-reflect" type="button">Record</button>
+              <button class="fam-metal-button fam-reflect" type="button">Eject</button>
+              <button class="fam-wood-button fam-reflect" type="button">Open</button>
+              <button class="fam-glossy-button fam-reflect" type="button">Save</button>
+              <span class="fam-knob fam-reflect" role="img" aria-label="Volume"></span>
+            </div>
+            <div class="reflect-row reflect-photos" style="--reflect-room: 140px">
+              <img class="fam-reflect" src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky">
+              <img class="fam-reflect" src="images/snow-leopard.jpg" alt="A snow leopard with snow on its fur, looking toward the camera">
+              <figure class="fam-wood-frame fam-wood-frame--glossy fam-reflect"><img src="images/tree.jpg" alt=""></figure>
+            </div>
+        </div>
+        <h2>Reflections on a shelf</h2>
+        <div class="reflect-stage">
+            <div class="reflect-row fam-shelf" style="--reflect-room: 80px">
+              <button class="fam-plastic fam-plastic--red fam-reflect" type="button">Record</button>
+              <button class="fam-metal-button fam-reflect" type="button">Eject</button>
+              <button class="fam-wood-button fam-reflect" type="button">Open</button>
+              <button class="fam-glossy-button fam-reflect" type="button">Save</button>
+              <span class="fam-knob fam-reflect" role="img" aria-label="Volume"></span>
+            </div>
+            <div class="reflect-row fam-shelf reflect-photos" style="--reflect-room: 140px">
+              <img class="fam-reflect" src="images/tree.jpg" alt="A lone tree on a green hill under a cloudy sky">
+              <img class="fam-reflect" src="images/snow-leopard.jpg" alt="A snow leopard with snow on its fur, looking toward the camera">
+              <figure class="fam-wood-frame fam-wood-frame--glossy fam-reflect"><img src="images/tree.jpg" alt=""></figure>
+            </div>
+        </div>
       </div>
       <p class="cap"><b>combine effects</b> <code class="copyable">fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
+      <p class="cap"><b>reflections</b> <code class="copyable">fam-reflect</code> <code class="copyable">fam-shelf</code> Put fam-reflect on a control, a photo or a frame for a glossy floor reflection that fades out below it, and fam-shelf on the box they stand in for a shiny floor. The reflection takes no layout space, so leave padding under it. Firefox does not support it and shows none.</p>
       <p class="cap"><b>cast and grounded shadows</b> <code class="copyable">fam-cast-md</code> <code class="copyable">fam-grounded-md</code> Put either on an inline-block or block wrapper with the same radius when the element has shading of its own or clips its overflow, such as a button or the pill.</p>
     </section>
 

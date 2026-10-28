@@ -340,6 +340,30 @@ body {
   background: linear-gradient(#dfe3e9, #c4cad3);
 }
 
+/* A dark floor for the reflections. Each row leaves --reflect-room under its things for the reflection, which takes no layout space,
+   and a shelf row makes its floor that tall so they stand on its top edge. */
+.reflect-stage {
+  margin-top: 4px;
+  border-radius: 14px;
+  background: radial-gradient(120% 140% at 50% 0%, #2c3038, #121317 70%);
+}
+
+.reflect-row {
+  --fam-shelf-height: var(--reflect-room);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 26px;
+  padding: 28px 20px var(--reflect-room);
+}
+
+.reflect-row:first-child { border-radius: 14px 14px 0 0; }
+.reflect-row:last-child { border-radius: 0 0 14px 14px; }
+.reflect-photos img { display: block; height: 150px; width: auto; }
+.reflect-photos figure { margin: 0; width: 120px; }
+.reflect-photos figure img { width: 100%; height: auto; }
+
 .build-panel > .stage:first-child { margin-top: 0; }
 .stage h2 { color: #1b2a40; }
 .stage h2:first-child { margin-top: 0; }
