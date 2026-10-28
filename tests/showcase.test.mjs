@@ -187,14 +187,14 @@ test('build your own shows every texture, labeled with the classes it uses', asy
         label: figure.querySelector('figcaption').textContent.trim(),
       })),
     );
-    assert.equal(squares.length, 10);
+    assert.equal(squares.length, 11);
     for (const square of squares) {
       for (const token of square.label.split(/\s+/)) {
         if (token.startsWith('--fam-')) assert.ok(square.properties.includes(token), `${token} is labeled but not set on its square`);
         else assert.ok(square.classes.includes(token), `${token} is labeled but not on its square (${square.classes.join(' ')})`);
       }
     }
-    const textures = ['fam-felt', 'fam-wood', 'fam-metal', 'fam-leather', 'fam-paper', 'fam-cork', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
+    const textures = ['fam-felt', 'fam-wood', 'fam-metal', 'fam-metal-sandblasted', 'fam-leather', 'fam-paper', 'fam-cork', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
     const shown = new Set(squares.flatMap((square) => square.classes));
     for (const texture of textures) assert.ok(shown.has(texture), `${texture} has no square`);
     assert.ok(squares.some((square) => square.properties.includes('--fam-cardstock-tint')), 'tinted cardstock has no square');
@@ -422,6 +422,7 @@ test('the controls page shows each control alone with its variants', async () =>
         roundButtons: count('.window .fam-plastic--round'),
         squareButtons: count('.window .fam-plastic--square'),
         metalButtons: count('.window .fam-metal-button'),
+        sandblastedButtons: count('.window .fam-metal-button--sandblasted'),
         glossyButtons: count('.window .fam-glossy-button'),
         glassButtons: count('.window .fam-glass-button'),
         buttonGroups: count('.window .fam-button-group'),
@@ -457,6 +458,7 @@ test('the controls page shows each control alone with its variants', async () =>
     assert.deepEqual(found.fills, [1, 1, 1]);
     assert.ok(found.selects >= 1 && found.menus >= 1 && found.searches >= 1 && found.selectedRows === 1);
     assert.ok(found.recessedRows >= 2 && found.leatherButtons >= 2);
+    assert.ok(found.sandblastedButtons >= 3, 'the sandblasted metal buttons are missing');
     assert.ok(found.disabledControls >= 6, 'the disabled looks are missing');
   } finally {
     await page.close();

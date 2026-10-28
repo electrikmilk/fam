@@ -93,6 +93,22 @@
   &lt;button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
+      <p class="scene-lead">Sandblasted metal buttons are the same buttons on a finer, grayer metal: add <code>fam-metal-button--sandblasted</code>.</p>
+      <div class="window fam-metal-sandblasted controls-stage">
+        <button class="fam-metal-button fam-metal-button--sandblasted fam-shadow-md" type="button">Eject</button>
+        <button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--round fam-shadow-md" type="button" aria-label="Info">i</button>
+        <button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--square fam-shadow-md" type="button" aria-label="Eject">E</button>
+        <button class="fam-metal-button fam-metal-button--sandblasted" type="button" disabled>Disabled</button>
+      </div>
+      <div class="code-block" role="group" aria-label="The sandblasted metal button markup" data-label="the sandblasted metal button markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-metal-sandblasted" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+  &lt;button class="fam-metal-button fam-metal-button--sandblasted fam-shadow-md" type="button"&gt;Eject&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--round fam-shadow-md" type="button" aria-label="Info"&gt;i&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--square fam-shadow-md" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
+  &lt;button class="fam-metal-button fam-metal-button--sandblasted" type="button" disabled&gt;Disabled&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       <p class="scene-lead">Buttons can share one case. Wrap them in a group, and mark the lit one with aria-pressed="true". A lit square plastic button shows its LED in the dish, and the others show the dark lens. Labeled buttons show a small lens above the label, dark until they are lit. The LED fades in and out. A leather group (fam-button-group--leather) is the leather of the navigation bar, and its lit item is the same dark pocket.</p>
       <div class="window fam-metal controls-stage">
         <div class="fam-button-group" role="group" aria-label="Playback mode">

@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 87 KB of CSS (19.7 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 88 KB of CSS (19.9 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -78,6 +78,7 @@ Put a material class on any box:
 - `fam-felt`: tintable felt, for screen backgrounds.
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
 - `fam-metal`: brushed metal, for plates, toolbars, navigation bars and panels.
+- `fam-metal-sandblasted`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`.
 - `fam-plastic-panel`: cream satin plastic for controls to sit on. Use it with a `fam-round-*` class.
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-leather-bar`: tan leather with a stitched bottom edge, for navigation bars. See [Navigation](#components).
@@ -271,7 +272,7 @@ A toggle LED is a label that wraps a checkbox, driven like the switch: it is lit
 </label>
 ```
 
-Navigation (use with `fam-wood`, `fam-metal` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
+Navigation (use with `fam-wood`, `fam-metal`, `fam-metal-sandblasted` or `fam-leather-bar`; mark the current page with `aria-current="page"`):
 
 ```html
 <nav class="fam-nav fam-wood" aria-label="Main">
@@ -345,7 +346,7 @@ Small dark text on natural light cardstock cannot reach 4.5:1 at its worst pixel
 - On a plain element a shadow class sets its `box-shadow`. A `fam-shadow-sm/md/lg` or `fam-cast-sm/md/lg` class also lifts plastic and metal buttons, the dial, the knob and the thumb of a switch, whose track stays sunken: the class names its shadow in `--fam-elevation` and these controls add it to the shadows they draw. A pressed or disabled button has sunk into its case and loses the lift. `--fam-elevation` does not inherit, so a button inside an elevated card is not lifted too. On any other element that draws its own shadow, such as the pill, the glossy button, the frames and the templates, the class has no effect, so put it on a wrapper with the same radius, for example `<span class="fam-cast-md fam-round-pill" style="display: inline-block"><button class="fam-pill" type="button">Save</button></span>`. Make the wrapper `inline-block` or a block: an inline one is only as tall as a line of text, so its shadow would not match the element. `fam-grounded-*` draws its ellipse with the element's `::after` and shows nothing on an element that clips its overflow (`overflow: hidden` or `auto`) or has no `::after` (`<img>`, `<input>`), so put it on a wrapper for any element that does either. That covers most of the kit: every `fam-plastic`, `fam-metal-button`, `fam-pill`, `fam-glossy-button`, `fam-glass`, `fam-wood-frame`, `fam-print-frame`, `fam-stitched`, `fam-dial`, `fam-knob`, the cells of a `fam-button-group`, `fam-recessed`, `fam-menu`, `fam-progress` and the templates.
 - Rounding: `fam-round-sm` (6px), `fam-round-md` (12px), `fam-round-lg` (20px), `fam-round-pill`. For a box inside padding, set `--fam-outer-radius` and `--fam-pad` on the outer box and use `fam-concentric` on the inner one, so the gap stays even.
 - Aqua pill with a gloss you can dial: `fam-pill` with `fam-gloss-none`, `fam-gloss-soft` or `fam-gloss-strong`.
-- Engraved text: `fam-engraved-metal`, `fam-engraved-wood`, `fam-engraved-leather`, on the matching material.
+- Engraved text: `fam-engraved-metal` (on brushed or sandblasted metal), `fam-engraved-wood`, `fam-engraved-leather`, on the matching material.
 
 ## Templates
 

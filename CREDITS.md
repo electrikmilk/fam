@@ -9,6 +9,7 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `felt-gray-tile.jpg` | `felt_lele-wan-ZHD1jN0QXwM-unsplash.jpg` | lele-wan | `make_tile.py 0.5 512 60`, then `to_tint_tile.py` |
 | `wood-light-tile.jpg` | `wood_smithsonian-e0pPip5TQRE-unsplash.jpg` | smithsonian | `make_tile.py 0.5 512 60 90` |
 | `metal-tile.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | `make_tile.py 0.55 512 14` |
+| `metal-sandblasted-tile.jpg` | `metal_katie-harp-TnQE5X48FMA-unsplash.jpg` | katie-harp | `make_tile.py 0.9 512 40` |
 | `metal-brushed.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | processed copy, recipe not recorded |
 | `metal-spiral.jpg` | `metal-spiral_fikri-rasyid-FnKKF2bATEE-unsplash.jpg` | fikri-rasyid | processed copy, recipe not recorded, scaled to 360px wide |
 | `knob-face.jpg` | `metal-spiral_fikri-rasyid-FnKKF2bATEE-unsplash.jpg` | fikri-rasyid | `make_radial_face.py ... 2762 1509 450 288 1.0 0.6` |

@@ -86,6 +86,16 @@ for (const family of BUTTON_FAMILIES) {
   });
 }
 
+test('sandblasted metal buttons are made from the sandblasted tile', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    assert.ok((await read(kit.page, '#metal-button-sandblasted', 'backgroundImage')).includes('metal-sandblasted-tile.jpg'));
+    assert.ok((await read(kit.page, '#metal-button-sandblasted-disabled', 'backgroundImage')).includes('metal-sandblasted-tile.jpg'));
+  } finally {
+    await kit.close();
+  }
+});
+
 test('metal buttons are made from the brushed metal texture', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {

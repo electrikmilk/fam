@@ -11,6 +11,7 @@ const CONTROLS = [
   ['plastic button on metal', '#plastic-on-metal', null],
   ['metal button on felt', '#metal-button-on-felt', null],
   ['metal button on metal', '#metal-button', null],
+  ['sandblasted metal button on felt', '#metal-button-sandblasted', null],
   ['glossy button on metal', '#glossy-button', null],
   ['glossy silver button on metal', '#glossy-silver', null],
   ['glass button on felt', '#glass-button', null, { ringIsOutside: true }],

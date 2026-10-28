@@ -21,6 +21,12 @@
     var(--fam-tex-metal-tile) 0 0 / 300px repeat;
 }
 
+.fam-metal-sandblasted {
+  background:
+    linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
+    var(--fam-tex-metal-sandblasted) 0 0 / 300px repeat;
+}
+
 /* Cream satin plastic, the case in references/plastic.png: a gradient carries the shape and the grain adds texture. The cream is muted and the grain
    stronger than on colored plastic, because a soft-light blend barely shows on a pale base. Use it with a fam-round class. */
 .fam-plastic-panel {
