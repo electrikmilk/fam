@@ -16,6 +16,14 @@
   background-blend-mode: multiply;
 }
 
+/* The twill tile is grayscale with an average of 200, so the default indigo tint lands on a mid denim blue */
+.fam-denim {
+  background-color: var(--fam-denim-tint, #41619b);
+  background-image: var(--fam-tex-denim-tile);
+  background-size: 256px;
+  background-blend-mode: multiply;
+}
+
 /* Lifted slightly so small dark engraved text passes contrast */
 .fam-wood {
   background:

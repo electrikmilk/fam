@@ -58,7 +58,7 @@ test('materials load their textures', async () => {
     assert.deepEqual(kit.issues, []);
     const styles = await kit.page.evaluate(() =>
       Object.fromEntries(
-        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'cardboard', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
+        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'denim', 'cardboard', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
           id,
           getComputedStyle(document.getElementById(id)).backgroundImage,
         ]),
@@ -113,6 +113,34 @@ test('linen is gray until it is tinted', async () => {
     const background = await kit.page.evaluate(() => getComputedStyle(document.getElementById('linen')).backgroundColor);
     const [red, green, blue] = background.match(/\d+/g).map(Number);
     assert.ok(red === green && green === blue, `the default linen is not gray: ${background}`);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('denim takes its tint', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    for (const tint of ['#000000', '#ffffff']) {
+      const background = await kit.page.evaluate((value) => {
+        const denim = document.getElementById('denim');
+        denim.style.setProperty('--fam-denim-tint', value);
+        return getComputedStyle(denim).backgroundColor;
+      }, tint);
+      const channel = tint === '#000000' ? 0 : 255;
+      assert.equal(background, `rgb(${channel}, ${channel}, ${channel})`, `denim ignores --fam-denim-tint ${tint}`);
+    }
+  } finally {
+    await kit.close();
+  }
+});
+
+test('denim is indigo until it is tinted', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const background = await kit.page.evaluate(() => getComputedStyle(document.getElementById('denim')).backgroundColor);
+    const [red, , blue] = background.match(/\d+/g).map(Number);
+    assert.ok(blue > red + 30, `the default denim is not blue: ${background}`);
   } finally {
     await kit.close();
   }
