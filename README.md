@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 86 KB of CSS (19.5 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 86 KB of CSS (19.6 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -145,9 +145,20 @@ Add `fam-glass--refract` for clear glass that bends what is behind its rim. It n
 <div class="fam-glass fam-glass--refract"></div>
 ```
 
-Refraction works in Chromium only. Other browsers show a clear glass pane with no bending. The bending strength is the `scale` attribute on `feDisplacementMap` in the snippet.
+Refraction works in Chromium only. Other browsers show a clear glass pane with no bending. The rim also splits into a faint rainbow fringe, like light through a prism (chromatic aberration): the snippet bends the red, green and blue channels by slightly different amounts. The static snippet always bends by the defaults below. Its strength is the `scale` on each of its three `feDisplacementMap` passes.
 
-The snippet's map is one fixed image stretched over the glass, so it bends the straight sides more than the corners of a rounded pane or a circle. For bending that follows the glass's own corner radius, also load the optional refraction script, the one piece of JavaScript the kit offers. It gives each `fam-glass--refract` a filter built from that element's size and radius, and rebuilds it when either changes, including a change to `--fam-r` or a `fam-round-*` class. The bending strength is the `DISPLACEMENT_SCALE` constant in the script, and the static filter stays in place as the fallback.
+The snippet's map is one fixed image stretched over the glass, so it bends the straight sides more than the corners of a rounded pane or a circle. For bending that follows the glass's own corner radius, also load the optional refraction script, the one piece of JavaScript the kit offers. It gives each `fam-glass--refract` a filter built from that element's size and radius, and rebuilds it when either changes, including a change to `--fam-r` or a `fam-round-*` class. The static filter stays in place as the fallback.
+
+The script also reads two variables from the glass itself, set with a class or an inline style, and applies a change on the next frame:
+
+- `--fam-refract-amount` (default `1`) multiplies the bending. `0` is flat glass, `2` bends twice as much.
+- `--fam-refract-dispersion` (default `.1`) is the chromatic aberration: red bends that fraction further than green and blue that fraction less. `0` turns the fringe off.
+
+Both are plain numbers without units. The script raises an error for a value that is not one, such as `2px`.
+
+```html
+<div class="fam-glass fam-glass--refract" style="--fam-refract-amount: 1.5; --fam-refract-dispersion: .2"></div>
+```
 
 ```js
 import 'fam-ui/refraction';
