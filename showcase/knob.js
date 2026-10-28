@@ -1,5 +1,7 @@
 // Turns a .fam-knob into a slider: keyboard, pointer, and the ARIA values a screen reader needs.
 // The orange tick sweeps 270 degrees, from 135 degrees left of straight up to 135 degrees right of it.
+// The knob turns in whole steps. A knob that stands for a fraction sets data-divisor (a step is 1 / divisor) and data-unit ("" for none),
+// and its aria-valuetext and scaledValue are the step count divided by the divisor.
 window.FamShowcase = window.FamShowcase || {};
 
 window.FamShowcase.createKnob = function (element, onChange) {
@@ -7,12 +9,14 @@ window.FamShowcase.createKnob = function (element, onChange) {
   var min = Number(element.getAttribute('aria-valuemin'));
   var max = Number(element.getAttribute('aria-valuemax'));
   var value = Number(element.getAttribute('aria-valuenow'));
+  var divisor = Number(element.getAttribute('data-divisor') || 1);
+  var unit = element.hasAttribute('data-unit') ? element.getAttribute('data-unit') : 'px';
 
   function render() {
     var angle = -SWEEP_DEGREES + (2 * SWEEP_DEGREES * (value - min)) / (max - min);
     element.style.setProperty('--fam-knob-angle', angle + 'deg');
     element.setAttribute('aria-valuenow', String(value));
-    element.setAttribute('aria-valuetext', value + 'px');
+    element.setAttribute('aria-valuetext', value / divisor + unit);
   }
 
   function clamp(next) {
@@ -61,6 +65,7 @@ window.FamShowcase.createKnob = function (element, onChange) {
 
   return {
     get value() { return value; },
+    get scaledValue() { return value / divisor; },
     setValue: function (next) {
       value = clamp(next);
       render();
