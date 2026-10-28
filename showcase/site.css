@@ -21,6 +21,8 @@ html { scroll-behavior: smooth; }
 .site-nav {
   position: sticky;
   top: 0;
+  /* The kit's .fam-nav is z-index 2, so the sample navs further down the page tie with this bar and paint over it */
+  z-index: 10;
   height: 64px;
   font-family: var(--site-font);
 }
