@@ -177,6 +177,19 @@ test('the materials page holds the textures, then the bars, frames and engraved 
   }
 });
 
+test('navigation bars are wood, leather, metal, paper or cardstock, and the leather ones are stitched', async () => {
+  const page = await openUrl(materialsUrl);
+  try {
+    const bars = await page.page.$$eval('#scene-navs .navs-window .fam-nav', (navs) => navs.map((nav) => [...nav.classList].filter((name) => name !== 'fam-nav')));
+    const allowed = ['fam-wood', 'fam-wood-paneled', 'fam-metal-brushed', 'fam-metal', 'fam-paper', 'fam-cardstock', 'fam-leather-bar'];
+    for (const classes of bars) assert.ok(classes.some((name) => allowed.includes(name)), `${classes.join(' ')} is not a wood, leather, metal, paper or cardstock bar`);
+    assert.ok(!bars.flat().some((name) => name.startsWith('fam-leather-pebbled')), 'a leather bar has no stitching');
+    for (const required of allowed) assert.ok(bars.some((classes) => classes.includes(required)), `no ${required} bar is shown`);
+  } finally {
+    await page.close();
+  }
+});
+
 test('build your own shows every texture, labeled with the classes it uses', async () => {
   const page = await openUrl(materialsUrl);
   try {

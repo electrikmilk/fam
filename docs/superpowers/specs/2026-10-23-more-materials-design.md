@@ -7,7 +7,7 @@ Adds new materials and material variants to the kit (`css/materials.css`, `css/c
 
 ## Intent and why
 
-The owner wants more materials to choose from. Each new material gets the same reach as wood, metal and leather have today: a navigation bar, engraved text where it makes sense, and, for the second metal, its own metal buttons.
+The owner wants more materials to choose from. New materials get engraved text where it makes sense, the second metal gets its own metal buttons, and navigation bars exist only on wood (plain and paneled), leather (stitched), metal, paper and cardstock.
 
 ## Requested materials
 
@@ -24,7 +24,7 @@ All photos are already in `textures/` and are Unsplash photos, credited the same
 ## Goals
 
 - Every material above is a material class that works on any box, tiles seamlessly without stretching, and loads its texture only when used.
-- Every material has a matching navigation bar (`fam-nav` plus the material class), with readable text and a selected item.
+- Navigation bars (`fam-nav` plus the material class), with readable text and a selected item, exist only for wood, paneled wood, stitched leather, brushed and sandblasted metal, paper and cardstock. Linen, cardboard, denim, paper bag and leather with no stitched edge get none.
 - Engraved text classes (`fam-engraved-*`) exist for the materials where engraving makes sense. The builder decides which ones.
 - Sandblasted metal has its own metal buttons, which group, take the LED and press like the brushed ones.
 - Linen and denim take a tint like the felt does. Tintability is a goal for linen and not required for the others.
@@ -40,7 +40,7 @@ All photos are already in `textures/` and are Unsplash photos, credited the same
 
 ## Decided by the owner
 
-- Full reach for every new material: navigation bars, engraved text where it makes sense, and second-metal buttons.
+- Navigation bars only on wood, leather, metal, paper and cardstock, and no bar on leather without a stitched edge. This replaced an earlier call that every new material gets a bar. I read the list as also asking for paper and cardstock bars, which did not exist before, and treated paper bag as its own material with no bar.
 - The current metal is renamed brushed metal with the class `fam-metal-brushed`, and the sandblasted metal is plain `fam-metal`. This replaced an earlier call to keep `fam-metal` as the brushed one.
 - The paneled wood tile must avoid the bolts or nails in the planks photo.
 - The design is approved.
