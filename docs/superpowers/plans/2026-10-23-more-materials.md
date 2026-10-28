@@ -12,11 +12,11 @@
 
 ## Global Constraints
 
-- `fam-metal` and `fam-metal-button` keep their names and are the brushed metal. Call the current metal "brushed metal" in the showcase captions and README prose only.
+- The current metal is `fam-metal-brushed` and the sandblasted metal is plain `fam-metal`. `fam-metal-button` stays the brushed button; sandblasted buttons are `fam-metal-button--sandblasted`.
 - No new JavaScript. New work meets WCAG AA contrast on rendered pixels at 1440px and 375px, shows a focus ring, and keeps the forced-colors and reduced-motion rules that `.fam-nav` already carries.
 - Tiles never stretch and a material you do not use is never downloaded. Tile files should stay between 13 KB and 85 KB; a tile that needs more goes over, and `CREDITS.md` says why.
 - The paneled wood tile must show no bolt or nail. If a planks crop cannot tile without a visible seam or repeat, drop paneled wood, tell the owner, and ship no substitute.
-- Class names: `fam-metal-sandblasted`, `fam-metal-button--sandblasted`, `fam-leather-pebbled` (modifiers `--black`, `--brown`), `fam-leather-frame--brown`, `fam-leather-bar--brown`, `fam-wood-paneled`, `fam-linen`, `fam-cardboard` (modifier `--chipboard`), `fam-denim`, `fam-paper-bag`. Asset names: `<material>-tile.jpg`.
+- Class names: `fam-metal`, `fam-metal-button--sandblasted`, `fam-leather-pebbled` (modifiers `--black`, `--brown`), `fam-leather-frame--brown`, `fam-leather-bar--brown`, `fam-wood-paneled`, `fam-linen`, `fam-cardboard` (modifier `--chipboard`), `fam-denim`, `fam-paper-bag`. Asset names: `<material>-tile.jpg`.
 - Linen and denim take their own tint variable, like `--fam-cardstock-tint`: `--fam-linen-tint` (default a natural linen) and `--fam-denim-tint` (default indigo). One shared `--fam-tint` cannot have two defaults. Cardboard and paper bag keep their photo colors.
 - Source photos are already in `textures/`. Credit each in `CREDITS.md` with the photographer (the name inside the file name) and the exact command that made the asset.
 - Commit messages are imperative, one commit per material, and end with `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`. Do not `git add` the untracked `references/` or `textures/` photos unrelated to the task.
@@ -29,7 +29,7 @@ Every material task runs these in order. The task lists only what is specific to
 1. **Failing tests first.** Add the new asset names to `ASSET_NAMES` (and to `TILED_NAMES` if it is a seamless tile) in `tests/assets.test.mjs`. Add a `<div id="<material>" class="sample <class>">` to `tests/fixtures/kit.html` and its id to the list in `materials load their textures` in `tests/materials.test.mjs`. Run `node --test tests/assets.test.mjs tests/materials.test.mjs`; expect FAIL (missing assets, no texture).
 2. **Cut the tile.** Use `tools/texture-pipeline/make_tile.py SOURCE OUTPUT CROP_FRACTION SIZE FLATTEN_RADIUS [ROTATE_DEGREES]`, then `to_tint_tile.py SRC OUT` for tinted materials. Write outputs to `assets/`. Look at the tile (Read the image) and at a 3x3 repeat of it before keeping it.
 3. **Token and class.** Add `--fam-tex-<name>` to `css/tokens.css` and the class to `css/materials.css`, with a comment only where a number needs its why.
-4. **Navigation bar.** Add `.fam-nav.<class>` rules to `css/components.css` beside the metal and leather bars. Light surfaces copy `.fam-nav.fam-metal` (dark ink, light lip, dark pocket with light label for `aria-current="page"`). Dark surfaces copy `.fam-leather-bar--black` (light ink, dark lip). Set `.fam-nav-item:focus-visible { outline-color }` to the ink color.
+4. **Navigation bar.** Add `.fam-nav.<class>` rules to `css/components.css` beside the metal and leather bars. Light surfaces copy `.fam-nav.fam-metal-brushed` (dark ink, light lip, dark pocket with light label for `aria-current="page"`). Dark surfaces copy `.fam-leather-bar--black` (light ink, dark lip). Set `.fam-nav-item:focus-visible { outline-color }` to the ink color.
 5. **Showcase.** In `showcase/materials.html` add a swatch to the "Textures" `.swatches` list (figcaption is the class name), a nav bar to `#scene-navs` and to its markup note, and the class to the "build your own" `<code class="copyable">` list. In `tests/showcase.test.mjs` raise the expected swatch count (`squares.length`, currently 10) by one and add the class to `textures`.
 6. **Docs.** Add the class to the README "Materials" list and the nav sentence; add the `CREDITS.md` row. If the asset ends in `-tile.jpg`, run `node --test tests/claims.test.mjs` and, if it fails, update the quoted `tile-min` and `tile-max` numbers in `showcase/index.html` and `README.md`.
 7. **Verify.** Run `npm run test:fast`, then `npm run test:contrast`. Expect all PASS. Open `showcase/materials.html` in a browser and look at the swatch and nav bar at 1440px and 375px wide.
@@ -53,13 +53,13 @@ Every material task runs these in order. The task lists only what is specific to
 - Test: `tests/controls.test.mjs`, `tests/disabled.test.mjs`, `tests/focus-contrast.test.mjs`
 
 **Interfaces:**
-- Produces: `--fam-tex-metal-sandblasted`; classes `fam-metal-sandblasted` and `fam-metal-button--sandblasted` (used together with `fam-metal-button`); optional `fam-engraved-sandblasted`.
+- Produces: `--fam-tex-metal-sandblasted`; classes `fam-metal` and `fam-metal-button--sandblasted` (used together with `fam-metal-button`); optional `fam-engraved-sandblasted`.
 
 - [ ] **Step 1:** Do checklist step 1 with id `metal-sandblasted`. In `tests/controls.test.mjs` add `metal sandblasted buttons are made from the sandblasted tile`, asserting `#metal-button-sandblasted` has `backgroundImage` containing `metal-sandblasted-tile.jpg`, modeled on `metal buttons are made from the brushed metal texture`. In `tests/disabled.test.mjs` add `#metal-button-sandblasted-disabled` to the selector lists that already hold `#metal-button-disabled`. In `tests/focus-contrast.test.mjs` add `['sandblasted metal button', '#metal-button-sandblasted', null]`. Run them; expect FAIL.
-- [ ] **Step 2:** Do checklist steps 2 and 3. The material is the tile under the same top-light gradient `.fam-metal` uses. Rename nothing.
+- [ ] **Step 2:** Do checklist steps 2 and 3. The material is the tile under the same top-light gradient `.fam-metal-brushed` uses.
 - [ ] **Step 3:** Add `.fam-metal-button--sandblasted` in `css/components.css` right after `.fam-metal-button:disabled`. It overrides only `background` for rest and for `:disabled` (the tile in place of `var(--fam-tex-metal-brushed)`, same gradients). Groups, LED, round and square variants already select `.fam-metal-button`, so they work unchanged.
-- [ ] **Step 4:** Do checklist step 4 for `.fam-nav.fam-metal-sandblasted`, copying `.fam-nav.fam-metal`. Do step 5; also add to `showcase/controls.html` next to the brushed buttons: `#metal-button-sandblasted`, `#metal-button-sandblasted-disabled`, and a sandblasted round button, each with a markup line in the code block. Relabel the brushed captions "brushed metal" in showcase and README prose.
-- [ ] **Step 5:** In `#scene-engraved` add a `fam-metal-sandblasted` panel with `fam-engraved-metal`. If the contrast audit fails for it, add `.fam-engraved-sandblasted` to `css/effects.css` with a color fitted to the tile and use that.
+- [ ] **Step 4:** Do checklist step 4 for `.fam-nav.fam-metal`, copying `.fam-nav.fam-metal-brushed`. Do step 5; also add to `showcase/controls.html` next to the brushed buttons: `#metal-button-sandblasted`, `#metal-button-sandblasted-disabled`, and a sandblasted round button, each with a markup line in the code block. Relabel the brushed captions "brushed metal" in showcase and README prose.
+- [ ] **Step 5:** In `#scene-engraved` add a `fam-metal` panel with `fam-engraved-metal`. If the contrast audit fails for it, add `.fam-engraved-sandblasted` to `css/effects.css` with a color fitted to the tile and use that.
 - [ ] **Step 6:** Do checklist steps 6 to 8. Commit message: `Add sandblasted metal with a navigation bar and buttons`.
 
 ### Task 2: Pebbled leather

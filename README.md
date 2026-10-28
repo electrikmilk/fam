@@ -78,8 +78,8 @@ Put a material class on any box:
 - `fam-felt`: tintable felt, for screen backgrounds.
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
 - `fam-wood-paneled`: dark vertical planks, for navigation bars and panels. Its text is light.
-- `fam-metal`: brushed metal, for plates, toolbars, navigation bars and panels.
-- `fam-metal-sandblasted`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`.
+- `fam-metal-brushed`: brushed metal, for plates, toolbars, navigation bars and panels.
+- `fam-metal`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`.
 - `fam-plastic-panel`: cream satin plastic for controls to sit on. Use it with a `fam-round-*` class.
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-leather-pebbled`: the leather frame's pebbled leather with no stitched edge, in tan; add `fam-leather-pebbled--black` for black or `fam-leather-pebbled--brown` for dark brown.
@@ -274,7 +274,7 @@ A toggle LED is a label that wraps a checkbox, driven like the switch: it is lit
 </label>
 ```
 
-Navigation (use with `fam-wood`, `fam-metal`, `fam-wood-paneled`, `fam-metal-sandblasted`, `fam-leather-bar` or `fam-leather-pebbled`; mark the current page with `aria-current="page"`):
+Navigation (use with `fam-wood`, `fam-metal-brushed`, `fam-wood-paneled`, `fam-metal`, `fam-leather-bar` or `fam-leather-pebbled`; mark the current page with `aria-current="page"`):
 
 ```html
 <nav class="fam-nav fam-wood" aria-label="Main">

@@ -51,7 +51,7 @@
     <section class="scene" id="scene-buttons">
       <h3 class="scene-title">Plastic and metal buttons</h3>
       <p class="scene-lead">Raised plastic buttons in five colors, with round and square ones that have a dish. They sit best on metal, and a disabled button sinks into its case like one that has not popped up yet. Metal buttons are made the same way from brushed metal.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <button class="fam-plastic fam-plastic--red fam-shadow-md" type="button">Record</button>
         <button class="fam-plastic fam-plastic--green fam-shadow-md" type="button">Play</button>
         <button class="fam-plastic fam-plastic--amber fam-shadow-md" type="button">Pause</button>
@@ -64,7 +64,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The plastic button markup" data-label="the plastic button markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;button class="fam-plastic fam-plastic--red fam-shadow-md" type="button"&gt;Record&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--green fam-shadow-md" type="button"&gt;Play&lt;/button&gt;
   &lt;button class="fam-plastic fam-plastic--amber fam-shadow-md" type="button"&gt;Pause&lt;/button&gt;
@@ -76,7 +76,7 @@
   &lt;button class="fam-plastic fam-plastic--purple fam-plastic--round" type="button" aria-label="Info, disabled" disabled&gt;i&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <button class="fam-metal-button fam-shadow-md" type="button">Eject</button>
         <button class="fam-metal-button fam-metal-button--round fam-shadow-md" type="button" aria-label="Info">i</button>
         <button class="fam-metal-button fam-metal-button--square fam-shadow-md" type="button" aria-label="Eject">E</button>
@@ -85,7 +85,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The metal button markup" data-label="the metal button markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Eject&lt;/button&gt;
   &lt;button class="fam-metal-button fam-metal-button--round fam-shadow-md" type="button" aria-label="Info"&gt;i&lt;/button&gt;
   &lt;button class="fam-metal-button fam-metal-button--square fam-shadow-md" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
@@ -94,7 +94,7 @@
 &lt;/div&gt;</code></pre>
       </div>
       <p class="scene-lead">Sandblasted metal buttons are the same buttons on a finer, grayer metal: add <code>fam-metal-button--sandblasted</code>.</p>
-      <div class="window fam-metal-sandblasted controls-stage">
+      <div class="window fam-metal controls-stage">
         <button class="fam-metal-button fam-metal-button--sandblasted fam-shadow-md" type="button">Eject</button>
         <button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--round fam-shadow-md" type="button" aria-label="Info">i</button>
         <button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--square fam-shadow-md" type="button" aria-label="Eject">E</button>
@@ -102,7 +102,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The sandblasted metal button markup" data-label="the sandblasted metal button markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal-sandblasted" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;button class="fam-metal-button fam-metal-button--sandblasted fam-shadow-md" type="button"&gt;Eject&lt;/button&gt;
   &lt;button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--round fam-shadow-md" type="button" aria-label="Info"&gt;i&lt;/button&gt;
   &lt;button class="fam-metal-button fam-metal-button--sandblasted fam-metal-button--square fam-shadow-md" type="button" aria-label="Eject"&gt;E&lt;/button&gt;
@@ -110,7 +110,7 @@
 &lt;/div&gt;</code></pre>
       </div>
       <p class="scene-lead">Buttons can share one case. Wrap them in a group, and mark the lit one with aria-pressed="true". A lit square plastic button shows its LED in the dish, and the others show the dark lens. Labeled buttons show a small lens above the label, dark until they are lit. The LED fades in and out. A leather group (fam-button-group--leather) is the leather of the navigation bar, and its lit item is the same dark pocket.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <div class="fam-button-group" role="group" aria-label="Playback mode">
           <button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"></button>
           <button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"></button>
@@ -125,7 +125,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The button group markup" data-label="the button group markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;div class="fam-button-group" role="group" aria-label="Playback mode"&gt;
     &lt;button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 1" aria-pressed="false"&gt;&lt;/button&gt;
     &lt;button class="fam-plastic fam-plastic--square" type="button" aria-label="Mode 2" aria-pressed="true"&gt;&lt;/button&gt;
@@ -161,7 +161,7 @@
     <section class="scene" id="scene-glossy-glass">
       <h3 class="scene-title">Glossy and glass buttons</h3>
       <p class="scene-lead">Glossy buttons are the aqua pill on a button, in blue and silver, and fam-gloss-soft or fam-gloss-strong dial the sheen. Glass buttons are the frosted pill on a button and read best on a dark surface.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <button class="fam-glossy-button" type="button">Save</button>
         <button class="fam-glossy-button fam-glossy-button--silver" type="button">Cancel</button>
         <button class="fam-glossy-button fam-gloss-strong" type="button">Strong gloss</button>
@@ -169,14 +169,14 @@
       </div>
       <div class="code-block" role="group" aria-label="The glossy button markup" data-label="the glossy button markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;button class="fam-glossy-button" type="button"&gt;Save&lt;/button&gt;
   &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button"&gt;Cancel&lt;/button&gt;
   &lt;button class="fam-glossy-button fam-gloss-strong" type="button"&gt;Strong gloss&lt;/button&gt;
   &lt;button class="fam-glossy-button" type="button" disabled&gt;Disabled&lt;/button&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <div class="fam-button-group" role="group" aria-label="Toolbar">
           <button class="fam-glossy-button fam-glossy-button--silver" type="button" aria-pressed="false">Back</button>
           <button class="fam-glossy-button fam-glossy-button--silver" type="button" aria-pressed="true">List</button>
@@ -190,7 +190,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The glossy button group markup" data-label="the glossy button group markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;div class="fam-button-group" role="group" aria-label="Toolbar"&gt;
     &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button" aria-pressed="false"&gt;Back&lt;/button&gt;
     &lt;button class="fam-glossy-button fam-glossy-button--silver" type="button" aria-pressed="true"&gt;List&lt;/button&gt;
@@ -227,7 +227,7 @@
     <section class="scene" id="scene-radios">
       <h3 class="scene-title">Radio buttons</h3>
       <p class="scene-lead">Real radio inputs, so arrow keys and forms work with no JavaScript. Plastic and metal radios are LEDs that are dark when unchecked and glow when checked, and a disabled one sinks into its case. Glossy and glass radios show a plain dot.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <label class="fam-radio fam-radio--plastic"><input type="radio" name="plastic-mode" checked><span class="fam-radio-dot"></span>Record</label>
         <label class="fam-radio fam-radio--plastic"><input type="radio" name="plastic-mode"><span class="fam-radio-dot"></span>Play</label>
         <label class="fam-radio fam-radio--plastic"><input type="radio" name="plastic-mode" disabled><span class="fam-radio-dot"></span>Locked</label>
@@ -240,7 +240,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The plastic, metal and glossy radio markup" data-label="the plastic, metal and glossy radio markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; padding: 28px"&gt;
   &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="plastic-mode" checked&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Record&lt;/label&gt;
   &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="plastic-mode"&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Play&lt;/label&gt;
   &lt;label class="fam-radio fam-radio--plastic"&gt;&lt;input type="radio" name="plastic-mode" disabled&gt;&lt;span class="fam-radio-dot"&gt;&lt;/span&gt;Locked&lt;/label&gt;
@@ -324,7 +324,7 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <div class="tab-demo">
         <div class="fam-button-group" role="tablist" aria-label="Metal tabs" data-tabs>
           <button class="fam-metal-button" type="button" role="tab" id="metal-tab-0" aria-selected="true" aria-controls="metal-panel-0">One</button>
@@ -338,7 +338,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The metal tab strip markup" data-label="the metal tab strip markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="padding: 28px"&gt;
   &lt;div class="tab-demo"&gt;
   &lt;div class="fam-button-group" role="tablist" aria-label="Metal tabs" data-tabs&gt;
     &lt;button class="fam-metal-button" type="button" role="tab" id="metal-tab-0" aria-selected="true" aria-controls="metal-panel-0"&gt;One&lt;/button&gt;
@@ -430,7 +430,7 @@
     <section class="scene" id="scene-switch-knob">
       <h3 class="scene-title">Switch and knob</h3>
       <p class="scene-lead">The switch is a checkbox, so it toggles with no JavaScript. The knob is a picture, and --fam-knob-angle turns its tick.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <label class="fam-switch fam-shadow-md"><input type="checkbox" role="switch" aria-label="On example" checked><span class="fam-switch-knob"></span></label>
         <label class="fam-switch fam-shadow-md"><input type="checkbox" role="switch" aria-label="Off example"><span class="fam-switch-knob"></span></label>
         <label class="fam-switch"><input type="checkbox" role="switch" aria-label="Disabled example" disabled><span class="fam-switch-knob"></span></label>
@@ -440,7 +440,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The switch and knob markup" data-label="the switch and knob markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center; padding: 28px"&gt;
   &lt;label class="fam-switch fam-shadow-md"&gt;&lt;input type="checkbox" role="switch" aria-label="On example" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
   &lt;label class="fam-switch fam-shadow-md"&gt;&lt;input type="checkbox" role="switch" aria-label="Off example"&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
   &lt;label class="fam-switch"&gt;&lt;input type="checkbox" role="switch" aria-label="Disabled example" disabled&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;
@@ -517,7 +517,7 @@
   &lt;span class="fam-led fam-led--blue fam-led--large"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Sync&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <span class="fam-led fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Power</span><span class="fam-visually-hidden">, on</span></span>
         <span class="fam-led"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label fam-led-label--printed">Standby</span><span class="fam-visually-hidden">, off</span></span>
         <span class="fam-led fam-led--green fam-led--lit"><span class="fam-led-lens" aria-hidden="true"></span><span class="fam-led-label">Ready</span><span class="fam-visually-hidden">, on</span></span>
@@ -529,7 +529,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The LEDs on metal markup" data-label="the leds on metal markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
   &lt;span class="fam-led fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Power&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
   &lt;span class="fam-led"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Standby&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, off&lt;/span&gt;&lt;/span&gt;
   &lt;span class="fam-led fam-led--green fam-led--lit"&gt;&lt;span class="fam-led-lens" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Ready&lt;/span&gt;&lt;span class="fam-visually-hidden"&gt;, on&lt;/span&gt;&lt;/span&gt;
@@ -541,7 +541,7 @@
 &lt;/div&gt;</code></pre>
       </div>
       <p class="scene-lead">An LED that wraps a checkbox is a toggle, driven the same way as the switch: it is lit while checked, so it works without JavaScript and in forms. Give the input role="switch" and the label is its name. A disabled one sinks into its case like a disabled button.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <label class="fam-led"><input type="checkbox" role="switch" checked><span class="fam-led-lens"></span><span class="fam-led-label">Power</span></label>
         <label class="fam-led"><input type="checkbox" role="switch"><span class="fam-led-lens"></span><span class="fam-led-label">Standby</span></label>
         <label class="fam-led fam-led--green"><input type="checkbox" role="switch" checked><span class="fam-led-lens"></span><span class="fam-led-label fam-led-label--printed">Ready</span></label>
@@ -553,7 +553,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The toggle LEDs markup" data-label="the toggle LEDs markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-start; padding: 28px"&gt;
   &lt;label class="fam-led"&gt;&lt;input type="checkbox" role="switch" checked&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Power&lt;/span&gt;&lt;/label&gt;
   &lt;label class="fam-led"&gt;&lt;input type="checkbox" role="switch"&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label"&gt;Standby&lt;/span&gt;&lt;/label&gt;
   &lt;label class="fam-led fam-led--green"&gt;&lt;input type="checkbox" role="switch" checked&gt;&lt;span class="fam-led-lens"&gt;&lt;/span&gt;&lt;span class="fam-led-label fam-led-label--printed"&gt;Ready&lt;/span&gt;&lt;/label&gt;
@@ -569,7 +569,7 @@
     <section class="scene" id="scene-progress">
       <h3 class="scene-title">Progress tubes</h3>
       <p class="scene-lead">Set the value with --fam-value and pick a fill: candy, aqua or green.</p>
-      <div class="window fam-metal controls-stage">
+      <div class="window fam-metal-brushed controls-stage">
         <div class="fam-progress" role="progressbar" aria-label="Candy cane progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value: 68%">
           <div class="fam-progress-fill fam-progress-fill--candy"></div>
         </div>
@@ -582,7 +582,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The progress tube markup" data-label="the progress tube markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: grid; gap: 18px; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: grid; gap: 18px; padding: 28px"&gt;
   &lt;div class="fam-progress" role="progressbar" aria-label="Candy cane progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68" style="--fam-value: 68%"&gt;
     &lt;div class="fam-progress-fill fam-progress-fill--candy"&gt;&lt;/div&gt;
   &lt;/div&gt;
@@ -823,13 +823,13 @@
       <h3 class="scene-title">Keyboard focus</h3>
       <p class="scene-lead">Press Tab to move through these controls. Each one draws a two-tone ring: a white halo next to the control and a dark outline outside it, so the ring reads on metal, felt and wood alike.</p>
       <div class="window focus-stage">
-        <div class="fam-metal focus-cell"><button class="fam-metal-button fam-shadow-md" type="button">Play</button></div>
+        <div class="fam-metal-brushed focus-cell"><button class="fam-metal-button fam-shadow-md" type="button">Play</button></div>
         <div class="fam-felt focus-cell"><div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div></div>
         <div class="fam-wood focus-cell"><label class="fam-switch fam-shadow-md"><input type="checkbox" role="switch" aria-label="Wi-Fi" checked><span class="fam-switch-knob"></span></label></div>
       </div>
       <div class="code-block" role="group" aria-label="The keyboard focus markup" data-label="the keyboard focus markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="padding: 28px"&gt;&lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Play&lt;/button&gt;&lt;/div&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="padding: 28px"&gt;&lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Play&lt;/button&gt;&lt;/div&gt;
 &lt;div class="fam-felt" style="padding: 28px"&gt;&lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;div class="fam-wood" style="padding: 28px"&gt;&lt;label class="fam-switch fam-shadow-md"&gt;&lt;input type="checkbox" role="switch" aria-label="Wi-Fi" checked&gt;&lt;span class="fam-switch-knob"&gt;&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</code></pre>
       </div>

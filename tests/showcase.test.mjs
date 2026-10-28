@@ -194,7 +194,7 @@ test('build your own shows every texture, labeled with the classes it uses', asy
         else assert.ok(square.classes.includes(token), `${token} is labeled but not on its square (${square.classes.join(' ')})`);
       }
     }
-    const textures = ['fam-felt', 'fam-wood', 'fam-wood-paneled', 'fam-metal', 'fam-metal-sandblasted', 'fam-leather', 'fam-leather-pebbled', 'fam-paper', 'fam-cork', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
+    const textures = ['fam-felt', 'fam-wood', 'fam-wood-paneled', 'fam-metal-brushed', 'fam-metal', 'fam-leather', 'fam-leather-pebbled', 'fam-paper', 'fam-cork', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
     const shown = new Set(squares.flatMap((square) => square.classes));
     for (const texture of textures) assert.ok(shown.has(texture), `${texture} has no square`);
     assert.ok(squares.some((square) => square.properties.includes('--fam-cardstock-tint')), 'tinted cardstock has no square');
@@ -469,7 +469,7 @@ test('the progress tubes sit on metal on the controls page', async () => {
   const page = await openUrl(showcasePageUrl('controls'));
   try {
     const classes = await page.page.$eval('#scene-progress .window', (window) => [...window.classList]);
-    assert.ok(classes.includes('fam-metal') && !classes.includes('fam-felt'), classes.join(' '));
+    assert.ok(classes.includes('fam-metal-brushed') && !classes.includes('fam-felt'), classes.join(' '));
   } finally {
     await page.close();
   }

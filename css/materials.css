@@ -20,13 +20,13 @@
   background: var(--fam-tex-wood-paneled-tile) 0 0 / 380px repeat;
 }
 
-.fam-metal {
+.fam-metal-brushed {
   background:
     linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
     var(--fam-tex-metal-tile) 0 0 / 300px repeat;
 }
 
-.fam-metal-sandblasted {
+.fam-metal {
   background:
     linear-gradient(rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
     var(--fam-tex-metal-sandblasted) 0 0 / 300px repeat;

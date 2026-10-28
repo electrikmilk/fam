@@ -47,8 +47,8 @@
             <figure class="sq"><span class="swatch fam-felt"></span><figcaption>fam-felt</figcaption></figure>
             <figure class="sq"><span class="swatch fam-wood"></span><figcaption>fam-wood</figcaption></figure>
             <figure class="sq"><span class="swatch fam-wood-paneled"></span><figcaption>fam-wood-paneled</figcaption></figure>
+            <figure class="sq"><span class="swatch fam-metal-brushed"></span><figcaption>fam-metal-brushed</figcaption></figure>
             <figure class="sq"><span class="swatch fam-metal"></span><figcaption>fam-metal</figcaption></figure>
-            <figure class="sq"><span class="swatch fam-metal-sandblasted"></span><figcaption>fam-metal-sandblasted</figcaption></figure>
             <figure class="sq"><span class="swatch fam-leather"></span><figcaption>fam-leather</figcaption></figure>
             <figure class="sq"><span class="swatch fam-leather-pebbled"></span><figcaption>fam-leather-pebbled</figcaption></figure>
             <figure class="sq"><span class="swatch fam-leather-pebbled fam-leather-pebbled--brown"></span><figcaption>fam-leather-pebbled--brown</figcaption></figure>
@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-wood-paneled fam-metal fam-metal-sandblasted fam-leather fam-leather-pebbled fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
+      <p class="cap"><b>build your own</b> <code class="copyable">fam-felt fam-wood fam-wood-paneled fam-metal-brushed fam-metal fam-leather fam-leather-pebbled fam-paper fam-cork fam-cardstock fam-legal-pad fam-leather-frame fam-pill fam-gloss-soft fam-round-md fam-shadow-md</code></p>
       <p class="cap"><b>cast and grounded shadows</b> <code class="copyable">fam-cast-md</code> <code class="copyable">fam-grounded-md</code> Put either on an inline-block or block wrapper with the same radius when the element has shading of its own or clips its overflow, such as a button or the pill.</p>
     </section>
 
@@ -115,13 +115,13 @@
           <span class="fam-nav-item">Library</span>
           <span class="fam-nav-item">About</span>
         </nav>
-        <nav class="fam-nav fam-metal" aria-label="Brushed metal navigation">
+        <nav class="fam-nav fam-metal-brushed" aria-label="Brushed metal navigation">
           <span class="fam-nav-brand">fam</span>
           <span class="fam-nav-item" aria-current="page">Home</span>
           <span class="fam-nav-item">Library</span>
           <span class="fam-nav-item">About</span>
         </nav>
-        <nav class="fam-nav fam-metal-sandblasted" aria-label="Sandblasted metal navigation">
+        <nav class="fam-nav fam-metal" aria-label="Sandblasted metal navigation">
           <span class="fam-nav-brand">fam</span>
           <span class="fam-nav-item" aria-current="page">Home</span>
           <span class="fam-nav-item">Library</span>
@@ -172,7 +172,7 @@
   &lt;span class="fam-nav-item"&gt;Library&lt;/span&gt;
   &lt;span class="fam-nav-item"&gt;About&lt;/span&gt;
 &lt;/nav&gt;
-&lt;!-- Swap fam-wood for fam-wood-paneled, fam-metal, fam-metal-sandblasted, fam-leather-bar, fam-leather-bar fam-leather-bar--black, fam-leather-bar fam-leather-bar--brown, fam-leather-pebbled, fam-leather-pebbled fam-leather-pebbled--black or fam-leather-pebbled fam-leather-pebbled--brown --&gt;</code></pre>
+&lt;!-- Swap fam-wood for fam-wood-paneled, fam-metal-brushed, fam-metal, fam-leather-bar, fam-leather-bar fam-leather-bar--black, fam-leather-bar fam-leather-bar--brown, fam-leather-pebbled, fam-leather-pebbled fam-leather-pebbled--black or fam-leather-pebbled fam-leather-pebbled--brown --&gt;</code></pre>
       </div>
     </section>
 
@@ -202,8 +202,8 @@
       <h2 class="scene-title">Engraved text</h2>
       <p class="scene-lead">Text pressed into brushed and sandblasted metal, leather, dark leather, wood and paneled wood.</p>
       <div class="panels">
-        <div class="window fam-metal panel"><span class="fam-engraved-metal">SETTINGS</span></div>
-        <div class="window fam-metal-sandblasted panel"><span class="fam-engraved-metal">OPTIONS</span></div>
+        <div class="window fam-metal-brushed panel"><span class="fam-engraved-metal">SETTINGS</span></div>
+        <div class="window fam-metal panel"><span class="fam-engraved-metal">OPTIONS</span></div>
         <div class="window fam-leather panel"><span class="fam-engraved-leather">Notebook</span></div>
         <div class="window fam-leather-pebbled panel"><span class="fam-engraved-leather">Journal</span></div>
         <div class="window fam-leather-pebbled fam-leather-pebbled--black panel"><span class="fam-engraved-leather-dark">Ledger</span></div>
@@ -213,8 +213,8 @@
       </div>
       <div class="code-block" role="group" aria-label="The engraved text markup" data-label="the engraved text markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;SETTINGS&lt;/span&gt;&lt;/div&gt;
-&lt;div class="fam-metal-sandblasted" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;OPTIONS&lt;/span&gt;&lt;/div&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;SETTINGS&lt;/span&gt;&lt;/div&gt;
+&lt;div class="fam-metal" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-metal"&gt;OPTIONS&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-leather" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather"&gt;Notebook&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-leather-pebbled" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather"&gt;Journal&lt;/span&gt;&lt;/div&gt;
 &lt;div class="fam-leather-pebbled fam-leather-pebbled--black" style="display: grid; place-items: center; height: 110px"&gt;&lt;span class="fam-engraved-leather-dark"&gt;Ledger&lt;/span&gt;&lt;/div&gt;
@@ -266,7 +266,7 @@
     <section class="scene" id="scene-metal-metal">
       <h2 class="scene-title">Metal on metal</h2>
       <p class="scene-lead">A hardware panel: metal buttons on a brushed metal plate, with its label engraved into the plate.</p>
-      <div class="window fam-metal metal-controls">
+      <div class="window fam-metal-brushed metal-controls">
         <span class="fam-engraved-metal">Deck</span>
         <button class="fam-metal-button fam-shadow-md" type="button">Play</button>
         <button class="fam-metal-button fam-shadow-md" type="button">Stop</button>
@@ -274,7 +274,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The metal on metal markup" data-label="the metal on metal markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;div class="fam-metal" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
+        <pre><code>&lt;div class="fam-metal-brushed" style="display: flex; gap: 16px; align-items: center; padding: 28px"&gt;
   &lt;span class="fam-engraved-metal"&gt;Deck&lt;/span&gt;
   &lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Play&lt;/button&gt;
   &lt;button class="fam-metal-button fam-shadow-md" type="button"&gt;Stop&lt;/button&gt;
