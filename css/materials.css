@@ -101,6 +101,16 @@
   background: var(--fam-tex-grid-paper-tile) 0 0 / 288px repeat;
 }
 
+/* A slate board wiped with a cloth, with chalk dust left in the strokes */
+.fam-blackboard {
+  background: #303030 var(--fam-tex-blackboard-tile) 0 0 / 256px repeat;
+}
+
+/* The green board of a classroom, with faint wiped chalk */
+.fam-chalkboard {
+  background: #335f4f var(--fam-tex-chalkboard-tile) 0 0 / 256px repeat;
+}
+
 .fam-paper-bag {
   background: var(--fam-tex-paper-bag-tile) 0 0 / 256px repeat;
 }

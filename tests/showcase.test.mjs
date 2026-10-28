@@ -200,14 +200,14 @@ test('build your own shows every texture, labeled with the classes it uses', asy
         label: figure.querySelector('figcaption').textContent.trim(),
       })),
     );
-    assert.equal(squares.length, 23);
+    assert.equal(squares.length, 25);
     for (const square of squares) {
       for (const token of square.label.split(/\s+/)) {
         if (token.startsWith('--fam-')) assert.ok(square.properties.includes(token), `${token} is labeled but not set on its square`);
         else assert.ok(square.classes.includes(token), `${token} is labeled but not on its square (${square.classes.join(' ')})`);
       }
     }
-    const textures = ['fam-felt', 'fam-linen', 'fam-denim', 'fam-wood', 'fam-wood-paneled', 'fam-metal-brushed', 'fam-metal', 'fam-leather', 'fam-leather-pebbled', 'fam-paper', 'fam-paper-bag', 'fam-lined-paper', 'fam-grid-paper', 'fam-cork', 'fam-cardboard', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
+    const textures = ['fam-felt', 'fam-linen', 'fam-denim', 'fam-wood', 'fam-wood-paneled', 'fam-metal-brushed', 'fam-metal', 'fam-leather', 'fam-leather-pebbled', 'fam-paper', 'fam-paper-bag', 'fam-lined-paper', 'fam-grid-paper', 'fam-blackboard', 'fam-chalkboard', 'fam-cork', 'fam-cardboard', 'fam-cardstock', 'fam-legal-pad', 'fam-leather-frame'];
     const shown = new Set(squares.flatMap((square) => square.classes));
     for (const texture of textures) assert.ok(shown.has(texture), `${texture} has no square`);
     assert.ok(squares.some((square) => square.properties.includes('--fam-cardstock-tint')), 'tinted cardstock has no square');

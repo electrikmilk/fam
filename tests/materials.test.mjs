@@ -58,7 +58,7 @@ test('materials load their textures', async () => {
     assert.deepEqual(kit.issues, []);
     const styles = await kit.page.evaluate(() =>
       Object.fromEntries(
-        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'denim', 'cardboard', 'cardstock', 'legal-pad', 'paper', 'paper-bag', 'lined-paper', 'grid-paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
+        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'denim', 'cardboard', 'cardstock', 'legal-pad', 'paper', 'paper-bag', 'lined-paper', 'grid-paper', 'blackboard', 'chalkboard', 'cork', 'frame-tan', 'felt-green'].map((id) => [
           id,
           getComputedStyle(document.getElementById(id)).backgroundImage,
         ]),

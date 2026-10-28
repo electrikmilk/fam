@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 12 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 92 KB of CSS (20.7 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 93 KB of CSS (20.8 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -89,6 +89,8 @@ Put a material class on any box:
 - `fam-paper`: white textured paper, for lists and note panels.
 - `fam-cardboard`: linerboard with faint ridges, for panels.
 - `fam-paper-bag`: golden kraft paper, for panels.
+- `fam-blackboard`: a slate board wiped with a cloth, for panels with light text.
+- `fam-chalkboard`: a green classroom chalkboard, for panels with light text.
 - `fam-lined-paper`: white paper with blue rules 27px apart and a red margin line 44px from the left, for panels and notes.
 - `fam-grid-paper`: white paper with a blue grid of 24px squares.
 - `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
