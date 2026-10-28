@@ -1,6 +1,6 @@
 <h1 align="center"><img src="docs/header.png" alt="Fam: familiar materials for the web" width="880"></h1>
 
-Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, paper, cardstock and plastic. No JavaScript required, no build step.
+Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, linen, denim, paper, paper bag, cardboard, cardstock and plastic. No JavaScript required, no build step.
 
 Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials. Use it as a full UI framework, or just add a texture or material behind a minimalist, flat UI of your own. See [Two ways to use it](#two-ways-to-use-it).
 
@@ -37,7 +37,7 @@ Beyond the look:
 A tour of the materials in five pages: https://electrikmilk.github.io/fam/
 
 - Home: the two ways to use Fam (as a framework, or as texture behind a flat UI) and a switcher that shows one pairing at a time, with the classes it uses.
-- Materials: every texture, the felt and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, metal on metal, legal pad and leather, cardstock and legal pad, leather and paper.
+- Materials: every texture, the felt, linen, denim and cardstock tints, gloss, rounding and shadows, plus navigation bars, photo frames with cork, engraved text and scenes that combine materials: wood and felt, metal on metal, legal pad and leather, cardstock and legal pad, leather and paper.
 - Controls: plastic, metal, glossy and glass buttons and button groups, radio buttons, tabs, the plastic panel and dial, LEDs, the switch and knob, progress tubes, glass fields, the search pill, list rows, zebra tables, recessed fields and the leather button, each alone with its disabled look.
 - Glass: frosted glass, the ambient glow and refraction, and a glass lens that follows your cursor with knobs to tune it.
 - Examples: the pages in `examples/`.
