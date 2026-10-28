@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 13 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 86 KB of CSS (19.6 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 87 KB of CSS (19.7 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -130,13 +130,15 @@ Add `fam-wood-frame--glossy` for a glass sheen over a photo. Leave it off for a 
 
 ## Glass
 
-Refraction only applies to Chrome, but all browsers get a nice specular ambient glow, bleeding nearby colors into the glass.
+Refraction only applies to Chrome, but all browsers get a nice specular ambient glow, bleeding nearby colors into the glass, and a specular rim light: a bright line along the top-left edge that follows the corner radius.
 
 ```html
 <div class="fam-glass"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
 ```
 
 Set `--fam-r` for the corner radius (default pill), or add a `fam-round-*` class, which sets it for you. A plain `border-radius` on the glass rounds the lens but not the glow, so use one of these instead. The glow's inner fade follows the rounded corners as long as the radius fits the box (at most half of its shorter side). For a pill that is wider than tall, leave `--fam-r` unset rather than setting a larger value. Also set `--fam-glow-depth`, `--fam-bleed`, the lens blur with `--fam-glass-blur` (default 14px) and `--fam-refract-blur` (default 1px, for refracting glass), and the saturation with `--fam-glass-saturate`, `--fam-glow-saturate` and `--fam-refract-saturate`. The thin clear rim is where the glow is strongest: `--fam-glow-saturate` and `--fam-glow-brightness` amplify it, `--fam-shade-inset` sets how wide the clear rim is and `--fam-glass-rim` sets the opacity of its edge line.
+
+Set `--fam-glass-specular` on the glass itself (default `1`) to scale the highlight. `0` turns it off and `2` doubles it. It is a plain number without a unit, and it changes with a class or an inline style, with no script.
 
 Add `fam-glass--refract` for clear glass that bends what is behind its rim. It needs the filter in `snippets/refraction-filter.html` somewhere in the page, once:
 

@@ -64,6 +64,17 @@ test('glass saturation is a variable', async () => {
   }
 });
 
+test('glass specular highlight is a variable', async () => {
+  const kit = await openKit();
+  try {
+    const highlightAlpha = (selector) => style(kit.page, selector, '::before', 'boxShadow').then((shadow) => shadow.split(' inset')[0].match(/rgba\(.*?, ([\d.]+)\)/)[1]);
+    assert.equal(await highlightAlpha('#glass'), '0.95');
+    assert.equal(await highlightAlpha('#glass-matte'), '0');
+  } finally {
+    await kit.close();
+  }
+});
+
 test('glass blur is a variable', async () => {
   const kit = await openKit();
   try {

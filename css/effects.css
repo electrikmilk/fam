@@ -14,6 +14,7 @@
   /* Read by snippets/refraction-round.js, which sets them on the filter. The static snippet cannot read them and always bends by these defaults. */
   --fam-refract-amount: 1;
   --fam-refract-dispersion: .1;
+  --fam-glass-specular: 1;
   --fam-glass-saturate: 125%;
   --fam-glow-blur: calc(var(--fam-glass-blur) + 11px);
   --fam-glow-saturate: 260%;
@@ -51,7 +52,13 @@
     linear-gradient(rgba(255, 255, 255, .14), rgba(255, 255, 255, .32));
   background-origin: border-box;
   background-clip: padding-box, border-box, border-box;
-  box-shadow: inset 0 0 0 1px var(--fam-glass-rim), inset 0 -8px 12px -6px var(--fam-glass-underlight);
+  /* An inset shadow offset toward the light is thickest at the top-left and fades to nothing around the opposite corner, and it follows
+     the corner radius, so the rim light needs no geometry of its own. */
+  box-shadow:
+    inset 3px 3px 3px -2px rgba(255, 255, 255, calc(.95 * var(--fam-glass-specular))),
+    inset -2px -2px 3px -2px rgba(255, 255, 255, calc(.4 * var(--fam-glass-specular))),
+    inset 0 0 0 1px var(--fam-glass-rim),
+    inset 0 -8px 12px -6px var(--fam-glass-underlight);
 }
 
 /* Tints change the shade and the ink together, so the text keeps its contrast. Light glass needs dark ink; blue glass keeps white ink.
