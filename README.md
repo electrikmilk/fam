@@ -14,7 +14,7 @@ Textures are compact tiles to load fast. Each is between 12 KB and 85 KB, and a 
 
 Beyond the look:
 
-- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 93 KB of CSS (20.8 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
+- **Light.** The notes example (`examples/notes.html`) loads 250 KB of images and 93 KB of CSS (20.9 KB gzipped), the same at 375px and 1440px wide. There is no JavaScript.
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
@@ -291,6 +291,8 @@ Navigation (use with `fam-wood`, `fam-wood-paneled`, `fam-paper`, `fam-cardstock
   <a class="fam-nav-item" href="/about">About</a>
 </nav>
 ```
+
+The paper, cardstock and metal bars use dark ink, so keep a cardstock bar's tint light (the default is fine); on a dark tint such as `#562a0e` the labels would not read.
 
 `fam-leather-bar` is the leather of the frames with a row of stitches along the bottom edge. Add `fam-leather-bar--black` for black leather or `fam-leather-bar--brown` for dark brown leather, which switch the text to light.
 

@@ -190,6 +190,17 @@ test('navigation bars are wood, leather, metal, paper or cardstock, and the leat
   }
 });
 
+test('leather bars keep 8px of padding under their items so the stitches clear the active pocket', async () => {
+  const page = await openUrl(materialsUrl);
+  try {
+    const paddings = await page.page.$$eval('#scene-navs .fam-nav.fam-leather-bar', (bars) => bars.map((bar) => getComputedStyle(bar).paddingBottom));
+    assert.ok(paddings.length >= 3, 'the tan, black and brown leather bars are missing');
+    assert.deepEqual(paddings, paddings.map(() => '8px'));
+  } finally {
+    await page.close();
+  }
+});
+
 test('build your own shows every texture, labeled with the classes it uses', async () => {
   const page = await openUrl(materialsUrl);
   try {
