@@ -1,6 +1,6 @@
 <h1 align="center"><img src="docs/header.png" alt="Fam: familiar materials for the web" width="880"></h1>
 
-Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, linen, denim, paper, paper bag, cardboard, cardstock and plastic. No JavaScript required, no build step.
+Plain CSS for skeuomorphic interfaces in the style of Mac OS X Aqua and iOS before version 7: metal, glass, leather, wood, felt, linen, denim, paper (plain, lined and grid), paper bag, cardboard, cork, cardstock, blackboard, chalkboard and plastic. No JavaScript required, no build step.
 
 Fam is meant to be short and sweet, and is short for Familiar. It also stands for Fam Adds Materials. Use it as a full UI framework, or just add a texture or material behind a minimalist, flat UI of your own. See [Two ways to use it](#two-ways-to-use-it).
 
@@ -18,7 +18,7 @@ Beyond the look:
 - **Responsive without extra work.** Tiles repeat to fill any box. Photo frames are nine-sliced and the leather bar's stitched edge repeats along its length, so both fit any width.
 - **Accessible, and tested.** Contrast is measured on the rendered pixels against WCAG AA, every control has a keyboard focus ring, and forced colors, disabled states and missing backdrop blur are handled. See [Accessibility](#accessibility).
 - **Easy to adopt.** One stylesheet, `fam-` classes and `--fam-` custom properties. Because it is plain CSS, it sits alongside whatever framework you use.
-- **Quick to recolor.** One variable tints felt (`--fam-tint`) and cardstock (`--fam-cardstock-tint`).
+- **Quick to recolor.** One variable tints felt (`--fam-tint`), linen (`--fam-linen-tint`), denim (`--fam-denim-tint`) or cardstock (`--fam-cardstock-tint`).
 
 ## Two ways to use it
 
@@ -81,7 +81,7 @@ Put a material class on any box:
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
 - `fam-wood-paneled`: dark horizontal planks, for navigation bars and panels. Its text is light.
 - `fam-metal-brushed`: brushed metal, for plates, toolbars, navigation bars and panels.
-- `fam-metal`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`.
+- `fam-metal`: fine sandblasted metal, for the same uses. Its buttons are `fam-metal-button fam-metal-button--sandblasted`. `fam-metal` used to be the brushed metal, so switch an old use of it to `fam-metal-brushed`.
 - `fam-plastic-panel`: cream satin plastic for controls to sit on. Use it with a `fam-round-*` class.
 - `fam-leather`: tan leather, for panels and fields.
 - `fam-leather-pebbled`: the leather frame's pebbled leather with no stitched edge, in tan; add `fam-leather-pebbled--black` for black or `fam-leather-pebbled--brown` for dark brown.
@@ -92,7 +92,7 @@ Put a material class on any box:
 - `fam-blackboard`: a slate board wiped with a cloth, for panels with light text.
 - `fam-chalkboard`: a green classroom chalkboard, for panels with light text.
 - `fam-lined-paper`: white paper with blue rules 27px apart and a red margin line 44px from the left, for panels and notes.
-- `fam-grid-paper`: white paper with a blue grid of 24px squares.
+- `fam-grid-paper`: white paper with a blue grid of even 24px squares, so give text a 24px line height to sit on them.
 - `fam-cork`: cork, for bulletin boards. Put it inside a wood frame.
 - `fam-cardstock`: natural light cardstock. Set `--fam-cardstock-tint` to multiply the texture onto a color; `#562a0e` gives brown cardstock for title bars, where white text reads well.
 - `fam-legal-pad`: yellow ruled paper with a red double margin. Its rules are 24px apart, so give text a 24px line height to sit on them.
@@ -210,11 +210,12 @@ Plastic buttons and the knob:
 
 Round and square buttons have a round dish. A disabled button sinks into its case with a darker face and a muted label.
 
-Metal buttons are the same family in brushed metal, with `--round` and `--square` for icons:
+Metal buttons are the same family in brushed metal, with `--round` and `--square` for icons. Add `fam-metal-button--sandblasted` for the sandblasted metal of `fam-metal`:
 
 ```html
 <button class="fam-metal-button" type="button">Eject</button>
 <button class="fam-metal-button fam-metal-button--round" type="button" aria-label="Info">i</button>
+<button class="fam-metal-button fam-metal-button--sandblasted" type="button">Eject</button>
 ```
 
 Glossy and glass buttons are real buttons. The glossy one is the aqua pill (`fam-gloss-soft` and `fam-gloss-strong` dial its sheen) and the glass one is the frosted pill, so put it on a dark surface:
