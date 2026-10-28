@@ -6,18 +6,19 @@ SEED  picks which strip of the board each plank is cut from; try several and kee
 The photo is turned a quarter turn so its grain runs horizontally. Each plank is a strip cut from a different place on the board, so no two
 planks share grain. The first OVERLAP columns of a strip are crossfaded into the columns just past its end, which are the same grain one tile
 further along, so the tile wraps sideways without a seam. Planks are stacked with a shaded groove between them, so it wraps vertically too.
-A small median filter takes out the dust and scratches the board's photo carries, and a light unsharp mask restores the grain.
+A small median filter and a cap on how far a pixel may stand above its surroundings take out the dust and scratches the board's photo carries, and a light unsharp mask restores the grain.
 """
 import random
 import sys
-from PIL import Image, ImageFilter
+from PIL import Image, ImageChops, ImageFilter
 
 Image.MAX_IMAGE_PIXELS = None
 
 PLANKS = 6
-GAIN = 1.9  # the photo is very dark walnut; this brings it to a mid brown
+GAIN = 1.5  # the photo is very dark walnut; this brings it to a brown dark enough that pale engraved letters reach 3:1 on its lightest grain
 SCALE = 0.6  # output pixels per source pixel
 OVERLAP = 300
+HIGHLIGHT_LIMIT = 24  # how far above its blurred surroundings a pixel may rise, in source levels; dust and scratches rise far more
 QUALITY = 76
 
 source_path, output_path = sys.argv[1], sys.argv[2]
@@ -36,7 +37,8 @@ def cut_plank():
     strip = board.crop((left, top, left + strip_width + OVERLAP, top + strip_height))
     # Filtering before the blend keeps the image borders, where filters treat pixels differently, away from the join
     scaled = strip.resize((size + scaled_overlap, plank_height), Image.LANCZOS).filter(ImageFilter.MedianFilter(3))
-    scaled = scaled.filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
+    ceiling = scaled.filter(ImageFilter.GaussianBlur(4)).point(lambda value: min(255, value + HIGHLIGHT_LIMIT))
+    scaled = ImageChops.darker(scaled, ceiling).filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
     body = scaled.crop((0, 0, size, plank_height))
     following = scaled.crop((size, 0, size + scaled_overlap, plank_height))
     ramp = Image.new("L", (scaled_overlap, 1))

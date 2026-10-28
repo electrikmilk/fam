@@ -120,6 +120,10 @@ test('engraved text colors', async () => {
     assert.equal(await style(kit.page, '#engraved-wood-paneled', null, 'color'), 'rgb(244, 218, 176)');
     assert.equal(await style(kit.page, '#engraved-leather', null, 'color'), 'rgb(55, 28, 10)');
     assert.equal(await style(kit.page, '#engraved-leather-dark', null, 'color'), 'rgb(236, 227, 207)');
+    // Light letters need a shaded groove edge inside the glyph, which only a text stroke can draw, or they look raised instead of cut in
+    for (const id of ['#engraved-leather-dark', '#engraved-wood-paneled']) {
+      assert.equal(await style(kit.page, id, null, 'webkitTextStrokeWidth'), '1px', `${id} has no groove edge`);
+    }
   } finally {
     await kit.close();
   }

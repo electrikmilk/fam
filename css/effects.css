@@ -235,12 +235,14 @@
   text-shadow: 0 1px 0 rgba(255, 225, 185, .55), 0 -1px 1px rgba(0, 0, 0, .25);
 }
 
+/* Light letters pressed into dark leather, like foil stamping. As on the planks, the dark stroke is the shaded wall just inside each letter's edge and the light lip below is the lit lower edge. */
 .fam-engraved-leather-dark {
   font-size: 20px;
   color: rgb(236, 227, 207);
   font-weight: 700;
   letter-spacing: 1px;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, .8), 0 1px 0 rgba(255, 255, 255, .12);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, .7);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .28), 0 -1px 1px rgba(0, 0, 0, .55);
 }
 
 /* Light wood showing where the letters were cut. The dark stroke is the groove's shaded wall just inside the edge of each letter, and the light lip below is its lit lower edge.
