@@ -58,7 +58,7 @@ test('materials load their textures', async () => {
     assert.deepEqual(kit.issues, []);
     const styles = await kit.page.evaluate(() =>
       Object.fromEntries(
-        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
+        ['wood', 'wood-paneled', 'metal-brushed', 'metal', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'linen', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
           id,
           getComputedStyle(document.getElementById(id)).backgroundImage,
         ]),
@@ -85,6 +85,23 @@ test('materials load their textures', async () => {
     assert.ok(pebbledImages[0].includes('leather-fill-tan-tile.jpg') && !pebbledImages[0].includes('bar-edge'), pebbledImages[0]);
     assert.ok(pebbledImages[1].includes('leather-fill-black-tile.jpg') && !pebbledImages[1].includes('bar-edge'), pebbledImages[1]);
     assert.ok(pebbledImages[2].includes('leather-fill-brown-tile.jpg') && !pebbledImages[2].includes('bar-edge'), pebbledImages[2]);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('linen takes its tint', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    for (const tint of ['#000000', '#ffffff']) {
+      const background = await kit.page.evaluate((value) => {
+        const linen = document.getElementById('linen');
+        linen.style.setProperty('--fam-linen-tint', value);
+        return getComputedStyle(linen).backgroundColor;
+      }, tint);
+      const channel = tint === '#000000' ? 0 : 255;
+      assert.equal(background, `rgb(${channel}, ${channel}, ${channel})`, `linen ignores --fam-linen-tint ${tint}`);
+    }
   } finally {
     await kit.close();
   }

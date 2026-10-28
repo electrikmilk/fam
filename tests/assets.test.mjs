@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const ASSET_NAMES = [
   'felt-gray-tile.jpg',
+  'linen-tile.jpg',
   'wood-light-tile.jpg',
   'wood-paneled-tile.jpg',
   'metal-tile.jpg',
@@ -36,6 +37,7 @@ const ASSET_NAMES = [
 
 const TILED_NAMES = [
   'felt-gray-tile.jpg',
+  'linen-tile.jpg',
   'wood-light-tile.jpg',
   'wood-paneled-tile.jpg',
   'metal-tile.jpg',
