@@ -11,6 +11,9 @@
   --fam-shade-inset: 1px;
   --fam-glass-blur: 14px;
   --fam-refract-blur: 1px;
+  /* Read by snippets/refraction-round.js, which sets them on the filter. The static snippet cannot read them and always bends by these defaults. */
+  --fam-refract-amount: 1;
+  --fam-refract-dispersion: .1;
   --fam-glass-saturate: 125%;
   --fam-glow-blur: calc(var(--fam-glass-blur) + 11px);
   --fam-glow-saturate: 260%;

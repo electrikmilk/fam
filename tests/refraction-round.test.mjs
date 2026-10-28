@@ -85,3 +85,59 @@ test('the filter is rebuilt when the radius changes', async () => {
     await kit.close();
   }
 });
+
+// The scales of the red, green and blue displacement passes of the filter the helper built for an element
+const channelScales = (page) =>
+  page.evaluate((selector) => {
+    const id = document.querySelector(selector).style.getPropertyValue('--fam-refract-filter').slice('url(#'.length, -1);
+    return [...document.getElementById(id).querySelectorAll('feDisplacementMap')].map((pass) => Number(pass.getAttribute('scale')));
+  }, GLASS);
+
+const setGlassVariable = (page, name, value) =>
+  page.evaluate(([selector, variable, text]) => document.querySelector(selector).style.setProperty(variable, text), [GLASS, name, value]);
+
+const waitForScales = (page, expected) =>
+  page.waitForFunction(
+    ([selector, wanted]) => {
+      const id = document.querySelector(selector).style.getPropertyValue('--fam-refract-filter').slice('url(#'.length, -1);
+      const scales = [...document.getElementById(id).querySelectorAll('feDisplacementMap')].map((pass) => Number(pass.getAttribute('scale')));
+      return scales.every((scale, index) => Math.abs(scale - wanted[index]) < 0.00001);
+    },
+    [GLASS, expected],
+  );
+
+test('red bends furthest and blue least by default, so the rim fringes', async () => {
+  const kit = await openKitWithHelper();
+  try {
+    assert.deepEqual(await channelScales(kit.page), [0.22, 0.2, 0.18]);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('the amount scales every pass and the dispersion spreads red and blue around green', async () => {
+  const kit = await openKitWithHelper();
+  try {
+    const { page } = kit;
+    await setGlassVariable(page, '--fam-refract-amount', '2');
+    await waitForScales(page, [0.44, 0.4, 0.36]);
+    await setGlassVariable(page, '--fam-refract-dispersion', '0');
+    await waitForScales(page, [0.4, 0.4, 0.4]);
+    await setGlassVariable(page, '--fam-refract-amount', '0');
+    await waitForScales(page, [0, 0, 0]);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('a variable that is not a plain number raises instead of falling back', async () => {
+  const kit = await openKitWithHelper();
+  try {
+    const { page } = kit;
+    const raised = new Promise((resolve) => page.once('pageerror', resolve));
+    await setGlassVariable(page, '--fam-refract-amount', '2px');
+    assert.match((await raised).message, /--fam-refract-amount must be a plain number, got "2px"/);
+  } finally {
+    await kit.close();
+  }
+});
