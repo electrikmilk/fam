@@ -117,7 +117,7 @@ The black frame and fill are neutral gray (fill mean is about 45,45,45), the tan
 - Produces: `fam-linen` reading `--fam-linen-tint`
 
 - [ ] **Step 1:** Checklist step 1 with id `linen`, plus a test `linen takes its tint` setting `--fam-linen-tint:#000` and then `#fff` on `#linen` and asserting `backgroundColor` is `rgb(0, 0, 0)` and `rgb(255, 255, 255)`. Expect FAIL.
-- [ ] **Step 2:** Checklist steps 2 and 3. Class shape follows `.fam-felt`: `background-color: var(--fam-linen-tint, #666666)`, the tile, `background-blend-mode: multiply`. The default tint is dark gray.
+- [ ] **Step 2:** Checklist steps 2 and 3. Class shape follows `.fam-felt`: `background-color: var(--fam-linen-tint, #64656c)`, the tile, `background-blend-mode: multiply`. The default tint is dark gray.
 - [ ] **Step 3:** Checklist steps 4 to 8, with a light nav on the default tint. Add a tinted row (three tints) under the "Felt in any color" heading's pattern only if it fits the page. Commit message: `Add linen that takes a tint`.
 
 ### Task 6: Cardboard

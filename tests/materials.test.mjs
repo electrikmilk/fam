@@ -109,13 +109,17 @@ test('linen takes its tint', async () => {
   }
 });
 
-test('linen is dark gray until it is tinted', async () => {
+// The slate gray in references/Screenshot 2026-10-28 at 13.24.38.png averages rgb(84, 85, 91). The linen tile multiplies the tint by its own
+// average of 215/255, so the default tint is that gray scaled back up.
+const LINEN_TILE_AVERAGE = 215;
+test('linen is the reference slate gray until it is tinted', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
     const background = await kit.page.evaluate(() => getComputedStyle(document.getElementById('linen')).backgroundColor);
-    const [red, green, blue] = background.match(/\d+/g).map(Number);
-    assert.ok(red === green && green === blue, `the default linen is not gray: ${background}`);
-    assert.ok(red < 110, `the default linen is not dark: ${background}`);
+    const channels = background.match(/\d+/g).map(Number);
+    const reference = [84, 85, 91].map((channel) => (channel * 255) / LINEN_TILE_AVERAGE);
+    channels.forEach((channel, index) => assert.ok(Math.abs(channel - reference[index]) <= 4, `the default linen is not the reference gray: ${background}`));
+    assert.ok(channels[2] > channels[0], `the default linen has no cool slate lean: ${background}`);
   } finally {
     await kit.close();
   }
