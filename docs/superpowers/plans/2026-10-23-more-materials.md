@@ -15,7 +15,7 @@
 - The current metal is `fam-metal-brushed` and the sandblasted metal is plain `fam-metal`. `fam-metal-button` stays the brushed button; sandblasted buttons are `fam-metal-button--sandblasted`.
 - No new JavaScript. New work meets WCAG AA contrast on rendered pixels at 1440px and 375px, shows a focus ring, and keeps the forced-colors and reduced-motion rules that `.fam-nav` already carries.
 - Tiles never stretch and a material you do not use is never downloaded. Tile files should stay between 13 KB and 85 KB; a tile that needs more goes over, and `CREDITS.md` says why.
-- The paneled wood tile must show no bolt or nail. If a planks crop cannot tile without a visible seam or repeat, drop paneled wood, tell the owner, and ship no substitute.
+- The paneled wood tile must hold up in fidelity next to the other materials, tile without a visible seam or repeat, and show no bolt or nail. Otherwise drop paneled wood, tell the owner, and ship no substitute.
 - Class names: `fam-metal`, `fam-metal-button--sandblasted`, `fam-leather-pebbled` (modifiers `--black`, `--brown`), `fam-leather-frame--brown`, `fam-leather-bar--brown`, `fam-wood-paneled`, `fam-linen`, `fam-cardboard`, `fam-denim`, `fam-paper-bag`. Asset names: `<material>-tile.jpg`.
 - Linen and denim take their own tint variable, like `--fam-cardstock-tint`: `--fam-linen-tint` (default dark gray) and `--fam-denim-tint` (default indigo). One shared `--fam-tint` cannot have two defaults. Cardboard and paper bag keep their photo colors.
 - Source photos are already in `textures/`. Credit each in `CREDITS.md` with the photographer (the name inside the file name) and the exact command that made the asset.
@@ -96,14 +96,14 @@ The black frame and fill are neutral gray (fill mean is about 45,45,45), the tan
 ### Task 4: Paneled wood
 
 **Files:**
-- Create: `assets/wood-paneled-tile.jpg` from `textures/wood-planks_ekaterina-novitskaya-KugwNl9jX1Q-unsplash.jpg`
+- Create: `assets/wood-paneled-tile.jpg` from `textures/dark-wood_the-cleveland-museum-of-art-AD8nr59mr5c-unsplash.jpg` with `tools/texture-pipeline/make_planks_tile.py`
 - Modify: files named in the checklist plus `css/effects.css`
 
 **Interfaces:**
 - Produces: `fam-wood-paneled`, `.fam-engraved-wood-paneled`
 
 - [ ] **Step 1:** Checklist step 1 with id `wood-paneled`. Expect FAIL.
-- [ ] **Step 2:** Cut the tile from a crop that avoids every bolt and nail, with the plank seams horizontal in the finished tile and the repeat period an exact multiple of the plank spacing so the seams line up. Add a check to the checklist's look step: no nail visible in a 3x3 repeat.
+- [ ] **Step 2:** Build the tile from the walnut board: six planks, each from a different strip of the board, joined by shaded grooves, horizontal in the finished tile. Try several seeds and keep the cleanest.
 - [ ] **Step 3:** The surface is dark, so the nav bar and a light engraved class `.fam-engraved-wood-paneled` take light ink, fitted to the tile pixels. Add a `fam-wood-paneled` panel to `#scene-engraved`.
 - [ ] **Step 4:** Checklist steps 3 to 8. Commit message: `Add paneled wood with a navigation bar`.
 

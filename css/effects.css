@@ -247,7 +247,7 @@
    A text shadow can only fall outside the glyph, so on its own it makes light letters look raised. */
 .fam-engraved-wood-paneled {
   font-size: 20px;
-  color: rgb(226, 188, 136);
+  color: rgb(244, 218, 176);
   font-weight: 700;
   letter-spacing: 1px;
   -webkit-text-stroke: 1px rgba(58, 26, 8, .85);

@@ -10,7 +10,7 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `linen-tile.jpg` | `linen_logan-voss-sFGj4Lj1un8-unsplash.jpg` | logan-voss | `make_tile.py 0.3 384 40`, then `to_gray_tint_tile.py ... 215 18` |
 | `denim-tile.jpg` | `denim_mike-hindle-Js5Qi_X1qzo-unsplash.jpg` | mike-hindle | `make_tile.py 0.2 512 40`, then `to_gray_tint_tile.py ... 200 24` |
 | `wood-light-tile.jpg` | `wood_smithsonian-e0pPip5TQRE-unsplash.jpg` | smithsonian | `make_tile.py 0.5 512 60 90` |
-| `wood-paneled-tile.jpg` | `wood-planks_ekaterina-novitskaya-KugwNl9jX1Q-unsplash.jpg` | ekaterina-novitskaya | `make_paneled_tile.py ... 654 1596 700 768 300`, six whole planks cut clear of the bolts and turned to run horizontally |
+| `wood-paneled-tile.jpg` | `dark-wood_the-cleveland-museum-of-art-AD8nr59mr5c-unsplash.jpg` | the-cleveland-museum-of-art | `make_planks_tile.py ... 768 21`, six planks cut from different places on one walnut board, with scratches filtered out |
 | `metal-tile.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | `make_tile.py 0.55 512 14` |
 | `metal-sandblasted-tile.jpg` | `metal_katie-harp-TnQE5X48FMA-unsplash.jpg` | katie-harp | `make_tile.py 0.9 512 40` |
 | `metal-brushed.jpg` | `metal-brushed_apryan-widodo-tRrIXmtOmL4-unsplash.jpg` | apryan-widodo | processed copy, recipe not recorded |

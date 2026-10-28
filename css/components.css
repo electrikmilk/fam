@@ -1256,6 +1256,11 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 4px 9px rgba(0, 0, 0, .6);
 }
 
+/* The walnut is a mid brown, so the light ink needs a darker bar behind it than the leathers do */
+.fam-nav.fam-wood-paneled {
+  box-shadow: inset 0 0 0 999px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .22), 0 4px 9px rgba(0, 0, 0, .6);
+}
+
 :is(.fam-leather-bar--black, .fam-leather-bar--brown, .fam-wood-paneled) .fam-nav-brand,
 :is(.fam-leather-bar--black, .fam-leather-bar--brown, .fam-wood-paneled) .fam-nav-item {
   color: #ece3cf;
