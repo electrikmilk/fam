@@ -91,6 +91,15 @@ test('credits cover every asset', async () => {
   }
 });
 
+// Horizontal planks differ row to row, so the rows spread far more than the columns; the vertical source photo scores well under 1
+const MINIMUM_PLANK_DIRECTION_RATIO = 3;
+
+test('the paneled wood planks run horizontally', () => {
+  const script = fileURLToPath(new URL('../tools/texture-pipeline/plank_direction.py', import.meta.url));
+  const ratio = Number(execFileSync('python3', ['-I', script, assetPath('wood-paneled-tile.jpg')], { encoding: 'utf8' }));
+  assert.ok(ratio >= MINIMUM_PLANK_DIRECTION_RATIO, `the rows spread only ${ratio} times the columns`);
+});
+
 // The spiral-metal photo's brightest wedge is 2.2 times its darkest. A ring-only face scores 1.0, which reads as a flat bullseye.
 const MINIMUM_REFLECTION_CONTRAST = 1.8;
 

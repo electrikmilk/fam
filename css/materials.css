@@ -23,7 +23,7 @@
     var(--fam-tex-wood-light-tile) 0 0 / 380px repeat;
 }
 
-/* Dark vertical planks; the tile holds six whole planks, so a 380px repeat gives planks about 63px wide */
+/* Dark horizontal planks; the tile holds six whole planks, so a 380px repeat gives planks about 63px tall */
 .fam-wood-paneled {
   background: var(--fam-tex-wood-paneled-tile) 0 0 / 380px repeat;
 }

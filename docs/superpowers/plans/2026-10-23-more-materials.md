@@ -103,7 +103,7 @@ The black frame and fill are neutral gray (fill mean is about 45,45,45), the tan
 - Produces: `fam-wood-paneled`, `.fam-engraved-wood-paneled`
 
 - [ ] **Step 1:** Checklist step 1 with id `wood-paneled`. Expect FAIL.
-- [ ] **Step 2:** Cut the tile from a crop that avoids every bolt and nail, with the plank seams vertical and the repeat period an exact multiple of the plank spacing so the seams line up. Add a check to the checklist's look step: no nail visible in a 3x3 repeat.
+- [ ] **Step 2:** Cut the tile from a crop that avoids every bolt and nail, with the plank seams horizontal in the finished tile and the repeat period an exact multiple of the plank spacing so the seams line up. Add a check to the checklist's look step: no nail visible in a 3x3 repeat.
 - [ ] **Step 3:** The surface is dark, so the nav bar and a light engraved class `.fam-engraved-wood-paneled` take light ink, fitted to the tile pixels. Add a `fam-wood-paneled` panel to `#scene-engraved`.
 - [ ] **Step 4:** Checklist steps 3 to 8. Commit message: `Add paneled wood with a navigation bar`.
 
