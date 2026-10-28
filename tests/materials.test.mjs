@@ -106,3 +106,14 @@ test('linen takes its tint', async () => {
     await kit.close();
   }
 });
+
+test('linen is gray until it is tinted', async () => {
+  const kit = await openUrl(fixtureUrl('kit'));
+  try {
+    const background = await kit.page.evaluate(() => getComputedStyle(document.getElementById('linen')).backgroundColor);
+    const [red, green, blue] = background.match(/\d+/g).map(Number);
+    assert.ok(red === green && green === blue, `the default linen is not gray: ${background}`);
+  } finally {
+    await kit.close();
+  }
+});

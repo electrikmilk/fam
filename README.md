@@ -76,7 +76,7 @@ Class names start with `fam-` and custom properties with `--fam-`.
 Put a material class on any box:
 
 - `fam-felt`: tintable felt, for screen backgrounds.
-- `fam-linen`: woven linen that takes a tint. Set `--fam-linen-tint` (natural linen by default), the way felt takes `--fam-tint`.
+- `fam-linen`: woven linen that takes a tint. Set `--fam-linen-tint` (gray by default), the way felt takes `--fam-tint`.
 - `fam-wood`: light wood with horizontal grain, for navigation bars and panels.
 - `fam-wood-paneled`: dark horizontal planks, for navigation bars and panels. Its text is light.
 - `fam-metal-brushed`: brushed metal, for plates, toolbars, navigation bars and panels.

@@ -8,9 +8,9 @@
   background-blend-mode: multiply;
 }
 
-/* Like the felt, the tile is grayscale and multiplies onto the tint, but it is light (average 215) so the default tint stays close to natural linen */
+/* Like the felt, the tile is grayscale and multiplies onto the tint, but it is light (average 215) so a tint stays close to its own color */
 .fam-linen {
-  background-color: var(--fam-linen-tint, #eacd8a);
+  background-color: var(--fam-linen-tint, #cfcfcf);
   background-image: var(--fam-tex-linen-tile);
   background-size: 256px;
   background-blend-mode: multiply;
