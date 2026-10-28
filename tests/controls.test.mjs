@@ -35,6 +35,7 @@ async function faceBrightness(page, selector) {
 const BUTTON_FAMILIES = [
   { name: 'plastic', enabled: '#plastic-red', disabled: ['#plastic-disabled', '#plastic-round-disabled', '#plastic-square-disabled'], dished: ['#plastic-square', '#plastic-purple'], dishless: ['#plastic-red'] },
   { name: 'metal', enabled: '#metal-button-on-felt', disabled: ['#metal-button-disabled'], dished: [], dishless: ['#metal-button', '#metal-round', '#metal-square'] },
+  { name: 'wood', enabled: '#wood-button', disabled: ['#wood-button-disabled'], dished: [], dishless: ['#wood-button', '#wood-round', '#wood-square'] },
 ];
 
 const labelAlpha = (color) => Number(color.match(/[\d.]+/g)[3] ?? 1);
@@ -86,20 +87,20 @@ for (const family of BUTTON_FAMILIES) {
   });
 }
 
-test('sandblasted metal buttons are made from the sandblasted tile', async () => {
+test('brushed metal buttons are made from the brushed photo', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
-    assert.ok((await read(kit.page, '#metal-button-sandblasted', 'backgroundImage')).includes('metal-sandblasted-tile.jpg'));
-    assert.ok((await read(kit.page, '#metal-button-sandblasted-disabled', 'backgroundImage')).includes('metal-sandblasted-tile.jpg'));
+    assert.ok((await read(kit.page, '#metal-button-brushed', 'backgroundImage')).includes('metal-brushed.jpg'));
+    assert.ok((await read(kit.page, '#metal-button-brushed-disabled', 'backgroundImage')).includes('metal-brushed.jpg'));
   } finally {
     await kit.close();
   }
 });
 
-test('metal buttons are made from the brushed metal texture', async () => {
+test('metal buttons are made from the sandblasted metal tile', async () => {
   const kit = await openUrl(fixtureUrl('kit'));
   try {
-    assert.ok((await read(kit.page, '#metal-button', 'backgroundImage')).includes('metal-brushed.jpg'));
+    assert.ok((await read(kit.page, '#metal-button', 'backgroundImage')).includes('metal-sandblasted-tile.jpg'));
   } finally {
     await kit.close();
   }

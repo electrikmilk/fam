@@ -11,13 +11,13 @@ test('disabled controls look and behave disabled', async () => {
     for (const selector of ['#leather-disabled', '#switch-disabled', '#glass-disabled']) {
       assert.equal(await read(page, selector, 'opacity'), '0.5', `${selector} is not dimmed`);
     }
-    for (const selector of ['#plastic-disabled', '#metal-button-disabled', '#metal-button-sandblasted-disabled']) {
+    for (const selector of ['#plastic-disabled', '#metal-button-disabled', '#metal-button-brushed-disabled', '#wood-button-disabled', '#wood-button-paneled-disabled']) {
       assert.equal(await read(page, selector, 'opacity'), '0.7', `${selector} is not a little faded`);
     }
-    for (const selector of ['#plastic-disabled', '#metal-button-disabled', '#metal-button-sandblasted-disabled', '#leather-disabled', '#switch-disabled', '#glass-disabled input']) {
+    for (const selector of ['#plastic-disabled', '#metal-button-disabled', '#metal-button-brushed-disabled', '#wood-button-disabled', '#wood-button-paneled-disabled', '#leather-disabled', '#switch-disabled', '#glass-disabled input']) {
       assert.equal(await read(page, selector, 'cursor'), 'default', `${selector} still shows an interactive cursor`);
     }
-    for (const selector of ['#plastic-disabled', '#metal-button-disabled', '#metal-button-sandblasted-disabled', '#leather-disabled']) {
+    for (const selector of ['#plastic-disabled', '#metal-button-disabled', '#metal-button-brushed-disabled', '#wood-button-disabled', '#wood-button-paneled-disabled', '#leather-disabled']) {
       const box = await page.locator(selector).boundingBox();
       await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
       await page.mouse.down();

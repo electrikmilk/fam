@@ -290,7 +290,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .18), var(--fam-ring);
 }
 
-/* Brushed metal button: the metal photo under a soft top light, with the same case, dish and disabled look as the plastic ones */
+/* Metal button: the sandblasted metal photo under a soft top light, with the same case, dish and disabled look as the plastic ones */
 .fam-metal-button {
   box-sizing: border-box;
   position: relative;
@@ -309,7 +309,7 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   cursor: pointer;
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, .72) 0%, rgba(255, 255, 255, .58) 50%, rgba(255, 255, 255, .4) 100%),
-    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
+    var(--fam-tex-metal-sandblasted) 50% 50% / 240px auto;
   --fam-rest-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .45);
   box-shadow: var(--fam-rest-shadow), var(--fam-elevation, 0 0 0 0 transparent);
 }
@@ -332,28 +332,93 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
   background:
     linear-gradient(rgba(0, 0, 0, .38), rgba(0, 0, 0, .38)),
-    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
+    var(--fam-tex-metal-sandblasted) 50% 50% / 240px auto;
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 255, 255, .25);
 }
 
-/* The sandblasted variant swaps only the photo; the case, dish and disabled look stay the brushed button's */
-.fam-metal-button--sandblasted {
+/* The brushed variant swaps only the photo; the case, dish and disabled look stay the metal button's */
+.fam-metal-button--brushed {
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, .72) 0%, rgba(255, 255, 255, .58) 50%, rgba(255, 255, 255, .4) 100%),
-    var(--fam-tex-metal-sandblasted) 50% 50% / 240px auto;
+    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
 }
 
-.fam-metal-button--sandblasted:disabled {
+.fam-metal-button--brushed:disabled {
   background:
     linear-gradient(rgba(0, 0, 0, .38), rgba(0, 0, 0, .38)),
-    var(--fam-tex-metal-sandblasted) 50% 50% / 240px auto;
+    var(--fam-tex-metal-brushed) 50% 50% / 240px auto;
 }
 
-/* Round and square buttons of both families. They come after both base rules so their size wins. */
+/* Wooden button: the light wood photo under a soft top light, with the metal button's case, shape and disabled look. Its ink is the
+   dark engraved ink of the wooden navigation bar. */
+.fam-wood-button {
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: var(--fam-radius-pill);
+  border: 1px solid rgba(50, 25, 5, .7);
+  color: #1c0d03;
+  font: 600 13px/1 var(--fam-font-ui);
+  text-shadow: 0 1px 0 rgba(255, 238, 205, .6), 0 -1px 0 rgba(60, 30, 5, .3);
+  cursor: pointer;
+  background:
+    linear-gradient(to bottom, rgba(255, 238, 205, .5) 0%, rgba(255, 238, 205, .36) 50%, rgba(255, 238, 205, .22) 100%),
+    var(--fam-tex-wood-light-tile) 0 0 / 380px repeat;
+  --fam-rest-shadow: inset 0 1px 0 rgba(255, 244, 220, .7), inset 0 -2px 3px rgba(80, 40, 10, .35), 0 2px 3px rgba(0, 0, 0, .45);
+  box-shadow: var(--fam-rest-shadow), var(--fam-elevation, 0 0 0 0 transparent);
+}
+
+.fam-wood-button:focus-visible {
+  outline: 2px solid var(--fam-focus-ink);
+  outline-offset: 2px;
+  box-shadow: var(--fam-focus-halo), var(--fam-rest-shadow), var(--fam-elevation, 0 0 0 0 transparent);
+}
+
+.fam-wood-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(40, 20, 5, .5), 0 1px 1px rgba(0, 0, 0, .4);
+}
+
+.fam-wood-button:disabled {
+  opacity: .7;
+  cursor: default;
+  color: rgba(28, 13, 3, .5);
+  text-shadow: 0 1px 0 rgba(255, 238, 205, .3);
+  background:
+    linear-gradient(rgba(0, 0, 0, .38), rgba(0, 0, 0, .38)),
+    var(--fam-tex-wood-light-tile) 0 0 / 380px repeat;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .6), inset 0 -1px 0 rgba(255, 244, 220, .25);
+}
+
+/* The paneled variant swaps the photo for the dark planks and the ink for the light engraved ink of the paneled bar */
+.fam-wood-button--paneled {
+  color: rgb(244, 218, 176);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
+  background:
+    linear-gradient(to bottom, rgba(255, 222, 176, .16) 0%, rgba(255, 222, 176, 0) 60%),
+    var(--fam-tex-wood-paneled-tile) 0 0 / 380px repeat;
+}
+
+.fam-wood-button--paneled:disabled {
+  color: rgba(244, 218, 176, .5);
+  background:
+    linear-gradient(rgba(0, 0, 0, .38), rgba(0, 0, 0, .38)),
+    var(--fam-tex-wood-paneled-tile) 0 0 / 380px repeat;
+}
+
+/* Round and square buttons of every family. They come after the base rules so their size wins. */
 .fam-plastic--round,
 .fam-plastic--square,
 .fam-metal-button--round,
-.fam-metal-button--square {
+.fam-metal-button--square,
+.fam-wood-button--round,
+.fam-wood-button--square {
   width: 34px;
   min-width: 0;
   padding: 0;
@@ -361,7 +426,8 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
 }
 
 .fam-plastic--square,
-.fam-metal-button--square {
+.fam-metal-button--square,
+.fam-wood-button--square {
   border-radius: var(--fam-radius-md);
   font-size: 16px;
 }
