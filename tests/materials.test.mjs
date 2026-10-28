@@ -58,7 +58,7 @@ test('materials load their textures', async () => {
     assert.deepEqual(kit.issues, []);
     const styles = await kit.page.evaluate(() =>
       Object.fromEntries(
-        ['wood', 'metal', 'metal-sandblasted', 'leather', 'pebbled-tan', 'pebbled-black', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
+        ['wood', 'metal', 'metal-sandblasted', 'leather', 'pebbled-tan', 'pebbled-black', 'pebbled-brown', 'cardstock', 'legal-pad', 'paper', 'cork', 'frame-tan', 'felt-green'].map((id) => [
           id,
           getComputedStyle(document.getElementById(id)).backgroundImage,
         ]),
@@ -71,16 +71,20 @@ test('materials load their textures', async () => {
     assert.ok(frameSource.includes('leather-frame-tan-soft.png'), frameSource);
     const blackSource = await kit.page.evaluate(() => getComputedStyle(document.getElementById('frame-black')).borderImageSource);
     assert.ok(blackSource.includes('leather-frame-black-soft.png'), blackSource);
+    const brownFrameSource = await kit.page.evaluate(() => getComputedStyle(document.getElementById('frame-brown')).borderImageSource);
+    assert.ok(brownFrameSource.includes('leather-frame-brown-soft.png'), brownFrameSource);
     const barImages = await kit.page.evaluate(() =>
-      ['bar-tan', 'bar-black'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
+      ['bar-tan', 'bar-black', 'bar-brown'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
     );
     assert.ok(barImages[0].includes('leather-bar-edge-tan.png') && barImages[0].includes('leather-fill-tan-tile.jpg'), barImages[0]);
     assert.ok(barImages[1].includes('leather-bar-edge-black.png') && barImages[1].includes('leather-fill-black-tile.jpg'), barImages[1]);
+    assert.ok(barImages[2].includes('leather-bar-edge-brown.png') && barImages[2].includes('leather-fill-brown-tile.jpg'), barImages[2]);
     const pebbledImages = await kit.page.evaluate(() =>
-      ['pebbled-tan', 'pebbled-black'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
+      ['pebbled-tan', 'pebbled-black', 'pebbled-brown'].map((id) => getComputedStyle(document.getElementById(id)).backgroundImage),
     );
     assert.ok(pebbledImages[0].includes('leather-fill-tan-tile.jpg') && !pebbledImages[0].includes('bar-edge'), pebbledImages[0]);
     assert.ok(pebbledImages[1].includes('leather-fill-black-tile.jpg') && !pebbledImages[1].includes('bar-edge'), pebbledImages[1]);
+    assert.ok(pebbledImages[2].includes('leather-fill-brown-tile.jpg') && !pebbledImages[2].includes('bar-edge'), pebbledImages[2]);
   } finally {
     await kit.close();
   }

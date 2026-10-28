@@ -21,10 +21,13 @@ const ASSET_NAMES = [
   'leather-tile.jpg',
   'leather-fill-tan-tile.jpg',
   'leather-fill-black-tile.jpg',
+  'leather-fill-brown-tile.jpg',
   'leather-frame-tan-soft.png',
   'leather-frame-black-soft.png',
+  'leather-frame-brown-soft.png',
   'leather-bar-edge-tan.png',
   'leather-bar-edge-black.png',
+  'leather-bar-edge-brown.png',
   'wood-frame.jpg',
   'led-lens-lit.png',
   'led-lens-unlit.png',
@@ -42,13 +45,14 @@ const TILED_NAMES = [
   'leather-tile.jpg',
   'leather-fill-tan-tile.jpg',
   'leather-fill-black-tile.jpg',
+  'leather-fill-brown-tile.jpg',
   'grain-fine.jpg',
   'grain-plastic.jpg',
 ];
 
 // File name to byte ceiling, for files that stay over the budget after lossless optimization.
-// The tan frame is a 457px alpha image of stitched leather; ImageMagick and Pillow both re-encode it larger than this.
-const EXCEPTIONS = { 'leather-frame-tan-soft.png': 217652 };
+// The tan and brown frames are 457px alpha images of stitched leather; ImageMagick and Pillow both re-encode it larger than this.
+const EXCEPTIONS = { 'leather-frame-tan-soft.png': 217652, 'leather-frame-brown-soft.png': 192111 };
 const BUDGET_BYTES = 150 * 1024;
 
 const assetPath = (name) => fileURLToPath(new URL(`../assets/${name}`, import.meta.url));

@@ -187,7 +187,7 @@ test('build your own shows every texture, labeled with the classes it uses', asy
         label: figure.querySelector('figcaption').textContent.trim(),
       })),
     );
-    assert.equal(squares.length, 12);
+    assert.equal(squares.length, 14);
     for (const square of squares) {
       for (const token of square.label.split(/\s+/)) {
         if (token.startsWith('--fam-')) assert.ok(square.properties.includes(token), `${token} is labeled but not set on its square`);

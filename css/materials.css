@@ -81,6 +81,12 @@
   box-shadow: 0 26px 44px -16px rgba(0, 0, 0, .7);
 }
 
+.fam-leather-frame--brown {
+  border-image: var(--fam-tex-leather-frame-brown-soft) 68 / 34px / 0 round;
+  background: var(--fam-tex-leather-fill-brown-tile) 0 0 / 168px 51.5px repeat;
+  box-shadow: 0 26px 44px -16px rgba(0, 0, 0, .7);
+}
+
 /* A bar of the frame's leather with its stitched edge along the bottom. The 321x50 edge strip is drawn at half size so it stays sharp on 2x screens,
    which puts the stitch row about 8.5px above the bottom edge. */
 .fam-leather-bar {
@@ -95,6 +101,12 @@
     var(--fam-tex-leather-fill-black-tile) 0 0 / 168px 51.5px repeat;
 }
 
+.fam-leather-bar--brown {
+  background:
+    var(--fam-tex-leather-bar-edge-brown) 0 100% / auto 25px repeat-x,
+    var(--fam-tex-leather-fill-brown-tile) 0 0 / 168px 51.5px repeat;
+}
+
 /* The frame's leather on its own, with no stitched edge */
 .fam-leather-pebbled {
   background: var(--fam-tex-leather-fill-tan-tile) 0 0 / 168px 51.5px repeat;
@@ -102,6 +114,10 @@
 
 .fam-leather-pebbled--black {
   background: var(--fam-tex-leather-fill-black-tile) 0 0 / 168px 51.5px repeat;
+}
+
+.fam-leather-pebbled--brown {
+  background: var(--fam-tex-leather-fill-brown-tile) 0 0 / 168px 51.5px repeat;
 }
 
 /* 9-slice wood frame: 402px square image, 51 device px slices, drawn at half size so a 26px border stays sharp on 2x screens.

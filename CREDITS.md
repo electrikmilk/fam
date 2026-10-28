@@ -23,9 +23,12 @@ Every texture in `assets/` is processed from a photograph on Unsplash. Unsplash 
 | `leather-fill-tan-tile.jpg` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `soft_interior.py`, then `tan_leather.py` |
 | `leather-fill-black-tile.jpg` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `soft_interior.py` |
 | `leather-frame-tan-soft.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_stitched_frame.py`, `soft_interior.py`, then `tan_leather.py` |
+| `leather-fill-brown-tile.jpg` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `brown_leather.py leather-frame-black-soft.png leather-fill-black-tile.jpg OUT 68 28`, from the finished black assets because the frame recipe's arguments were not recorded |
+| `leather-frame-brown-soft.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `brown_leather.py` as above |
 | `leather-frame-black-soft.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_stitched_frame.py`, then `soft_interior.py` |
 | `leather-bar-edge-tan.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-tan-soft.png OUT 68 50` |
 | `leather-bar-edge-black.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-black-soft.png OUT 68 50` |
+| `leather-bar-edge-brown.png` | `leather-stitched_olga-kovalski-5_GUH12XnNc-unsplash.jpg` | olga-kovalski | `make_bar_edge.py leather-frame-brown-soft.png OUT 68 50` |
 | `wood-frame.jpg` | `wood-frame_se-tsuchiya--EkbLo1LdEM-unsplash.png` | se-tsuchiya | `make_wood_frame.py ... 556 28` |
 | `led-lens-lit.png` | `tao-yuan-R4Hv6RnF05Q-unsplash.jpg` | tao-yuan | `make_led_lens.py ... 278 258 128 128 3 0.5` |
 | `led-lens-unlit.png` | `tao-yuan-R4Hv6RnF05Q-unsplash.jpg` | tao-yuan | `make_led_lens.py ... 809 261 120 128 3 0.6` |
