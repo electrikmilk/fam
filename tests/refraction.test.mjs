@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { fixtureUrl, openUrl } from './helpers/browser.mjs';
 
-const helperUrl = new URL('../snippets/refraction-round.js', import.meta.url);
+const helperUrl = new URL('../snippets/refraction.js', import.meta.url);
 const GLASS = '#glass-refract';
 
 async function openKitWithHelper() {

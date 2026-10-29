@@ -32,7 +32,7 @@ export function buildDisplacementMapSvg() {
 }
 
 // The same defaults as --fam-refract-amount and --fam-refract-dispersion in css/effects.css, and the same base scale as
-// snippets/refraction-round.js. The static filter cannot read CSS variables, so it always bends by these.
+// snippets/refraction.js. The static filter cannot read CSS variables, so it always bends by these.
 const DISPLACEMENT_SCALE = 0.2;
 const DEFAULT_AMOUNT = 1;
 const DEFAULT_DISPERSION = 0.1;

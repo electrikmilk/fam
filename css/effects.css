@@ -11,7 +11,7 @@
   --fam-shade-inset: 1px;
   --fam-glass-blur: 14px;
   --fam-refract-blur: 1px;
-  /* Read by snippets/refraction-round.js, which sets them on the filter. The static snippet cannot read them and always bends by these defaults. */
+  /* Read by snippets/refraction.js, which sets them on the filter. The static snippet cannot read them and always bends by these defaults. */
   --fam-refract-amount: 1;
   --fam-refract-dispersion: .1;
   --fam-glass-specular: 1;
@@ -121,7 +121,7 @@
   background-clip: border-box;
 }
 
-/* snippets/refraction-round.js gives each refracting glass a filter shaped to its own radius and names it in --fam-refract-filter.
+/* snippets/refraction.js gives each refracting glass a filter shaped to its own radius and names it in --fam-refract-filter.
    It sits behind @supports because var() always parses: an engine that cannot use url() in a backdrop filter would otherwise drop
    the blur instead of keeping the plain declaration above. */
 @supports (backdrop-filter: url(#fam-refract)) {

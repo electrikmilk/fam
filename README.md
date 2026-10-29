@@ -177,7 +177,7 @@ Both are plain numbers without units. The script raises an error for a value tha
 import 'fam-ui/refraction';
 ```
 
-Without a bundler, load `node_modules/fam-ui/snippets/refraction-round.js` with `<script defer>` instead. It does nothing on the server, so it is safe to import from server-rendered code.
+Without a bundler, load `node_modules/fam-ui/snippets/refraction.js` with `<script defer>` instead. It does nothing on the server, so it is safe to import from server-rendered code.
 
 A dropdown is the same field with a `select`: `<select class="fam-glass-input">`. The open list is a plain styled `ul.fam-menu` for your own menus, with `aria-selected="true"` on the chosen item.
 

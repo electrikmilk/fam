@@ -22,7 +22,7 @@
     "./css/*": "./css/*",
     "./assets/*": "./assets/*",
     "./snippets/*": "./snippets/*",
-    "./refraction": "./snippets/refraction-round.js",
+    "./refraction": "./snippets/refraction.js",
     "./package.json": "./package.json"
   },
   "scripts": {
