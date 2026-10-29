@@ -85,6 +85,26 @@ test('list rows are real links, not a listbox that has no keyboard model', async
   }
 });
 
+for (const width of [320, 375]) {
+  test(`sign-in field text is not cut off at ${width}px`, async () => {
+    const example = await openUrl(exampleUrl('sign-in'), { viewport: { width, height: 800 } });
+    try {
+      const cutOff = await example.page.$$eval('.fam-field-row input', (inputs) =>
+        inputs.map((input) => {
+          const style = getComputedStyle(input);
+          const context = document.createElement('canvas').getContext('2d');
+          context.font = style.font;
+          const textWidth = context.measureText(input.placeholder).width;
+          return { id: input.id, textWidth, inputWidth: input.clientWidth };
+        }).filter(({ textWidth, inputWidth }) => textWidth > inputWidth),
+      );
+      assert.deepEqual(cutOff, [], 'a placeholder is wider than its input');
+    } finally {
+      await example.close();
+    }
+  });
+}
+
 test('controls navigation labels are not truncated at phone width', async () => {
   const example = await openUrl(exampleUrl('controls'), { viewport: { width: 375, height: 800 } });
   try {
