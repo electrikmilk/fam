@@ -1240,14 +1240,14 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   font-size: .87em;
 }
 
-/* Beside an 82px label, the input in a leather-framed card is about 120px wide, which cuts an email address, so the label moves above it */
+/* Beside an 82px label, the input in a leather-framed card is about 120px wide, which cuts an email address, so the label column narrows to fit "Password" */
 @media (max-width: 480px) {
   .fam-field-row {
-    flex-wrap: wrap;
-    gap: 2px 12px;
+    gap: 8px;
+    padding-inline: var(--fam-field-pad-x);
   }
 
-  .fam-field-row label { flex-basis: 100%; }
+  .fam-field-row label { flex-basis: 64px; }
 }
 
 .fam-field:focus-within {
