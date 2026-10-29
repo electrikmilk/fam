@@ -36,10 +36,11 @@ export const exampleUrl = (name) => pathToFileURL(fileURLToPath(new URL(`../exam
 
 export async function openUrl(
   url,
-  { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference', forcedColors = 'none', javaScriptEnabled = true, initScript } = {},
+  { viewport = { width: 1440, height: 900 }, deviceScaleFactor = 1, reducedMotion = 'no-preference', forcedColors = 'none', javaScriptEnabled = true, hasTouch = false, initScript } = {},
 ) {
   const browser = await sharedBrowserForThisFile();
-  const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion, forcedColors, javaScriptEnabled });
+  // hasTouch makes (pointer: coarse) and (hover: none) match, like a phone
+  const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion, forcedColors, javaScriptEnabled, hasTouch });
   const page = await context.newPage();
 
   const issues = [];

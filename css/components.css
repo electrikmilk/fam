@@ -18,6 +18,11 @@
 
 .fam-glass-input::placeholder { color: var(--fam-glass-ink-soft); }
 
+/* iOS Safari zooms the page when a field under 16px gets focus */
+@media (pointer: coarse) {
+  .fam-glass-input { font-size: max(1em, 16px); }
+}
+
 /* The dropdown is the glass field with a plain white chevron and no separate button */
 select.fam-glass-input {
   appearance: none;
@@ -1199,6 +1204,11 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   --fam-field-pad-y: 15px;
   --fam-field-pad-x: 18px;
   --fam-field-size: 18px;
+}
+
+/* iOS Safari zooms the page when a field under 16px gets focus. max() leaves the large field at its 18px. */
+@media (pointer: coarse) {
+  .fam-field { font-size: max(var(--fam-field-size), 16px); }
 }
 
 /* Labeled rows share one well, like the sign-in card. The padding moves from the field to its rows. */

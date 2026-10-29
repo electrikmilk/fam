@@ -310,7 +310,7 @@ The paper, cardstock and metal bars use dark ink, so keep a cardstock bar's tint
 <nav class="fam-nav fam-leather-bar fam-leather-bar--black" aria-label="Main">...</nav>
 ```
 
-Text fields, leather button, list rows. A field is part white so the material under it shows through. Add `fam-field--pill` for a pill, `fam-field--sm` or `fam-field--lg` for a size, and `fam-field--group` to hold labeled `fam-field-row`s in one well. Set `aria-invalid="true"` on the input for the red ring and shake (clear it and set it again to shake twice), and link a `fam-field-message` with `aria-describedby`. A disabled input dims its field.
+Text fields, leather button, list rows. A field is part white so the material under it shows through. Add `fam-field--pill` for a pill, `fam-field--sm` or `fam-field--lg` for a size, and `fam-field--group` to hold labeled `fam-field-row`s in one well. Set `aria-invalid="true"` on the input for the red ring and shake (clear it and set it again to shake twice), and link a `fam-field-message` with `aria-describedby`. A disabled input dims its field. On a touch screen every field is at least 16px, because iOS Safari zooms the page when a smaller one gets focus.
 
 ```html
 <label class="fam-field"><input placeholder="Name" aria-label="Name"></label>
