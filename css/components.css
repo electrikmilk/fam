@@ -1,5 +1,9 @@
 /* fam-ui components */
 
+/* Touch screens flash a gray box over a tapped control. The kit's controls show their own pressed and selected looks, and :where() keeps this
+   from outranking any rule of yours. The property is inherited, so the parts inside a control are covered too. */
+:where([class^="fam-"], [class*=" fam-"]) { -webkit-tap-highlight-color: transparent; }
+
 /* ---------- Glass fields and the dropdown menu ---------- */
 
 .fam-glass-input {

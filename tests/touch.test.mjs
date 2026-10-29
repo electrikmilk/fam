@@ -52,3 +52,31 @@ test('the showcase code buttons and standalone footer link are 44px tall to tap 
     await page.close();
   }
 });
+
+const NO_TAP_HIGHLIGHT = 'rgba(0, 0, 0, 0)';
+
+test('kit controls do not flash the browser tap highlight', async () => {
+  const kit = await openUrl(fixtureUrl('kit'), PHONE);
+  try {
+    const colors = await kit.page.$$eval('.fam-plastic, .fam-radio, .fam-leather-button, .fam-switch, .fam-nav-item, .fam-list-row', (controls) =>
+      controls.map((control) => ({ name: control.className, color: getComputedStyle(control).webkitTapHighlightColor })),
+    );
+    assert.ok(colors.length > 0, 'the kit has no controls to check');
+    for (const { name, color } of colors) assert.equal(color, NO_TAP_HIGHLIGHT, `${name} flashes ${color}`);
+  } finally {
+    await kit.close();
+  }
+});
+
+test('showcase links, cards and buttons do not flash the browser tap highlight', async () => {
+  const page = await openUrl(showcasePageUrl('index'), PHONE);
+  try {
+    const colors = await page.page.$$eval('.site-nav a, .card, #credits a, .copy', (targets) =>
+      targets.map((target) => ({ name: target.className || target.tagName, color: getComputedStyle(target).webkitTapHighlightColor })),
+    );
+    assert.ok(colors.length > 1, 'the page has no targets to check');
+    for (const { name, color } of colors) assert.equal(color, NO_TAP_HIGHLIGHT, `${name} flashes ${color}`);
+  } finally {
+    await page.close();
+  }
+});
