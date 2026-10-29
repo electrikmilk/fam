@@ -203,7 +203,7 @@
 
     <section class="scene" id="scene-glass-refraction">
       <h2 class="scene-title">Refraction</h2>
-      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. The <code>fam-ui/refraction</code> script builds that filter for each glass. Other browsers show the same pane without the bending.</p>
+      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. The <code>fam-ui/refraction</code> script builds that filter for each glass: load it with a script tag, or import it with a bundler. Other browsers show the same pane without the bending.</p>
       <div class="window glass-lab">
         <div class="glass-tiles">
           <figure class="glass-tile">
@@ -220,6 +220,10 @@
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;script src="snippets/refraction.js" defer&gt;&lt;/script&gt;
 &lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;</code></pre>
+      </div>
+      <div class="code-block" role="group" aria-label="Importing the refraction script" data-label="the refraction script import">
+        <div class="code-head"><span class="code-lang">JS</span></div>
+        <pre><code>import 'fam-ui/refraction';</code></pre>
       </div>
     </section>
   </main>

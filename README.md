@@ -158,7 +158,7 @@ Add `fam-glass--refract` for clear glass that bends what is behind its rim. Load
 <div class="fam-glass fam-glass--refract"></div>
 ```
 
-Or, with a bundler:
+Or, with a bundler, import it for its side effect. It is the same script, exported as `fam-ui/refraction`:
 
 ```js
 import 'fam-ui/refraction';

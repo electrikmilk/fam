@@ -116,7 +116,7 @@ test('every class in a caption exists in the kit', async () => {
   for (const pageName of PAGE_NAMES) {
     const page = await openUrl(showcasePageUrl(pageName));
     try {
-      const found = await page.page.$$eval('.cap code, .code-block code, .ref-table code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-[a-z0-9-]+/g) ?? []));
+      const found = await page.page.$$eval('.cap code, .code-block code, .ref-table code', (codes) => codes.flatMap((code) => code.textContent.match(/(?<![-\w])fam-(?!ui\/)[a-z0-9-]+/g) ?? []));
       for (const name of found) names.add(name);
     } finally {
       await page.close();
@@ -131,7 +131,7 @@ const SCENE_PAGE_NAMES = ['materials', 'controls', 'glass'];
 // Runs in the page. A snippet or caption may only name kit classes its demo uses. A scene with a code block must also name every
 // kit class its demo uses, so what a visitor copies is the whole demo.
 const MISMATCHES_SOURCE = `(containerSelector) => {
-  const kitClasses = (text) => text.match(/(?<![-\\w])fam-[a-z0-9-]+/g) ?? [];
+  const kitClasses = (text) => text.match(/(?<![-\\w])fam-(?!ui\\/)[a-z0-9-]+/g) ?? [];
   return [...document.querySelectorAll(containerSelector)].flatMap((container) => {
     const written = new Set(kitClasses([...container.querySelectorAll('.cap code, .code-block code')].map((code) => code.textContent).join(' ')));
     const used = new Set(
