@@ -204,7 +204,7 @@
 
     <section class="scene" id="scene-glass-refraction">
       <h2 class="scene-title">Refraction</h2>
-      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. The <code>fam-ui/refraction</code> script builds that filter for each glass: load it with a script tag, or import it with a bundler. Other browsers show the same pane without the bending.</p>
+      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. It bends a photo just as well. The <code>fam-ui/refraction</code> script builds that filter for each glass: load it with a script tag, or import it with a bundler. Other browsers show the same pane without the bending.</p>
       <div class="window glass-lab">
         <div class="glass-tiles">
           <figure class="glass-tile">
@@ -214,6 +214,14 @@
           <figure class="glass-tile">
             <div class="glass-backdrop glass-backdrop--plate"><div class="fam-glass fam-glass--refract glass-pane glass-pane--pill"></div></div>
             <figcaption>fam-glass--refract</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--galaxy"><div class="fam-glass fam-glass--refract glass-pane glass-pane--pill"></div></div>
+            <figcaption>fam-glass--refract on a photo</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--aurora"><div class="fam-glass fam-glass--refract glass-pane glass-pane--pill"></div></div>
+            <figcaption>fam-glass--refract on a photo</figcaption>
           </figure>
         </div>
       </div>
