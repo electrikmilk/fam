@@ -556,6 +556,13 @@ select.fam-glass-input option { color: #222; text-shadow: none; }
   cursor: inherit;
 }
 
+@media (pointer: coarse) {
+  .fam-radio {
+    box-sizing: border-box;
+    min-height: 44px;
+  }
+}
+
 .fam-radio-dot {
   box-sizing: border-box;
   position: relative;

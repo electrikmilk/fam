@@ -252,6 +252,14 @@ html { scroll-behavior: smooth; }
 
 #credits a { color: #a9c2ff; }
 
+/* Links inside a sentence are exempt from the target size; the one standing alone in the last line is not */
+@media (pointer: coarse) {
+  #credits p:last-child a {
+    display: inline-block;
+    padding: 13px 0;
+  }
+}
+
 @media (max-width: 600px) {
   .page-head,
   .section { padding-top: 48px; }
@@ -505,6 +513,10 @@ html { scroll-behavior: smooth; }
   padding: 7px 16px;
   border-color: rgba(255, 255, 255, .4);
   font: 700 14px/1 var(--site-font);
+}
+
+@media (pointer: coarse) {
+  .code-head :is(.copy, .toggle) { min-height: 44px; }
 }
 
 .code-head .toggle {
