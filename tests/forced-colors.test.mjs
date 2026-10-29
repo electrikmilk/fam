@@ -51,7 +51,7 @@ test('focus draws a real outline on glass, recessed and search fields in forced 
   const kit = await openUrl(fixtureUrl('kit'), { forcedColors: 'active' });
   try {
     const { page } = kit;
-    for (const [input, wrapper] of [['#glass-input', '.fam-glass'], ['#recessed-input', '.fam-recessed'], ['#search-input', '.fam-search']]) {
+    for (const [input, wrapper] of [['#glass-input', '.fam-glass'], ['#recessed-input', '.fam-field'], ['#search-input', '.fam-field']]) {
       await page.focus(input);
       const outline = await page.evaluate(
         ([inputSelector, wrapperSelector]) => {

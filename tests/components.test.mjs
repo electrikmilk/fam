@@ -51,7 +51,7 @@ const FOCUS_TARGETS = [
 // Runs in the page. Reports the focus indicator of a control and of the wrapper that draws it for hidden or borderless inputs.
 const SNAPSHOT_SOURCE = `(id) => {
   const element = id === 'switch-off' ? document.querySelector('#switch-off input') : document.getElementById(id);
-  const wrapper = element.closest('.fam-switch, .fam-glass, .fam-recessed, .fam-search') ?? element;
+  const wrapper = element.closest('.fam-switch, .fam-glass, .fam-field') ?? element;
   const read = (node) => { const computed = getComputedStyle(node); return { outline: computed.outlineStyle + ' ' + computed.outlineWidth, shadow: computed.boxShadow }; };
   return { element: read(element), wrapper: read(wrapper) };
 }`;
