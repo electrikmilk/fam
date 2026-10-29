@@ -361,7 +361,7 @@ body {
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: center;
-  gap: 26px;
+  gap: var(--reflect-room) 26px;
   padding: 28px 20px var(--reflect-room);
 }
 
