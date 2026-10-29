@@ -49,6 +49,95 @@ html { scroll-behavior: smooth; }
   .site-nav .fam-nav-brand { font-size: 20px; }
 }
 
+/* nav-menu.js wraps the links in the drawer and adds the toggle. On a wide screen the wrapper has no box of its own,
+   so the links stay direct children of the bar. */
+.site-nav-menu { display: contents; }
+
+.site-nav-toggle,
+.site-nav-scrim { display: none; }
+
+@media (max-width: 480px) {
+  .site-nav .site-nav-toggle {
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin: 0 4px 0 auto;
+    padding: 0;
+  }
+
+  /* Three bars that become an X, drawn in the button's own ink */
+  .site-nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 3px;
+    border-radius: 2px;
+    background: #3a1f08;
+    box-shadow: 0 1px 0 rgba(255, 225, 170, .6);
+  }
+
+  .site-nav.is-open .site-nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .site-nav.is-open .site-nav-toggle span:nth-child(2) { opacity: 0; }
+  .site-nav.is-open .site-nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .site-nav-scrim {
+    display: block;
+    position: fixed;
+    inset: 64px 0 0;
+    background: rgba(0, 0, 0, .55);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .site-nav.is-open .site-nav-scrim {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* The kit's bar scrolls its own overflow, which would clip a drawer that hangs below it. The links are in the drawer, so nothing needs to scroll. */
+  .site-nav:has(> .site-nav-menu) { overflow: visible; }
+
+  /* The drawer opens downward from the bar's stitched edge. The clip leaves room for its shadow on three sides. */
+  .site-nav-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 8px 10px 26px;
+    box-shadow: 0 18px 28px -6px rgba(0, 0, 0, .65);
+    clip-path: inset(0 -40px 100% -40px);
+    visibility: hidden;
+  }
+
+  .site-nav.is-open .site-nav-menu {
+    clip-path: inset(0 -40px -60px -40px);
+    visibility: visible;
+  }
+
+  .site-nav .site-nav-menu .fam-nav-item:not(.site-nav-home) {
+    display: flex;
+    align-items: center;
+    max-width: none;
+    min-height: 48px;
+    padding: 0 16px;
+    font-size: 18px;
+    border-radius: 24px;
+  }
+
+  /* Closing waits for the slide to finish before the drawer is hidden from the keyboard and screen readers */
+  @media (prefers-reduced-motion: no-preference) {
+    .site-nav-toggle span { transition: transform .2s ease, opacity .2s ease; }
+    .site-nav-scrim { transition: opacity .2s ease, visibility 0s linear .2s; }
+    .site-nav.is-open .site-nav-scrim { transition: opacity .2s ease; }
+    .site-nav-menu { transition: clip-path .2s ease, visibility 0s linear .2s; }
+    .site-nav.is-open .site-nav-menu { transition: clip-path .2s ease; }
+  }
+}
+
 .page-head,
 .section {
   box-sizing: border-box;
