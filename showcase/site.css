@@ -655,3 +655,16 @@ html { scroll-behavior: smooth; }
 @media (max-width: 480px) {
   .site-nav-home { display: none; }
 }
+
+/* The fields scene stacks its demos in a column no wider than a phone form */
+.field-stack {
+  display: grid;
+  gap: 14px;
+  max-width: 360px;
+}
+
+.field-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}

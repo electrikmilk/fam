@@ -688,8 +688,7 @@
         <tbody>
           <tr><td><code>fam-glass</code></td><td>The frosted pill. Wrap a <code>fam-glass-input</code> in it for a field, or use a <code>select</code> for a dropdown. <code>fam-glass--light</code> is light glass with dark text.</td></tr>
           <tr><td><code>fam-menu</code></td><td>An open list for your own menus, with <code>aria-selected="true"</code> on the chosen item.</td></tr>
-          <tr><td><code>fam-search</code></td><td>A recessed search pill with a magnifier.</td></tr>
-          <tr><td><code>fam-recessed</code></td><td>Labeled fields cut into leather. Each <code>fam-recessed-row</code> holds a label and an input.</td></tr>
+          <tr><td><code>fam-field</code></td><td>A text field cut into any material, part white so the texture shows through. Add <code>fam-field--pill</code> for a pill, <code>fam-field--sm</code> or <code>fam-field--lg</code> for a size, and <code>fam-field--group</code> to hold labeled <code>fam-field-row</code>s in one well. <code>aria-invalid="true"</code> on the input turns it red and shakes it, and <code>fam-field-message</code> holds the error text.</td></tr>
         </tbody>
       </table>
       <h3 class="variant-title">Glass field and dropdown</h3>
@@ -745,10 +744,30 @@
   &lt;div class="fam-glass"&gt;&lt;input class="fam-glass-input" placeholder="Disabled" aria-label="Disabled" disabled&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
       </div>
+      <h3 class="variant-title">Text fields</h3>
+      <p class="scene-lead">A field is a well cut into whatever it sits on. The recessed fill is part white, so the wood, leather or paper shows through. Add <code>fam-field--pill</code> for a pill, and <code>fam-field--sm</code> or <code>fam-field--lg</code> for a size.</p>
+      <div class="window fam-wood controls-stage controls-stage--block">
+        <div class="field-stack">
+          <label class="fam-field fam-field--sm"><input placeholder="Small" aria-label="Small recessed field"></label>
+          <label class="fam-field"><input placeholder="Medium" aria-label="Medium recessed field"></label>
+          <label class="fam-field fam-field--lg"><input placeholder="Large" aria-label="Large recessed field"></label>
+          <label class="fam-field fam-field--pill fam-field--sm"><input placeholder="Small pill" aria-label="Small pill field"></label>
+          <label class="fam-field fam-field--pill"><input placeholder="Medium pill" aria-label="Medium pill field"></label>
+          <label class="fam-field fam-field--pill fam-field--lg"><input placeholder="Large pill" aria-label="Large pill field"></label>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The text field markup" data-label="the text field markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-wood" style="padding: 20px"&gt;
+  &lt;label class="fam-field"&gt;&lt;input placeholder="Medium" aria-label="Name"&gt;&lt;/label&gt;
+  &lt;label class="fam-field fam-field--lg"&gt;&lt;input placeholder="Large" aria-label="Name"&gt;&lt;/label&gt;
+  &lt;label class="fam-field fam-field--pill fam-field--sm"&gt;&lt;input placeholder="Small pill" aria-label="Name"&gt;&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       <h3 class="variant-title">Search pill</h3>
-      <p class="scene-lead">A recessed search pill on paper.</p>
+      <p class="scene-lead">A pill field with a magnifier before the input.</p>
       <div class="window fam-paper controls-stage controls-stage--block">
-        <label class="fam-search">
+        <label class="fam-field fam-field--pill fam-field--sm">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
           <input placeholder="Search" aria-label="Search notes">
         </label>
@@ -756,27 +775,57 @@
       <div class="code-block" role="group" aria-label="The search pill markup" data-label="the search pill markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;div class="fam-paper" style="padding: 20px"&gt;
-  &lt;label class="fam-search"&gt;
+  &lt;label class="fam-field fam-field--pill fam-field--sm"&gt;
     &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"&gt;&lt;circle cx="10" cy="10" r="6.5"/&gt;&lt;path d="M15 15l6 6"/&gt;&lt;/svg&gt;
     &lt;input placeholder="Search" aria-label="Search notes"&gt;
   &lt;/label&gt;
 &lt;/div&gt;</code></pre>
       </div>
-      <h3 class="variant-title">Recessed fields</h3>
-      <p class="scene-lead">Labeled fields cut into leather.</p>
+      <h3 class="variant-title">Grouped fields</h3>
+      <p class="scene-lead">Labeled rows share one well, with a line between them.</p>
       <div class="window fam-leather controls-stage controls-stage--block">
-        <div class="fam-recessed">
-          <div class="fam-recessed-row"><label for="name">Name</label><input id="name" placeholder="Required"></div>
-          <div class="fam-recessed-row"><label for="email">Email</label><input id="email" type="email" placeholder="Required"></div>
+        <div class="fam-field fam-field--group">
+          <div class="fam-field-row"><label for="name">Name</label><input id="name" placeholder="Required"></div>
+          <div class="fam-field-row"><label for="email">Email</label><input id="email" type="email" placeholder="Required"></div>
         </div>
       </div>
-      <div class="code-block" role="group" aria-label="The recessed field markup" data-label="the recessed field markup">
+      <div class="code-block" role="group" aria-label="The grouped field markup" data-label="the grouped field markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
         <pre><code>&lt;div class="fam-leather" style="padding: 20px"&gt;
-  &lt;div class="fam-recessed"&gt;
-    &lt;div class="fam-recessed-row"&gt;&lt;label for="name"&gt;Name&lt;/label&gt;&lt;input id="name" placeholder="Required"&gt;&lt;/div&gt;
-    &lt;div class="fam-recessed-row"&gt;&lt;label for="email"&gt;Email&lt;/label&gt;&lt;input id="email" type="email" placeholder="Required"&gt;&lt;/div&gt;
+  &lt;div class="fam-field fam-field--group"&gt;
+    &lt;div class="fam-field-row"&gt;&lt;label for="name"&gt;Name&lt;/label&gt;&lt;input id="name" placeholder="Required"&gt;&lt;/div&gt;
+    &lt;div class="fam-field-row"&gt;&lt;label for="email"&gt;Email&lt;/label&gt;&lt;input id="email" type="email" placeholder="Required"&gt;&lt;/div&gt;
   &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      <h3 class="variant-title">Error and disabled</h3>
+      <p class="scene-lead">Set <code>aria-invalid="true"</code> on the input and the field turns red and shakes. Link the message with <code>aria-describedby</code>. Clear the attribute and set it again to shake a second time. A disabled input dims its field.</p>
+      <div class="window fam-linen controls-stage controls-stage--block">
+        <div class="field-stack">
+          <div>
+            <label class="fam-field"><input id="field-error-recessed" value="not-an-email" aria-label="Email" aria-invalid="true" aria-describedby="field-error-recessed-message"></label>
+            <span class="fam-field-message" id="field-error-recessed-message">Enter a valid email address</span>
+          </div>
+          <div>
+            <label class="fam-field fam-field--pill"><input id="field-error-pill" value="123" aria-label="Code" aria-invalid="true" aria-describedby="field-error-pill-message"></label>
+            <span class="fam-field-message" id="field-error-pill-message">The code has 6 digits</span>
+          </div>
+          <div class="field-actions">
+            <button class="fam-plastic fam-plastic--blue" type="button" data-shake-field="field-error-recessed">Shake the field</button>
+            <button class="fam-plastic fam-plastic--blue" type="button" data-shake-field="field-error-pill">Shake the pill</button>
+          </div>
+          <label class="fam-field"><input placeholder="Disabled" aria-label="Disabled field" disabled></label>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The error and disabled markup" data-label="the error and disabled markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;div class="fam-linen" style="padding: 20px"&gt;
+  &lt;label class="fam-field"&gt;
+    &lt;input id="email" value="not-an-email" aria-label="Email" aria-invalid="true" aria-describedby="email-message"&gt;
+  &lt;/label&gt;
+  &lt;span class="fam-field-message" id="email-message"&gt;Enter a valid email address&lt;/span&gt;
+  &lt;button class="fam-plastic fam-plastic--blue" type="button" data-shake-field="email"&gt;Shake the field&lt;/button&gt;
+  &lt;label class="fam-field"&gt;&lt;input placeholder="Disabled" aria-label="Disabled" disabled&gt;&lt;/label&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </section>
@@ -941,5 +990,6 @@
 <script src="tabs.js"></script>
 <script src="table-grid.js"></script>
 <script src="copy.js"></script>
+<script src="field-error.js"></script>
 </body>
 </html>
