@@ -151,18 +151,22 @@ Set `--fam-r` for the corner radius (default pill), or add a `fam-round-*` class
 
 Set `--fam-glass-specular` on the glass itself (default `1`) to scale the highlight. `0` turns it off and `2` doubles it. It is a plain number without a unit, and it changes with a class or an inline style, with no script.
 
-Add `fam-glass--refract` for clear glass that bends what is behind its rim. It needs the filter in `snippets/refraction-filter.html` somewhere in the page, once:
+Add `fam-glass--refract` for clear glass that bends what is behind its rim. Load the refraction script once in the page and it does the rest:
 
 ```html
-<!-- paste the contents of snippets/refraction-filter.html -->
+<script src="node_modules/fam-ui/snippets/refraction.js" defer></script>
 <div class="fam-glass fam-glass--refract"></div>
 ```
 
-Refraction works in Chromium only. Other browsers show a clear glass pane with no bending. The rim also splits into a faint rainbow fringe, like light through a prism (chromatic aberration): the snippet bends the red, green and blue channels by slightly different amounts. The static snippet always bends by the defaults below. Its strength is the `scale` on each of its three `feDisplacementMap` passes.
+Or, with a bundler:
 
-The snippet's map is one fixed image stretched over the glass, so it bends the straight sides more than the corners of a rounded pane or a circle. For bending that follows the glass's own corner radius, also load the optional refraction script, the one piece of JavaScript the kit offers. It gives each `fam-glass--refract` a filter built from that element's size and radius, and rebuilds it when either changes, including a change to `--fam-r` or a `fam-round-*` class. The static filter stays in place as the fallback.
+```js
+import 'fam-ui/refraction';
+```
 
-The script also reads two variables from the glass itself, set with a class or an inline style, and applies a change on the next frame:
+Refraction works in Chromium only. Other browsers show a clear glass pane with no bending. The rim also splits into a faint rainbow fringe, like light through a prism (chromatic aberration): red, green and blue bend by slightly different amounts. The script is the one piece of JavaScript the kit offers. It injects a filter for each `fam-glass--refract`, built from that element's size and radius so the bending follows a rounded pane or a circle, and rebuilds it when either changes, including a change to `--fam-r` or a `fam-round-*` class. It does nothing on the server, so it is safe to import from server-rendered code.
+
+The script reads two variables from the glass itself, set with a class or an inline style, and applies a change on the next frame:
 
 - `--fam-refract-amount` (default `1`) multiplies the bending. `0` is flat glass, `2` bends twice as much.
 - `--fam-refract-dispersion` (default `.1`) is the chromatic aberration: red bends that fraction further than green and blue that fraction less. `0` turns the fringe off.
@@ -173,11 +177,7 @@ Both are plain numbers without units. The script raises an error for a value tha
 <div class="fam-glass fam-glass--refract" style="--fam-refract-amount: 1.5; --fam-refract-dispersion: .2"></div>
 ```
 
-```js
-import 'fam-ui/refraction';
-```
-
-Without a bundler, load `node_modules/fam-ui/snippets/refraction.js` with `<script defer>` instead. It does nothing on the server, so it is safe to import from server-rendered code.
+Without JavaScript, paste the contents of `snippets/refraction-filter.html` into the page once instead. Its map is one fixed image stretched over the glass, so it bends the straight sides more than the corners of a rounded pane or a circle, and it always bends by the defaults above. Its strength is the `scale` on each of its three `feDisplacementMap` passes.
 
 A dropdown is the same field with a `select`: `<select class="fam-glass-input">`. The open list is a plain styled `ul.fam-menu` for your own menus, with `aria-selected="true"` on the chosen item.
 

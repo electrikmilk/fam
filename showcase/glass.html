@@ -13,20 +13,6 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="fam-refract" x="0" y="0" width="1" height="1" primitiveUnits="objectBoundingBox" color-interpolation-filters="sRGB">
-    <feImage x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'100'%20height%3D'100'%20preserveAspectRatio%3D'none'%3E%3Cdefs%3E%3ClinearGradient%20id%3D'x'%20x1%3D'0'%20x2%3D'1'%20y1%3D'0'%20y2%3D'0'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(255%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(215%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(160%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(128%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(96%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(40%2C0%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D'y'%20x1%3D'0'%20x2%3D'0'%20y1%3D'0'%20y2%3D'1'%3E%3Cstop%20offset%3D'0'%20stop-color%3D'rgb(0%2C255%2C0)'%2F%3E%3Cstop%20offset%3D'0.04'%20stop-color%3D'rgb(0%2C215%2C0)'%2F%3E%3Cstop%20offset%3D'0.1'%20stop-color%3D'rgb(0%2C160%2C0)'%2F%3E%3Cstop%20offset%3D'0.2'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.8'%20stop-color%3D'rgb(0%2C128%2C0)'%2F%3E%3Cstop%20offset%3D'0.9'%20stop-color%3D'rgb(0%2C96%2C0)'%2F%3E%3Cstop%20offset%3D'0.96'%20stop-color%3D'rgb(0%2C40%2C0)'%2F%3E%3Cstop%20offset%3D'1'%20stop-color%3D'rgb(0%2C0%2C0)'%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'black'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23x)'%2F%3E%3Crect%20width%3D'100'%20height%3D'100'%20fill%3D'url(%23y)'%20style%3D'mix-blend-mode%3Ascreen'%2F%3E%3C%2Fsvg%3E"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.22" xChannelSelector="R" yChannelSelector="G" result="red-bent"/>
-    <feColorMatrix in="red-bent" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.2" xChannelSelector="R" yChannelSelector="G" result="green-bent"/>
-    <feColorMatrix in="green-bent" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green"/>
-    <feDisplacementMap in="SourceGraphic" in2="map" scale="0.18" xChannelSelector="R" yChannelSelector="G" result="blue-bent"/>
-    <feColorMatrix in="blue-bent" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue"/>
-    <feBlend in="red" in2="green" mode="screen" result="red-green"/>
-    <feBlend in="red-green" in2="blue" mode="screen"/>
-  </filter>
-</svg>
-
 <div class="fam">
   <nav class="fam-nav fam-leather-bar site-nav" aria-label="Site">
     <a class="fam-nav-brand" href="index.html">Fam</a>
@@ -118,7 +104,7 @@
       </div>
       <div class="code-block" role="group" aria-label="The frosted glass markup" data-label="the frosted glass markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;!-- Paste snippets/refraction-filter.html once in the page, then: --&gt;
+        <pre><code>&lt;!-- Load snippets/refraction.js once in the page, then: --&gt;
 &lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 24px; --fam-refract-blur: 3px; width: 220px; height: 110px"&gt;&lt;/div&gt;
 &lt;div class="fam-glass fam-glass--refract fam-glass--light" style="--fam-r: 55px; --fam-refract-blur: 3px; width: 110px; height: 110px"&gt;&lt;/div&gt;</code></pre>
       </div>
@@ -217,7 +203,7 @@
 
     <section class="scene" id="scene-glass-refraction">
       <h2 class="scene-title">Refraction</h2>
-      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. That rounding comes from the optional <code>fam-ui/refraction</code> script. Other browsers show the same pane without the bending.</p>
+      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Clear glass bends the grid behind its rim, and the bending follows the glass's own radius. The <code>fam-ui/refraction</code> script builds that filter for each glass. Other browsers show the same pane without the bending.</p>
       <div class="window glass-lab">
         <div class="glass-tiles">
           <figure class="glass-tile">
@@ -232,11 +218,8 @@
       </div>
       <div class="code-block" role="group" aria-label="The refracting glass markup" data-label="the refracting glass markup">
         <div class="code-head"><span class="code-lang">HTML</span></div>
-        <pre><code>&lt;!-- Paste snippets/refraction-filter.html once in the page, then: --&gt;
-&lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;
-
-&lt;!-- Optional: bend along each glass's own radius --&gt;
-&lt;script src="snippets/refraction.js" defer&gt;&lt;/script&gt;</code></pre>
+        <pre><code>&lt;script src="snippets/refraction.js" defer&gt;&lt;/script&gt;
+&lt;div class="fam-glass fam-glass--refract"&gt;&lt;/div&gt;</code></pre>
       </div>
     </section>
   </main>

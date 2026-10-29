@@ -1,7 +1,7 @@
-// Optional. Gives every .fam-glass--refract its own refraction filter, shaped to its size and corner radius, so the bending follows the rim
-// of a rounded pane or a circle. Without this script the glass uses the static filter from refraction-filter.html, which is built for a
-// box and bends the straight sides more than the corners. It also reads --fam-refract-amount and --fam-refract-dispersion from each
-// glass, which the static filter cannot. Chromium only, like the filter itself.
+// Injects a refraction filter for every .fam-glass--refract, shaped to its size and corner radius, so the bending follows the rim of a
+// rounded pane or a circle. It also reads --fam-refract-amount and --fam-refract-dispersion from each glass. Without this script the glass
+// needs the static filter from refraction-filter.html pasted into the page, which is built for a box and bends the straight sides more
+// than the corners. Chromium only, like the filter itself.
 // Load it with a script tag or import it for its side effect: import 'fam-ui/refraction'.
 (function () {
   // A bundler can import this on the server, where there is no page to fit

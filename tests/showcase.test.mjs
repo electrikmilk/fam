@@ -72,12 +72,28 @@ for (const pageName of PAGE_NAMES) {
   });
 }
 
-test('the glass page carries the current refraction snippet', async () => {
-  const [page, snippet] = await Promise.all([
-    readFile(new URL('../showcase/glass.html', import.meta.url), 'utf8'),
-    readFile(new URL('../snippets/refraction-filter.html', import.meta.url), 'utf8'),
-  ]);
-  assert.ok(page.includes(snippet.trim()), 'showcase/glass.html has a stale or missing copy of snippets/refraction-filter.html');
+test('every refracting glass on the glass page gets a filter that exists, with no filter pasted into the page', async () => {
+  const page = await openUrl(showcasePageUrl('glass'));
+  try {
+    const { glassCount, missing, pastedFilters } = await page.page.evaluate(async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      const glass = [...document.querySelectorAll('.fam-glass--refract')];
+      const missingFilters = glass.filter((element) => {
+        const reference = element.style.getPropertyValue('--fam-refract-filter');
+        return !reference.startsWith('url(#') || !document.getElementById(reference.slice('url(#'.length, -1));
+      });
+      return {
+        glassCount: glass.length,
+        missing: missingFilters.length,
+        pastedFilters: document.querySelectorAll('filter#fam-refract').length,
+      };
+    });
+    assert.ok(glassCount > 0);
+    assert.equal(missing, 0, `${missing} of ${glassCount} refracting glass have no injected filter`);
+    assert.equal(pastedFilters, 0);
+  } finally {
+    await page.close();
+  }
 });
 
 for (const pageName of PAGE_NAMES) {

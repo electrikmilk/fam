@@ -1,11 +1,9 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { exampleUrl, openUrl } from './helpers/browser.mjs';
 import { OFFENDERS_SOURCE } from './helpers/layout.mjs';
 
 const PAGES = ['controls', 'notes', 'sign-in', 'components', 'frames'];
-const TEMPLATE_PAGES = ['controls', 'notes', 'sign-in'];
 const LOAD_BUDGET_BYTES = 1.5 * 1024 * 1024;
 
 for (const name of PAGES) {
@@ -33,14 +31,6 @@ for (const name of PAGES) {
     } finally {
       await example.close();
     }
-  });
-
-  if (TEMPLATE_PAGES.includes(name)) test(`${name} carries the current refraction snippet`, async () => {
-    const [page, snippet] = await Promise.all([
-      readFile(new URL(`../examples/${name}.html`, import.meta.url), 'utf8'),
-      readFile(new URL('../snippets/refraction-filter.html', import.meta.url), 'utf8'),
-    ]);
-    assert.ok(page.includes(snippet.trim()), `${name}.html has a stale or missing copy of snippets/refraction-filter.html`);
   });
 }
 

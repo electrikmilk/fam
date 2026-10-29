@@ -111,7 +111,7 @@
 .fam-glass--refract { --fam-glow-blur: calc(var(--fam-refract-blur) + 22px); }
 
 /* Clear glass that bends the backdrop at its rim. The plain declaration comes first so an engine that rejects url() filters keeps it.
-   Chromium only; the displacement filter itself is the inline snippet in snippets/refraction-filter.html. */
+   Chromium only; the displacement filter itself is injected by snippets/refraction.js, or pasted from snippets/refraction-filter.html without it. */
 .fam-glass--refract::before {
   backdrop-filter: blur(var(--fam-refract-blur)) saturate(var(--fam-refract-saturate)) brightness(105%);
   backdrop-filter: url(#fam-refract) blur(var(--fam-refract-blur)) saturate(var(--fam-refract-saturate)) brightness(105%);
