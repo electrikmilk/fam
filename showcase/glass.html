@@ -34,6 +34,7 @@
       <a href="#scene-glass-glow">Ambient glow</a>
       <a href="#scene-glass-materials">On materials</a>
       <a href="#scene-glass-refraction">Refraction</a>
+      <a href="#scene-glass-controls">Buttons and fields</a>
     </nav>
     </header>
 
@@ -224,6 +225,28 @@
       <div class="code-block" role="group" aria-label="Importing the refraction script" data-label="the refraction script import">
         <div class="code-head"><span class="code-lang">JS</span></div>
         <pre><code>import 'fam-ui/refraction';</code></pre>
+      </div>
+    </section>
+
+    <section class="scene" id="scene-glass-controls">
+      <h2 class="scene-title">Refracting buttons and fields</h2>
+      <p class="scene-lead"><span class="glass-warning">Chromium only</span> Add <code>fam-glass--refract</code> to a glass button or field and it becomes clear glass that bends the grid behind its rim. The clear glass has no frosting behind the label, so the label reads best over a calm backdrop.</p>
+      <div class="window glass-lab">
+        <div class="glass-tiles">
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid"><button class="fam-glass fam-glass--refract fam-glass-button" type="button">Share</button></div>
+            <figcaption>fam-glass-button</figcaption>
+          </figure>
+          <figure class="glass-tile">
+            <div class="glass-backdrop glass-backdrop--grid"><div class="fam-glass fam-glass--refract glass-pane glass-pane--field"><input class="fam-glass-input" placeholder="Search" aria-label="Refracting glass field sample"></div></div>
+            <figcaption>fam-glass-input</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="code-block" role="group" aria-label="The refracting button and field markup" data-label="the refracting button and field markup">
+        <div class="code-head"><span class="code-lang">HTML</span></div>
+        <pre><code>&lt;button class="fam-glass fam-glass--refract fam-glass-button" type="button"&gt;Share&lt;/button&gt;
+&lt;div class="fam-glass fam-glass--refract"&gt;&lt;input class="fam-glass-input" placeholder="Search" aria-label="Search"&gt;&lt;/div&gt;</code></pre>
       </div>
     </section>
   </main>

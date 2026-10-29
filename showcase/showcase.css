@@ -233,6 +233,15 @@ body {
     linear-gradient(135deg, #eef3fb 0%, #d0dbef 38%, #94a9cc 72%, #3f5178 100%);
 }
 
+/* The dusk gradient cut into cells by faint hairlines. Refracting controls keep a light label on it, and the lines are what the rim bends. */
+.glass-backdrop--grid {
+  --glass-cell: 30px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .12) 0 1px, transparent 1px var(--glass-cell)) calc(var(--glass-cell) / 2) 0,
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .12) 0 1px, transparent 1px var(--glass-cell)) 0 calc(var(--glass-cell) / 2),
+    linear-gradient(135deg, #43464e, #1c1e23);
+}
+
 .glass-pane {
   --fam-r: 24px;
   width: 64%;

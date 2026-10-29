@@ -22,6 +22,9 @@
 
 .fam-glass-input::placeholder { color: var(--fam-glass-ink-soft); }
 
+/* Clear glass has no frosting behind the placeholder, and its sheen brightens the backdrop, so the soft ink falls under 4.5:1 */
+.fam-glass--refract .fam-glass-input::placeholder { color: var(--fam-glass-ink); }
+
 /* iOS Safari zooms the page when a field under 16px gets focus */
 @media (pointer: coarse) {
   .fam-glass-input { font-size: max(1em, 16px); }

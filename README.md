@@ -181,6 +181,13 @@ Without JavaScript, paste the contents of `snippets/refraction-filter.html` into
 
 A dropdown is the same field with a `select`: `<select class="fam-glass-input">`. The open list is a plain styled `ul.fam-menu` for your own menus, with `aria-selected="true"` on the chosen item.
 
+A glass button or field refracts like any other glass: add `fam-glass--refract` to it, with the refraction script loaded. The clear glass has no frosting behind the label, so the label reads best over a calm backdrop.
+
+```html
+<button class="fam-glass fam-glass--refract fam-glass-button" type="button">Share</button>
+<div class="fam-glass fam-glass--refract"><input class="fam-glass-input" placeholder="Search" aria-label="Search"></div>
+```
+
 ## Components
 
 Switch (a checkbox, so it works without JavaScript). The thumb is taller than the track and sticks out 4px past each end, so the switch has a 4px margin to keep neighbours clear. The thumb slides and the blue fill fades in when it toggles; both stop under `prefers-reduced-motion: reduce`:
