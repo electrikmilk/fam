@@ -118,7 +118,9 @@ body {
   align-items: start;
 }
 
-.frames-grid--wide { grid-template-columns: repeat(2, 1fr); }
+.frames-grid--wide { grid-template-columns: repeat(2, 1fr); align-items: center; }
+/* A square photo in a landscape-sized cell would tower over its neighbour, so it takes less of the cell */
+.frames-grid--wide .frame-square { width: 62%; justify-self: center; }
 .frames-grid figure { margin: 0; }
 .frames-grid img { display: block; width: 100%; }
 .cork-board { height: 150px; }
