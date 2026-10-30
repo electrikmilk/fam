@@ -48,6 +48,6 @@ The scripts are in `tools/texture-pipeline/` and the source photos are in `textu
 
 `showcase/images/ribbon.jpg` is the photo by boliviainteligente (Unsplash), resized. `showcase/images/tree.jpg` is the same tree photo as `examples/tree.jpg`.
 
-`showcase/images/galaxy.jpg` is the photo by sheng-hu (Unsplash), edited and resized. `showcase/images/aurora.jpg` is the photo by stein-egil-liland (Pexels), edited and resized.
+`showcase/images/galaxy.jpg` is the photo by sheng-hu (Unsplash), edited and resized. `showcase/images/aurora.jpg` is the photo by stein-egil-liland (Pexels), edited and resized. `showcase/images/mountain.jpg` is the photo by kasya-shahovskaya (Unsplash), resized. `showcase/images/clownfish.jpg` is the photo by ugomon82 (Pexels), modified and resized.
 
 `examples/snow-leopard.jpg` and `showcase/images/snow-leopard.jpg` are the landscape photo on the frames example and Materials pages. [Snow leopard in snow 2](https://commons.wikimedia.org/wiki/File:Snow_leopard_in_snow_2.jpg) by [Nicolas Goulet](https://www.flickr.com/photos/nicolasgoulet/5361403415/) is licensed under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (modified). The photo was edited and resized.
