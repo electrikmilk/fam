@@ -189,6 +189,9 @@ body {
   gap: 16px;
 }
 
+/* Wider tiles so six of them fall into rows of three instead of five and one */
+.glass-tiles--wide { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
 .glass-tile { margin: 0; }
 
 .glass-tile figcaption {
@@ -233,9 +236,11 @@ body {
     linear-gradient(135deg, #eef3fb 0%, #d0dbef 38%, #94a9cc 72%, #3f5178 100%);
 }
 
-/* Photo backdrops as tall as the plate, so they sit level with it. Both are dark with a few bright points, which the rim bends. */
+/* Photo backdrops as tall as the plate, so they sit level with it. The detail in the photo is what the rim bends. */
 .glass-backdrop--galaxy,
-.glass-backdrop--aurora {
+.glass-backdrop--aurora,
+.glass-backdrop--mountain,
+.glass-backdrop--clownfish {
   height: 240px;
   background-position: 50% 50%;
   background-size: cover;
@@ -243,6 +248,8 @@ body {
 
 .glass-backdrop--galaxy { background-image: url(images/galaxy.jpg); background-color: #0b1030; }
 .glass-backdrop--aurora { background-image: url(images/aurora.jpg); background-color: #1a0a33; }
+.glass-backdrop--mountain { background-image: url(images/mountain.jpg); background-color: #c9d3e3; }
+.glass-backdrop--clownfish { background-image: url(images/clownfish.jpg); background-color: #1d5a1d; }
 
 /* The dusk gradient cut into cells by faint hairlines. Refracting controls keep a light label on it, and the lines are what the rim bends. */
 .glass-backdrop--grid {
